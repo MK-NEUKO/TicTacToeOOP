@@ -3,16 +3,21 @@
     public class GameBoardArea
     {
         private readonly int _areaId;
-        private readonly bool _signeIsX;
-        private readonly bool _signeIsO;
-        private readonly bool _areaIsEmpty;
+        private string _signe;
+        
 
         public GameBoardArea(int areaId)
         {
             _areaId = areaId;
-            _signeIsX = false;
-            _signeIsO = false;
-            _areaIsEmpty = true;
+            _signe = " ";
         }
+
+        
+        public string Signe
+        {
+            get { return _signe; }
+            set { _signe = value; }
+        }
+
     }
 }
