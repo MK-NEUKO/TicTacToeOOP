@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Srevices", "Srevices", "{04
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Core", "Logic\TicTacToe.Core\TicTacToe.Core.csproj", "{523990FA-A2B4-4C2F-9BCD-8F896AA1F290}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.ConsoleClient", "Ui\TicTacToe.ConsoleClient\TicTacToe.ConsoleClient.csproj", "{EBCD5312-73CB-4F7C-A379-37291F00E863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleClient", "Ui\TicTacToe.ConsoleClient\TicTacToe.ConsoleClient.csproj", "{EBCD5312-73CB-4F7C-A379-37291F00E863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.TestConsole", "Ui\TicTacToe.TestConsole\TicTacToe.TestConsole.csproj", "{0B00AF9B-534A-4A26-8C54-AD8EDF87A531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.TestConsole", "Ui\TicTacToe.TestConsole\TicTacToe.TestConsole.csproj", "{0B00AF9B-534A-4A26-8C54-AD8EDF87A531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.WPFClient", "Ui\TicTacToe.WPFClient\TicTacToe.WPFClient.csproj", "{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.WPFClient", "Ui\TicTacToe.WPFClient\TicTacToe.WPFClient.csproj", "{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
