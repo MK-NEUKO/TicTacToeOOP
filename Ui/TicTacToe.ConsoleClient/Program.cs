@@ -5,6 +5,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
 {
     class Program
     {
+        // TODO: Namenskonventionen .NET 
+        // eigene Bezeichner dementsprechen Überarbeiten. 
+        
         static void Main(string[] args)
         {
             List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
