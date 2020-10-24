@@ -26,27 +26,37 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void ShowGameBoard()
-        {
-            string[] signes = new string[9];
-            int index = 0;
-            foreach (GameBoardArea area in _boardAreaList)
-            {
-                signes[index] = area.Signe;
-                index++;
-            }
-
+        public void DrawGameBoard()
+        {         
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("     1   2   3   ");
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" A | {0} | {1} | {2} | ", signes[0], signes[1], signes[2]);
+            Console.WriteLine(" A | {0} | {1} | {2} | ", _boardAreaList[0].Signe, _boardAreaList[1].Signe, _boardAreaList[2].Signe);           
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" B | {0} | {1} | {2} | ", signes[3], signes[4], signes[5]);
+            Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Signe, _boardAreaList[4].Signe, _boardAreaList[5].Signe);
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" C | {0} | {1} | {2} | ", signes[6], signes[7], signes[8]);
+            Console.WriteLine(" C | {0} | {1} | {2} | ", _boardAreaList[6].Signe, _boardAreaList[7].Signe, _boardAreaList[8].Signe);
             Console.WriteLine("   +---+---+---+ ");
             Console.ResetColor();
             Console.WriteLine();
+        }
+
+        public void DrawInfoBoard()
+        {
+            Console.WriteLine("PlayerX: {0} | Mensch", _playerX.Name);
+            Console.WriteLine("PlayerO: {0} | Computer", _playerO.Name);
+            Console.WriteLine("Punktestand: (X) 12 : 4 (O) || 5 Unentschieden");
+            Console.WriteLine();
+        }
+
+        public void DrawGameBoardAtWin()
+        {
+
+        }
+
+        public void AskGameSettings()
+        {
+
         }
 
         public int AskPlayerForInput(string player, string name)

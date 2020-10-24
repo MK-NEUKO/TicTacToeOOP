@@ -28,7 +28,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             while (counter < 10)
             {
                 _view.ShowTitle();
-                _view.ShowGameBoard();
+                _view.DrawGameBoard();
+                _view.DrawInfoBoard();
                 _board.CheckForWinner();
                 if (_board.PlayerXIsWinner)
                 {
