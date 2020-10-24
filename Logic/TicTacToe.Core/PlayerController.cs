@@ -15,6 +15,14 @@ namespace NEUKO.TicTacToe.Core
             _playerO = playerO;
         }
 
+        public string GiveTheRightToken()
+        {
+            if (_playerX.InAction)
+                return "X";
+            else
+                return "O";
+        }
+
         public void ChangePlayer()
         {
             if (_playerX.InAction)

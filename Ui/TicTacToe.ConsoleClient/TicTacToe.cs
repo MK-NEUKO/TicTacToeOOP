@@ -43,10 +43,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     Console.WriteLine("{0} hat gewonnen!!!", _playerO.Name);
                     Console.ResetColor();
                 }
-                if (_playerX.InAction)
-                    _board.PlaceASigne(_view.AskPlayerForInput("PlayerX", _playerX.Name), "X");
-                else
-                    _board.PlaceASigne(_view.AskPlayerForInput("PlayerO", _playerO.Name), "O");
+                
+                _board.PlaceASigne(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
+                
                 _playerControler.ChangePlayer();
                 Console.Clear();
                 counter++;

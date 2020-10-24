@@ -3,5 +3,6 @@
     public interface IPlayerController
     {
         void ChangePlayer();
+        string GiveTheRightToken();
     }
 }

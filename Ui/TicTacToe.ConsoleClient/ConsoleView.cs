@@ -59,10 +59,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         }
 
-        public int AskPlayerForInput(string player, string name)
+        public int AskPlayerForInput()
         {
             Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("{0}: {1}", player, name);
+            if (_playerX.InAction)           
+                Console.WriteLine("PlayerX: {0}", _playerX.Name);  
+            else
+                Console.WriteLine("PlayerO: {0}", _playerO.Name);
             Console.Write("Eingsbe..:");
             Console.ResetColor();
             Console.Write(" ");
