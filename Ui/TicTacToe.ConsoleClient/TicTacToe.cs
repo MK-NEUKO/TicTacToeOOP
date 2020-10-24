@@ -43,6 +43,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     Console.WriteLine("{0} hat gewonnen!!!", _playerO.Name);
                     Console.ResetColor();
                 }
+
+                // TODO
+                // nachfolgender if-else-block durch eine Anweisung ersetzen
+
                 if (_playerX.InAction)
                     _board.PlaceASigne(_view.AskPlayerForInput("PlayerX", _playerX.Name), "X");
                 else
