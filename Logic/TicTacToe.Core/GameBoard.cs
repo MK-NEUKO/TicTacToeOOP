@@ -32,35 +32,34 @@ namespace NEUKO.TicTacToe.Core
 
         public void CheckForWinner()
         {
-            for (int i = 0; i < 8; i++)
+            for (int winConstellation = 0; winConstellation < 8; winConstellation++)
             {
-                if (i == 0) CheckWinningConstellation(0, 1, 2);
-                if (i == 1) CheckWinningConstellation(3, 4, 5);
-                if (i == 2) CheckWinningConstellation(6, 7, 8);
-                if (i == 3) CheckWinningConstellation(0, 3, 6);
-                if (i == 4) CheckWinningConstellation(1, 4, 7);
-                if (i == 5) CheckWinningConstellation(2, 5, 8);
-                if (i == 6) CheckWinningConstellation(0, 4, 8);
-                if (i == 7) CheckWinningConstellation(2, 4, 6);
+                if (winConstellation == 0) CheckTheWinConstellation(0, 1, 2);
+                if (winConstellation == 1) CheckTheWinConstellation(3, 4, 5);
+                if (winConstellation == 2) CheckTheWinConstellation(6, 7, 8);
+                if (winConstellation == 3) CheckTheWinConstellation(0, 3, 6);
+                if (winConstellation == 4) CheckTheWinConstellation(1, 4, 7);
+                if (winConstellation == 5) CheckTheWinConstellation(2, 5, 8);
+                if (winConstellation == 6) CheckTheWinConstellation(0, 4, 8);
+                if (winConstellation == 7) CheckTheWinConstellation(2, 4, 6);
             }
         }
 
-        private void CheckWinningConstellation(int idOne, int idTwo, int idThree)
+        private void CheckTheWinConstellation(int areaIDOne, int areaIDTwo, int areaIDThree)
         {            
-            string actualSignes = _boardAreaList[idOne].Signe;
-            actualSignes += _boardAreaList[idTwo].Signe;
-            actualSignes += _boardAreaList[idThree].Signe;         
+            string actualContent = _boardAreaList[areaIDOne].Area;
+            actualContent += _boardAreaList[areaIDTwo].Area;
+            actualContent += _boardAreaList[areaIDThree].Area;         
 
-            if (actualSignes == "XXX")         
+            if (actualContent == "XXX")         
                 _playerXIsWinner = true;            
-            else if (actualSignes == "OOO")            
+            else if (actualContent == "OOO")            
                 _playerOIsWinner = true;                 
         }
 
-        public void PlaceASigne(int areaId, string signe)
+        public void PlaceAToken(int areaID, string token)
         {
-            GameBoardArea boardArea = _boardAreaList[areaId];
-            boardArea.Signe = signe;
+            _boardAreaList[areaID].Area = token;
         }
     }
 }

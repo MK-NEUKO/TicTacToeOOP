@@ -2,21 +2,21 @@
 {
     public class GameBoardArea
     {
-        private readonly int _areaId;
-        private string _signe;
+        private readonly int _areaID;
+        private string area;
         
 
-        public GameBoardArea(int areaId)
+        public GameBoardArea(int areaID)
         {
-            _areaId = areaId;
-            _signe = " ";
+            _areaID = areaID;
+            area = " ";
         }
 
         
-        public string Signe
+        public string Area
         {
-            get { return _signe; }
-            set { _signe = value; }
+            get { return area; }
+            set { area = value; }
         }
 
     }

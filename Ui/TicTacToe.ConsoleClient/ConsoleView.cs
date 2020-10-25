@@ -7,14 +7,23 @@ namespace NEUKO.TicTacToe.ConsoleClient
     public class ConsoleView
     {
         private readonly IList<GameBoardArea> _boardAreaList;
+        private readonly IGameBoard _board;
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
+        private bool _wrongUserInput;
 
-        public ConsoleView(IList<GameBoardArea> boardAreaList, IPlayer playerX, IPlayer playerO)
+        public ConsoleView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO)
         {
             _boardAreaList = boardAreaList;
+            _board = board;
             _playerX = playerX;
             _playerO = playerO;
+            _wrongUserInput = true;
+        }
+
+        public bool WrongUserInput
+        {
+            get { return _wrongUserInput; }
         }
 
         public void ShowTitle()
@@ -31,11 +40,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("     1   2   3   ");
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" A | {0} | {1} | {2} | ", _boardAreaList[0].Signe, _boardAreaList[1].Signe, _boardAreaList[2].Signe);           
+            Console.WriteLine(" A | {0} | {1} | {2} | ", _boardAreaList[0].Area, _boardAreaList[1].Area, _boardAreaList[2].Area);           
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Signe, _boardAreaList[4].Signe, _boardAreaList[5].Signe);
+            Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Area, _boardAreaList[4].Area, _boardAreaList[5].Area);
             Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" C | {0} | {1} | {2} | ", _boardAreaList[6].Signe, _boardAreaList[7].Signe, _boardAreaList[8].Signe);
+            Console.WriteLine(" C | {0} | {1} | {2} | ", _boardAreaList[6].Area, _boardAreaList[7].Area, _boardAreaList[8].Area);
             Console.WriteLine("   +---+---+---+ ");
             Console.ResetColor();
             Console.WriteLine();
@@ -74,10 +83,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
             return ConvertUserInput(userInput);
         }
 
-        private int ConvertUserInput(string input)
+        private int ConvertUserInput(string userInput)
         {
-            input = input.ToUpper();
-            switch (input)
+            userInput = userInput.ToUpper();
+            switch (userInput)
             {
                 case "A1":
                     return 0; 
@@ -96,15 +105,27 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 case "C2":
                     return 7; 
                 case "C3":
-                    return 8; 
-
+                    return 8;
+               
             }
+            _wrongUserInput = false;
             return 9;
         }
 
         public void ShowWinner()
         {
-
+            if (_board.PlayerXIsWinner)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("{0} hat gewonnen!!!", _playerX.Name);
+                Console.ResetColor();
+            }
+            else if (_board.PlayerOIsWinner)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("{0} hat gewonnen!!!", _playerO.Name);
+                Console.ResetColor();
+            }
         }
     }
 }

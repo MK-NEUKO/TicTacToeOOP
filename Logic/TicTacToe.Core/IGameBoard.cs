@@ -7,7 +7,7 @@ namespace NEUKO.TicTacToe.Core
         IList<GameBoardArea> BoardAreaList { get; }
         bool PlayerXIsWinner { get; }
         bool PlayerOIsWinner { get; }
-        void PlaceASigne(int areaId, string signe);
+        void PlaceAToken(int areaID, string token);
         void CheckForWinner();
     }
 }

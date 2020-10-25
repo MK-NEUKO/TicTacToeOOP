@@ -25,27 +25,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerX.Name = "Horst";
             _playerO.Name = "Jochen";
             int counter = 0;
-            while (counter < 10)
+            while (!_board.PlayerXIsWinner || !_board.PlayerOIsWinner)
             {
                 _view.ShowTitle();
                 _view.DrawGameBoard();
                 _view.DrawInfoBoard();
                 _board.CheckForWinner();
-                if (_board.PlayerXIsWinner)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("{0} hat gewonnen!!!", _playerX.Name);
-                    Console.ResetColor();
-                }
-                else if (_board.PlayerOIsWinner)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("{0} hat gewonnen!!!", _playerO.Name);
-                    Console.ResetColor();
-                }
-                
-                _board.PlaceASigne(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
-                
+                _view.ShowWinner();                
+                _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());                
                 _playerControler.ChangePlayer();
                 Console.Clear();
                 counter++;
