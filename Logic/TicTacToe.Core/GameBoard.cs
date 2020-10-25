@@ -60,6 +60,7 @@ namespace NEUKO.TicTacToe.Core
         public void PlaceAToken(int areaID, string token)
         {
             _boardAreaList[areaID].Area = token;
+            _boardAreaList[areaID].AreaHasToken = true;
         }
     }
 }

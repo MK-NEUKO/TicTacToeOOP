@@ -89,7 +89,18 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 areaID = ConvertUserInput(userInput);
                 if (areaID < 0 || areaID > 8)
                 {
-                    Console.WriteLine("ungültige Eingabe");
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Ungültige Eingabe, gültige Eingabe währe z.B. 'B1' od. 'c2'!");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    wrongInput = true;
+                }
+                else if (_boardAreaList[areaID].AreaHasToken)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Das Feld ist bereits besetzt!");
+                    Console.ResetColor();
+                    Console.WriteLine();
                     wrongInput = true;
                 }
                 else

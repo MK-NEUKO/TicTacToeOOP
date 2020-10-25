@@ -3,20 +3,26 @@
     public class GameBoardArea
     {
         private readonly int _areaID;
-        private string area;
+        private string _area;
+        private bool _areaHasToken;
         
 
         public GameBoardArea(int areaID)
         {
             _areaID = areaID;
-            area = " ";
+            _area = " ";
         }
 
-        
+        public bool AreaHasToken 
+        {
+            get { return _areaHasToken; }
+            set { _areaHasToken = value; }
+        }
+
         public string Area
         {
-            get { return area; }
-            set { area = value; }
+            get { return _area; }
+            set { _area = value; }
         }
 
     }
