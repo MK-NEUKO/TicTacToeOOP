@@ -70,17 +70,34 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public int AskPlayerForInput()
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            if (_playerX.InAction)           
-                Console.WriteLine("PlayerX: {0}", _playerX.Name);  
-            else
-                Console.WriteLine("PlayerO: {0}", _playerO.Name);
-            Console.Write("Eingsbe..:");
-            Console.ResetColor();
-            Console.Write(" ");
-            string userInput = Console.ReadLine();
-            Console.WriteLine();
-            return ConvertUserInput(userInput);
+            string userInput;
+            int areaID = 0;
+            bool wrongInput = true;
+
+            do
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                if (_playerX.InAction)
+                    Console.WriteLine("PlayerX: {0}", _playerX.Name);
+                else
+                    Console.WriteLine("PlayerO: {0}", _playerO.Name);
+                Console.Write("Eingsbe..:");
+                Console.ResetColor();
+                Console.Write(" ");
+                userInput = Console.ReadLine();
+                Console.WriteLine();
+                areaID = ConvertUserInput(userInput);
+                if (areaID < 0 || areaID > 8)
+                {
+                    Console.WriteLine("ungültige Eingabe");
+                    wrongInput = true;
+                }
+                else
+                    wrongInput = false;
+
+            } while (wrongInput);
+
+            return areaID;
         }
 
         private int ConvertUserInput(string userInput)
