@@ -5,10 +5,18 @@
         private bool _inAction;
         private bool _isHuman;
         private string _name;
+        private string _points;        
+
 
         public Player()
         {
 
+        }
+
+        public string Points
+        {
+            get { return _points; }
+            set { _points = value; }
         }
 
         public bool InAction

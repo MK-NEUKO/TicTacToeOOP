@@ -52,9 +52,18 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void DrawInfoBoard()
         {
-            Console.WriteLine("PlayerX: {0} | Mensch", _playerX.Name);
-            Console.WriteLine("PlayerO: {0} | Computer", _playerO.Name);
-            Console.WriteLine("Punktestand: (X) 12 : 4 (O) || 5 Unentschieden");
+            string px = "12";
+            string po = "7";
+            string unentschieden = "5";
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("PlayerX: {0} | Mensch   ", _playerX.Name.PadRight(10, '.'));
+            Console.WriteLine("PlayerO: {0} | Computer ", _playerO.Name.PadRight(10, '.'));
+            Console.ResetColor();
+            Console.WriteLine("----------------------------------------");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Punkte:   {0} {1}:{2} {3} ", _playerX.Name.PadLeft(10), px.PadLeft(3),/*_playerX.Points.PadLeft(3), _playerO.Points.PadRight(3),*/po.PadRight(3), _playerO.Name.PadRight(10) );
+            Console.WriteLine("Unentschieden:          {0} ", unentschieden.PadRight(15));
+            Console.ResetColor();
             Console.WriteLine();
         }
 
@@ -87,6 +96,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 userInput = Console.ReadLine();
                 Console.WriteLine();
                 areaID = ConvertUserInput(userInput);
+
                 if (areaID < 0 || areaID > 8)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -136,7 +146,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     return 8;
                
             }
-            _wrongUserInput = false;
             return 9;
         }
 

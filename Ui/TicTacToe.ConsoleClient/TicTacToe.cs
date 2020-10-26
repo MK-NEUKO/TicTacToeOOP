@@ -24,6 +24,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {
             _playerX.Name = "Horst";
             _playerO.Name = "Jochen";
+            _playerO.Points = "12";
+            _playerO.Points = "7";
             int counter = 0;
             while (!_board.PlayerXIsWinner || !_board.PlayerOIsWinner)
             {

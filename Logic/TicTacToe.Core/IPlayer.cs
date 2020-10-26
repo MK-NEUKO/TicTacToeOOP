@@ -5,5 +5,6 @@
         bool InAction { get; set; }
         bool IsHuman { get; set; }
         string Name { get; set; }
+        string Points { get; set; }
     }
 }
