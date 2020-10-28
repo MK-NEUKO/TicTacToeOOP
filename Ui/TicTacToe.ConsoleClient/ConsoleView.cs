@@ -67,7 +67,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void DrawGameBoardAtWin()
+        public void DrawGameBoardWhenWon()
         {
 
         }
@@ -87,9 +87,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
             {
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 if (_playerX.InAction)
-                    Console.WriteLine("PlayerX: {0}", _playerX.Name);
+                    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
                 else
-                    Console.WriteLine("PlayerO: {0}", _playerO.Name);
+                    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
                 Console.Write("Eingsbe..:");
                 Console.ResetColor();
                 Console.Write(" ");

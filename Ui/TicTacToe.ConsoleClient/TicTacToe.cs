@@ -20,10 +20,12 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _view = view;
         }
 
+
+
         public void Play()
         {
-            _playerX.Name = "Horst";
-            _playerO.Name = "Jochen";
+            _playerX.Name = "1234567890";
+            _playerO.Name = "12345";
             _playerO.Points = "12";
             _playerO.Points = "7";
             int counter = 0;

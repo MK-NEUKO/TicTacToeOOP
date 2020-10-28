@@ -10,7 +10,7 @@
 
         public Player()
         {
-
+            _points = "0";
         }
 
         public string Points

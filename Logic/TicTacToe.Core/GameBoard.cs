@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace NEUKO.TicTacToe.Core
 {
@@ -7,12 +8,21 @@ namespace NEUKO.TicTacToe.Core
     {
         private readonly IList<GameBoardArea> _boardAreaList;
         private bool _playerXIsWinner;
-        private bool _playerOIsWinner;  
+        private bool _playerOIsWinner;
+        private int _evaluationValue;
+        private const int _maximizerValue = 10;
+        private const int _minimizerValue = -10;
 
 
         public GameBoard(IList<GameBoardArea> boardAreaList)
         {
             _boardAreaList = boardAreaList;
+        }
+
+        public int Evaluation
+        {
+            get { return _evaluationValue; }
+            set { _evaluationValue = value; }
         }
 
         public IList<GameBoardArea> BoardAreaList
@@ -49,12 +59,19 @@ namespace NEUKO.TicTacToe.Core
         {            
             string actualContent = _boardAreaList[areaIDOne].Area;
             actualContent += _boardAreaList[areaIDTwo].Area;
-            actualContent += _boardAreaList[areaIDThree].Area;         
+            actualContent += _boardAreaList[areaIDThree].Area;
 
-            if (actualContent == "XXX")         
-                _playerXIsWinner = true;            
-            else if (actualContent == "OOO")            
-                _playerOIsWinner = true;                 
+            if (actualContent == "XXX")
+            {
+                _playerXIsWinner = true;
+                _evaluationValue = _maximizerValue;
+            }
+            else if (actualContent == "OOO")
+            {
+                _playerOIsWinner = true;
+                _evaluationValue = _minimizerValue;
+            }
+                                
         }
 
         public void PlaceAToken(int areaID, string token)
