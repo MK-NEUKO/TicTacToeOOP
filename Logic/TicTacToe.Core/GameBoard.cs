@@ -9,9 +9,7 @@ namespace NEUKO.TicTacToe.Core
         private readonly IList<GameBoardArea> _boardAreaList;
         private bool _playerXIsWinner;
         private bool _playerOIsWinner;
-        private int _evaluationValue;
-        private const int _maximizerValue = 10;
-        private const int _minimizerValue = -10;
+        private int _evaluationValue;        
 
 
         public GameBoard(IList<GameBoardArea> boardAreaList)
@@ -61,17 +59,10 @@ namespace NEUKO.TicTacToe.Core
             actualContent += _boardAreaList[areaIDTwo].Area;
             actualContent += _boardAreaList[areaIDThree].Area;
 
-            if (actualContent == "XXX")
-            {
-                _playerXIsWinner = true;
-                _evaluationValue = _maximizerValue;
-            }
-            else if (actualContent == "OOO")
-            {
-                _playerOIsWinner = true;
-                _evaluationValue = _minimizerValue;
-            }
-                                
+            if (actualContent == "XXX")            
+                _playerXIsWinner = true;                          
+            else if (actualContent == "OOO")            
+                _playerOIsWinner = true;           
         }
 
         public void PlaceAToken(int areaID, string token)
