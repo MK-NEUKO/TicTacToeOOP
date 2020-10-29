@@ -38,6 +38,42 @@ namespace NEUKO.TicTacToe.Core
             get { return _playerOIsWinner; }            
         }
 
+
+        // Eine wietere Idee für die Gewinnerermittlung
+        // Das Array kommt in den Konstruktor und ein Feld wird erstellt
+        /*
+        int[,] _winConstellation = new int[8,3]
+        	{
+        		{0,1,2},  +---+---+---+
+        		{3,4,5},  | 0 | 1 | 2 |
+        		{6,7,8},  +---+---+---+
+        		{0,3,6},  | 3 | 4 | 5 |
+        		{1,4,7},  +---+---+---+
+        		{2,5,8},  | 6 | 7 | 8 | 
+        		{0,4,8},  +---+---+---+
+        		{2,4,6},  
+        	};                
+        }
+
+
+        public void CheckForWinner()
+        {
+        	for(int i = 0; i < 8; i++)
+        	{
+        		string actualContent = "";
+        		actualContent = _boardAreaList[_winConstellation[i,0]].Signe;
+        		actualContent += _boardAreaList[_winConstellation[i,1]].Signe;
+        		actualContent += _boardAreaList[_winConstellation[i,2]].Signe;
+        		
+        		if(actualContent == "XXX")
+        			_playerXIsWinner = true;
+     	
+        		if(actualContent == "OOO")
+        			_playerOIsWinner = true;
+        	}
+        }
+        */
+
         public void CheckForWinner()
         {
             for (int winConstellation = 0; winConstellation < 8; winConstellation++)
