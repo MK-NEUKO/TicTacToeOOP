@@ -31,10 +31,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
             int counter = 0;
             while (!_board.PlayerXIsWinner || !_board.PlayerOIsWinner)
             {
+                _board.CheckForWinner();
                 _view.ShowTitle();
                 _view.DrawGameBoard();
-                _view.DrawInfoBoard();
-                _board.CheckForWinner();
+                _view.DrawInfoBoard();              
                 _view.ShowWinner();                
                 _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());                
                 _playerControler.ChangePlayer();

@@ -36,65 +36,25 @@ namespace NEUKO.TicTacToe.ConsoleClient
         }
 
         public void DrawGameBoard()
-        {         
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("     1   2   3   ");
-            Console.WriteLine("   +---+---+---+ ");            
-            Console.Write(" A |");
-
-            // AreaID 0:
-            if (_boardAreaList[0].IsWinArea)
+        {
+            if (_board.PlayerXIsWinner || _board.PlayerOIsWinner)
             {
-                Console.BackgroundColor = ConsoleColor.Yellow;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(" " + _boardAreaList[0].Area + " ");
+                DrawGameBoardWhenWon();
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("     1   2   3   ");
+                Console.WriteLine("   +---+---+---+ ");
+                Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[0].Area, _boardAreaList[1].Area, _boardAreaList[2].Area);
+                Console.WriteLine("   +---+---+---+ ");
+                Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Area, _boardAreaList[4].Area, _boardAreaList[5].Area);
+                Console.WriteLine("   +---+---+---+ ");
+                Console.WriteLine(" C | {0} | {1} | {2} | ", _boardAreaList[6].Area, _boardAreaList[7].Area, _boardAreaList[8].Area);
+                Console.WriteLine("   +---+---+---+ ");
                 Console.ResetColor();
+                Console.WriteLine();
             }
-            else
-            {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" " + _boardAreaList[0].Area + " ");
-            }
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write("|");
-
-            // AreaID 1:
-            if (_boardAreaList[0].IsWinArea)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                Console.Write(" " + _boardAreaList[1].Area + " ");
-                Console.ResetColor();
-            }
-            else
-            {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" " + _boardAreaList[1].Area + " ");
-            }
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write("|");
-
-            // AreaID 2:
-            if (_boardAreaList[2].IsWinArea)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                Console.Write(" " + _boardAreaList[2].Area + " ");              
-            }
-            else
-            {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" " + _boardAreaList[2].Area + " ");
-            }
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("| ");
-
-
-            Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Area, _boardAreaList[4].Area, _boardAreaList[5].Area);
-            Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" C | {0} | {1} | {2} | ", _boardAreaList[6].Area, _boardAreaList[7].Area, _boardAreaList[8].Area);
-            Console.WriteLine("   +---+---+---+ ");
-            Console.ResetColor();
-            Console.WriteLine();
         }
 
         public void DrawInfoBoard()
@@ -114,9 +74,82 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void DrawGameBoardWhenWon()
+        private void DrawGameBoardWhenWon()
         {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("     1   2   3   ");
+            Console.WriteLine("   +---+---+---+ ");
+            Console.Write(" A |");
 
+            for (int i = 0; i < 3; i++)
+            {
+                if (_boardAreaList[i].IsWinArea)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                }
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write("|");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" ");  
+            
+            Console.WriteLine("   +---+---+---+ ");
+            Console.Write(" B |");
+
+            for (int i = 3; i < 6; i++)
+            {
+                if (_boardAreaList[i].IsWinArea)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                }
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write("|");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" ");
+
+            Console.WriteLine("   +---+---+---+ ");
+            Console.Write(" C |");
+
+            for (int i = 6; i < 9; i++)
+            {
+                if (_boardAreaList[i].IsWinArea)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(" " + _boardAreaList[i].Area + " ");
+                }
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write("|");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" ");
+
+            Console.WriteLine("   +---+---+---+ ");
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         public void AskGameSettings()
