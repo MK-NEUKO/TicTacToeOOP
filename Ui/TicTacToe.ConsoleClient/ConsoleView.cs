@@ -39,8 +39,55 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {         
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("     1   2   3   ");
-            Console.WriteLine("   +---+---+---+ ");
-            Console.WriteLine(" A | {0} | {1} | {2} | ", _boardAreaList[0].Area, _boardAreaList[1].Area, _boardAreaList[2].Area);           
+            Console.WriteLine("   +---+---+---+ ");            
+            Console.Write(" A |");
+
+            // AreaID 0:
+            if (_boardAreaList[0].IsWinArea)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(" " + _boardAreaList[0].Area + " ");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" " + _boardAreaList[0].Area + " ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write("|");
+
+            // AreaID 1:
+            if (_boardAreaList[0].IsWinArea)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.Write(" " + _boardAreaList[1].Area + " ");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" " + _boardAreaList[1].Area + " ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write("|");
+
+            // AreaID 2:
+            if (_boardAreaList[2].IsWinArea)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.Write(" " + _boardAreaList[2].Area + " ");              
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" " + _boardAreaList[2].Area + " ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("| ");
+
+
             Console.WriteLine("   +---+---+---+ ");
             Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Area, _boardAreaList[4].Area, _boardAreaList[5].Area);
             Console.WriteLine("   +---+---+---+ ");
