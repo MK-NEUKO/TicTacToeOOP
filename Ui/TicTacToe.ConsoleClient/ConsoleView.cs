@@ -76,9 +76,27 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         private void DrawGameBoardWhenWon()
         {
+            //string[] beginningBoardLine = new string[3]
+            //{
+            //    " A |",
+            //    " B |",
+            //    " C |"
+            //};
+
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("     1   2   3   ");
             Console.WriteLine("   +---+---+---+ ");
+
+            //for (int line = 0; line < 3; line++)
+            //{
+            //    Console.WriteLine(beginningBoardLine[line]);
+            //    for (int area = line; area < area + 3; area++)
+            //    {
+
+            //    }
+
+            //}
+
             Console.Write(" A |");
 
             for (int i = 0; i < 3; i++)

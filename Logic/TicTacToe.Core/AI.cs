@@ -67,62 +67,58 @@ namespace NEUKO.TicTacToe.Core
 
         private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
+        private readonly int[,] _winConstellation;
         private int _valuation;
 
         public AI(IList<GameBoardArea> evaluationList, IGameBoard board)
         {
             _evaluationList = evaluationList;
             _board = board;
+            _winConstellation = new int[8, 3]
+            {
+                {0,1,2}, /* +---+---+---+*/
+                {3,4,5}, /* | 0 | 1 | 2 |*/
+                {6,7,8}, /* +---+---+---+*/
+                {0,3,6}, /* | 3 | 4 | 5 |*/
+                {1,4,7}, /* +---+---+---+*/
+                {2,5,8}, /* | 6 | 7 | 8 |*/
+                {0,4,8}, /* +---+---+---+*/
+                {2,4,6},
+            };
         }
 
         // ergibt 10 wenn X gewonnen hat
         // ergibt -10 wenn O gewonnen hat
         // ergibt 0 bei Unentschieden
         // ergibt -1 wenn alles offen ist
-        //public void Evaluate()
-        //{
-        //    CheckForWinner();
-        //    if (_valuation == 10 || _valuation == -10)
-        //        return;
-        //    foreach (GameBoardArea area in _evaluationList)
-        //    {
-        //        if (!area.AreaHasToken)
-        //            _valuation = -1;
-        //    }
-        //}
 
+        public int Evaluate()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                string actualContent = _evaluationList[_winConstellation[i, 0]].Area;
+                actualContent += _evaluationList[_winConstellation[i, 1]].Area;
+                actualContent += _evaluationList[_winConstellation[i, 2]].Area;
 
+                if (actualContent == "XXX")
+                    return 10;
 
-        //public void CheckForWinner()
-        //{
-        //    for (int winConstellation = 0; winConstellation < 8; winConstellation++)
-        //    {
-        //        if (winConstellation == 0) CheckTheWinConstellation(0, 1, 2);
-        //        if (winConstellation == 1) CheckTheWinConstellation(3, 4, 5);
-        //        if (winConstellation == 2) CheckTheWinConstellation(6, 7, 8);
-        //        if (winConstellation == 3) CheckTheWinConstellation(0, 3, 6);
-        //        if (winConstellation == 4) CheckTheWinConstellation(1, 4, 7);
-        //        if (winConstellation == 5) CheckTheWinConstellation(2, 5, 8);
-        //        if (winConstellation == 6) CheckTheWinConstellation(0, 4, 8);
-        //        if (winConstellation == 7) CheckTheWinConstellation(2, 4, 6);
-        //    }
-        //}
+                if (actualContent == "OOO")
+                    return -10;
 
-        //private void CheckTheWinConstellation(int areaIDOne, int areaIDTwo, int areaIDThree)
-        //{
-        //    string actualContent = _evaluationList[areaIDOne].Area;
-        //    actualContent += _evaluationList[areaIDTwo].Area;
-        //    actualContent += _evaluationList[areaIDThree].Area;
+            }
 
-        //    if (actualContent == "XXX")
-        //    {
-        //        _valuation = 10;
-        //    }
-        //    else if (actualContent == "OOO")
-        //    {
-        //        _valuation = -10;
-        //    }
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (!area.AreaHasToken)
+                    _valuation = -1;
+            }
+            return 0;
+        }
 
-        //}
+        public void ShowAITest()
+        {
+
+        }
     }
 }
