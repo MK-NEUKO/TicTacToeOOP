@@ -118,7 +118,8 @@ namespace NEUKO.TicTacToe.Core
 
         public void ShowAITest()
         {
-
+            _evaluationList = _board.BoardAreaList;
+            Console.WriteLine(Evaluate());
         }
     }
 }
