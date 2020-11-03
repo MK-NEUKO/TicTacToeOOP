@@ -68,6 +68,7 @@ namespace NEUKO.TicTacToe.Core
         private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
         private readonly int[,] _winConstellation;
+        private string[] _testGameBoard;
         private int _valuation;
 
         public AI(IList<GameBoardArea> evaluationList, IGameBoard board)
@@ -85,7 +86,15 @@ namespace NEUKO.TicTacToe.Core
                 {0,4,8}, /* +---+---+---+*/
                 {2,4,6},
             };
+
+            _testGameBoard = new string[9]
+            {
+                " ","O"," ",
+                "X","X","O",
+                " ","X","O"
+            };
         }
+           
 
         // ergibt 10 wenn X gewonnen hat
         // ergibt -10 wenn O gewonnen hat
@@ -118,7 +127,19 @@ namespace NEUKO.TicTacToe.Core
 
         public void ShowAITest()
         {
-            _evaluationList = _board.BoardAreaList;
+            //_evaluationList = _board.BoardAreaList;
+            for (int i = 0; i < 9; i++)
+            {
+                _evaluationList[i].Area = _testGameBoard[i];
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                if(i == 3 || i == 6)
+                    Console.WriteLine();
+                Console.Write("| {0} |", _evaluationList[i].Area);
+            }
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine(Evaluate());
         }
     }
