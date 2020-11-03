@@ -93,7 +93,7 @@ namespace NEUKO.TicTacToe.Core
             _testGameBoard = new string[9]
             {
                 " ","O"," ",
-                "X","X","O",
+                "X"," ","O",
                 " ","X","O"
             };
         }
@@ -110,6 +110,8 @@ namespace NEUKO.TicTacToe.Core
 
         private int Evaluate()
         {
+            _evaluationList = _board.BoardAreaList;
+
             for (int i = 0; i < 8; i++)
             {
                 string actualContent = _evaluationList[_winConstellation[i, 0]].Area;
@@ -226,10 +228,10 @@ namespace NEUKO.TicTacToe.Core
         public void ShowAITest()
         {
             //_evaluationList = _board.BoardAreaList;
-            for (int i = 0; i < 9; i++)
-            {
-                _evaluationList[i].Area = _testGameBoard[i];
-            }
+            //for (int i = 0; i < 9; i++)
+            //{
+            //    _evaluationList[i].Area = _testGameBoard[i];
+            //}
 
             Console.WriteLine("#### TestGameBoard ####");
             for (int i = 0; i < 9; i++)

@@ -193,9 +193,17 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 Console.Write("Eingsbe..:");
                 Console.ResetColor();
                 Console.Write(" ");
-                userInput = Console.ReadLine();
-                Console.WriteLine();
-                areaID = ConvertUserInput(userInput);
+                if (_playerO.InAction)
+                {
+                    _aimimax.GetAreaIDForO();
+                    areaID = _aimimax.AreaIDForO;
+                }
+                else
+                {
+                    userInput = Console.ReadLine();
+                    Console.WriteLine();
+                    areaID = ConvertUserInput(userInput);
+                }
 
                 if (areaID < 0 || areaID > 8)
                 {
