@@ -1,4 +1,5 @@
 ﻿using NEUKO.TicTacToe.Core;
+using System;
 using System.Collections.Generic;
 
 namespace NEUKO.TicTacToe.ConsoleClient
@@ -11,16 +12,22 @@ namespace NEUKO.TicTacToe.ConsoleClient
         static void Main(string[] args)
         {
             List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaId = 0; areaId < 9; areaId++)
+            List<GameBoardArea> evaluationList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
             {
-                boardAreaList.Add(new GameBoardArea(areaId));
+                boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                evaluationList.Add(new GameBoardArea(areaID));
             }
             GameBoard board = new GameBoard(boardAreaList);
+            AI aimimax = new AI(evaluationList, board);
             Player playerX = new Player() { InAction = true };
             Player playerO = new Player();
-            PlayerController playerController = new PlayerController(playerX, playerO);
-            ConsoleView view = new ConsoleView(boardAreaList, board, playerX, playerO);
-            TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, view);
+            PlayerController playerController = new PlayerController(playerX, playerO, aimimax);
+            ConsoleView view = new ConsoleView(boardAreaList, board, playerX, playerO, aimimax);
+            TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, view, aimimax);
 
             tictactoe.Play();
         }

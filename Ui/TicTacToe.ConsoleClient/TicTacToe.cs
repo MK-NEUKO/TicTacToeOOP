@@ -9,14 +9,16 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayerController _playerControler;
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
+        private readonly IAI _aimimax;
         private readonly ConsoleView _view;
 
-        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, ConsoleView view)
+        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, ConsoleView view , IAI aimimax)
         {
             _board = board;
             _playerControler = playerController;
             _playerX = playerX;
             _playerO = playerO;
+            _aimimax = aimimax;
             _view = view;
         }
 
@@ -34,6 +36,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _board.CheckForWinner();
                 _view.ShowTitle();
                 _view.DrawGameBoard();
+                /////////////////
+                //Test AI
+                /////////////////
+                _aimimax.ShowAITest();
+                ////////////////////////////
                 _view.DrawInfoBoard();              
                 _view.ShowWinner();                
                 _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());                

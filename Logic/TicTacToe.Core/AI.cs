@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.Core
 {
-    class AI
+    public class AI : IAI
     {
         #region Minimax Aögorythmus Wikipedia
         /*
@@ -111,7 +111,7 @@ namespace NEUKO.TicTacToe.Core
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (!area.AreaHasToken)
-                    _valuation = -1;
+                    return -1;
             }
             return 0;
         }
