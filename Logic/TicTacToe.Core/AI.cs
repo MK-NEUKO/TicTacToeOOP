@@ -96,12 +96,12 @@ namespace NEUKO.TicTacToe.Core
         }
            
 
-        // ergibt 10 wenn X gewonnen hat
-        // ergibt -10 wenn O gewonnen hat
-        // ergibt 0 bei Unentschieden
+        // ergibt 2 wenn X gewonnen hat
+        // ergibt 0 wenn O gewonnen hat
+        // ergibt 1 bei Unentschieden
         // ergibt -1 wenn alles offen ist
 
-        public int Evaluate()
+        private int Evaluate()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -110,10 +110,10 @@ namespace NEUKO.TicTacToe.Core
                 actualContent += _evaluationList[_winConstellation[i, 2]].Area;
 
                 if (actualContent == "XXX")
-                    return 10;
+                    return 2;
 
                 if (actualContent == "OOO")
-                    return -10;
+                    return 0;
 
             }
 
@@ -122,7 +122,49 @@ namespace NEUKO.TicTacToe.Core
                 if (!area.AreaHasToken)
                     return -1;
             }
-            return 0;
+            return 1;
+        }
+
+        private int Min()
+        {
+            if (Evaluate() != -1)
+                return Evaluate();
+
+            int minValue = 999;
+
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "O";
+                    int max = Max();
+                    if (max < minValue)
+                        minValue = max;
+                    area.Area = " ";
+                }
+            }
+            return minValue;
+        }
+
+        private int Max()
+        {
+            if (Evaluate() != -1)
+                return Evaluate();
+
+            int maxValue = -999;
+
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "X";
+                    int min = Min();
+                    if (min > maxValue)
+                        maxValue = min;
+                    area.Area = " ";
+                }
+            }
+            return maxValue;
         }
 
         public void ShowAITest()
@@ -132,6 +174,8 @@ namespace NEUKO.TicTacToe.Core
             {
                 _evaluationList[i].Area = _testGameBoard[i];
             }
+
+            Console.WriteLine("#### TestGameBoard ####");
             for (int i = 0; i < 9; i++)
             {
                 if(i == 3 || i == 6)
@@ -140,7 +184,10 @@ namespace NEUKO.TicTacToe.Core
             }
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine(Evaluate());
+            Console.WriteLine("Evaluate..: " + Evaluate());
+            Console.WriteLine("Min.......: " + Min());
+            Console.WriteLine("Max.......: " + Max());
+            Console.WriteLine();
         }
     }
 }
