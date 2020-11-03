@@ -8,6 +8,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
     {
         // TODO: Namenskonventionen .NET 
         // eigene Bezeichner dementsprechen Überarbeiten. 
+
+        // Datenkappselung: Verwendet man innerhalb der Klasse das Feld oder die Eigenschaft?
+        // Lamda Ausdrücke nachschlagen, lernen!
         
         static void Main(string[] args)
         {

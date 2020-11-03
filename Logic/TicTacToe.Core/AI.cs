@@ -69,7 +69,10 @@ namespace NEUKO.TicTacToe.Core
         private IGameBoard _board;
         private readonly int[,] _winConstellation;
         private string[] _testGameBoard;
-        private int _valuation;
+        private int _areaIDForX;
+        private int _areaIDForO;
+
+        
 
         public AI(IList<GameBoardArea> evaluationList, IGameBoard board)
         {
@@ -94,7 +97,11 @@ namespace NEUKO.TicTacToe.Core
                 " ","X","O"
             };
         }
-           
+
+        public int AreaIDForO { get => _areaIDForO; }
+
+        public int AreaIDForX { get => _areaIDForX; }
+
 
         // ergibt 2 wenn X gewonnen hat
         // ergibt 0 wenn O gewonnen hat
@@ -167,6 +174,55 @@ namespace NEUKO.TicTacToe.Core
             return maxValue;
         }
 
+
+        public int GetAreaIDForX()
+        {
+            if (Evaluate() != -1)
+                return Evaluate();
+
+            int maxValue = -999;
+
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "X";
+                    int min = Min();
+                    if (min > maxValue)
+                    {
+                        maxValue = min;
+                        _areaIDForX = area.AreaID;
+                    }
+                    area.Area = " ";
+                }
+            }
+            return maxValue;
+        }
+
+        public int GetAreaIDForO()
+        {
+            if (Evaluate() != -1)
+                return Evaluate();
+
+            int minValue = 999;
+
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "O";
+                    int max = Max();
+                    if (max < minValue)
+                    {
+                        minValue = max;
+                        _areaIDForO = area.AreaID;
+                    }                       
+                    area.Area = " ";
+                }
+            }
+            return minValue;
+        }
+
         public void ShowAITest()
         {
             //_evaluationList = _board.BoardAreaList;
@@ -185,9 +241,9 @@ namespace NEUKO.TicTacToe.Core
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Evaluate..: " + Evaluate());
-            Console.WriteLine("Min.......: " + Min());
-            Console.WriteLine("Max.......: " + Max());
+            Console.WriteLine("Min.......: " + Min() + " ||  AreaIDForX..: " + GetAreaIDForX());
+            Console.WriteLine("Max.......: " + Max() + " ||  AreaIDForO..: " + GetAreaIDForO());
             Console.WriteLine();
-        }
+        }      
     }
 }

@@ -34,5 +34,6 @@
             set { _area = value; }
         }
 
+        public int AreaID { get => _areaID; }
     }
 }
