@@ -11,6 +11,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
+        private int _tie;
         private bool _wrongUserInput;
 
         public ConsoleView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IAI aimimax)
@@ -20,6 +21,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerX = playerX;
             _playerO = playerO;
             _aimimax = aimimax;
+            _tie = 0;
             _wrongUserInput = true;
         }
 
@@ -27,6 +29,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {
             get { return _wrongUserInput; }
         }
+
+        public int Tie { get => _tie; set => _tie = value; }
 
         public void ShowTitle()
         {
@@ -61,17 +65,17 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void DrawInfoBoard()
         {
-            string px = "12";
-            string po = "7";
-            string unentschieden = "5";
+            string px = _playerX.Points.ToString();
+            string po = _playerO.Points.ToString();
+            string unentschieden = _tie.ToString();
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("PlayerX: {0} | Mensch   ", _playerX.Name.PadRight(10, '.'));
+            Console.WriteLine("PlayerX: {0} | Computer ", _playerX.Name.PadRight(10, '.'));
             Console.WriteLine("PlayerO: {0} | Computer ", _playerO.Name.PadRight(10, '.'));
             Console.ResetColor();
-            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("-----------------------------------");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Punkte:   {0} {1}:{2} {3} ", _playerX.Name.PadLeft(10), px.PadLeft(3),/*_playerX.Points.PadLeft(3), _playerO.Points.PadRight(3),*/po.PadRight(3), _playerO.Name.PadRight(10) );
-            Console.WriteLine("Unentschieden:          {0} ", unentschieden.PadRight(15));
+            Console.WriteLine("   {0} {1}:{2} {3} ", _playerX.Name.PadLeft(10), px.PadLeft(3),/*_playerX.Points.PadLeft(3), _playerO.Points.PadRight(3),*/po.PadRight(3), _playerO.Name.PadRight(10) );
+            Console.WriteLine("Unentschieden:   {0} ", unentschieden.PadRight(15));
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -179,7 +183,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public int AskPlayerForInput()
         {
-            string userInput;
+            //string userInput;
             int areaID = 0;
             bool wrongInput = true;
 
@@ -197,14 +201,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 {
                     _aimimax.GetAreaIDForX();
                     Console.WriteLine(_aimimax.AreaIDForX);
-                    Console.ReadKey();
+                    //Console.ReadKey();
                     areaID = _aimimax.AreaIDForX;
                 }
                 if (_playerO.InAction)
                 {
                     _aimimax.GetAreaIDForO();
                     Console.WriteLine(_aimimax.AreaIDForO);
-                    Console.ReadKey();
+                    //Console.ReadKey();
                     areaID = _aimimax.AreaIDForO;
                 }
                 

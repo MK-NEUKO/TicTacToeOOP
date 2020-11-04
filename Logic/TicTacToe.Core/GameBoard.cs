@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
 namespace NEUKO.TicTacToe.Core
 {
@@ -9,6 +10,7 @@ namespace NEUKO.TicTacToe.Core
         private readonly IList<GameBoardArea> _boardAreaList;
         private bool _playerXIsWinner;
         private bool _playerOIsWinner;
+        private bool _gameIsTie;
         private readonly int[,] _winConstellation;        
 
 
@@ -41,7 +43,9 @@ namespace NEUKO.TicTacToe.Core
         public bool PlayerOIsWinner
         {
             get { return _playerOIsWinner; }            
-        }        
+        }
+
+        public bool GameIsTie { get => _gameIsTie; }
 
         public void CheckForWinner()
         {
@@ -69,13 +73,39 @@ namespace NEUKO.TicTacToe.Core
                 }
         			
         	}
+            if (IsGameTie())
+            {
+                _gameIsTie = true;
+            }
             
-        }          
+        }
+        
+        private bool IsGameTie()
+        {
+            foreach (GameBoardArea area in _boardAreaList)
+            {
+                if (area.Area == " ")
+                    return false;
+            }
+            return true;
+        }
 
         public void PlaceAToken(int areaID, string token)
         {
             _boardAreaList[areaID].Area = token;
             _boardAreaList[areaID].AreaHasToken = true;
+        }
+
+        public void ResetGameBoard()
+        {
+            foreach (GameBoardArea area in _boardAreaList)
+            {
+                area.Area = " ";
+                area.AreaHasToken = false;
+            }
+            _playerXIsWinner = false;
+            _playerOIsWinner = false;
+            _gameIsTie = false;
         }
     }
 }

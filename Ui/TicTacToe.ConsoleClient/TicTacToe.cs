@@ -26,29 +26,50 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void Play()
         {
-            _playerX.Name = "1234567890";
-            _playerO.Name = "12345";
-            _playerO.Points = "12";
-            _playerO.Points = "7";
-            //int counter = 0;
-            while (!_board.PlayerXIsWinner || !_board.PlayerOIsWinner)
+            _playerX.Name = "Hal";
+            _playerO.Name = "Aimimax";
+            
+            int counter = 0;
+            do
             {
+                while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
+                {
+                    _view.ShowTitle();
+                    _view.DrawGameBoard();
+                    _view.DrawInfoBoard();
+                    /////////////////
+                    //Test AI
+                    /////////////////
+                    _aimimax.ShowAITest();
+                    ////////////////////////////
+                    
+                    //_view.ShowWinner();                
+                    _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
+                    _playerControler.ChangePlayer();
+                    _board.CheckForWinner();                  
+                    Console.Clear();                   
+                }
+                GivePoints();
+                _board.ResetGameBoard();
+                counter++;
+                if (counter == 10)
+                {
+                    _view.ShowTitle();
+                    _view.DrawInfoBoard();
+                }
                 
-                _view.ShowTitle();
-                _view.DrawGameBoard();
-                /////////////////
-                //Test AI
-                /////////////////
-                _aimimax.ShowAITest();
-                ////////////////////////////
-                //_view.DrawInfoBoard();              
-                //_view.ShowWinner();                
-                _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());                
-                _playerControler.ChangePlayer();
-                //_board.CheckForWinner();
-                Console.Clear();
-                //counter++;
-            }
-        }    
+            } while (counter < 10);
+            Console.ReadKey();
+        } 
+        
+        private void GivePoints()
+        {
+            if (_board.PlayerXIsWinner)
+                _playerX.Points++;
+            if (_board.PlayerOIsWinner)
+                _playerO.Points++;
+            if (_board.GameIsTie)
+                _view.Tie++;
+        }
     }
 }

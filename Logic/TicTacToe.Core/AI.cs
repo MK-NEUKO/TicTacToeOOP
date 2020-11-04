@@ -236,13 +236,13 @@ namespace NEUKO.TicTacToe.Core
             //    _evaluationList[i].Area = _testGameBoard[i];
             //}
 
-            Console.WriteLine("#### TestGameBoard ####");
-            for (int i = 0; i < 9; i++)
-            {
-                if(i == 3 || i == 6)
-                    Console.WriteLine();
-                Console.Write("| {0} |", _evaluationList[i].Area);
-            }
+            //Console.WriteLine("#### TestGameBoard ####");
+            //for (int i = 0; i < 9; i++)
+            //{
+            //    if(i == 3 || i == 6)
+            //        Console.WriteLine();
+            //    Console.Write("| {0} |", _evaluationList[i].Area);
+            //}
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Evaluate().......: " + Evaluate());

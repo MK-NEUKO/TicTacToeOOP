@@ -5,15 +5,15 @@
         private bool _inAction;
         private bool _isHuman;
         private string _name;
-        private string _points;        
+        private int _points;        
 
 
         public Player()
         {
-            _points = "0";
+            _points = 0;
         }
 
-        public string Points
+        public int Points
         {
             get { return _points; }
             set { _points = value; }

@@ -9,6 +9,7 @@ namespace NEUKO.TicTacToe.Core
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
+        
 
         public PlayerController(IPlayer playerX, IPlayer playerO, IAI aimimax)
         {
