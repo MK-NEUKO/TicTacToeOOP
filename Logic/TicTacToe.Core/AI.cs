@@ -71,6 +71,7 @@ namespace NEUKO.TicTacToe.Core
         private string[] _testGameBoard;
         private int _areaIDForX;
         private int _areaIDForO;
+        private int _maximumDepth;
 
         
 
@@ -78,6 +79,7 @@ namespace NEUKO.TicTacToe.Core
         {
             _evaluationList = evaluationList;
             _board = board;
+            _maximumDepth = 1;
             _winConstellation = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/
@@ -101,6 +103,7 @@ namespace NEUKO.TicTacToe.Core
         public int AreaIDForO { get => _areaIDForO; }
 
         public int AreaIDForX { get => _areaIDForX; }
+        public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
 
 
         // ergibt 2 wenn X gewonnen hat
@@ -139,10 +142,12 @@ namespace NEUKO.TicTacToe.Core
             return 1;
         }
 
-        private int Min()
+        private int Min(int depth)
         {
             if (Evaluate() != -1)
                 return Evaluate();
+            if (depth == 0)
+                return 1;
 
             int minValue = 999;
             foreach (GameBoardArea area in _evaluationList)
@@ -150,7 +155,7 @@ namespace NEUKO.TicTacToe.Core
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    int max = Max();
+                    int max = Max(depth - 1);
                     area.Area = " ";
                     if (max < minValue)
                         minValue = max;
@@ -159,10 +164,12 @@ namespace NEUKO.TicTacToe.Core
             return minValue;
         }
 
-        private int Max()
+        private int Max(int depth)
         {
             if (Evaluate() != -1)
                 return Evaluate();
+            if (depth == 0)
+                return 1;
 
             int maxValue = -999;
             foreach (GameBoardArea area in _evaluationList)
@@ -170,7 +177,7 @@ namespace NEUKO.TicTacToe.Core
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    int min = Min();
+                    int min = Min(depth - 1);
                     area.Area = " ";
                     if (min > maxValue)
                         maxValue = min;
@@ -192,7 +199,7 @@ namespace NEUKO.TicTacToe.Core
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    int min = Min();
+                    int min = Min(_maximumDepth);
                     if (min > maxValue)
                     {
                         maxValue = min;
@@ -216,7 +223,7 @@ namespace NEUKO.TicTacToe.Core
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    int max = Max();
+                    int max = Max(_maximumDepth);
                     if (max < minValue)
                     {
                         minValue = max;
@@ -246,8 +253,8 @@ namespace NEUKO.TicTacToe.Core
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Evaluate().......: " + Evaluate());
-            Console.WriteLine("Min()............: " + Min());
-            Console.WriteLine("Max()............: " + Max());
+            //Console.WriteLine("Min()............: " + Min());
+            //Console.WriteLine("Max()............: " + Max());
             Console.WriteLine("GerAreaIDForX()..: " + GetAreaIDForX());
             Console.WriteLine("GetAreaIDForO()..: " + GetAreaIDForO());            
             Console.WriteLine("_areaIDForX......: " + _areaIDForX);
