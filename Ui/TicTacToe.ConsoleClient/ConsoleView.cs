@@ -48,7 +48,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("     1   2   3   ");
                 Console.WriteLine("   +---+---+---+ ");
-                Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[0].Area, _boardAreaList[1].Area, _boardAreaList[2].Area);
+                Console.WriteLine(" A | {0} | {1} | {2} | ", _boardAreaList[0].Area, _boardAreaList[1].Area, _boardAreaList[2].Area);
                 Console.WriteLine("   +---+---+---+ ");
                 Console.WriteLine(" B | {0} | {1} | {2} | ", _boardAreaList[3].Area, _boardAreaList[4].Area, _boardAreaList[5].Area);
                 Console.WriteLine("   +---+---+---+ ");
@@ -185,25 +185,33 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                //Console.BackgroundColor = ConsoleColor.DarkBlue;
+                //if (_playerX.InAction)
+                //    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                //else
+                //    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
+                //Console.Write("Eingsbe..:");
+                //Console.ResetColor();
+                //Console.Write(" ");
                 if (_playerX.InAction)
-                    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
-                else
-                    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
-                Console.Write("Eingsbe..:");
-                Console.ResetColor();
-                Console.Write(" ");
+                {
+                    _aimimax.GetAreaIDForX();
+                    Console.WriteLine(_aimimax.AreaIDForX);
+                    Console.ReadKey();
+                    areaID = _aimimax.AreaIDForX;
+                }
                 if (_playerO.InAction)
                 {
                     _aimimax.GetAreaIDForO();
+                    Console.WriteLine(_aimimax.AreaIDForO);
+                    Console.ReadKey();
                     areaID = _aimimax.AreaIDForO;
                 }
-                else
-                {
-                    userInput = Console.ReadLine();
-                    Console.WriteLine();
-                    areaID = ConvertUserInput(userInput);
-                }
+                
+                    //userInput = Console.ReadLine();
+                    //Console.WriteLine();
+                    //areaID = ConvertUserInput(userInput);
+               
 
                 if (areaID < 0 || areaID > 8)
                 {

@@ -30,10 +30,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerO.Name = "12345";
             _playerO.Points = "12";
             _playerO.Points = "7";
-            int counter = 0;
+            //int counter = 0;
             while (!_board.PlayerXIsWinner || !_board.PlayerOIsWinner)
             {
-                _board.CheckForWinner();
+                
                 _view.ShowTitle();
                 _view.DrawGameBoard();
                 /////////////////
@@ -41,12 +41,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 /////////////////
                 _aimimax.ShowAITest();
                 ////////////////////////////
-                _view.DrawInfoBoard();              
-                _view.ShowWinner();                
+                //_view.DrawInfoBoard();              
+                //_view.ShowWinner();                
                 _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());                
                 _playerControler.ChangePlayer();
+                //_board.CheckForWinner();
                 Console.Clear();
-                counter++;
+                //counter++;
             }
         }    
     }
