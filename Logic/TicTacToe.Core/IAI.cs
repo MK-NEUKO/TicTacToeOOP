@@ -11,5 +11,6 @@ namespace NEUKO.TicTacToe.Core
         int GetAreaIDForO();
         int AreaIDForX { get; }
         int AreaIDForO { get; }
+        int MaximumDepth { get; set; }
     }
 }

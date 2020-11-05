@@ -76,6 +76,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("   {0} {1}:{2} {3} ", _playerX.Name.PadLeft(10), px.PadLeft(3),/*_playerX.Points.PadLeft(3), _playerO.Points.PadRight(3),*/po.PadRight(3), _playerO.Name.PadRight(10) );
             Console.WriteLine("Unentschieden:   {0} ", unentschieden.PadRight(15));
+            Console.WriteLine("Suchtiefe = {0}                    ", _aimimax.MaximumDepth);
             Console.ResetColor();
             Console.WriteLine();
         }

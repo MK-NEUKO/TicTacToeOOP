@@ -79,7 +79,7 @@ namespace NEUKO.TicTacToe.Core
         {
             _evaluationList = evaluationList;
             _board = board;
-            _maximumDepth = 1;
+            _maximumDepth = 2;
             _winConstellation = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/

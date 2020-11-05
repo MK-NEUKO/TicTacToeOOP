@@ -41,15 +41,15 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     //Test AI
                     /////////////////
                     _aimimax.ShowAITest();
-                    ////////////////////////////
-                    
-                    //_view.ShowWinner();                
+                    ////////////////////////////                                                    
                     _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
                     _board.CheckForWinner();                  
                     Console.Clear();                   
                 }
                 GivePoints();
+                _view.ShowWinner();
+                _view.DrawGameBoard();
                 _board.ResetGameBoard();
                 counter++;
                 if (counter == 10)
