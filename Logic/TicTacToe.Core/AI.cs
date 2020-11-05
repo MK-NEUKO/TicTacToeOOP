@@ -79,7 +79,7 @@ namespace NEUKO.TicTacToe.Core
         {
             _evaluationList = evaluationList;
             _board = board;
-            _maximumDepth = 2;
+            _maximumDepth = 10;
             _winConstellation = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/
@@ -156,48 +156,51 @@ namespace NEUKO.TicTacToe.Core
             return value;
         }
 
-        private double Min(int depth)
+        private double Min(int depth, double alpha, double beta)
         {
             if (EvaluateGameBoard() != -1)
                 return EvaluateGameBoard();
             if (depth == 0)
                 return EvaluateBoardAreas();
 
-            double minValue = 999;
+            //double minValue = 999;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    double max = Max(depth - 1);
+                    double max = Max(depth - 1, alpha, beta);
                     area.Area = " ";
-                    if (max < minValue)
-                        minValue = max;
+                    if (max < beta)
+                        beta = max;
+                    if (beta <= alpha)
+                        return alpha;
                 }
             }
-            return minValue;
+            return beta;
         }
 
-        private double Max(int depth)
+        private double Max(int depth, double alpha, double beta)
         {
             if (EvaluateGameBoard() != -1)
                 return EvaluateGameBoard();
             if (depth == 0)
                 return EvaluateBoardAreas();
-
-            double maxValue = -999;
+            
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    double min = Min(depth - 1);
+                    double min = Min(depth - 1, alpha, beta);
                     area.Area = " ";
-                    if (min > maxValue)
-                        maxValue = min;
+                    if (min > alpha)
+                        alpha = min;
+                    if (alpha >= beta)
+                        return beta;
                 }
             }
-            return maxValue;
+            return alpha;
         }
 
 
@@ -206,23 +209,23 @@ namespace NEUKO.TicTacToe.Core
             if (EvaluateGameBoard() != -1)
                 return EvaluateGameBoard();
 
-            double maxValue = -999;
-
+            double alpha = -999;
+            double beta = 999;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    double min = Min(_maximumDepth);
-                    if (min > maxValue)
-                    {
-                        maxValue = min;
-                        _areaIDForX = area.AreaID;
-                    }
+                    double min = Min(_maximumDepth, alpha, beta);
                     area.Area = " ";
+                    if (min > alpha)
+                    {
+                        alpha = min;
+                        _areaIDForX = area.AreaID;
+                    }                    
                 }
             }
-            return maxValue;
+            return alpha;
         }
 
         public double GetAreaIDForO()
@@ -230,23 +233,23 @@ namespace NEUKO.TicTacToe.Core
             if (EvaluateGameBoard() != -1)
                 return EvaluateGameBoard();
 
-            double minValue = 999;
-
+            double alpha = -999;
+            double beta = 999;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    double max = Max(_maximumDepth);
-                    if (max < minValue)
-                    {
-                        minValue = max;
-                        _areaIDForO = area.AreaID;
-                    }                       
+                    double max = Max(_maximumDepth, alpha, beta);
                     area.Area = " ";
+                    if (max < beta)
+                    {
+                        beta = max;
+                        _areaIDForO = area.AreaID;
+                    }                    
                 }
             }
-            return minValue;
+            return beta;
         }
 
         public void ShowAITest()

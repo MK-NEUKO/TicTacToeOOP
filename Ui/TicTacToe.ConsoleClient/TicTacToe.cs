@@ -45,7 +45,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
                     _board.CheckForWinner();
-                    Console.ReadKey();
+                    //Console.ReadKey();
                     Console.Clear();                   
                 }
                 GivePoints();
