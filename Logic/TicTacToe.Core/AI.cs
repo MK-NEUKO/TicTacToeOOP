@@ -269,6 +269,7 @@ namespace NEUKO.TicTacToe.Core
             Console.WriteLine("Evaluate().......: " + EvaluateGameBoard());
             //Console.WriteLine("Min()............: " + Min());
             //Console.WriteLine("Max()............: " + Max());
+            Console.WriteLine("EvaluateBoardAreas().: " + EvaluateBoardAreas());
             Console.WriteLine("GerAreaIDForX()..: " + GetAreaIDForX());
             Console.WriteLine("GetAreaIDForO()..: " + GetAreaIDForO());            
             Console.WriteLine("_areaIDForX......: " + _areaIDForX);
