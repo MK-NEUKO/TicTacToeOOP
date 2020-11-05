@@ -7,8 +7,8 @@ namespace NEUKO.TicTacToe.Core
     public interface IAI
     {
         void ShowAITest();
-        int GetAreaIDForX();
-        int GetAreaIDForO();
+        double GetAreaIDForX();
+        double GetAreaIDForO();
         int AreaIDForX { get; }
         int AreaIDForO { get; }
         int MaximumDepth { get; set; }
