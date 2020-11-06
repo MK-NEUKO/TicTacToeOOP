@@ -6,7 +6,7 @@ namespace NEUKO.TicTacToe.Core
 {
     public class AI : IAI
     {
-        #region Minimax Aögorythmus Wikipedia
+        #region Minimax Algorythmus Wikipedia
         /*
            gespeicherterZug = NULL;
            int gewuenschteTiefe = 4;
@@ -130,7 +130,6 @@ namespace NEUKO.TicTacToe.Core
 
                 if (actualContent == "OOO")
                     return 0;
-
             }
 
             foreach (GameBoardArea area in _evaluationList)

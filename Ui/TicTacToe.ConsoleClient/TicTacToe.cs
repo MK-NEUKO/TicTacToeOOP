@@ -11,6 +11,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
         private readonly ConsoleView _view;
+        private bool getSettings;
 
         public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, ConsoleView view , IAI aimimax)
         {
@@ -28,10 +29,20 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {
             _playerX.Name = "Hal";
             _playerO.Name = "Aimimax";
+            getSettings = true;
             
             int counter = 0;
             do
             {
+                if (getSettings)
+                    _view.GetSettings();
+                
+                if (_view.GetStandardSettings)
+                    _view.AskForStandartSettings();
+
+                if (_view.GetAdvancedSettings)
+                    _view.AskForAdvancedSettings();
+
                 while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
                 {
                     _view.ShowTitle();
@@ -49,16 +60,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     Console.Clear();                   
                 }
                 GivePoints();
-                _view.ShowWinner();
-                _playerControler.ChangePlayer();
+                _view.ShowTitle();                
                 _view.DrawGameBoard();
+                _view.ShowWinner();
+                _view.DrawInfoBoard();
+                _playerControler.ChangePlayer();
                 _board.ResetGameBoard();
                 counter++;
-                if (counter == 10)
-                {
-                    _view.ShowTitle();
-                    _view.DrawInfoBoard();
-                }
+                
                 
             } while (counter < 10);
             Console.ReadKey();

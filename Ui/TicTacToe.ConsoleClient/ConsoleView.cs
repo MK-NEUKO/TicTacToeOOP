@@ -13,6 +13,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IAI _aimimax;
         private int _tie;
         private bool _wrongUserInput;
+        private bool _getStandardSettings;
+        private bool _getAdvancedSettings;
 
         public ConsoleView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IAI aimimax)
         {
@@ -31,6 +33,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         }
 
         public int Tie { get => _tie; set => _tie = value; }
+        public bool GetStandardSettings { get => _getStandardSettings; }
+        public bool GetAdvancedSettings { get => _getAdvancedSettings; }
 
         public void ShowTitle()
         {
@@ -39,6 +43,30 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" -------------------------- ");
             Console.ResetColor();
             Console.WriteLine();
+        }
+
+        internal void AskForAdvancedSettings()
+        {
+            Console.WriteLine("Ad Settings");
+        }
+
+        internal void AskForStandartSettings()
+        {
+            Console.WriteLine("St Settings");
+        }
+
+        public void GetSettings()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("Willkommen im Spiel Tic Tac Toe");
+            Console.WriteLine("Standart Einstellungen...: 1   ");
+            Console.WriteLine("Erweiterte Einstellungen.: 2   ");
+            Console.ResetColor();
+            string userInput = Console.ReadLine();
+            if (userInput == "1")
+                _getStandardSettings = true;
+            if (userInput == "2")
+                _getAdvancedSettings = true;            
         }
 
         public void DrawGameBoard()
@@ -184,39 +212,39 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public int AskPlayerForInput()
         {
-            //string userInput;
+            string userInput;
             int areaID = 0;
             bool wrongInput = true;
 
             do
             {
-                //Console.BackgroundColor = ConsoleColor.DarkBlue;
-                //if (_playerX.InAction)
-                //    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                if (_playerX.InAction)
+                    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
                 //else
                 //    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
-                //Console.Write("Eingsbe..:");
-                //Console.ResetColor();
-                //Console.Write(" ");
-                if (_playerX.InAction)
-                {
-                    _aimimax.GetAreaIDForX();
-                    Console.WriteLine(_aimimax.AreaIDForX);
-                    //Console.ReadKey();
-                    areaID = _aimimax.AreaIDForX;
-                }
+                Console.Write("Eingsbe..:");
+                Console.ResetColor();
+                Console.Write(" ");
+                //if (_playerX.InAction)
+                //{
+                //    _aimimax.GetAreaIDForX();
+                //    Console.WriteLine(_aimimax.AreaIDForX);
+                //    //Console.ReadKey();
+                //    areaID = _aimimax.AreaIDForX;
+                //}
                 if (_playerO.InAction)
                 {
                     _aimimax.GetAreaIDForO();
                     Console.WriteLine(_aimimax.AreaIDForO);
-                    //Console.ReadKey();
-                    areaID = _aimimax.AreaIDForO;
+                    Console.ReadKey();
+                    return _aimimax.AreaIDForO;
                 }
-                
-                    //userInput = Console.ReadLine();
-                    //Console.WriteLine();
-                    //areaID = ConvertUserInput(userInput);
-               
+
+                userInput = Console.ReadLine();
+                Console.WriteLine();
+                areaID = ConvertUserInput(userInput);
+
 
                 if (areaID < 0 || areaID > 8)
                 {
