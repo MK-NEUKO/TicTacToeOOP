@@ -29,8 +29,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Player playerX = new Player() { InAction = true };
             Player playerO = new Player();
             PlayerController playerController = new PlayerController(playerX, playerO, aimimax);
+            QueryView query = new QueryView(boardAreaList, board, playerX, playerO, aimimax);
+            DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, aimimax);
             ConsoleView view = new ConsoleView(boardAreaList, board, playerX, playerO, aimimax);
-            TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, view, aimimax);
+            TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, display, query, view, aimimax);
 
             tictactoe.Play();
         }

@@ -10,16 +10,20 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
+        private readonly DisplayView _display;
+        private readonly QueryView _query;
         private readonly ConsoleView _view;
         private bool getSettings;
 
-        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, ConsoleView view , IAI aimimax)
+        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, DisplayView display, QueryView query, ConsoleView view , IAI aimimax)
         {
             _board = board;
             _playerControler = playerController;
             _playerX = playerX;
             _playerO = playerO;
             _aimimax = aimimax;
+            _display = display;
+            _query = query;
             _view = view;
         }
 
