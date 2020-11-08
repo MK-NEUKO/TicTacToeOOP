@@ -39,12 +39,12 @@ namespace NEUKO.TicTacToe.ConsoleClient
             do
             {
                 if (getSettings)
-                    _view.GetSettings();
+                    _query.GetSettings();
                 
-                if (_view.GetStandardSettings)
-                    _view.AskForStandartSettings();
+                if (_query.GetDefaultSettings)
+                    _query.AskForDefaultSettings();
 
-                if (_view.GetAdvancedSettings)
+                if (_query.GetAdvancedSettings)
                     _view.AskForAdvancedSettings();
 
                 while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
