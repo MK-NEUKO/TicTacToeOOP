@@ -10,11 +10,15 @@ namespace NEUKO.TicTacToe.Core
         private readonly IPlayer _playerO;
         private readonly IGameBoard _board;
         private readonly IAI _aimimax;
+        private int _gameIsTie;
 
-        public PlayerController(IPlayer playerX, IPlayer playerO, IAI aimimax)
+        public int GameIsTie { get => _gameIsTie; }
+
+        public PlayerController(IPlayer playerX, IPlayer playerO, IGameBoard board, IAI aimimax)
         {
             _playerX = playerX;
-            _playerO = playerO;          
+            _playerO = playerO;
+            _board = board;
             _aimimax = aimimax;
         }
 
@@ -38,6 +42,16 @@ namespace NEUKO.TicTacToe.Core
                 _playerX.InAction = true;
                 _playerO.InAction = false;
             }
+        }
+
+        public void GivePoints()
+        {
+            if (_board.PlayerXIsWinner)
+                _playerX.Points++;
+            if (_board.PlayerOIsWinner)
+                _playerO.Points++;
+            if (_board.GameIsTie)
+                _gameIsTie++;
         }
 
     }

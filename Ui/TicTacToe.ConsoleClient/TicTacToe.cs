@@ -11,11 +11,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
         private readonly DisplayView _display;
-        private readonly QueryView _query;
-        private readonly ConsoleView _view;
+        private readonly QueryView _query;        
         private bool getSettings;
 
-        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, DisplayView display, QueryView query, ConsoleView view , IAI aimimax)
+        public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, DisplayView display, QueryView query, IAI aimimax)
         {
             _board = board;
             _playerControler = playerController;
@@ -23,15 +22,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerO = playerO;
             _aimimax = aimimax;
             _display = display;
-            _query = query;
-            _view = view;
+            _query = query;           
         }
 
 
 
         public void Play()
         {
-            _playerX.Name = "Hal";
             _playerO.Name = "Aimimax";
             getSettings = true;
             
@@ -45,29 +42,29 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     _query.AskForDefaultSettings();
 
                 if (_query.GetAdvancedSettings)
-                    _view.AskForAdvancedSettings();
+                    _query.AskForAdvancedSettings();
 
                 while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
                 {
-                    _view.ShowTitle();
-                    _view.DrawGameBoard();
-                    _view.DrawInfoBoard();
+                    _display.ShowTitle();
+                    _display.DrawGameBoard();
+                    _display.DrawInfoBoard();
                     /////////////////
                     //Test AI
                     /////////////////
                     _aimimax.ShowAITest();
                     ////////////////////////////                                                    
-                    _board.PlaceAToken(_view.AskPlayerForInput(), _playerControler.GiveTheRightToken());
+                    _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
                     _board.CheckForWinner();
                     //Console.ReadKey();
                     Console.Clear();                   
                 }
-                GivePoints();
-                _view.ShowTitle();                
-                _view.DrawGameBoard();
-                _view.ShowWinner();
-                _view.DrawInfoBoard();
+                _playerControler.GivePoints();
+                _display.ShowTitle();                
+                _display.DrawGameBoard();
+                _display.ShowWinner();
+                _display.DrawInfoBoard();
                 _playerControler.ChangePlayer();
                 _board.ResetGameBoard();
                 counter++;
@@ -77,14 +74,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.ReadKey();
         } 
         
-        private void GivePoints()
-        {
-            if (_board.PlayerXIsWinner)
-                _playerX.Points++;
-            if (_board.PlayerOIsWinner)
-                _playerO.Points++;
-            if (_board.GameIsTie)
-                _view.Tie++;
-        }
+        
     }
 }

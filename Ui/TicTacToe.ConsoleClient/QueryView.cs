@@ -153,5 +153,98 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
 
         }
+
+        internal void AskForAdvancedSettings()
+        {
+            Console.WriteLine("Ad Settings");
+        }
+
+        public int AskPlayerForInput()
+        {
+            string userInput;
+            int areaID = 0;
+            bool wrongInput = true;
+
+            do
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                if (_playerX.InAction)
+                    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                //else
+                //    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
+                Console.Write("Eingsbe..:");
+                Console.ResetColor();
+                Console.Write(" ");
+                //if (_playerX.InAction)
+                //{
+                //    _aimimax.GetAreaIDForX();
+                //    Console.WriteLine(_aimimax.AreaIDForX);
+                //    //Console.ReadKey();
+                //    areaID = _aimimax.AreaIDForX;
+                //}
+                if (_playerO.InAction)
+                {
+                    _aimimax.GetAreaIDForO();
+                    Console.WriteLine(_aimimax.AreaIDForO);
+                    Console.ReadKey();
+                    return _aimimax.AreaIDForO;
+                }
+
+                userInput = Console.ReadLine();
+                Console.WriteLine();
+                areaID = ConvertUserInput(userInput);
+
+
+                if (areaID < 0 || areaID > 8)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Ungültige Eingabe, gültige Eingabe währe z.B. 'B1' od. 'c2'!");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    wrongInput = true;
+                }
+                else if (_boardAreaList[areaID].AreaHasToken)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Das Feld ist bereits besetzt!");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    wrongInput = true;
+                }
+                else
+                    wrongInput = false;
+
+            } while (wrongInput);
+
+            return areaID;
+        }
+
+        private int ConvertUserInput(string userInput)
+        {
+            userInput = userInput.ToUpper();
+            switch (userInput)
+            {
+                case "A1":
+                    return 0;
+                case "A2":
+                    return 1;
+                case "A3":
+                    return 2;
+                case "B1":
+                    return 3;
+                case "B2":
+                    return 4;
+                case "B3":
+                    return 5;
+                case "C1":
+                    return 6;
+                case "C2":
+                    return 7;
+                case "C3":
+                    return 8;
+
+            }
+            return 9;
+        }
     }
 }
