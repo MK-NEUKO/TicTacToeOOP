@@ -46,19 +46,20 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
                 while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
                 {
+                    _display.ResetConsole();
                     _display.ShowTitle();
                     _display.DrawGameBoard();
                     _display.DrawInfoBoard();
                     /////////////////
                     //Test AI
                     /////////////////
-                    _aimimax.ShowAITest();
+                    //_aimimax.ShowAITest();
                     ////////////////////////////                                                    
                     _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
                     _board.CheckForWinner();
                     //Console.ReadKey();
-                    Console.Clear();                   
+                    //Console.Clear();                   
                 }
                 _playerControler.GivePoints();
                 _display.ShowTitle();                

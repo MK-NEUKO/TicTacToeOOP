@@ -11,9 +11,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IGameBoard _board;
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
-        private readonly IAI _aimimax;
-        private int _tie;
-        private bool _wrongUserInput;
+        private readonly IAI _aimimax;        
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
 
@@ -23,9 +21,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _board = board;
             _playerX = playerX;
             _playerO = playerO;
-            _aimimax = aimimax;
-            _tie = 0;
-            _wrongUserInput = true;
+            _aimimax = aimimax;            
         }
 
         public bool GetDefaultSettings { get => _getDefaultSettings; set => _getDefaultSettings = value; }
@@ -88,7 +84,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             do
             {
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write("Name.:");
+                Console.Write(" Name.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
@@ -120,7 +116,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
-                Console.Write("Name.:");
+                Console.Write(" Name.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();

@@ -12,8 +12,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
         private readonly IPlayerController _playerController;
-        private readonly IAI _aimimax;        
-        private bool _wrongUserInput;       
+        private readonly IAI _aimimax;
+        private bool _wrongUserInput;
 
         public DisplayView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax)
         {
@@ -22,8 +22,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerX = playerX;
             _playerO = playerO;
             _playerController = playerController;
-            _aimimax = aimimax;            
+            _aimimax = aimimax;
             _wrongUserInput = true;
+        }
+
+        public void ResetConsole()
+        {
+            Console.Clear();
         }
 
         public void ShowTitle()
