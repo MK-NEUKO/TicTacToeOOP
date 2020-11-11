@@ -40,11 +40,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void DrawGameBoard()
+        public void ShowGameBoard()
         {
             if (_board.PlayerXIsWinner || _board.PlayerOIsWinner)
             {
-                DrawGameBoardWhenWon();
+                ShowGameBoardWhenWon();
             }
             else
             {
@@ -64,7 +64,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
 
 
-        private void DrawGameBoardWhenWon()
+        private void ShowGameBoardWhenWon()
         {
             //string[] beginningBoardLine = new string[3]
             //{
@@ -160,20 +160,79 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void DrawInfoBoard()
+        public void ShowInfoBoard()
         {
+            string playerHuman = "Mensch";
+            string playerAI = "Computer";
             string px = _playerX.Points.ToString();
             string po = _playerO.Points.ToString();
             string unentschieden = _playerController.GameIsTie.ToString();
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("PlayerX: {0} | Computer ", _playerX.Name.PadRight(10, '.'));
-            Console.WriteLine("PlayerO: {0} | Computer ", _playerO.Name.PadRight(10, '.'));
-            Console.ResetColor();
-            Console.WriteLine("-----------------------------------");
+            string maxDepth = "leicht";
+
+            // WhenWon Zeile
+
+            // Erste Zeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" +-------------------------------------------+ ");
+            Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("   {0} {1}:{2} {3} ", _playerX.Name.PadLeft(10), px.PadLeft(3),/*_playerX.Points.PadLeft(3), _playerO.Points.PadRight(3),*/po.PadRight(3), _playerO.Name.PadRight(10));
-            Console.WriteLine("Unentschieden:   {0} ", unentschieden.PadRight(15));
-            Console.WriteLine("Suchtiefe = {0}                    ", _aimimax.MaximumDepth);
+            Console.Write($" Player'X' {playerHuman.PadLeft(8)} | {playerAI.PadRight(8)} Player'O' ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" | ");
+
+            // Zwischenzeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" +-");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write("--------------------|--------------------");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("-+ ");
+            
+
+            // Zweite Zeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" | ");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write($" {_playerO.Name.PadRight(14, '.')} {px.PadLeft(3)} | {po.PadRight(3)} {_playerX.Name.PadLeft(14, '.')} ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" | ");
+
+            // Zwischenzeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" +-");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write("-----------------------------------------");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("-+ ");
+
+            // Dritte Zeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" | ");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write($" Unentschieden      {unentschieden.PadRight(21)}");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" | ");
+
+            // Zwischenzeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" +-");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write("-----------------------------------------");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("-+ ");
+
+            // Vierte Zeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" | ");
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.Write($" Schwierigkeitsgrad:   {maxDepth.PadRight(18)}");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" | ");
+
+
+            // Letzte Zeile
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(" +-------------------------------------------+ ");                                  
             Console.ResetColor();
             Console.WriteLine();
         }

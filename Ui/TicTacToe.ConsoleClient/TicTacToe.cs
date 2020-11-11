@@ -48,8 +48,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 {
                     _display.ResetConsole();
                     _display.ShowTitle();
-                    _display.DrawGameBoard();
-                    _display.DrawInfoBoard();
+                    _display.ShowGameBoard();
+                    _display.ShowInfoBoard();
                     /////////////////
                     //Test AI
                     /////////////////
@@ -63,9 +63,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 _playerControler.GivePoints();
                 _display.ShowTitle();                
-                _display.DrawGameBoard();
+                _display.ShowGameBoard();
                 _display.ShowWinner();
-                _display.DrawInfoBoard();
+                _display.ShowInfoBoard();
                 _playerControler.ChangePlayer();
                 _board.ResetGameBoard();
                 counter++;
