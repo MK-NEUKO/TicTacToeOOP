@@ -30,12 +30,12 @@ namespace NEUKO.TicTacToe.ConsoleClient
         public void Play()
         {
             _playerO.Name = "Aimimax";
-            getSettings = true;
+            
             
             int counter = 0;
             do
             {
-                if (getSettings)
+                if (_query.GetMainSettings)
                     _query.GetSettings();
                 
                 if (_query.GetDefaultSettings)
@@ -57,10 +57,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     ////////////////////////////                                                    
                     _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
-                    _board.CheckForWinner();
-                    //Console.ReadKey();
-                    //Console.Clear();                   
+                    _board.CheckForWinner();                                      
                 }
+                _display.ResetConsole();
                 _playerControler.GivePoints();
                 _display.ShowTitle();                
                 _display.ShowGameBoard();
@@ -68,6 +67,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _display.ShowInfoBoard();
                 _playerControler.ChangePlayer();
                 _board.ResetGameBoard();
+                _query.AskForContinue();
                 counter++;
                 
                 

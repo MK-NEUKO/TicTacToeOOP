@@ -11,7 +11,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IGameBoard _board;
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
-        private readonly IAI _aimimax;        
+        private readonly IAI _aimimax;
+        private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
 
@@ -21,11 +22,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _board = board;
             _playerX = playerX;
             _playerO = playerO;
-            _aimimax = aimimax;            
+            _aimimax = aimimax;
+            _getMainSettings = true;
         }
 
         public bool GetDefaultSettings { get => _getDefaultSettings; set => _getDefaultSettings = value; }
         public bool GetAdvancedSettings { get => _getAdvancedSettings; set => _getAdvancedSettings = value; }
+        public bool GetMainSettings { get => _getMainSettings; set => _getMainSettings = value; }
 
         public void GetSettings()
         {
@@ -150,6 +153,49 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         }
 
+        internal void AskForContinue()
+        {
+            bool repeatQuery;
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Noch ein Spiel?     ");
+            Console.WriteLine(" ------------------- ");
+            Console.WriteLine(" Weiter Spielen.: 1  ");
+            Console.WriteLine(" Einstellungen..: 2  ");
+            Console.ResetColor();
+            do
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" Eingabe.:");
+                Console.ResetColor();
+                Console.Write(" ");
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    _getMainSettings = false;
+                    _getDefaultSettings = false;
+                    _getAdvancedSettings = false;
+                    repeatQuery = false;
+                }
+                else if (userInput == "2")
+                {
+                    _getMainSettings = true;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+
+                    repeatQuery = true;
+                }
+            } while (repeatQuery);
+
+            Console.Clear();
+        }
+
         internal void AskForAdvancedSettings()
         {
             Console.WriteLine("Ad Settings");
@@ -182,7 +228,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 {
                     _aimimax.GetAreaIDForO();
                     Console.WriteLine(_aimimax.AreaIDForO);
-                    Console.ReadKey();
+                    //Console.ReadKey();
                     return _aimimax.AreaIDForO;
                 }
 
