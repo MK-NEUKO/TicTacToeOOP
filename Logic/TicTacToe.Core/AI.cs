@@ -68,7 +68,7 @@ namespace NEUKO.TicTacToe.Core
         private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
         private readonly int[,] _winConstellation;
-        private double[] _boardAreaFineValue;
+        private readonly double[] _boardAreaFineValue;
         private int _areaIDForX;
         private int _areaIDForO;
         private int _maximumDepth;
@@ -101,7 +101,6 @@ namespace NEUKO.TicTacToe.Core
         }
 
         public int AreaIDForO { get => _areaIDForO; }
-
         public int AreaIDForX { get => _areaIDForX; }
         public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
 

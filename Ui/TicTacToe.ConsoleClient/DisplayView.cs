@@ -160,12 +160,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void ShowInfoBoard()
         {
+            string[] playerStatus = new string[2] { "Computer", "Mensch" };
             string playerHuman = "Mensch";
             string playerAI = "Computer";
-            string px = _playerX.Points.ToString();
-            string po = _playerO.Points.ToString();
-            string unentschieden = _playerController.GameIsTie.ToString();
-            string maxDepth = "leicht";
+            string pointsPlayerX = _playerX.Points.ToString();
+            string pointsPlayerO = _playerO.Points.ToString();
+            string gameIsTie = _playerController.GameIsTie.ToString();
+            string[] diffecultyLevel = new string[6] { "UNVERSCHÄMT LEICHT", "NORMAL", "SCHWER", " ", " ", "UNBESIEGBAR" };
+                
 
             // WhenWon Zeile
 
@@ -174,7 +176,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" +-------------------------------------------+ ");
             Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write($" Player'X' {playerHuman.PadLeft(8)} | {playerAI.PadRight(8)} Player'O' ");
+            Console.Write($" Player'X' {playerStatus[Convert.ToInt32 (_playerX.IsHuman)].PadLeft(8)} | {playerStatus[Convert.ToInt32(_playerO.IsHuman)].PadRight(8)} Player'O' ");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" | ");
 
@@ -191,7 +193,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write($" {_playerX.Name.PadRight(14, '.')} {px.PadLeft(3)} | {po.PadRight(3)} {_playerO.Name.PadLeft(14, '.')} ");
+            Console.Write($" {_playerX.Name.PadRight(14, '.')} {pointsPlayerX.PadLeft(3)} | {pointsPlayerO.PadRight(3)} {_playerO.Name.PadLeft(14, '.')} ");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" | ");
 
@@ -207,7 +209,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write($" Unentschieden      {unentschieden.PadRight(21)}");
+            Console.Write($" Unentschieden      {gameIsTie.PadRight(21)}");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" | ");
 
@@ -223,7 +225,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write($" Schwierigkeitsgrad:   {maxDepth.PadRight(18)}");
+            Console.Write($" Schwierigkeitsgrad:  {diffecultyLevel[_aimimax.MaximumDepth].PadRight(19)}");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" | ");
 

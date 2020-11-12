@@ -102,6 +102,7 @@ namespace NEUKO.TicTacToe.Core
             {
                 area.Area = " ";
                 area.AreaHasToken = false;
+                area.IsWinArea = false;
             }
             _playerXIsWinner = false;
             _playerOIsWinner = false;

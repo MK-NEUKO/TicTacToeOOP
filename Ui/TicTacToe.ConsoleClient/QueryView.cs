@@ -114,7 +114,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ------------------ ");
             Console.WriteLine(" Leicht......: 1    ");
             Console.WriteLine(" Normal......: 2    ");
-            Console.WriteLine(" Unbesiegbar.: 3    ");
+            Console.WriteLine(" Schwer......: 3    ");
+            Console.WriteLine(" Unbesiegbar.: 4    ");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
 
             do
@@ -130,10 +131,15 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else if (userInput == "2")
                 {
-                    _aimimax.MaximumDepth = 2;
+                    _aimimax.MaximumDepth = 1;
                     repeatQuery = false;
                 }
                 else if (userInput == "3")
+                {
+                    _aimimax.MaximumDepth = 2;
+                    repeatQuery = false;
+                }
+                else if (userInput == "4")
                 {
                     _aimimax.MaximumDepth = 5;
                     repeatQuery = false;
