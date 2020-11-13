@@ -11,28 +11,23 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerO;
         private readonly IAI _aimimax;
         private readonly DisplayView _display;
-        private readonly QueryView _query;        
-        private bool getSettings;
+        private readonly QueryView _query;              
 
         public TicTacToe(IGameBoard board, IPlayerController playerController, IPlayer playerX, IPlayer playerO, DisplayView display, QueryView query, IAI aimimax)
         {
             _board = board;
             _playerControler = playerController;
             _playerX = playerX;
-            _playerO = playerO;
-            _aimimax = aimimax;
+            _playerO = playerO;            
             _display = display;
-            _query = query;           
+            _query = query;
+            _aimimax = aimimax;
         }
 
 
 
         public void Play()
-        {
-            _playerO.Name = "Aimimax";
-            
-            
-            int counter = 0;
+        {                                
             do
             {
                 if (_query.GetMainSettings)
@@ -49,12 +44,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     _display.ResetConsole();
                     _display.ShowTitle();
                     _display.ShowGameBoard();
-                    _display.ShowInfoBoard();
-                    /////////////////
-                    //Test AI
-                    /////////////////
-                    //_aimimax.ShowAITest();
-                    ////////////////////////////                                                    
+                    _display.ShowInfoBoard();                                                                     
                     _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveTheRightToken());
                     _playerControler.ChangePlayer();
                     _board.CheckForWinner();                                      
@@ -67,14 +57,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _display.ShowInfoBoard();
                 _playerControler.ChangePlayer();
                 _board.ResetGameBoard();
-                _query.AskForContinue();
-                counter++;
+                _query.AskForContinue();                
                 
-                
-            } while (counter < 10);
-            Console.ReadKey();
-        } 
-        
-        
+            } while (_query.PlayerWillContinue);           
+        }        
     }
 }

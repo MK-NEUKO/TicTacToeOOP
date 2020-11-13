@@ -15,6 +15,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
+        private bool _playerWillContinue;
 
         public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IAI aimimax)
         {
@@ -29,6 +30,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         public bool GetDefaultSettings { get => _getDefaultSettings; set => _getDefaultSettings = value; }
         public bool GetAdvancedSettings { get => _getAdvancedSettings; set => _getAdvancedSettings = value; }
         public bool GetMainSettings { get => _getMainSettings; set => _getMainSettings = value; }
+        public bool PlayerWillContinue { get => _playerWillContinue; set => _playerWillContinue = value; }
 
         public void GetSettings()
         {
@@ -84,10 +86,16 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine("                     - Spieler 'X' kann eine Namen eingeben.              ");
             Console.ResetColor();
 
+            // Grundeinstellungen
+            _playerX.InAction = true;
+            _playerX.IsHuman = true;
+            _playerO.Name = "Aimimax";
+            _playerO.IsHuman = false;
+
             do
             {
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" Name.:");
+                Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
@@ -120,7 +128,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
-                Console.Write(" Name.:");
+                Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
@@ -181,11 +189,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     _getMainSettings = false;
                     _getDefaultSettings = false;
                     _getAdvancedSettings = false;
+                    _playerWillContinue = true;
                     repeatQuery = false;
                 }
                 else if (userInput == "2")
                 {
                     _getMainSettings = true;
+                    _playerWillContinue = true;
                     repeatQuery = false;
                 }
                 else
@@ -202,7 +212,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.Clear();
         }
 
-        internal void AskForAdvancedSettings()
+        public void AskForAdvancedSettings()
         {
             Console.WriteLine("Ad Settings");
         }

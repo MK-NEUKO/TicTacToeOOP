@@ -63,30 +63,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
 
         private void ShowGameBoardWhenWon()
-        {
-            //string[] beginningBoardLine = new string[3]
-            //{
-            //    " A |",
-            //    " B |",
-            //    " C |"
-            //};
-
+        {           
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("     1   2   3   ");
-            Console.WriteLine("   +---+---+---+ ");
-
-            //for (int line = 0; line < 3; line++)
-            //{
-            //    Console.WriteLine(beginningBoardLine[line]);
-            //    for (int area = line; area < area + 3; area++)
-            //    {
-
-            //    }
-
-            //}
-
+            Console.WriteLine("   +---+---+---+ "); 
+            
+            // Erste Zeile vom Spielfeld
             Console.Write(" A |");
-
             for (int i = 0; i < 3; i++)
             {
                 if (_boardAreaList[i].IsWinArea)
@@ -108,8 +91,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ");
 
             Console.WriteLine("   +---+---+---+ ");
-            Console.Write(" B |");
 
+            // Zweite Zeile vom Spielfeld
+            Console.Write(" B |");
             for (int i = 3; i < 6; i++)
             {
                 if (_boardAreaList[i].IsWinArea)
@@ -131,8 +115,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ");
 
             Console.WriteLine("   +---+---+---+ ");
-            Console.Write(" C |");
 
+            // Dritte Zeile vom Spielfeld
+            Console.Write(" C |");
             for (int i = 6; i < 9; i++)
             {
                 if (_boardAreaList[i].IsWinArea)
@@ -160,9 +145,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void ShowInfoBoard()
         {
-            string[] playerStatus = new string[2] { "Computer", "Mensch" };
-            string playerHuman = "Mensch";
-            string playerAI = "Computer";
+            string[] playerStatus = new string[2] { "Computer", "Mensch" };            
             string pointsPlayerX = _playerX.Points.ToString();
             string pointsPlayerO = _playerO.Points.ToString();
             string gameIsTie = _playerController.GameIsTie.ToString();
