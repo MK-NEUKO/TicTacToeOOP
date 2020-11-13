@@ -56,7 +56,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else if (userInput == "2")
                 {
-                    GetAdvancedSettings = true;
+                    _getAdvancedSettings = true;
                     repeatQuery = false;
                 }
                 else
@@ -78,23 +78,19 @@ namespace NEUKO.TicTacToe.ConsoleClient
             bool repeatQuery;
 
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Standart Einstellungen                                                   ");
-            Console.WriteLine(" ------------------------------------------------------------------------ ");
-            Console.WriteLine(" Grundeinstellungen: - Spieler 'O' ist der Computergegner.                ");
-            Console.WriteLine("                     - Der Schwirigkeitsgrad ist wählbar.                 ");
-            Console.WriteLine("                     - Nach jeder Partie wechselt der Beginnende Spieler. ");
-            Console.WriteLine("                     - Spieler 'X' kann eine Namen eingeben.              ");
-            Console.ResetColor();
-
-            // Grundeinstellungen
-            _playerX.InAction = true;
-            _playerX.IsHuman = true;
-            _playerO.Name = "Aimimax";
-            _playerO.IsHuman = false;
+            Console.WriteLine(" Standart Einstellungen                                                    ");
+            Console.WriteLine(" ------------------------------------------------------------------------- ");
+            Console.WriteLine(" Grundeinstellungen: - Spieler 'O' ist der Computergegner.                 ");
+            Console.WriteLine("                     - Der Computergegner hat den Namen Aimimax.           ");
+            Console.WriteLine("                     - Als Erstes wird nach dem Namen von PlayerX gefragt. ");
+            Console.WriteLine("                     - Als Zweites nach dem Schwierigkeitsgrad.            ");
+            Console.WriteLine();                     
 
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(" PlayerX, wähle einen Namen, erlaubt sind (A-Z, a-z, 0-9). ");
+                Console.BackgroundColor = ConsoleColor.DarkBlue;                
                 Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
@@ -102,7 +98,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 if (String.IsNullOrEmpty(userInput))
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Falsche Eingabe, ...");
+                    Console.WriteLine(" Falsche Eingabe, erlaubt sind (A-Z, a-z, 0-9). ");
                     Console.ResetColor();
                     Console.WriteLine();
 
@@ -155,7 +151,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, ...");
+                    Console.WriteLine(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
                     Console.ResetColor();
                     Console.WriteLine();
                     repeatQuery = true;
@@ -164,7 +160,79 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             } while (repeatQuery);
 
+            // Noch fehlende Grundeinstellungen
+            _playerX.InAction = true;
+            _playerX.IsHuman = true;
+            _playerO.Name = "Aimimax";
+            _playerO.IsHuman = false;
+        }
 
+        public void AskForAdvancedSettings()
+        {
+            bool repeatQuery;
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Erweiterte Einstellungen                                           ");
+            Console.WriteLine(" ------------------------------------------------------------------ ");
+            Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");            
+            Console.WriteLine();
+
+            // 1. Frage ob PlayerX = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
+            AskPlayerForHumanOrAI(_playerX);
+            AskPlayerForName(_playerX);
+            AskPlayerForDiffecultyLevel(_playerX);
+            // 2. Frage ob PlayerO = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
+            
+        }
+
+        private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AskPlayerForName(IPlayer askedPlayer)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
+        {
+            bool repeatQuery;
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Mensch oder Computer ");
+            Console.WriteLine(" -------------------- ");
+            Console.WriteLine(" Mensch...: 1 ");
+            Console.WriteLine(" Computer.: 2 ");
+            Console.WriteLine();
+
+            do
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" Eingabe.:");
+                Console.ResetColor();
+                Console.Write(" ");
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    askedPlayer.IsHuman = true;
+                    repeatQuery = false;
+                }
+                else if (userInput == "2")
+                {
+                    askedPlayer.IsHuman = false;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+
+                    repeatQuery = true;
+                }
+            } while (repeatQuery);
         }
 
         internal void AskForContinue()
@@ -175,7 +243,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Noch ein Spiel?     ");
             Console.WriteLine(" ------------------- ");
             Console.WriteLine(" Weiter Spielen.: 1  ");
-            Console.WriteLine(" Einstellungen..: 2  ");
+            Console.WriteLine(" Einstellungen..: 2  ");            
             Console.ResetColor();
             do
             {
@@ -210,12 +278,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (repeatQuery);
 
             Console.Clear();
-        }
-
-        public void AskForAdvancedSettings()
-        {
-            Console.WriteLine("Ad Settings");
-        }
+        }        
 
         public int AskPlayerForInput()
         {
