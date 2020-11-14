@@ -54,6 +54,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 if (userInput == "1")
                 {
                     _getDefaultSettings = true;
+                    _getAdvancedSettings = false;
                     repeatQuery = false;
                 }
                 else if (userInput == "2")
