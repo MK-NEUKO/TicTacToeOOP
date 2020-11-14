@@ -6,6 +6,7 @@
         string GiveTheRightToken();
         void GivePoints();
         IPlayer GivePlayerInAction();
+        void ResetPlayers();
         int GameIsTie { get; }
     }
 }

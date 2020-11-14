@@ -11,18 +11,20 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IGameBoard _board;
         private readonly IPlayer _playerX;
         private readonly IPlayer _playerO;
+        private readonly IPlayerController _playerController;
         private readonly IAI _aimimax;
         private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
         private bool _playerWillContinue;
 
-        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IAI aimimax)
+        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax)
         {
             _boardAreaList = boardAreaList;
             _board = board;
             _playerX = playerX;
             _playerO = playerO;
+            _playerController = playerController;
             _aimimax = aimimax;
             _getMainSettings = true;
         }
@@ -323,7 +325,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (repeatQuery);
         }
 
-        internal void AskForContinue()
+        public void AskForContinue()
         {
             bool repeatQuery;
 
@@ -352,6 +354,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 {
                     _getMainSettings = true;
                     _playerWillContinue = true;
+                    _playerController.ResetPlayers();
                     repeatQuery = false;
                 }
                 else

@@ -23,6 +23,19 @@ namespace NEUKO.TicTacToe.Core
             
         }
 
+        public void ResetPlayers()
+        {
+            _playerX.Points = 0;
+            _playerX.Name = "PlayerX";
+            _playerX.InAction = true;
+
+            _playerO.Points = 0;
+            _playerO.Name = "PlayerO";
+            _playerO.InAction = true;
+
+            _gameIsTie = 0;
+        }
+
         public IPlayer GivePlayerInAction()
         {
             if (_playerX.InAction)
