@@ -78,7 +78,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         internal void AskForDefaultSettings()
         {
-            bool repeatQuery;
+            //bool repeatQuery;
 
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" Standart Einstellungen                                                    ");
@@ -87,87 +87,17 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine("                     - Der Computergegner hat den Namen Aimimax.           ");
             Console.WriteLine("                     - Als Erstes wird nach dem Namen von PlayerX gefragt. ");
             Console.WriteLine("                     - Als Zweites nach dem Schwierigkeitsgrad.            ");
-            Console.WriteLine();                     
-
-            do
-            {
-                Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(" PlayerX, wähle einen Namen, erlaubt sind (A-Z, a-z, 0-9). ");
-                Console.BackgroundColor = ConsoleColor.DarkBlue;                
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
-                string userInput = Console.ReadLine();
-                if (String.IsNullOrEmpty(userInput))
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, erlaubt sind (A-Z, a-z, 0-9). ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
-                    repeatQuery = true;
-                }
-                else
-                {
-                    _playerX.Name = userInput;
-                    _playerX.IsHuman = true;
-                    repeatQuery = false;
-                }
-            } while (repeatQuery);
             Console.WriteLine();
 
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Schwierigkeitsgrad ");
-            Console.WriteLine(" ------------------ ");
-            Console.WriteLine(" Leicht......: 1    ");
-            Console.WriteLine(" Normal......: 2    ");
-            Console.WriteLine(" Schwer......: 3    ");
-            Console.WriteLine(" Unbesiegbar.: 4    ");
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
 
-            do
-            {
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
-                string userInput = Console.ReadLine();
-                if (userInput == "1")
-                {
-                    _aimimax.MaximumDepth = 0;
-                    repeatQuery = false;
-                }
-                else if (userInput == "2")
-                {
-                    _aimimax.MaximumDepth = 1;
-                    repeatQuery = false;
-                }
-                else if (userInput == "3")
-                {
-                    _aimimax.MaximumDepth = 2;
-                    repeatQuery = false;
-                }
-                else if (userInput == "4")
-                {
-                    _aimimax.MaximumDepth = 5;
-                    repeatQuery = false;
-                }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                    repeatQuery = true;
-                }
-                Console.ResetColor();
+            AskPlayerForName(_playerX);
 
-            } while (repeatQuery);
-
-            // Noch fehlende Grundeinstellungen
             _playerX.InAction = true;
             _playerX.IsHuman = true;
             _playerO.Name = "Aimimax";
             _playerO.IsHuman = false;
+
+            AskPlayerForDiffecultyLevel(_playerO);            
         }
 
         public void AskForAdvancedSettings()
@@ -186,7 +116,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             }
             else
             {
-                _playerX.Name = "Amimax";
+                _playerX.Name = "Aimimax";
                 AskPlayerForDiffecultyLevel(_playerX);
             }
 
@@ -198,7 +128,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             }
             else
             {
-                _playerO.Name = "Amimax";
+                _playerO.Name = "HAL";
                 AskPlayerForDiffecultyLevel(_playerO);
             }
         }
@@ -218,6 +148,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
+                Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
                 Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
