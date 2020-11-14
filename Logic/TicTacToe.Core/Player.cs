@@ -11,6 +11,7 @@
         public Player()
         {
             _points = 0;
+            
         }
 
         public int Points

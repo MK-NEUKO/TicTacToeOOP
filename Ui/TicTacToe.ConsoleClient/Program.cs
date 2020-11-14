@@ -26,8 +26,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             }
             GameBoard board = new GameBoard(boardAreaList);
             AI aimimax = new AI(evaluationList, board);
-            Player playerX = new Player() { InAction = true };
-            Player playerO = new Player();
+            Player playerX = new Player() { Name = "PlayerX", InAction = true };
+            Player playerO = new Player() { Name = "PlayerO"};
             PlayerController playerController = new PlayerController(playerX, playerO, board, aimimax);
             QueryView query = new QueryView(boardAreaList, board, playerX, playerO, aimimax);
             DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           

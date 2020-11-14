@@ -168,9 +168,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         }
 
         public void AskForAdvancedSettings()
-        {
-            bool repeatQuery;
-
+        {           
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" Erweiterte Einstellungen                                           ");
             Console.WriteLine(" ------------------------------------------------------------------ ");
@@ -179,20 +177,110 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             // 1. Frage ob PlayerX = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
             AskPlayerForHumanOrAI(_playerX);
-            AskPlayerForName(_playerX);
-            AskPlayerForDiffecultyLevel(_playerX);
+            if(_playerX.IsHuman)
+            {
+                AskPlayerForName(_playerX);
+            }
+            else
+            {
+                _playerX.Name = "Amimax";
+                AskPlayerForDiffecultyLevel(_playerX);
+            }
+
             // 2. Frage ob PlayerO = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
-            
+            AskPlayerForHumanOrAI(_playerO);
+            if (_playerO.IsHuman)
+            {
+                AskPlayerForName(_playerO);
+            }
+            else
+            {
+                _playerO.Name = "Amimax";
+                AskPlayerForDiffecultyLevel(_playerO);
+            }
         }
 
         private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
         {
-            throw new NotImplementedException();
+            bool repeatQuery;
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Schwierigkeitsgrad ");
+            Console.WriteLine(" ------------------ ");
+            Console.WriteLine(" Leicht......: 1    ");
+            Console.WriteLine(" Normal......: 2    ");
+            Console.WriteLine(" Schwer......: 3    ");
+            Console.WriteLine(" Unbesiegbar.: 4    ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+
+            do
+            {
+                Console.Write(" Eingabe.:");
+                Console.ResetColor();
+                Console.Write(" ");
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    _aimimax.MaximumDepth = 0;
+                    repeatQuery = false;
+                }
+                else if (userInput == "2")
+                {
+                    _aimimax.MaximumDepth = 1;
+                    repeatQuery = false;
+                }
+                else if (userInput == "3")
+                {
+                    _aimimax.MaximumDepth = 2;
+                    repeatQuery = false;
+                }
+                else if (userInput == "4")
+                {
+                    _aimimax.MaximumDepth = 5;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    repeatQuery = true;
+                }
+                Console.ResetColor();
+
+            } while (repeatQuery);
         }
 
         private void AskPlayerForName(IPlayer askedPlayer)
         {
-            throw new NotImplementedException();
+            bool repeatQuery;
+
+            do
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind (A-Z, a-z, 0-9). ");
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" Eingabe.:");
+                Console.ResetColor();
+                Console.Write(" ");
+                string userInput = Console.ReadLine();
+                if (String.IsNullOrEmpty(userInput))
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(" Falsche Eingabe, erlaubt sind (A-Z, a-z, 0-9). ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+
+                    repeatQuery = true;
+                }
+                else
+                {
+                    askedPlayer.Name = userInput;                    
+                    repeatQuery = false;
+                }
+            } while (repeatQuery);
+            Console.WriteLine();
         }
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
@@ -200,11 +288,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
             bool repeatQuery;
 
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Mensch oder Computer ");
-            Console.WriteLine(" -------------------- ");
+            Console.WriteLine($" Einstellungen für {askedPlayer.Name} ");
+            Console.WriteLine(" ------------------------- ");
             Console.WriteLine(" Mensch...: 1 ");
             Console.WriteLine(" Computer.: 2 ");
-            Console.WriteLine();
+            
 
             do
             {
@@ -282,20 +370,57 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public int AskPlayerForInput()
         {
-            string userInput;
-            int areaID = 0;
+            string userInput = "";
+            int areaID;
             bool wrongInput = true;
 
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
                 if (_playerX.InAction)
-                    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                {
+                    if (_playerX.IsHuman)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                        Console.Write("Eingsbe..:");
+                        Console.ResetColor();
+                        Console.Write(" ");
+                        userInput = Console.ReadLine();
+                        Console.WriteLine();                        
+                    }
+                    else
+                    {
+                        _aimimax.GetAreaIDForX();
+                        return _aimimax.AreaIDForX;
+                    }
+                }
+                else if(_playerO.InAction)
+                {
+                    if (_playerO.IsHuman)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.WriteLine("PlayerX: {0} ", _playerX.Name);
+                        Console.Write("Eingsbe..:");
+                        Console.ResetColor();
+                        Console.Write(" ");
+                        userInput = Console.ReadLine();
+                        Console.WriteLine();                       
+                    }
+                    else
+                    {
+                        _aimimax.GetAreaIDForO();
+                        return _aimimax.AreaIDForO;
+                    }
+                }
+
+                //Console.BackgroundColor = ConsoleColor.DarkBlue;
+                //if (_playerX.InAction)
+                //    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
                 //else
                 //    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
-                Console.Write("Eingsbe..:");
-                Console.ResetColor();
-                Console.Write(" ");
+                //Console.Write("Eingsbe..:");
+                //Console.ResetColor();
+                //Console.Write(" ");
                 //if (_playerX.InAction)
                 //{
                 //    _aimimax.GetAreaIDForX();
@@ -303,16 +428,16 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 //    //Console.ReadKey();
                 //    areaID = _aimimax.AreaIDForX;
                 //}
-                if (_playerO.InAction)
-                {
-                    _aimimax.GetAreaIDForO();
-                    Console.WriteLine(_aimimax.AreaIDForO);
-                    //Console.ReadKey();
-                    return _aimimax.AreaIDForO;
-                }
+                //if (_playerO.InAction)
+                //{
+                //    _aimimax.GetAreaIDForO();
+                //    Console.WriteLine(_aimimax.AreaIDForO);
+                //    //Console.ReadKey();
+                //    return _aimimax.AreaIDForO;
+                //}
 
-                userInput = Console.ReadLine();
-                Console.WriteLine();
+                //userInput = Console.ReadLine();
+                //Console.WriteLine();
                 areaID = ConvertUserInput(userInput);
 
 

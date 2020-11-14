@@ -20,6 +20,17 @@ namespace NEUKO.TicTacToe.Core
             _playerO = playerO;
             _board = board;
             _aimimax = aimimax;
+            
+        }
+
+        public IPlayer GivePlayerInAction()
+        {
+            if (_playerX.InAction)
+                return _playerX;
+            else if (_playerO.InAction)
+                return _playerO;
+            else
+                return null;
         }
 
         public string GiveTheRightToken()
