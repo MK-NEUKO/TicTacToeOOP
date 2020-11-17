@@ -1,7 +1,7 @@
 ﻿using NEUKO.TicTacToe.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NEUKO.TicTacToe.ConsoleClient
 {
@@ -147,6 +147,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Normal......: 2    ");
             Console.WriteLine(" Schwer......: 3    ");
             Console.WriteLine(" Unbesiegbar.: 4    ");
+            Console.WriteLine(" #### Hinweis!!!    -die Grade sind nicht genau abgestimmt, bitte probieren ### ");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
 
             do
@@ -196,16 +197,16 @@ namespace NEUKO.TicTacToe.ConsoleClient
             do
             {
                 Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind (A-Z, a-z, 0-9). ");
+                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen ###noch nicht Implementiert:(A-Z, a-z, 0-9)###. ");
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
-                if (String.IsNullOrEmpty(userInput))
+                if (String.IsNullOrEmpty(userInput) || userInput.Length > 14 /*|| IsValidAlphaNumericString(userInput)*/)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, erlaubt sind (A-Z, a-z, 0-9). ");
+                    Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen ###noch nicht Implementiert:(A-Z, a-z, 0-9)###. ");
                     Console.ResetColor();
                     Console.WriteLine();
 
@@ -219,6 +220,12 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (repeatQuery);
             Console.WriteLine();
         }
+
+        //private bool IsValidAlphaNumericString(string userInput)
+        //{
+        //    Regex pattern = new Regex(@"[a-zA-Z0-9]");
+        //    return pattern.IsMatch(userInput.Trim());
+        //}
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {
@@ -352,34 +359,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
                         areaID = _aimimax.AreaIDForO;
                     }
                 }
-
-                //Console.BackgroundColor = ConsoleColor.DarkBlue;
-                //if (_playerX.InAction)
-                //    Console.WriteLine("PlayerX: {0} ", _playerX.Name);
-                //else
-                //    Console.WriteLine("PlayerO: {0} ", _playerO.Name);
-                //Console.Write("Eingsbe..:");
-                //Console.ResetColor();
-                //Console.Write(" ");
-                //if (_playerX.InAction)
-                //{
-                //    _aimimax.GetAreaIDForX();
-                //    Console.WriteLine(_aimimax.AreaIDForX);
-                //    //Console.ReadKey();
-                //    areaID = _aimimax.AreaIDForX;
-                //}
-                //if (_playerO.InAction)
-                //{
-                //    _aimimax.GetAreaIDForO();
-                //    Console.WriteLine(_aimimax.AreaIDForO);
-                //    //Console.ReadKey();
-                //    return _aimimax.AreaIDForO;
-                //}
-
-                //userInput = Console.ReadLine();
-                //Console.WriteLine();
-                
-
 
                 if (areaID < 0 || areaID > 8)
                 {
