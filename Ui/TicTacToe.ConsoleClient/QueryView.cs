@@ -306,7 +306,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         public int AskPlayerForInput()
         {
             string userInput = "";
-            int areaID;
+            int areaID = -1;
             bool wrongInput = true;
 
             do
@@ -321,12 +321,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
                         Console.ResetColor();
                         Console.Write(" ");
                         userInput = Console.ReadLine();
+                        areaID = ConvertUserInput(userInput);
                         Console.WriteLine();                        
                     }
                     else
                     {
-                        _aimimax.GetAreaIDForX();
-                        return _aimimax.AreaIDForX;
+                        _aimimax.GetAMove();
+                        areaID = _aimimax.AreaIDForX;
                     }
                 }
                 else if(_playerO.InAction)
@@ -339,12 +340,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
                         Console.ResetColor();
                         Console.Write(" ");
                         userInput = Console.ReadLine();
+                        areaID = ConvertUserInput(userInput);
                         Console.WriteLine();                       
                     }
                     else
                     {
-                        _aimimax.GetAreaIDForO();
-                        return _aimimax.AreaIDForO;
+                        _aimimax.GetAMove();
+                        areaID = _aimimax.AreaIDForO;
                     }
                 }
 
@@ -373,7 +375,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
                 //userInput = Console.ReadLine();
                 //Console.WriteLine();
-                areaID = ConvertUserInput(userInput);
+                
 
 
                 if (areaID < 0 || areaID > 8)
