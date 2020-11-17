@@ -67,19 +67,22 @@ namespace NEUKO.TicTacToe.Core
 
         private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
+        private IPlayer _playerX;
+        private IPlayer _playerO;
         private readonly int[,] _winConstellation;
         private readonly double[] _boardAreaFineValue;
         private int _areaIDForX;
         private int _areaIDForO;
-        private int _maximumDepth;
+        //private int _maximumDepth;
 
         
 
-        public AI(IList<GameBoardArea> evaluationList, IGameBoard board)
+        public AI(IList<GameBoardArea> evaluationList, IGameBoard board, IPlayer playerX, IPlayer playerO)
         {
             _evaluationList = evaluationList;
             _board = board;
-            _maximumDepth = 10;
+            _playerX = playerX;
+            _playerO = playerO;
             _winConstellation = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/
@@ -102,7 +105,7 @@ namespace NEUKO.TicTacToe.Core
 
         public int AreaIDForO { get => _areaIDForO; }
         public int AreaIDForX { get => _areaIDForX; }
-        public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
+        //public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
 
         public void GetAMove()
         {
@@ -110,8 +113,10 @@ namespace NEUKO.TicTacToe.Core
             _areaIDForX = -1;
             _areaIDForO = -1;
 
-            //Max(_maximumDepth, int.MinValue, int.MaxValue);
-            Min(_maximumDepth, int.MinValue, int.MaxValue);
+            if(_playerX.InAction)
+                Max(_playerX.MaximumDepth, int.MinValue, int.MaxValue);
+            if(_playerO.InAction)
+                Min(_playerO.MaximumDepth, int.MinValue, int.MaxValue);
         }
 
 
@@ -132,7 +137,7 @@ namespace NEUKO.TicTacToe.Core
                     if (min > alpha)
                     {
                         alpha = min;
-                        if(depth == _maximumDepth)
+                        if(depth == _playerX.MaximumDepth)
                             _areaIDForX = area.AreaID;
                     }                        
                     if (alpha >= beta)
@@ -159,7 +164,7 @@ namespace NEUKO.TicTacToe.Core
                     if (max < beta)
                     {
                         beta = max;
-                        if (depth == _maximumDepth)
+                        if (depth == _playerO.MaximumDepth)
                             _areaIDForO = area.AreaID;
                     }                        
                     if (beta <= alpha)

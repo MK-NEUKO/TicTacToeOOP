@@ -94,6 +94,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             _playerX.InAction = true;
             _playerX.IsHuman = true;
+            _playerX.MaximumDepth = 0;
             _playerO.Name = "Aimimax";
             _playerO.IsHuman = false;
 
@@ -112,6 +113,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             AskPlayerForHumanOrAI(_playerX);
             if(_playerX.IsHuman)
             {
+                _playerX.MaximumDepth = 0;
                 AskPlayerForName(_playerX);
             }
             else
@@ -124,6 +126,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             AskPlayerForHumanOrAI(_playerO);
             if (_playerO.IsHuman)
             {
+                _playerX.MaximumDepth = 0;
                 AskPlayerForName(_playerO);
             }
             else
@@ -155,22 +158,22 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
-                    _aimimax.MaximumDepth = 0;
+                    askedPlayer.MaximumDepth = 1;
                     repeatQuery = false;
                 }
                 else if (userInput == "2")
                 {
-                    _aimimax.MaximumDepth = 1;
+                    askedPlayer.MaximumDepth = 2;
                     repeatQuery = false;
                 }
                 else if (userInput == "3")
                 {
-                    _aimimax.MaximumDepth = 2;
+                    askedPlayer.MaximumDepth = 3;
                     repeatQuery = false;
                 }
                 else if (userInput == "4")
                 {
-                    _aimimax.MaximumDepth = 5;
+                    askedPlayer.MaximumDepth = 5;
                     repeatQuery = false;
                 }
                 else

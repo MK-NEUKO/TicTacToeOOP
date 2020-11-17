@@ -5,12 +5,14 @@
         private bool _inAction;
         private bool _isHuman;
         private string _name;
-        private int _points;        
+        private int _points;
+        private int _maximumDepth;
 
 
         public Player()
         {
             _points = 0;
+            _maximumDepth = 0;
             
         }
 
@@ -36,5 +38,7 @@
             get { return _name; }
             set { _name = value; }
         }
+
+        public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
     }
 }

@@ -149,7 +149,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             string pointsPlayerX = _playerX.Points.ToString();
             string pointsPlayerO = _playerO.Points.ToString();
             string gameIsTie = _playerController.GameIsTie.ToString();
-            string[] diffecultyLevel = new string[6] { "UNVERSCHÄMT LEICHT", "NORMAL", "SCHWER", " ", " ", "UNBESIEGBAR" };
+            string[] diffecultyLevel = new string[6] { "Relativ", "Leicht", "Normal", "Schwer", " ", "UNBESIEGBAR" };
                 
 
             // WhenWon Zeile
@@ -208,7 +208,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" | ");
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write($" Schwierigkeitsgrad:  {diffecultyLevel[_aimimax.MaximumDepth].PadRight(19)}");
+            Console.Write($" {diffecultyLevel[_playerX.MaximumDepth].PadRight(18)} | {diffecultyLevel[_playerO.MaximumDepth].PadRight(18)} ");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" | ");
 

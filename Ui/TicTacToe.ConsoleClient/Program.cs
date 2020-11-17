@@ -24,10 +24,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
             {
                 evaluationList.Add(new GameBoardArea(areaID));
             }
-            GameBoard board = new GameBoard(boardAreaList);
-            AI aimimax = new AI(evaluationList, board);
+            GameBoard board = new GameBoard(boardAreaList);            
             Player playerX = new Player() { Name = "PlayerX", InAction = true };
             Player playerO = new Player() { Name = "PlayerO"};
+            AI aimimax = new AI(evaluationList, board, playerX, playerO);
             PlayerController playerController = new PlayerController(playerX, playerO, board, aimimax);
             QueryView query = new QueryView(boardAreaList, board, playerX, playerO, playerController, aimimax);
             DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           
