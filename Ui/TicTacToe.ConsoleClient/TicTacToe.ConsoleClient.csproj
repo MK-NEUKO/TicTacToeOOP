@@ -4,6 +4,16 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>NEUKO.TicTacToe.ConsoleClient</RootNamespace>
+    <Version>0.1.0</Version>
+    <Authors>Michael Koch</Authors>
+    <Company>MK-NEUKO</Company>
+    <Product>Computerspiel</Product>
+    <PackageReleaseNotes>bata Version zum Testen</PackageReleaseNotes>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

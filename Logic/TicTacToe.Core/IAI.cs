@@ -6,7 +6,6 @@ namespace NEUKO.TicTacToe.Core
 {
     public interface IAI
     {
-        void ShowAITest();
         void GetAMove();
         int AreaIDForX { get; }
         int AreaIDForO { get; }

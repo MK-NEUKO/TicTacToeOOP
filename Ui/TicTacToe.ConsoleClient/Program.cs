@@ -6,7 +6,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 {
     class Program
     {
-        // TODO: Namenskonventionen .NET 
+        // TODO Namenskonventionen .NET 
         // eigene Bezeichner dementsprechen Überarbeiten. 
 
         // Datenkappselung: Verwendet man innerhalb der Klasse das Feld oder die Eigenschaft?
