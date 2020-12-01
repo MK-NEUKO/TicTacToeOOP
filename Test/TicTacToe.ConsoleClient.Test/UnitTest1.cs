@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TicTacToe.Core.UnitTest
+namespace TicTacToe.ConsoleClient.Test
 {
     [TestClass]
     public class UnitTest1
