@@ -8,7 +8,6 @@ namespace NEUKO.TicTacToe.Core
     {
         void GetAMove();
         int AreaIDForX { get; }
-        int AreaIDForO { get; }
-        //int MaximumDepth { get; set; }
+        int AreaIDForO { get; }        
     }
 }

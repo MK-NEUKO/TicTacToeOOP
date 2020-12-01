@@ -5,6 +5,11 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.Core
 {
+    public struct WinConstellation
+    {
+
+    }
+
     public class GameBoard : IGameBoard
     {
         private readonly IList<GameBoardArea> _boardAreaList;
@@ -30,20 +35,11 @@ namespace NEUKO.TicTacToe.Core
             };
         }
 
-        public IList<GameBoardArea> BoardAreaList
-        {
-            get { return _boardAreaList; }
-        }
+        public IList<GameBoardArea> BoardAreaList { get => _boardAreaList; }
 
-        public bool PlayerXIsWinner
-        {
-            get { return _playerXIsWinner; }           
-        }
+        public bool PlayerXIsWinner { get => _playerXIsWinner; }
 
-        public bool PlayerOIsWinner
-        {
-            get { return _playerOIsWinner; }            
-        }
+        public bool PlayerOIsWinner { get => _playerOIsWinner; }
 
         public bool GameIsTie { get => _gameIsTie; }
 

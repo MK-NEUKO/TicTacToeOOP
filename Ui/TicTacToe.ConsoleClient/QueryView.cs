@@ -108,8 +108,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ------------------------------------------------------------------ ");
             Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");            
             Console.WriteLine();
-
-            // 1. Frage ob PlayerX = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
+            
             AskPlayerForHumanOrAI(_playerX);
             if(_playerX.IsHuman)
             {
@@ -122,7 +121,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 AskPlayerForDiffecultyLevel(_playerX);
             }
 
-            // 2. Frage ob PlayerO = Coputer oder Mensch, dann den Namen, dann wenn Computer, Schwiereigkeitsgrad?
+            
             AskPlayerForHumanOrAI(_playerO);
             if (_playerO.IsHuman)
             {
