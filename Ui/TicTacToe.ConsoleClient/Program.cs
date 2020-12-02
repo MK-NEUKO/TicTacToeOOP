@@ -11,7 +11,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         // Datenkappselung: Verwendet man innerhalb der Klasse das Feld oder die Eigenschaft?
         // Lamda Ausdrücke nachschlagen, lernen!
-        
+
+       
         static void Main(string[] args)
         {
             List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
@@ -32,6 +33,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
             QueryView query = new QueryView(boardAreaList, board, playerX, playerO, playerController, aimimax);
             DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           
             TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, display, query, aimimax);
+
+            // Abonieren der Events
+            board.AreaIsOccupied += query.Board_AreaIsOccupied;
 
             tictactoe.Play();
         }

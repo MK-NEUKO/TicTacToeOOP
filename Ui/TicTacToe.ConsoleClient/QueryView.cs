@@ -367,14 +367,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     Console.WriteLine();
                     wrongInput = true;
                 }
-                else if (_boardAreaList[areaID].AreaHasToken)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Das Feld ist bereits besetzt!");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                    wrongInput = true;
-                }
+                //else if (_boardAreaList[areaID].AreaHasToken)
+                //{
+                //    Console.BackgroundColor = ConsoleColor.DarkRed;
+                //    Console.WriteLine("Das Feld ist bereits besetzt!");
+                //    Console.ResetColor();
+                //    Console.WriteLine();
+                //    wrongInput = true;
+                //}
                 else
                     wrongInput = false;
 
@@ -382,6 +382,15 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             return areaID;
         }
+
+        public void Board_AreaIsOccupied()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Das Feld ist bereits besetzt!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
 
         private int ConvertUserInput(string userInput)
         {

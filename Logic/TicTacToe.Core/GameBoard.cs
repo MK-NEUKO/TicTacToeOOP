@@ -5,20 +5,24 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.Core
 {
-    public struct WinConstellation
-    {
-
-    }
+    public delegate void AreaIsOccupiedEventHandler();
 
     public class GameBoard : IGameBoard
     {
+        #region Events
+        public event AreaIsOccupiedEventHandler AreaIsOccupied;
+        #endregion
+
+        #region Felder
         private readonly IList<GameBoardArea> _boardAreaList;
         private bool _playerXIsWinner;
         private bool _playerOIsWinner;
         private bool _gameIsTie;
-        private readonly int[,] _winConstellation;        
+        private readonly int[,] _winConstellation;
+        #endregion
 
 
+        #region Konstruktor
         public GameBoard(IList<GameBoardArea> boardAreaList)
         {
             _boardAreaList = boardAreaList;
@@ -34,19 +38,20 @@ namespace NEUKO.TicTacToe.Core
                 {2,4,6},
             };
         }
+        #endregion
 
+        #region Eigenschaften
         public IList<GameBoardArea> BoardAreaList { get => _boardAreaList; }
-
         public bool PlayerXIsWinner { get => _playerXIsWinner; }
-
         public bool PlayerOIsWinner { get => _playerOIsWinner; }
-
         public bool GameIsTie { get => _gameIsTie; }
+        #endregion
+
 
         public void CheckGameBoardState()
         {
             CheckForWinner();
-            IsGameTie();
+            CheckForGameIsATie();
         }
 
         private void CheckForWinner()
@@ -75,7 +80,7 @@ namespace NEUKO.TicTacToe.Core
         	}            
         }
         
-        private void IsGameTie()
+        private void CheckForGameIsATie()
         {
             if (_playerXIsWinner || _playerOIsWinner)
                 return;
@@ -90,6 +95,9 @@ namespace NEUKO.TicTacToe.Core
 
         public void PlaceAToken(int areaID, string token)
         {
+            if (_boardAreaList[areaID].AreaHasToken)
+                AreaIsOccupied();
+
             _boardAreaList[areaID].Area = token;
             _boardAreaList[areaID].AreaHasToken = true;
         }
