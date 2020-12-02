@@ -43,10 +43,16 @@ namespace NEUKO.TicTacToe.Core
 
         public bool GameIsTie { get => _gameIsTie; }
 
-        public void CheckForWinner()
+        public void CheckGameBoardState()
         {
-        	for(int i = 0; i < 8; i++)
-        	{
+            CheckForWinner();
+            IsGameTie();
+        }
+
+        private void CheckForWinner()
+        {
+        	for(int i = 0; i < _winConstellation.GetLength(0); i++)
+        	{                
         		string actualContent = _boardAreaList[_winConstellation[i,0]].Area;
         		actualContent += _boardAreaList[_winConstellation[i,1]].Area;
         		actualContent += _boardAreaList[_winConstellation[i,2]].Area;
@@ -57,8 +63,7 @@ namespace NEUKO.TicTacToe.Core
                     _boardAreaList[_winConstellation[i, 0]].IsWinArea = true;
                     _boardAreaList[_winConstellation[i, 1]].IsWinArea = true;
                     _boardAreaList[_winConstellation[i, 2]].IsWinArea = true;
-                }
-        			
+                }        			
      	
         		if(actualContent == "OOO")
                 {
@@ -66,24 +71,21 @@ namespace NEUKO.TicTacToe.Core
                     _boardAreaList[_winConstellation[i, 0]].IsWinArea = true;
                     _boardAreaList[_winConstellation[i, 1]].IsWinArea = true;
                     _boardAreaList[_winConstellation[i, 2]].IsWinArea = true;
-                }
-        			
-        	}
-            if (IsGameTie())
-            {
-                _gameIsTie = true;
-            }
-            
+                }        			
+        	}            
         }
         
-        private bool IsGameTie()
+        private void IsGameTie()
         {
+            if (_playerXIsWinner || _playerOIsWinner)
+                return;
+
             foreach (GameBoardArea area in _boardAreaList)
             {
                 if (area.Area == " ")
-                    return false;
+                    return;
             }
-            return true;
+            _gameIsTie = true;
         }
 
         public void PlaceAToken(int areaID, string token)
