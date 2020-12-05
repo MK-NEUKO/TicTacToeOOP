@@ -34,9 +34,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
             DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           
             TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, display, query, aimimax);
 
-            // Abonieren der Events
-            board.AreaIsOccupied += query.Board_AreaIsOccupied;
-
             tictactoe.Play();
         }
     }

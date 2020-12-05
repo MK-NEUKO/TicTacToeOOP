@@ -3,9 +3,9 @@
     public interface IPlayerController
     {
         void ChangePlayer();
-        string GiveTheRightToken();
+        string GiveCurrentToken();
         void GivePoints();
-        IPlayer GivePlayerInAction();
+        IPlayer GiveCurrentPlayer();
         void ResetPlayers();
         int GameIsTie { get; }
     }

@@ -45,7 +45,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                     _display.ShowTitle();
                     _display.ShowGameBoard();
                     _display.ShowInfoBoard();                                                                     
-                    _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveTheRightToken());
+                    _board.PlaceAToken(_query.AskPlayerForInput(), _playerControler.GiveCurrentToken());
                     _playerControler.ChangePlayer();
                     _board.CheckGameBoardState();                                      
                 }

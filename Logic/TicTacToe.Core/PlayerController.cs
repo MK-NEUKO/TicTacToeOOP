@@ -36,7 +36,7 @@ namespace NEUKO.TicTacToe.Core
             _gameIsTie = 0;
         }
 
-        public IPlayer GivePlayerInAction()
+        public IPlayer GiveCurrentPlayer()
         {
             if (_playerX.InAction)
                 return _playerX;
@@ -46,7 +46,7 @@ namespace NEUKO.TicTacToe.Core
                 return null;
         }
 
-        public string GiveTheRightToken()
+        public string GiveCurrentToken()
         {
             if (_playerX.InAction)
                 return "X";

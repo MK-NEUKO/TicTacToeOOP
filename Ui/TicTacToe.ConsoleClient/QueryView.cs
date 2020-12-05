@@ -98,19 +98,19 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerO.Name = "Aimimax";
             _playerO.IsHuman = false;
 
-            AskPlayerForDiffecultyLevel(_playerO);            
+            AskPlayerForDiffecultyLevel(_playerO);
         }
 
         public void AskForAdvancedSettings()
-        {           
+        {
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" Erweiterte Einstellungen                                           ");
             Console.WriteLine(" ------------------------------------------------------------------ ");
-            Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");            
+            Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");
             Console.WriteLine();
-            
+
             AskPlayerForHumanOrAI(_playerX);
-            if(_playerX.IsHuman)
+            if (_playerX.IsHuman)
             {
                 _playerX.MaximumDepth = 0;
                 AskPlayerForName(_playerX);
@@ -121,7 +121,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 AskPlayerForDiffecultyLevel(_playerX);
             }
 
-            
+
             AskPlayerForHumanOrAI(_playerO);
             if (_playerO.IsHuman)
             {
@@ -213,7 +213,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    askedPlayer.Name = userInput;                    
+                    askedPlayer.Name = userInput;
                     repeatQuery = false;
                 }
             } while (repeatQuery);
@@ -235,7 +235,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ------------------------- ");
             Console.WriteLine(" Mensch...: 1 ");
             Console.WriteLine(" Computer.: 2 ");
-            
+
 
             do
             {
@@ -274,7 +274,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Noch ein Spiel?     ");
             Console.WriteLine(" ------------------- ");
             Console.WriteLine(" Weiter Spielen.: 1  ");
-            Console.WriteLine(" Einstellungen..: 2  ");            
+            Console.WriteLine(" Einstellungen..: 2  ");
             Console.ResetColor();
             do
             {
@@ -310,88 +310,81 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (repeatQuery);
 
             Console.Clear();
-        }        
+        }
 
         public int AskPlayerForInput()
         {
-            string userInput = "";
-            int areaID = -1;
-            bool wrongInput = true;
+            string userInput;
+            int areaID;
+            bool wrongInput;
 
             do
             {
-                if (_playerX.InAction)
+                if ((_playerX.InAction && _playerX.IsHuman) || (_playerO.InAction && _playerO.IsHuman))
                 {
-                    if (_playerX.IsHuman)
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.WriteLine("PlayerX: {0} ", _playerX.Name);
-                        Console.Write("Eingsbe..:");
-                        Console.ResetColor();
-                        Console.Write(" ");
-                        userInput = Console.ReadLine();
-                        areaID = ConvertUserInput(userInput);
-                        Console.WriteLine();                        
-                    }
-                    else
-                    {
-                        _aimimax.GetAMove();
-                        areaID = _aimimax.AreaIDForX;
-                    }
+                    userInput = GetAreaIDFromHuman();
+                    areaID = ConvertUserInput(userInput);
                 }
-                else if(_playerO.InAction)
-                {
-                    if (_playerO.IsHuman)
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.WriteLine("PlayerX: {0} ", _playerX.Name);
-                        Console.Write("Eingsbe..:");
-                        Console.ResetColor();
-                        Console.Write(" ");
-                        userInput = Console.ReadLine();
-                        areaID = ConvertUserInput(userInput);
-                        Console.WriteLine();                       
-                    }
-                    else
-                    {
-                        _aimimax.GetAMove();
-                        areaID = _aimimax.AreaIDForO;
-                    }
-                }
+                else                
+                    areaID = GetAreaIDFromAimimax();
 
-                if (areaID < 0 || areaID > 8)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Ungültige Eingabe, gültige Eingabe währe z.B. 'B1' od. 'c2'!");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                    wrongInput = true;
-                }
-                //else if (_boardAreaList[areaID].AreaHasToken)
-                //{
-                //    Console.BackgroundColor = ConsoleColor.DarkRed;
-                //    Console.WriteLine("Das Feld ist bereits besetzt!");
-                //    Console.ResetColor();
-                //    Console.WriteLine();
-                //    wrongInput = true;
-                //}
-                else
-                    wrongInput = false;
+                wrongInput = ValidateAreaID(areaID);          
 
             } while (wrongInput);
 
             return areaID;
         }
 
-        public void Board_AreaIsOccupied()
+        private bool ValidateAreaID(int areaID)
         {
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("Das Feld ist bereits besetzt!");
-            Console.ResetColor();
-            Console.WriteLine();
+
+            if (areaID < 0 || areaID > 8)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Ungültige Eingabe, gültige Eingabe währe z.B. 'B1' od. 'c2'!");
+                Console.ResetColor();
+                Console.WriteLine();
+                return true;
+            }
+            else if (_boardAreaList[areaID].AreaHasToken)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Das Feld ist bereits besetzt!");
+                Console.ResetColor();
+                Console.WriteLine();
+                return true;
+            }
+            else
+                return false;
         }
 
+        private int GetAreaIDFromAimimax()
+        {
+            _aimimax.GetAMove();
+            if (_playerX.InAction)
+                return _aimimax.AreaIDForX;
+            if (_playerO.InAction)
+                return _aimimax.AreaIDForO;
+            else
+                return -1;
+        }
 
+        private string GetAreaIDFromHuman()
+        {            
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            if(_playerX.InAction)
+                Console.WriteLine($"PlayerX: {_playerX.Name} ");
+            if(_playerO.InAction)
+                Console.WriteLine($"PlayerO: {_playerO.Name} ");
+            Console.Write("Eingsbe..:");
+            Console.ResetColor();
+            Console.Write(" ");
+            string userInput = Console.ReadLine();
+            Console.WriteLine();         
+            
+            return userInput;
+        }
+     
         private int ConvertUserInput(string userInput)
         {
             userInput = userInput.ToUpper();
