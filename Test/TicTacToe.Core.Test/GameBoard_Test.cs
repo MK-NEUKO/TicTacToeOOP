@@ -208,24 +208,26 @@ namespace TicTacToe.Core.Test
 
             // Act
             board.ResetGameBoard();
+
+
+            // Assert
             string allValuesOf_Area = "";
-            bool allValuesOf_IsWinnArea = true;
-            bool allValuesOf_AreaHasAToken = true;
+            bool allValuesOf_IsWinnArea =false;
+            bool allValuesOf_AreaHasAToken = false;
             foreach (var item in boardAreaList)
             {
                 allValuesOf_Area += item.Area;
                 if (item.IsWinArea)
-                    allValuesOf_IsWinnArea = false;
+                    allValuesOf_IsWinnArea = true;
                 if (item.AreaHasToken)
-                    allValuesOf_AreaHasAToken = false;
+                    allValuesOf_AreaHasAToken = true;
             }
 
-            // Assert
             Assert.IsFalse(board.PlayerXIsWinner);
             Assert.IsFalse(board.PlayerOIsWinner);
             Assert.IsFalse(board.GameIsTie);
-            Assert.IsTrue(allValuesOf_IsWinnArea);
-            Assert.IsTrue(allValuesOf_AreaHasAToken);
+            Assert.IsFalse(allValuesOf_IsWinnArea);
+            Assert.IsFalse(allValuesOf_AreaHasAToken);
             Assert.AreEqual(expexted_allValuesOf_Area, allValuesOf_Area);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
