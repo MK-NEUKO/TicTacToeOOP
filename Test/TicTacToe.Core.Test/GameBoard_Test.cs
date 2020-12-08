@@ -181,6 +181,60 @@ namespace TicTacToe.Core.Test
             TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);
         }
 
+        [DataTestMethod]
+        [DataRow(new string[9]{ "O", "X", "X",
+                                "X", "O", "O",
+                                "O", "X", "X" })]
+
+        [DataRow(new string[9]{ "O", " ", "X",
+                                "X", "X", "O",
+                                " ", "X", "O" })]
+        public void ResetGameBoard_TestWhetherAllGameBoardValuesAreReset(string[] testGameBoard)
+        {
+            // Arange 
+            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            GameBoard board = new GameBoard(boardAreaList);
+
+            for (int index = 0; index < testGameBoard.Length; index++)
+            {
+                boardAreaList[index].Area = testGameBoard[index];
+            }
+            string expexted_allValuesOf_Area = "         ";
+
+
+            // Act
+            board.ResetGameBoard();
+            string allValuesOf_Area = "";
+            bool allValuesOf_IsWinnArea = true;
+            bool allValuesOf_AreaHasAToken = true;
+            foreach (var item in boardAreaList)
+            {
+                allValuesOf_Area += item.Area;
+                if (item.IsWinArea)
+                    allValuesOf_IsWinnArea = false;
+                if (item.AreaHasToken)
+                    allValuesOf_AreaHasAToken = false;
+            }
+
+            // Assert
+            Assert.IsFalse(board.PlayerXIsWinner);
+            Assert.IsFalse(board.PlayerOIsWinner);
+            Assert.IsFalse(board.GameIsTie);
+            Assert.IsTrue(allValuesOf_IsWinnArea);
+            Assert.IsTrue(allValuesOf_AreaHasAToken);
+            Assert.AreEqual(expexted_allValuesOf_Area, allValuesOf_Area);
+            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
+            TestContext.WriteLine(TestContext.TestName);
+            TestContext.WriteLine("TestGameBoard:");
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[0], testGameBoard[1], testGameBoard[2]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[3], testGameBoard[4], testGameBoard[5]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);
+        }
+
         [TestCleanup] 
         public void TestCleanUp()
         {

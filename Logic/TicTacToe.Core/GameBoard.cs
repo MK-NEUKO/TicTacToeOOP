@@ -95,6 +95,8 @@ namespace NEUKO.TicTacToe.Core
 
         public void PlaceAToken(int areaID, string token)
         {
+            // TODO Exception auslösen wenn: übergebene Parameter nicht initialisiert sind, oder das Feld bereits besetzt ist.
+            // TODO Eventuell eine Eigene Exception erstellen (AreaIsOccupiedException).
             if (_boardAreaList[areaID].AreaHasToken)
                 AreaIsOccupied();
 
