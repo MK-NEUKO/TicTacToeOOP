@@ -237,6 +237,37 @@ namespace TicTacToe.Core.Test
             TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);
         }
 
+        [DataTestMethod]
+        [DataRow(0, "X", "X")]
+        [DataRow(1, "O", "O")]
+        [DataRow(2, "X", "X")]
+        [DataRow(3, "O", "O")]
+        [DataRow(4, "X", "X")]
+        [DataRow(5, "O", "O")]
+        [DataRow(6, "X", "X")]
+        [DataRow(7, "O", "O")]
+        [DataRow(8, "X", "X")]
+        public void PlaceAToken_TestWhenATokenIsPlaced(int inputAreaID, string token, string expectedToken)
+        {
+            // Arange
+            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            GameBoard board = new GameBoard(boardAreaList);
+
+            // Act
+            board.PlaceAToken(inputAreaID, token);
+            // Assert
+            Assert.AreEqual(expectedToken, boardAreaList[inputAreaID].Area);
+            Assert.IsTrue(boardAreaList[inputAreaID].AreaHasToken);
+            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
+            TestContext.WriteLine(TestContext.TestName);
+            TestContext.WriteLine("TestData:");
+            TestContext.WriteLine($"AreaID: {inputAreaID} | Token: {token}");
+        }
+
         [TestCleanup] 
         public void TestCleanUp()
         {
