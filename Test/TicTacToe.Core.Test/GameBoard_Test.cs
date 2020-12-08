@@ -15,45 +15,43 @@ namespace TicTacToe.Core.Test
         {
             get { return testContextInstance; }
             set { testContextInstance = value; }
-        }
-
-        [TestMethod]
-        public void WinConstellationOne_Test()
-        {
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();           
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }           
-            GameBoard board = new GameBoard(boardAreaList);
-
-            boardAreaList[0].Area = "X";
-            boardAreaList[1].Area = "X";
-            boardAreaList[2].Area = "X";
-            boardAreaList[3].Area = " ";
-            boardAreaList[4].Area = " ";
-            boardAreaList[5].Area = " ";
-            boardAreaList[6].Area = " ";
-            boardAreaList[7].Area = " ";
-            boardAreaList[8].Area = " ";
-
-            board.CheckGameBoardState();
-
-            Assert.IsTrue(board.PlayerXIsWinner);
-            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
-            TestContext.WriteLine(TestContext.TestName);
-        }
+        }        
 
         [DataTestMethod]
-        [DataRow(new string[9]{ "X", "X", "O",
-                                " ", "X", "O",
+        [DataRow(new string[9]{ "X", "X", "X",
+                                " ", "O", "O",
                                 "O", " ", "X" })]
 
-        [DataRow(new string[9]{ "O", "X", "X",
-                                " ", "X", "O",
-                                "X", " ", "O" })]
-        public void CheckWinConstallation_GameBoard(string[] testGameBoard)
+        [DataRow(new string[9]{ "O", " ", "X",
+                                "X", "X", "X",
+                                "O", " ", "O" })]
+
+        [DataRow(new string[9]{ "O", "O", " ",
+                                "X", "O", " ",
+                                "X", "X", "X" })]
+
+        [DataRow(new string[9]{ "X", "O", " ",
+                                "X", "O", " ",
+                                "X", "X", "O" })]
+
+        [DataRow(new string[9]{ "O", "X", " ",
+                                "O", "X", " ",
+                                "X", "X", "O" })]
+
+        [DataRow(new string[9]{ "O", "O", "X",
+                                " ", "O", "X",
+                                "X", " ", "X" })]
+
+        [DataRow(new string[9]{ "X", "O", " ",
+                                "X", "X", " ",
+                                "O", "O", "X" })]
+
+        [DataRow(new string[9]{ "X", "O", "X",
+                                " ", "X", " ",
+                                "X", "O", "O" })]
+        public void CheckGameBoardState_AllWinConstellationsForPlayerX(string[] testGameBoard)
         {
+            // Arange 
             List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
             for (int areaID = 0; areaID < 9; areaID++)
             {
@@ -66,14 +64,121 @@ namespace TicTacToe.Core.Test
                 boardAreaList[index].Area = testGameBoard[index];
             }
             
+            // Act
             board.CheckGameBoardState();
 
+            // Assert
             Assert.IsTrue(board.PlayerXIsWinner);
             Assert.IsFalse(board.PlayerOIsWinner);
             Assert.IsFalse(board.GameIsTie);
-            TestContext.WriteLine($"{testGameBoard[0]}|{testGameBoard[1]}|{testGameBoard[2]}");
-            TestContext.WriteLine($"{testGameBoard[3]}|{testGameBoard[4]}|{testGameBoard[5]}");
-            TestContext.WriteLine($"{testGameBoard[6]}|{testGameBoard[7]}|{testGameBoard[8]}");
+            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
+            TestContext.WriteLine(TestContext.TestName);
+            TestContext.WriteLine("TestGameBoard:");
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[0], testGameBoard[1], testGameBoard[2]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[3], testGameBoard[4], testGameBoard[5]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);            
+        }
+
+        [DataTestMethod]
+        [DataRow(new string[9]{ "O", "O", "O",
+                                " ", "X", "X",
+                                "X", " ", "O" })]
+
+        [DataRow(new string[9]{ "X", " ", "X",
+                                "O", "O", "O",
+                                "O", " ", "X" })]
+
+        [DataRow(new string[9]{ "X", "X", " ",
+                                "X", "O", " ",
+                                "O", "O", "O" })]
+
+        [DataRow(new string[9]{ "O", "X", "O",
+                                "O", "X", " ",
+                                "O", " ", "X" })]
+
+        [DataRow(new string[9]{ " ", "O", "X",
+                                "X", "O", "O",
+                                "X", "O", " " })]
+
+        [DataRow(new string[9]{ "X", "O", "O",
+                                " ", "X", "O",
+                                "X", " ", "O" })]
+
+        [DataRow(new string[9]{ "O", "X", " ",
+                                "X", "O", " ",
+                                "O", "X", "O" })]
+
+        [DataRow(new string[9]{ "X", "X", "O",
+                                " ", "O", " ",
+                                "O", "X", "O" })]
+        public void CheckGameBoardState_AllWinConstellationsForPlayerO(string[] testGameBoard)
+        {
+            // Arange 
+            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            GameBoard board = new GameBoard(boardAreaList);
+
+            for (int index = 0; index < testGameBoard.Length; index++)
+            {
+                boardAreaList[index].Area = testGameBoard[index];
+            }
+
+            // Act
+            board.CheckGameBoardState();
+
+            // Assert
+            Assert.IsTrue(board.PlayerOIsWinner);
+            Assert.IsFalse(board.PlayerXIsWinner);
+            Assert.IsFalse(board.GameIsTie);
+            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
+            TestContext.WriteLine(TestContext.TestName);
+            TestContext.WriteLine("TestGameBoard:");
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[0], testGameBoard[1], testGameBoard[2]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[3], testGameBoard[4], testGameBoard[5]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);
+        }
+
+        [DataTestMethod]
+        [DataRow(new string[9]{ "O", "X", "X",
+                                "X", "O", "O",
+                                "O", "X", "X" })]
+
+        [DataRow(new string[9]{ "O", "O", "X",
+                                "X", "X", "O",
+                                "O", "X", "O" })]
+
+        
+        public void CheckGameBoardState_TestWhenGameBoardIsTie(string[] testGameBoard)
+        {
+            // Arange 
+            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            GameBoard board = new GameBoard(boardAreaList);
+
+            for (int index = 0; index < testGameBoard.Length; index++)
+            {
+                boardAreaList[index].Area = testGameBoard[index];
+            }
+
+            // Act
+            board.CheckGameBoardState();
+
+            // Assert
+            Assert.IsFalse(board.PlayerXIsWinner);
+            Assert.IsFalse(board.PlayerOIsWinner);
+            Assert.IsTrue(board.GameIsTie);
+            TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
+            TestContext.WriteLine(TestContext.TestName);
+            TestContext.WriteLine("TestGameBoard:");
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[0], testGameBoard[1], testGameBoard[2]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[3], testGameBoard[4], testGameBoard[5]);
+            TestContext.WriteLine(" {0} | {1} | {2} ", testGameBoard[6], testGameBoard[7], testGameBoard[8]);
         }
 
         [TestCleanup] 
