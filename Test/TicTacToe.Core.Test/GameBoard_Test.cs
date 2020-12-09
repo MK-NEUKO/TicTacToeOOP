@@ -9,13 +9,25 @@ namespace TicTacToe.Core.Test
     [TestClass]
     public class GameBoard_Test
     {
-        private TestContext testContextInstance;
-
+        private TestContext _testContextInstance;
+        private GameBoard _board;
+        private IList<GameBoardArea> _boardAreaList;
         public TestContext TestContext
-        {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
+        { 
+            get { return _testContextInstance; }
+            set { _testContextInstance = value; }
         }        
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _boardAreaList = new List<GameBoardArea>();
+            for (int areaID = 0; areaID < 9; areaID++)
+            {
+                _boardAreaList.Add(new GameBoardArea(areaID));
+            }
+            _board = new GameBoard(_boardAreaList);
+        }
 
         [DataTestMethod]
         [DataRow(new string[9]{ "X", "X", "X",
@@ -52,25 +64,18 @@ namespace TicTacToe.Core.Test
         public void CheckGameBoardState_AllWinConstellationsForPlayerX(string[] testGameBoard)
         {
             // Arange 
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }
-            GameBoard board = new GameBoard(boardAreaList);
-
             for (int index = 0; index < testGameBoard.Length; index++)
             {
-                boardAreaList[index].Area = testGameBoard[index];
+                _boardAreaList[index].Area = testGameBoard[index];
             }
             
             // Act
-            board.CheckGameBoardState();
+            _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsTrue(board.PlayerXIsWinner);
-            Assert.IsFalse(board.PlayerOIsWinner);
-            Assert.IsFalse(board.GameIsTie);
+            Assert.IsTrue(_board.PlayerXIsWinner);
+            Assert.IsFalse(_board.PlayerOIsWinner);
+            Assert.IsFalse(_board.GameIsTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -113,26 +118,19 @@ namespace TicTacToe.Core.Test
                                 "O", "X", "O" })]
         public void CheckGameBoardState_AllWinConstellationsForPlayerO(string[] testGameBoard)
         {
-            // Arange 
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }
-            GameBoard board = new GameBoard(boardAreaList);
-
+            // Arange             
             for (int index = 0; index < testGameBoard.Length; index++)
             {
-                boardAreaList[index].Area = testGameBoard[index];
+                _boardAreaList[index].Area = testGameBoard[index];
             }
 
             // Act
-            board.CheckGameBoardState();
+            _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsTrue(board.PlayerOIsWinner);
-            Assert.IsFalse(board.PlayerXIsWinner);
-            Assert.IsFalse(board.GameIsTie);
+            Assert.IsTrue(_board.PlayerOIsWinner);
+            Assert.IsFalse(_board.PlayerXIsWinner);
+            Assert.IsFalse(_board.GameIsTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -154,25 +152,18 @@ namespace TicTacToe.Core.Test
         public void CheckGameBoardState_TestWhenGameBoardIsTie(string[] testGameBoard)
         {
             // Arange 
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }
-            GameBoard board = new GameBoard(boardAreaList);
-
             for (int index = 0; index < testGameBoard.Length; index++)
             {
-                boardAreaList[index].Area = testGameBoard[index];
+                _boardAreaList[index].Area = testGameBoard[index];
             }
 
             // Act
-            board.CheckGameBoardState();
+            _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsFalse(board.PlayerXIsWinner);
-            Assert.IsFalse(board.PlayerOIsWinner);
-            Assert.IsTrue(board.GameIsTie);
+            Assert.IsFalse(_board.PlayerXIsWinner);
+            Assert.IsFalse(_board.PlayerOIsWinner);
+            Assert.IsTrue(_board.GameIsTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -191,30 +182,23 @@ namespace TicTacToe.Core.Test
                                 " ", "X", "O" })]
         public void ResetGameBoard_TestWhetherAllGameBoardValuesAreReset(string[] testGameBoard)
         {
-            // Arange 
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }
-            GameBoard board = new GameBoard(boardAreaList);
-
+            // Arange           
             for (int index = 0; index < testGameBoard.Length; index++)
             {
-                boardAreaList[index].Area = testGameBoard[index];
+                _boardAreaList[index].Area = testGameBoard[index];
             }
             string expexted_allValuesOf_Area = "         ";
 
 
             // Act
-            board.ResetGameBoard();
+            _board.ResetGameBoard();
 
 
             // Assert
             string allValuesOf_Area = "";
             bool allValuesOf_IsWinnArea =false;
             bool allValuesOf_AreaHasAToken = false;
-            foreach (var item in boardAreaList)
+            foreach (var item in _boardAreaList)
             {
                 allValuesOf_Area += item.Area;
                 if (item.IsWinArea)
@@ -223,9 +207,9 @@ namespace TicTacToe.Core.Test
                     allValuesOf_AreaHasAToken = true;
             }
 
-            Assert.IsFalse(board.PlayerXIsWinner);
-            Assert.IsFalse(board.PlayerOIsWinner);
-            Assert.IsFalse(board.GameIsTie);
+            Assert.IsFalse(_board.PlayerXIsWinner);
+            Assert.IsFalse(_board.PlayerOIsWinner);
+            Assert.IsFalse(_board.GameIsTie);
             Assert.IsFalse(allValuesOf_IsWinnArea);
             Assert.IsFalse(allValuesOf_AreaHasAToken);
             Assert.AreEqual(expexted_allValuesOf_Area, allValuesOf_Area);
@@ -248,20 +232,13 @@ namespace TicTacToe.Core.Test
         [DataRow(7, "O", "O")]
         [DataRow(8, "X", "X")]
         public void PlaceAToken_TestWhenATokenIsPlaced(int inputAreaID, string token, string expectedToken)
-        {
-            // Arange
-            List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                boardAreaList.Add(new GameBoardArea(areaID));
-            }
-            GameBoard board = new GameBoard(boardAreaList);
-
+        {                    
             // Act
-            board.PlaceAToken(inputAreaID, token);
+            _board.PlaceAToken(inputAreaID, token);
+
             // Assert
-            Assert.AreEqual(expectedToken, boardAreaList[inputAreaID].Area);
-            Assert.IsTrue(boardAreaList[inputAreaID].AreaHasToken);
+            Assert.AreEqual(expectedToken, _boardAreaList[inputAreaID].Area);
+            Assert.IsTrue(_boardAreaList[inputAreaID].AreaHasToken);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestData:");
