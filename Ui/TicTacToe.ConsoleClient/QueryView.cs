@@ -196,16 +196,16 @@ namespace NEUKO.TicTacToe.ConsoleClient
             do
             {
                 Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen ###noch nicht Implementiert:(A-Z, a-z, 0-9)###. ");
+                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.Write(" Eingabe.:");
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
-                if (String.IsNullOrEmpty(userInput) || userInput.Length > 14 /*|| IsValidAlphaNumericString(userInput)*/)
+                if (String.IsNullOrEmpty(userInput) || !IsValidAlphaNumericString(userInput))
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen ###noch nicht Implementiert:(A-Z, a-z, 0-9)###. ");
+                    Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
                     Console.ResetColor();
                     Console.WriteLine();
 
@@ -220,11 +220,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        //private bool IsValidAlphaNumericString(string userInput)
-        //{
-        //    Regex pattern = new Regex(@"[a-zA-Z0-9]");
-        //    return pattern.IsMatch(userInput.Trim());
-        //}
+        private bool IsValidAlphaNumericString(string userInput)
+        {
+            Regex pattern = new Regex(@"^[a-zA-Z0-9\s]{0,14}$");
+            return pattern.IsMatch(userInput);
+        }
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {

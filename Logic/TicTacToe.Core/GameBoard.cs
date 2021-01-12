@@ -5,6 +5,8 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.Core
 {
+    // TODO Dokumentation erstellen, (Summary, etc.).
+
     public delegate void AreaIsOccupiedEventHandler();
 
     public class GameBoard : IGameBoard
@@ -23,6 +25,7 @@ namespace NEUKO.TicTacToe.Core
 
 
         #region Konstruktor
+        // TODO Standardkonstruktor erstellen, (Konstruktorverkettung üben).
         public GameBoard(IList<GameBoardArea> boardAreaList)
         {
             _boardAreaList = boardAreaList;
@@ -96,7 +99,7 @@ namespace NEUKO.TicTacToe.Core
         public void PlaceAToken(int areaID, string token)
         {
             // TODO Exception auslösen wenn: übergebene Parameter nicht initialisiert sind, oder das Feld bereits besetzt ist.
-            // TODO Eventuell eine Eigene Exception erstellen (AreaIsOccupiedException).
+            // TODO Eventuell eine Eigene Exception erstellen, aus Übungszwecken, da sonst nicht erforderlich (AreaIsOccupiedException).
             if (_boardAreaList[areaID].AreaHasToken)
                 AreaIsOccupied();
 
