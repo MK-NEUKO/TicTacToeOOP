@@ -13,12 +13,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayer _playerO;
         private readonly IPlayerController _playerController;
         private readonly IAI _aimimax;
+        private readonly QueryValidation _validation;
         private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
         private bool _playerWillContinue;
 
-        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax)
+        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax, QueryValidation validation)
         {
             _boardAreaList = boardAreaList;
             _board = board;
@@ -26,6 +27,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerO = playerO;
             _playerController = playerController;
             _aimimax = aimimax;
+            _validation = validation;
             _getMainSettings = true;
         }
 
@@ -202,28 +204,22 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 Console.ResetColor();
                 Console.Write(" ");
                 string userInput = Console.ReadLine();
-                if (String.IsNullOrEmpty(userInput) || !IsValidAlphaNumericString(userInput))
+                if (_validation.ValidatePlayerName(userInput))
+                {
+                    askedPlayer.Name = userInput;
+                    repeatQuery = false;
+                }
+                else
                 {
                     Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
                     Console.ResetColor();
                     Console.WriteLine();
 
-                    repeatQuery = true;
-                }
-                else
-                {
-                    askedPlayer.Name = userInput;
-                    repeatQuery = false;
+                    repeatQuery = true; 
                 }
             } while (repeatQuery);
             Console.WriteLine();
-        }
-
-        private bool IsValidAlphaNumericString(string userInput)
-        {
-            Regex pattern = new Regex(@"^[a-zA-Z0-9\s]{0,14}$");
-            return pattern.IsMatch(userInput);
         }
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
