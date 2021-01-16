@@ -85,11 +85,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void AskForAdvancedSettings()
         {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Erweiterte Einstellungen                                           ");
-            Console.WriteLine(" ------------------------------------------------------------------ ");
-            Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");
-            Console.WriteLine();
+            _queryDisplay.ShowMenuAskForAdvancedSettings();
 
             AskPlayerForHumanOrAI(_playerX);
             if (_playerX.IsHuman)

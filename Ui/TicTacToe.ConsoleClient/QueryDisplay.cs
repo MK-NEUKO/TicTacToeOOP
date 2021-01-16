@@ -43,5 +43,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine("                     - Als Zweites nach dem Schwierigkeitsgrad.            ");
             Console.WriteLine();
         }
+
+        public void ShowMenuAskForAdvancedSettings()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Erweiterte Einstellungen                                           ");
+            Console.WriteLine(" ------------------------------------------------------------------ ");
+            Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");
+            Console.WriteLine();
+        }
     }
 }
