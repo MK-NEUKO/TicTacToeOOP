@@ -31,5 +31,17 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void ShowMenuAskForDefaultSettings()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Standart Einstellungen                                                    ");
+            Console.WriteLine(" ------------------------------------------------------------------------- ");
+            Console.WriteLine(" Grundeinstellungen: - Spieler 'O' ist der Computergegner.                 ");
+            Console.WriteLine("                     - Der Computergegner hat den Namen Aimimax.           ");
+            Console.WriteLine("                     - Als Erstes wird nach dem Namen von PlayerX gefragt. ");
+            Console.WriteLine("                     - Als Zweites nach dem Schwierigkeitsgrad.            ");
+            Console.WriteLine();
+        }
     }
 }
