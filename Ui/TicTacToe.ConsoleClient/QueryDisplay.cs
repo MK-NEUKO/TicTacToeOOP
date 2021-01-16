@@ -71,5 +71,34 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void ShowMenuAskPlayerForDiffecultyLevel()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Schwierigkeitsgrad ");
+            Console.WriteLine(" ------------------ ");
+            Console.WriteLine(" Leicht......: 1    ");
+            Console.WriteLine(" Normal......: 2    ");
+            Console.WriteLine(" Schwer......: 3    ");
+            Console.WriteLine(" Unbesiegbar.: 4    ");
+            Console.WriteLine(" #### Hinweis!!!    -die Grade sind nicht genau abgestimmt, bitte probieren ### ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+        }
+
+        public void ShowInputQueryAskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        {
+            Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
+            Console.Write(" Eingabe.:");
+            Console.ResetColor();
+            Console.Write(" ");
+        }
+
+        public void ShowWhenWrongInputAskPlayerForDiffecultyLevel()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
     }
 }

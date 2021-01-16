@@ -105,6 +105,45 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
+        private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        {
+            bool repeatQuery;
+            _queryDisplay.ShowMenuAskPlayerForDiffecultyLevel();            
+
+            do
+            {
+                _queryDisplay.ShowInputQueryAskPlayerForDiffecultyLevel(askedPlayer);
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    askedPlayer.MaximumDepth = 1;
+                    repeatQuery = false;
+                }
+                else if (userInput == "2")
+                {
+                    askedPlayer.MaximumDepth = 2;
+                    repeatQuery = false;
+                }
+                else if (userInput == "3")
+                {
+                    askedPlayer.MaximumDepth = 3;
+                    repeatQuery = false;
+                }
+                else if (userInput == "4")
+                {
+                    askedPlayer.MaximumDepth = 5;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    _queryDisplay.ShowWhenWrongInputAskPlayerForDiffecultyLevel();
+                    repeatQuery = true;
+                }
+                Console.ResetColor();
+
+            } while (repeatQuery);
+        }
+
         public void AskForAdvancedSettings()
         {
             _queryDisplay.ShowMenuAskForAdvancedSettings();
@@ -135,59 +174,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             }
         }
 
-        private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
-        {
-            bool repeatQuery;
-
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Schwierigkeitsgrad ");
-            Console.WriteLine(" ------------------ ");
-            Console.WriteLine(" Leicht......: 1    ");
-            Console.WriteLine(" Normal......: 2    ");
-            Console.WriteLine(" Schwer......: 3    ");
-            Console.WriteLine(" Unbesiegbar.: 4    ");
-            Console.WriteLine(" #### Hinweis!!!    -die Grade sind nicht genau abgestimmt, bitte probieren ### ");
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-
-            do
-            {
-                Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
-                string userInput = Console.ReadLine();
-                if (userInput == "1")
-                {
-                    askedPlayer.MaximumDepth = 1;
-                    repeatQuery = false;
-                }
-                else if (userInput == "2")
-                {
-                    askedPlayer.MaximumDepth = 2;
-                    repeatQuery = false;
-                }
-                else if (userInput == "3")
-                {
-                    askedPlayer.MaximumDepth = 3;
-                    repeatQuery = false;
-                }
-                else if (userInput == "4")
-                {
-                    askedPlayer.MaximumDepth = 5;
-                    repeatQuery = false;
-                }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                    repeatQuery = true;
-                }
-                Console.ResetColor();
-
-            } while (repeatQuery);
-        }
+        
 
         
 
