@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEUKO.TicTacToe.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.ResetColor();
         }
 
-        public void ShowInputGetSettings()
+        public void ShowInputQueryGetSettings()
         {
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" Eingabe.:");
@@ -50,6 +51,24 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Erweiterte Einstellungen                                           ");
             Console.WriteLine(" ------------------------------------------------------------------ ");
             Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");
+            Console.WriteLine();
+        }
+
+        public void ShowInputQueryAskPlayerForName(IPlayer askedPlayer)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" Eingabe.:");
+            Console.ResetColor();
+            Console.Write(" ");
+        }
+
+        public void ShowWhenWrongInputAskPlayerForName()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
+            Console.ResetColor();
             Console.WriteLine();
         }
     }

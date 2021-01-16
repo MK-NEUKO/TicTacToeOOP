@@ -45,7 +45,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuGetSettings();
             do
             {
-                _queryDisplay.ShowInputGetSettings();
+                _queryDisplay.ShowInputQueryGetSettings();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -81,6 +81,28 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerO.IsHuman = false;
 
             AskPlayerForDiffecultyLevel(_playerO);
+        }
+
+        private void AskPlayerForName(IPlayer askedPlayer)
+        {
+            bool repeatQuery;
+
+            do
+            {
+                _queryDisplay.ShowInputQueryAskPlayerForName(askedPlayer);
+                string userInput = Console.ReadLine();
+                if (_validation.ValidatePlayerName(userInput))
+                {
+                    askedPlayer.Name = userInput;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    _queryDisplay.ShowWhenWrongInputAskPlayerForName();
+                    repeatQuery = true;
+                }
+            } while (repeatQuery);
+            Console.WriteLine();
         }
 
         public void AskForAdvancedSettings()
@@ -167,36 +189,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (repeatQuery);
         }
 
-        private void AskPlayerForName(IPlayer askedPlayer)
-        {
-            bool repeatQuery;
-
-            do
-            {
-                Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
-                string userInput = Console.ReadLine();
-                if (_validation.ValidatePlayerName(userInput))
-                {
-                    askedPlayer.Name = userInput;
-                    repeatQuery = false;
-                }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
-                    repeatQuery = true; 
-                }
-            } while (repeatQuery);
-            Console.WriteLine();
-        }
+        
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {
