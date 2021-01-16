@@ -14,12 +14,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IPlayerController _playerController;
         private readonly IAI _aimimax;
         private readonly QueryValidation _validation;
+        private readonly QueryDisplay _queryDisplay;
         private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
         private bool _playerWillContinue;
 
-        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax, QueryValidation validation)
+        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax, QueryValidation validation, QueryDisplay queryDisplay)
         {
             _boardAreaList = boardAreaList;
             _board = board;
@@ -28,6 +29,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _playerController = playerController;
             _aimimax = aimimax;
             _validation = validation;
+            _queryDisplay = queryDisplay;
             _getMainSettings = true;
         }
 
@@ -40,18 +42,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {
             bool repeatQuery;
 
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Willkommen im Spiel TicTacToe ");
-            Console.WriteLine(" ----------------------------- ");
-            Console.WriteLine(" Standart Einstellungen...: 1  ");
-            Console.WriteLine(" Erweiterte Einstellungen.: 2  ");
-            Console.ResetColor();
+            _queryDisplay.ShowMenuGetSettings();
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
+                _queryDisplay.ShowInputGetSettings();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -66,11 +60,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
+                    _queryDisplay.ShowWhenWrongInputGetSettings();
                     repeatQuery = true;
                 }
             } while (repeatQuery);
