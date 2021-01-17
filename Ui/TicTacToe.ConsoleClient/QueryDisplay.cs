@@ -100,5 +100,56 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public void ShowMenuAskPlayerForHumanOrAi(IPlayer askedPlayer)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine($" Einstellungen für {askedPlayer.Name} ");
+            Console.WriteLine(" ------------------------- ");
+            Console.WriteLine(" Mensch...: 1 ");
+            Console.WriteLine(" Computer.: 2 ");
+        }
+
+        public void ShowInputQueryAskPlayerForHumanOrAi()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" Eingabe.:");
+            Console.ResetColor();
+            Console.Write(" ");
+        }
+
+        public void ShowWhenWrongInputAskPlayerForHumanOrAi()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public void ShowMenuAskForContinue()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Noch ein Spiel?     ");
+            Console.WriteLine(" ------------------- ");
+            Console.WriteLine(" Weiter Spielen.: 1  ");
+            Console.WriteLine(" Einstellungen..: 2  ");
+            Console.ResetColor();
+        }
+
+        public void ShowInputQueryAskForContinue()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Write(" Eingabe.:");
+            Console.ResetColor();
+            Console.Write(" ");
+        }
+
+        public void ShowWhenWrongInputAskForContinue()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
     }
 }

@@ -172,29 +172,17 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _playerO.Name = "HAL";
                 AskPlayerForDiffecultyLevel(_playerO);
             }
-        }
-
-        
-
+        }       
         
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {
             bool repeatQuery;
-
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine($" Einstellungen für {askedPlayer.Name} ");
-            Console.WriteLine(" ------------------------- ");
-            Console.WriteLine(" Mensch...: 1 ");
-            Console.WriteLine(" Computer.: 2 ");
-
-
+            _queryDisplay.ShowMenuAskPlayerForHumanOrAi(askedPlayer);
+            
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
+                _queryDisplay.ShowInputQueryAskPlayerForHumanOrAi();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -208,11 +196,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
+                    _queryDisplay.ShowWhenWrongInputAskPlayerForHumanOrAi();
                     repeatQuery = true;
                 }
             } while (repeatQuery);
@@ -221,19 +205,11 @@ namespace NEUKO.TicTacToe.ConsoleClient
         public void AskForContinue()
         {
             bool repeatQuery;
-
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" Noch ein Spiel?     ");
-            Console.WriteLine(" ------------------- ");
-            Console.WriteLine(" Weiter Spielen.: 1  ");
-            Console.WriteLine(" Einstellungen..: 2  ");
-            Console.ResetColor();
+            _queryDisplay.ShowMenuAskForContinue();
+            
             do
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(" Eingabe.:");
-                Console.ResetColor();
-                Console.Write(" ");
+                _queryDisplay.ShowInputQueryAskForContinue();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -252,11 +228,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
+                    _queryDisplay.ShowWhenWrongInputAskForContinue();
                     repeatQuery = true;
                 }
             } while (repeatQuery);
