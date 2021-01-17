@@ -32,7 +32,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             PlayerController playerController = new PlayerController(playerX, playerO, board, aimimax);
             QueryValidation validation = new QueryValidation(boardAreaList);
             QueryDisplay queryDisplay = new QueryDisplay();
-            QueryView query = new QueryView(boardAreaList, board, playerX, playerO, playerController, aimimax, validation, queryDisplay);
+            QueryConverter inputConverter = new QueryConverter();
+            QueryView query = new QueryView(boardAreaList, board, playerX, playerO, playerController, aimimax, validation, queryDisplay, inputConverter);
             DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           
             TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, display, query, aimimax);
 

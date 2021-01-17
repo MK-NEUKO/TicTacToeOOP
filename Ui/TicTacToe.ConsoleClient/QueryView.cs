@@ -15,12 +15,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
         private readonly IAI _aimimax;
         private readonly QueryValidation _validation;
         private readonly QueryDisplay _queryDisplay;
+        private readonly QueryConverter _inputConverter;
         private bool _getMainSettings;
         private bool _getDefaultSettings;
         private bool _getAdvancedSettings;
         private bool _playerWillContinue;
 
-        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax, QueryValidation validation, QueryDisplay queryDisplay)
+        public QueryView(IList<GameBoardArea> boardAreaList, IGameBoard board, IPlayer playerX, IPlayer playerO, IPlayerController playerController, IAI aimimax, QueryValidation validation, QueryDisplay queryDisplay, QueryConverter inputConverter)
         {
             _boardAreaList = boardAreaList;
             _board = board;
@@ -30,6 +31,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _aimimax = aimimax;
             _validation = validation;
             _queryDisplay = queryDisplay;
+            _inputConverter = inputConverter;
             _getMainSettings = true;
         }
 
@@ -247,7 +249,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 if ((_playerX.InAction && _playerX.IsHuman) || (_playerO.InAction && _playerO.IsHuman))
                 {
                     userInput = GetAreaIDFromHuman();
-                    areaID = ConvertUserInput(userInput);
+                    areaID = _inputConverter.ConvertUserInput(userInput);
                 }
                 else                
                     areaID = GetAreaIDFromAimimax();
@@ -288,32 +290,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
             return userInput;
         }
      
-        private int ConvertUserInput(string userInput)
-        {
-            userInput = userInput.ToUpper();
-            switch (userInput)
-            {
-                case "A1":
-                    return 0;
-                case "A2":
-                    return 1;
-                case "A3":
-                    return 2;
-                case "B1":
-                    return 3;
-                case "B2":
-                    return 4;
-                case "B3":
-                    return 5;
-                case "C1":
-                    return 6;
-                case "C2":
-                    return 7;
-                case "C3":
-                    return 8;
-
-            }
-            return 9;
-        }
+        
     }
 }
