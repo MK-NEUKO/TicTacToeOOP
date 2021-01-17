@@ -252,35 +252,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 else                
                     areaID = GetAreaIDFromAimimax();
 
-                wrongInput = ValidateAreaID(areaID);          
+                wrongInput = _validation.ValidateAreaID(areaID);          
 
             } while (wrongInput);
 
             return areaID;
         }
 
-        private bool ValidateAreaID(int areaID)
-        {
-
-            if (areaID < 0 || areaID > 8)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Ungültige Eingabe, gültige Eingabe währe z.B. 'B1' od. 'c2'!");
-                Console.ResetColor();
-                Console.WriteLine();
-                return true;
-            }
-            else if (_boardAreaList[areaID].AreaHasToken)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Das Feld ist bereits besetzt!");
-                Console.ResetColor();
-                Console.WriteLine();
-                return true;
-            }
-            else
-                return false;
-        }
+        
 
         private int GetAreaIDFromAimimax()
         {
