@@ -15,6 +15,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Standart Einstellungen...: 1  ");
             Console.WriteLine(" Erweiterte Einstellungen.: 2  ");
             Console.ResetColor();
+            Console.WriteLine();
         }
 
         public void ShowMenuAskForDefaultSettings()
@@ -26,6 +27,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine("                     - Der Computergegner hat den Namen Aimimax.           ");
             Console.WriteLine("                     - Als Erstes wird nach dem Namen von PlayerX gefragt. ");
             Console.WriteLine("                     - Als Zweites nach dem Schwierigkeitsgrad.            ");
+            Console.ResetColor();
             Console.WriteLine();
         }
 
@@ -35,6 +37,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Erweiterte Einstellungen                                           ");
             Console.WriteLine(" ------------------------------------------------------------------ ");
             Console.WriteLine(" - PlayerX, sowie PlayerO können nach belieben konfiguriert werden. ");
+            Console.ResetColor();
             Console.WriteLine();
         }
 
@@ -48,6 +51,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Schwer......: 3    ");
             Console.WriteLine(" Unbesiegbar.: 4    ");
             Console.ResetColor();
+            Console.WriteLine();
         }
 
         public void ShowMenuAskPlayerForHumanOrAi(IPlayer askedPlayer)
@@ -57,6 +61,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" ------------------------- ");
             Console.WriteLine(" Mensch...: 1 ");
             Console.WriteLine(" Computer.: 2 ");
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         public void ShowMenuAskForContinue()
@@ -67,6 +73,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Weiter Spielen.: 1  ");
             Console.WriteLine(" Einstellungen..: 2  ");
             Console.ResetColor();
+            Console.WriteLine();
         }
 
         public void ShowInputQueryGetSettings()
