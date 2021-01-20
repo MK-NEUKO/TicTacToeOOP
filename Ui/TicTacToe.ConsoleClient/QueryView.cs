@@ -62,7 +62,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    _queryDisplay.ShowWhenWrongInputGetSettings();
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
                     repeatQuery = true;
                 }
             } while (repeatQuery);
@@ -100,7 +100,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    _queryDisplay.ShowWhenWrongInputAskPlayerForName();
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
                     repeatQuery = true;
                 }
             } while (repeatQuery);
@@ -138,11 +138,10 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    _queryDisplay.ShowWhenWrongInputAskPlayerForDiffecultyLevel();
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
                     repeatQuery = true;
-                }
-                Console.ResetColor();
-
+                }  
+                
             } while (repeatQuery);
         }
 
@@ -198,7 +197,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    _queryDisplay.ShowWhenWrongInputAskPlayerForHumanOrAi();
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
                     repeatQuery = true;
                 }
             } while (repeatQuery);
@@ -230,7 +229,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 }
                 else
                 {
-                    _queryDisplay.ShowWhenWrongInputAskForContinue();
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, bitte wähle '1' oder '2'! ");
                     repeatQuery = true;
                 }
             } while (repeatQuery);
