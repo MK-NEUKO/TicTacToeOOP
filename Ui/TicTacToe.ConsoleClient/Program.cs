@@ -15,6 +15,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
        
         static void Main(string[] args)
         {
+            #region Objects of the API TicTacToe.Core
             List<GameBoardArea> boardAreaList = new List<GameBoardArea>();
             List<GameBoardArea> evaluationList = new List<GameBoardArea>();
             for (int areaID = 0; areaID < 9; areaID++)
@@ -25,17 +26,22 @@ namespace NEUKO.TicTacToe.ConsoleClient
             {
                 evaluationList.Add(new GameBoardArea(areaID));
             }
-            GameBoard board = new GameBoard(boardAreaList);            
+            GameBoard board = new GameBoard(boardAreaList);
             Player playerX = new Player() { Name = "PlayerX", InAction = true };
-            Player playerO = new Player() { Name = "PlayerO"};
+            Player playerO = new Player() { Name = "PlayerO" };
             AI aimimax = new AI(evaluationList, board, playerX, playerO);
             PlayerController playerController = new PlayerController(playerX, playerO, board, aimimax);
+            #endregion
+
+            #region Objects of the ConsoleClient
             QueryValidation validation = new QueryValidation(boardAreaList);
             QueryDisplay queryDisplay = new QueryDisplay();
             QueryConverter inputConverter = new QueryConverter();
             QueryView query = new QueryView(boardAreaList, board, playerX, playerO, playerController, aimimax, validation, queryDisplay, inputConverter);
-            DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);           
+            DisplayView display = new DisplayView(boardAreaList, board, playerX, playerO, playerController, aimimax);
             TicTacToe tictactoe = new TicTacToe(board, playerController, playerX, playerO, display, query, aimimax);
+            #endregion
+
 
             tictactoe.Play();
         }
