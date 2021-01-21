@@ -76,44 +76,64 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine();
         }
 
-        public void ShowInputQueryGetSettings()
-        {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(" Eingabe.:");
-            Console.ResetColor();
-            Console.Write(" ");
-        }
+        //public void ShowInputQueryGetSettings()
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
+        //    Console.Write(" Eingabe.:");
+        //    Console.ResetColor();
+        //    Console.Write(" ");
+        //}
 
-        public void ShowInputQueryAskPlayerForName(IPlayer askedPlayer)
+        //public void ShowInputQueryAskPlayerForName(IPlayer askedPlayer)
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkGray;
+        //    Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
+        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
+        //    Console.Write(" Eingabe.:");
+        //    Console.ResetColor();
+        //    Console.Write(" ");
+        //}
+
+        //public void ShowInputQueryAskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkGray;
+        //    Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
+        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
+        //    Console.Write(" Eingabe.:");
+        //    Console.ResetColor();
+        //    Console.Write(" ");
+        //}
+
+        //public void ShowInputQueryAskPlayerForHumanOrAi()
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
+        //    Console.Write(" Eingabe.:");
+        //    Console.ResetColor();
+        //    Console.Write(" ");
+        //}
+
+        //public void ShowInputQueryAskForContinue()
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
+        //    Console.Write(" Eingabe.:");
+        //    Console.ResetColor();
+        //    Console.Write(" ");
+        //}
+
+        public void ShowInputQuery(string question = "Bitte wähle eine Option")
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
+            Console.WriteLine(" {0} ", question);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" Eingabe.:");
             Console.ResetColor();
-            Console.Write(" ");
+            Console.Write(" ");       
         }
 
-        public void ShowInputQueryAskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        public void ShowInputQuery(IPlayer askedPlayer, string question = "Bitte wähle eine Option")
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(" Eingabe.:");
-            Console.ResetColor();
-            Console.Write(" ");
-        }
-
-        public void ShowInputQueryAskPlayerForHumanOrAi()
-        {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(" Eingabe.:");
-            Console.ResetColor();
-            Console.Write(" ");
-        }
-
-        public void ShowInputQueryAskForContinue()
-        {
+            Console.WriteLine(" {0} {1} ", question, askedPlayer.Name);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" Eingabe.:");
             Console.ResetColor();

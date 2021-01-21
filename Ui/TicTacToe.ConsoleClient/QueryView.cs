@@ -47,7 +47,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuGetSettings();
             do
             {
-                _queryDisplay.ShowInputQueryGetSettings();
+                _queryDisplay.ShowInputQuery();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -91,7 +91,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
-                _queryDisplay.ShowInputQueryAskPlayerForName(askedPlayer);
+                _queryDisplay.ShowInputQuery(askedPlayer, "Gültig sind a-Z, 0-9 und Leerzeichen");
                 string userInput = Console.ReadLine();
                 if (_validation.ValidatePlayerName(userInput))
                 {
@@ -114,7 +114,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
             do
             {
-                _queryDisplay.ShowInputQueryAskPlayerForDiffecultyLevel(askedPlayer);
+                _queryDisplay.ShowInputQuery(askedPlayer);
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -183,7 +183,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             
             do
             {
-                _queryDisplay.ShowInputQueryAskPlayerForHumanOrAi();
+                _queryDisplay.ShowInputQuery(askedPlayer);
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
@@ -210,7 +210,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             
             do
             {
-                _queryDisplay.ShowInputQueryAskForContinue();
+                _queryDisplay.ShowInputQuery();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
