@@ -86,64 +86,6 @@ namespace NEUKO.TicTacToe.ConsoleClient
             AskPlayerForDiffecultyLevel(_playerO);
         }
 
-        private void AskPlayerForName(IPlayer askedPlayer)
-        {
-            bool repeatQuery;
-
-            do
-            {                
-                string userInput = _queryDisplay.GetInputQuery(askedPlayer, "Bitte wähle einen Namen, Gültig sind a-Z, 0-9 und Leerzeichen");
-                if (_validation.ValidatePlayerName(userInput))
-                {
-                    askedPlayer.Name = userInput;
-                    repeatQuery = false;
-                }
-                else
-                {
-                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
-                    repeatQuery = true;
-                }
-            } while (repeatQuery);
-            Console.WriteLine();
-        }
-
-        private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
-        {
-            bool repeatQuery;
-            _queryDisplay.ShowMenuAskPlayerForDiffecultyLevel();            
-
-            do
-            {                
-                string userInput = _queryDisplay.GetInputQuery(askedPlayer);
-                if (userInput == "1")
-                {
-                    askedPlayer.MaximumDepth = 1;
-                    repeatQuery = false;
-                }
-                else if (userInput == "2")
-                {
-                    askedPlayer.MaximumDepth = 2;
-                    repeatQuery = false;
-                }
-                else if (userInput == "3")
-                {
-                    askedPlayer.MaximumDepth = 3;
-                    repeatQuery = false;
-                }
-                else if (userInput == "4")
-                {
-                    askedPlayer.MaximumDepth = 5;
-                    repeatQuery = false;
-                }
-                else
-                {
-                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
-                    repeatQuery = true;
-                }  
-                
-            } while (repeatQuery);
-        }
-
         public void AskForAdvancedSettings()
         {
             _queryDisplay.ShowMenuAskForAdvancedSettings();
@@ -172,7 +114,65 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _playerO.Name = "HAL";
                 AskPlayerForDiffecultyLevel(_playerO);
             }
-        }               
+        }
+
+        private void AskPlayerForName(IPlayer askedPlayer)
+        {
+            bool repeatQuery;
+
+            do
+            {                
+                string userInput = _queryDisplay.GetInputQuery(askedPlayer, "Bitte wähle einen Namen, Gültig sind a-Z, 0-9 und Leerzeichen");
+                if (_validation.ValidatePlayerName(userInput))
+                {
+                    askedPlayer.Name = userInput;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
+                    repeatQuery = true;
+                }
+            } while (repeatQuery);
+            Console.WriteLine();
+        }
+
+        private void AskPlayerForDiffecultyLevel(IPlayer askedPlayer)
+        {
+            bool repeatQuery;
+            _queryDisplay.ShowMenuAskPlayerForDiffecultyLevel();            
+
+            do
+            {                
+                string userInput = _queryDisplay.GetInputQuery(askedPlayer, "Schwirigkeitsgrad des Computergegners");
+                if (userInput == "1")
+                {
+                    askedPlayer.MaximumDepth = 1;
+                    repeatQuery = false;
+                }
+                else if (userInput == "2")
+                {
+                    askedPlayer.MaximumDepth = 2;
+                    repeatQuery = false;
+                }
+                else if (userInput == "3")
+                {
+                    askedPlayer.MaximumDepth = 3;
+                    repeatQuery = false;
+                }
+                else if (userInput == "4")
+                {
+                    askedPlayer.MaximumDepth = 5;
+                    repeatQuery = false;
+                }
+                else
+                {
+                    _queryDisplay.ShowWhenWrongInput(" Falsche Eingabe, wähle die Menupunkte mit den Zahlen (1-4). ");
+                    repeatQuery = true;
+                }  
+                
+            } while (repeatQuery);
+        }      
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {
@@ -268,18 +268,13 @@ namespace NEUKO.TicTacToe.ConsoleClient
         }
 
         private string GetAreaIDFromHuman()
-        {            
+        {
+            string userInput = null;
             Console.BackgroundColor = ConsoleColor.DarkBlue;
-            if(_playerX.InAction)
-                Console.WriteLine($"PlayerX: {_playerX.Name} ");
+            if (_playerX.InAction)
+                userInput = _queryDisplay.GetInputQuery(_playerX, "Auf welches Feld möchtest du ziehen?");                
             if(_playerO.InAction)
-                Console.WriteLine($"PlayerO: {_playerO.Name} ");
-            Console.Write("Eingsbe..:");
-            Console.ResetColor();
-            Console.Write(" ");
-            string userInput = Console.ReadLine();
-            Console.WriteLine();         
-            
+                userInput = _queryDisplay.GetInputQuery(_playerO, "Auf welches Feld möchtest du ziehen?");
             return userInput;
         }
      
