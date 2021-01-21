@@ -74,70 +74,32 @@ namespace NEUKO.TicTacToe.ConsoleClient
             Console.WriteLine(" Einstellungen..: 2  ");
             Console.ResetColor();
             Console.WriteLine();
-        }
+        }       
 
-        //public void ShowInputQueryGetSettings()
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //    Console.Write(" Eingabe.:");
-        //    Console.ResetColor();
-        //    Console.Write(" ");
-        //}
-
-        //public void ShowInputQueryAskPlayerForName(IPlayer askedPlayer)
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkGray;
-        //    Console.WriteLine($" {askedPlayer.Name}, wähle einen Namen, erlaubt sind 14 Zeichen (A-Z, a-z, 0-9, Leerzeichen). ");
-        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //    Console.Write(" Eingabe.:");
-        //    Console.ResetColor();
-        //    Console.Write(" ");
-        //}
-
-        //public void ShowInputQueryAskPlayerForDiffecultyLevel(IPlayer askedPlayer)
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkGray;
-        //    Console.WriteLine($" Schwierigkeitsgrad für {askedPlayer.Name} ");
-        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //    Console.Write(" Eingabe.:");
-        //    Console.ResetColor();
-        //    Console.Write(" ");
-        //}
-
-        //public void ShowInputQueryAskPlayerForHumanOrAi()
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //    Console.Write(" Eingabe.:");
-        //    Console.ResetColor();
-        //    Console.Write(" ");
-        //}
-
-        //public void ShowInputQueryAskForContinue()
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //    Console.Write(" Eingabe.:");
-        //    Console.ResetColor();
-        //    Console.Write(" ");
-        //}
-
-        public void ShowInputQuery(string question = "Bitte wähle eine Option")
+        public string GetInputQuery(string question = "Bitte wähle eine Option")
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" {0} ", question);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" Eingabe.:");
             Console.ResetColor();
-            Console.Write(" ");       
+            Console.Write(" ");
+            string userInput = Console.ReadLine();
+            Console.WriteLine();
+            return userInput;
         }
-
-        public void ShowInputQuery(IPlayer askedPlayer, string question = "Bitte wähle eine Option")
+       
+        public string GetInputQuery(IPlayer askedPlayer, string question = "Bitte wähle eine Option")
         {
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" {0} {1} ", question, askedPlayer.Name);
+            Console.WriteLine(" {0} | {1} ", askedPlayer.Name, question);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" Eingabe.:");
             Console.ResetColor();
             Console.Write(" ");
+            string userInput = Console.ReadLine();
+            Console.WriteLine();
+            return userInput;
         }
             
         public void ShowWhenWrongInput(string massage)

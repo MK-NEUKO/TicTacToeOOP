@@ -47,8 +47,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuGetSettings();
             do
             {
-                _queryDisplay.ShowInputQuery();
-                string userInput = Console.ReadLine();
+                
+                string userInput = _queryDisplay.GetInputQuery();
                 if (userInput == "1")
                 {
                     _getDefaultSettings = true;
@@ -91,9 +91,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             bool repeatQuery;
 
             do
-            {
-                _queryDisplay.ShowInputQuery(askedPlayer, "Gültig sind a-Z, 0-9 und Leerzeichen");
-                string userInput = Console.ReadLine();
+            {                
+                string userInput = _queryDisplay.GetInputQuery(askedPlayer, "Bitte wähle einen Namen, Gültig sind a-Z, 0-9 und Leerzeichen");
                 if (_validation.ValidatePlayerName(userInput))
                 {
                     askedPlayer.Name = userInput;
@@ -114,9 +113,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuAskPlayerForDiffecultyLevel();            
 
             do
-            {
-                _queryDisplay.ShowInputQuery(askedPlayer);
-                string userInput = Console.ReadLine();
+            {                
+                string userInput = _queryDisplay.GetInputQuery(askedPlayer);
                 if (userInput == "1")
                 {
                     askedPlayer.MaximumDepth = 1;
@@ -174,8 +172,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 _playerO.Name = "HAL";
                 AskPlayerForDiffecultyLevel(_playerO);
             }
-        }       
-        
+        }               
 
         private void AskPlayerForHumanOrAI(IPlayer askedPlayer)
         {
@@ -183,9 +180,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuAskPlayerForHumanOrAi(askedPlayer);
             
             do
-            {
-                _queryDisplay.ShowInputQuery(askedPlayer);
-                string userInput = Console.ReadLine();
+            {                
+                string userInput = _queryDisplay.GetInputQuery(askedPlayer);
                 if (userInput == "1")
                 {
                     askedPlayer.IsHuman = true;
@@ -210,9 +206,8 @@ namespace NEUKO.TicTacToe.ConsoleClient
             _queryDisplay.ShowMenuAskForContinue();
             
             do
-            {
-                _queryDisplay.ShowInputQuery();
-                string userInput = Console.ReadLine();
+            {                
+                string userInput = _queryDisplay.GetInputQuery();
                 if (userInput == "1")
                 {
                     _getMainSettings = false;
@@ -259,9 +254,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
             } while (wrongInput);
 
             return areaID;
-        }
-
-        
+        }       
 
         private int GetAreaIDFromAimimax()
         {
