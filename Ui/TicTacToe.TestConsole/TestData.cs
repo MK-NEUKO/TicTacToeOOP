@@ -10,7 +10,7 @@ namespace NEUKO.TicTacToe.TestConsole
 
         public TestData()
         {
-
+            _testGameBoardList = new List<string>();
         }
 
         public List<string> TestGameBoardList { get => _testGameBoardList; set => _testGameBoardList = value; }
@@ -46,17 +46,51 @@ namespace NEUKO.TicTacToe.TestConsole
         {
             userInput = userInput.Replace(",", string.Empty);
             userInput = userInput.Replace('-', ' ');
-            Console.WriteLine(userInput);
+            foreach (char currentChar in userInput)
+            {
+                _testGameBoardList.Add(currentChar.ToString());
+            }                    
         }
 
         private void GetTestDataPlayer()
         {
+            Console.WriteLine();
             Console.WriteLine("Holen der TestPlayer");
         }
 
-        internal void ShowTestData()
+        public void ShowTestData()
         {
-            Console.WriteLine("Testdaten ausgeben");
+            int counter = 1;
+
+            Console.WriteLine();
+            Console.WriteLine("TestGameBoard:");
+            foreach (string item in _testGameBoardList)
+            {
+                switch (counter)
+                {
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
+                    case 7:
+                    case 8:
+                        Console.Write($"{item}|");
+                        break;
+                    case 3:
+                    case 6:
+                        Console.Write(item);
+                        Console.WriteLine("\n-+-+-");
+                        break;
+                    case 9:
+                        Console.Write(item);
+                        break;
+                    default:
+                        break;
+                }
+
+                counter++;
+            }
+            Console.WriteLine();
         }
     }
 }
