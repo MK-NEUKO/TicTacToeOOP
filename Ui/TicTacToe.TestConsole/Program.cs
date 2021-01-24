@@ -6,7 +6,7 @@ namespace NEUKO.TicTacToe.TestConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+
+        }            
     }
 }
