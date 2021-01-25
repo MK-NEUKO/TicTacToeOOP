@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NEUKO.TicTacToe.TestConsole
 {
@@ -7,11 +8,14 @@ namespace NEUKO.TicTacToe.TestConsole
         static void Main(string[] args)
         {
             // Objekte erstellen
-            TestData testDataSet = new TestData();
+            List<string> testGameBoard = new List<string>();
+            TestData testData = new TestData(testGameBoard);
+            MiniMax minimax = new MiniMax(testData);
             // Eingaben für die Testkonfiguration holen
-            testDataSet.GetTestData();
+            testData.GetTestData();
             // Testkonfiguraton Anzeigen
-            testDataSet.ShowTestData();
+            testData.ShowTestData();
+            Console.WriteLine($" Evatuate(): {minimax.Evaluate()}");
             // Test fahren, dabei den Suchbaum visualisieren.
 
             Console.ReadLine();

@@ -4,18 +4,18 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.TestConsole
 {
-    class TestData
+    public class TestData
     {
         private List<string> _testGameBoardList;
-        private string _testGameBoardAsString;
+        private string _testGameBoardInput;
         private string _searchDepth;
 
-        public TestData()
+        public TestData(List<string> testGameBoard)
         {
-            _testGameBoardList = new List<string>();
+            _testGameBoardList = testGameBoard;
         }
 
-        public List<string> TestGameBoardList { get => _testGameBoardList; set => _testGameBoardList = value; }
+        public List<string> TestGameBoardList { get => _testGameBoardList; }
 
         public void GetTestData()
         {
@@ -25,7 +25,7 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine(" Visuelle Darstellung eines Suchbaums im Spiel TicTacToe ");
             Console.ResetColor();
             TestDataInput();
-            KreateTestGameBoardList();
+            CreateTestGameBoardList();
         }        
 
         private void TestDataInput()
@@ -42,18 +42,18 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine(" Testdaten eingeben:");
             Console.WriteLine(" ----------------------------------------- ");
             Console.Write(" TestGameBoard: ");
-            _testGameBoardAsString = Console.ReadLine();
+            _testGameBoardInput = Console.ReadLine();
             Console.Write(" Suchtiefe: ");
             _searchDepth = Console.ReadLine();
             Console.WriteLine();   
         }
 
-        private void KreateTestGameBoardList()
+        private void CreateTestGameBoardList()
         {
-            _testGameBoardAsString = _testGameBoardAsString.ToUpper();
-            _testGameBoardAsString = _testGameBoardAsString.Replace(",", string.Empty);
-            _testGameBoardAsString = _testGameBoardAsString.Replace('-', ' ');
-            foreach (char currentChar in _testGameBoardAsString)
+            _testGameBoardInput = _testGameBoardInput.ToUpper();
+            _testGameBoardInput = _testGameBoardInput.Replace(",", string.Empty);
+            _testGameBoardInput = _testGameBoardInput.Replace('-', ' ');
+            foreach (char currentChar in _testGameBoardInput)
             {
                 _testGameBoardList.Add(currentChar.ToString());
             }                    
