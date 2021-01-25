@@ -8,6 +8,7 @@ namespace NEUKO.TicTacToe.TestConsole
     {
         private TestData _testData;
         private MiniMax _minimax;
+        private bool _repeatQuery = true;
 
         public VisualMiniMax(TestData testData, MiniMax minimax)
         {
@@ -23,8 +24,31 @@ namespace NEUKO.TicTacToe.TestConsole
                 _testData.GetTestData();
                 // Testkonfiguraton Anzeigen
                 _testData.ShowTestData();
+                Console.WriteLine();
                 Console.WriteLine($" Evatuate(): {_minimax.Evaluate()}");
-            } while (true);
+                AskForRepeat();
+
+            } while (_repeatQuery);
+        }
+
+        private void AskForRepeat()
+        {
+            string userInput = "";
+
+            Console.WriteLine();
+            Console.WriteLine(" Neuer Testlauf: 1 ");
+            Console.WriteLine(" Beenden.......: 2 ");
+            Console.Write(" Eingabe: ");
+            userInput = Console.ReadLine();
+            if (userInput == "1")
+            {
+                _repeatQuery = true;
+                Console.Clear();
+            }            
+                
+            if (userInput == "2")
+                _repeatQuery = false;
+            
         }
     }
 }
