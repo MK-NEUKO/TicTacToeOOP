@@ -7,6 +7,8 @@ namespace NEUKO.TicTacToe.TestConsole
     class TestData
     {
         private List<string> _testGameBoardList;
+        private string _testGameBoardAsString;
+        private string _searchDepth;
 
         public TestData()
         {
@@ -22,15 +24,14 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine("-------------------------------------------------------- ");
             Console.WriteLine(" Visuelle Darstellung eines Suchbaums im Spiel TicTacToe ");
             Console.ResetColor();
-            string userInput = GetTestDataGameBoard();
-            KreateTestGameBoardList(userInput);
-            GetTestDataPlayer();
+            TestDataInput();
+            KreateTestGameBoardList();
         }        
 
-        private string GetTestDataGameBoard()
+        private void TestDataInput()
         {
             Console.WriteLine();
-            Console.WriteLine("Eingabe der Testdaten:");
+            Console.WriteLine(" Eingabe der Testdaten:");
             Console.WriteLine();
             Console.WriteLine("  1|2|3                    X| |X");
             Console.WriteLine("  -+-+-                    -+-+-");
@@ -38,58 +39,36 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine("  -+-+-                    -+-+-");
             Console.WriteLine("  7|8|9                     |O|O");
             Console.WriteLine();
-            Console.WriteLine("Bitte gib das TestGameBoard in der gezeigten Reihenfolge ein.");
-            return Console.ReadLine();
+            Console.WriteLine(" Testdaten eingeben:");
+            Console.WriteLine(" ----------------------------------------- ");
+            Console.Write(" TestGameBoard: ");
+            _testGameBoardAsString = Console.ReadLine();
+            Console.Write(" Suchtiefe: ");
+            _searchDepth = Console.ReadLine();
+            Console.WriteLine();   
         }
 
-        private void KreateTestGameBoardList(string userInput)
+        private void KreateTestGameBoardList()
         {
-            userInput = userInput.Replace(",", string.Empty);
-            userInput = userInput.Replace('-', ' ');
-            foreach (char currentChar in userInput)
+            _testGameBoardAsString = _testGameBoardAsString.ToUpper();
+            _testGameBoardAsString = _testGameBoardAsString.Replace(",", string.Empty);
+            _testGameBoardAsString = _testGameBoardAsString.Replace('-', ' ');
+            foreach (char currentChar in _testGameBoardAsString)
             {
                 _testGameBoardList.Add(currentChar.ToString());
             }                    
         }
 
-        private void GetTestDataPlayer()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Holen der TestPlayer");
-        }
-
         public void ShowTestData()
         {
-            int counter = 1;
-
             Console.WriteLine();
-            Console.WriteLine("TestGameBoard:");
-            foreach (string item in _testGameBoardList)
-            {
-                switch (counter)
-                {
-                    case 1:
-                    case 2:
-                    case 4:
-                    case 5:
-                    case 7:
-                    case 8:
-                        Console.Write($"{item}|");
-                        break;
-                    case 3:
-                    case 6:
-                        Console.Write(item);
-                        Console.WriteLine("\n-+-+-");
-                        break;
-                    case 9:
-                        Console.Write(item);
-                        break;
-                    default:
-                        break;
-                }
-
-                counter++;
-            }
+            Console.WriteLine(" Folgende Testdaten wurden eingegeben:");
+            Console.WriteLine(" ----------------------------------------- ");
+            Console.WriteLine($"  {_testGameBoardList[0]}|{_testGameBoardList[1]}|{_testGameBoardList[2]}    Suchtiefe: {_searchDepth}");
+            Console.WriteLine("  -+-+- ");
+            Console.WriteLine($"  {_testGameBoardList[3]}|{_testGameBoardList[4]}|{_testGameBoardList[5]}");
+            Console.WriteLine("  -+-+- ");
+            Console.WriteLine($"  {_testGameBoardList[6]}|{_testGameBoardList[7]}|{_testGameBoardList[8]}");
             Console.WriteLine();
         }
     }
