@@ -11,12 +11,10 @@ namespace NEUKO.TicTacToe.TestConsole
             List<string> testGameBoard = new List<string>();
             TestData testData = new TestData(testGameBoard);
             MiniMax minimax = new MiniMax(testData);
-            // Eingaben für die Testkonfiguration holen
-            testData.GetTestData();
-            // Testkonfiguraton Anzeigen
-            testData.ShowTestData();
-            Console.WriteLine($" Evatuate(): {minimax.Evaluate()}");
+            VisualMiniMax visualMinimax = new VisualMiniMax(testData, minimax);
+
             // Test fahren, dabei den Suchbaum visualisieren.
+            visualMinimax.VisualizeMiniMaxAlgorithem();
 
             Console.ReadLine();
         }            
