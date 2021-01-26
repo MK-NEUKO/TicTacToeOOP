@@ -40,14 +40,42 @@ namespace NEUKO.TicTacToe.TestConsole
         {
             if (Evaluate() != _gameIsOpen)
                 return Evaluate();
+            int maximumValue = -1000;
             for (int index = 0; index < _testData.BoardAreas.Length; index++)
             {
                 if (_testData.BoardAreas[index] == ' ')
                 {
                     _testData.BoardAreas[index] = 'X';
+                    int minReturnValue = Min();
+                    if (minReturnValue > maximumValue)
+                    {
+                        maximumValue = minReturnValue;
+                    }
+                    _testData.BoardAreas[index] = ' ';
                 }
             }
-            return 42;
+            return maximumValue;
+        }
+
+        public int Min()
+        {
+            if (Evaluate() != _gameIsOpen)
+                return Evaluate();
+            int minimumValue = 1000;
+            for (int index = 0; index < _testData.BoardAreas.Length; index++)
+            {
+                if (_testData.BoardAreas[index] == ' ')
+                {
+                    _testData.BoardAreas[index] = 'O';
+                    int maxReturnValue = Max();
+                    if (maxReturnValue < minimumValue)
+                    {
+                        minimumValue = maxReturnValue;
+                    }
+                    _testData.BoardAreas[index] = ' ';
+                }
+            }
+            return minimumValue;
         }
 
         public int Evaluate()

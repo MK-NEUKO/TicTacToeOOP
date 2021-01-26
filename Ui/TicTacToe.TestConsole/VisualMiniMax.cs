@@ -26,7 +26,8 @@ namespace NEUKO.TicTacToe.TestConsole
                 _testData.ShowTestData();
                 Console.WriteLine();
                 Console.WriteLine($" Evatuate(): {_minimax.Evaluate()}");
-                _minimax.Max();
+                Console.WriteLine($" Min().....: {_minimax.Min()}");
+                Console.WriteLine($" Max().....: {_minimax.Max()}");
                 AskForRepeat();
 
             } while (_repeatQuery);
