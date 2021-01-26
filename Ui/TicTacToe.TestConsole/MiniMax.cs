@@ -34,15 +34,29 @@ namespace NEUKO.TicTacToe.TestConsole
                 {0,4,8}, /*  +---+---+---+  */
                 {2,4,6},
             };
+        }       
+
+        public int Max()
+        {
+            if (Evaluate() != _gameIsOpen)
+                return Evaluate();
+            for (int index = 0; index < _testData.BoardAreas.Length; index++)
+            {
+                if (_testData.BoardAreas[index] == ' ')
+                {
+                    _testData.BoardAreas[index] = 'X';
+                }
+            }
+            return 42;
         }
 
         public int Evaluate()
         {
             for (int i = 0; i < _winConstellation.GetLength(0); i++)
             {
-                string actualContent = _testData.TestGameBoardList[_winConstellation[i, 0]];
-                actualContent += _testData.TestGameBoardList[_winConstellation[i, 1]];
-                actualContent += _testData.TestGameBoardList[_winConstellation[i, 2]];
+                string actualContent = _testData.BoardAreas[_winConstellation[i, 0]].ToString();
+                actualContent += _testData.BoardAreas[_winConstellation[i, 1]].ToString();
+                actualContent += _testData.BoardAreas[_winConstellation[i, 2]].ToString();
 
                 if (actualContent == "XXX")
                     return _playerXIsWinner;
@@ -50,9 +64,9 @@ namespace NEUKO.TicTacToe.TestConsole
                 if (actualContent == "OOO")
                     return _playerOIsWinner;
             }
-            foreach (var listItem in _testData.TestGameBoardList)
+            foreach (var area in _testData.BoardAreas)
             {
-                if (listItem == " ")
+                if (area == ' ')
                     return _gameIsOpen;
             }
             return _gameIsTie;

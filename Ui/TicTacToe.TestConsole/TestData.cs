@@ -6,16 +6,16 @@ namespace NEUKO.TicTacToe.TestConsole
 {
     public class TestData
     {
-        private List<string> _testGameBoardList;
+        private char [] _boardAreas;
         private string _testGameBoardInput;
         private string _searchDepth;
 
-        public TestData(List<string> testGameBoard)
+        public TestData()
         {
-            _testGameBoardList = testGameBoard;
+            _boardAreas = new char[9];
         }
 
-        public List<string> TestGameBoardList { get => _testGameBoardList; }
+        public char[] BoardAreas { get => _boardAreas; }
 
         public void GetTestData()
         {
@@ -53,10 +53,10 @@ namespace NEUKO.TicTacToe.TestConsole
             _testGameBoardInput = _testGameBoardInput.ToUpper();
             _testGameBoardInput = _testGameBoardInput.Replace(",", string.Empty);
             _testGameBoardInput = _testGameBoardInput.Replace('-', ' ');
-            foreach (char currentChar in _testGameBoardInput)
+            for (int index = 0; index < _boardAreas.Length; index++)
             {
-                _testGameBoardList.Add(currentChar.ToString());
-            }                    
+                _boardAreas[index] = _testGameBoardInput[index];
+            }
         }
 
         public void ShowTestData()
@@ -64,11 +64,11 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine();
             Console.WriteLine(" Folgende Testdaten wurden eingegeben:");
             Console.WriteLine(" ----------------------------------------- ");
-            Console.WriteLine($"  {_testGameBoardList[0]}|{_testGameBoardList[1]}|{_testGameBoardList[2]}    Suchtiefe: {_searchDepth}");
+            Console.WriteLine($"  {_boardAreas[0]}|{_boardAreas[1]}|{_boardAreas[2]}    Suchtiefe: {_searchDepth}");
             Console.WriteLine("  -+-+- ");
-            Console.WriteLine($"  {_testGameBoardList[3]}|{_testGameBoardList[4]}|{_testGameBoardList[5]}");
+            Console.WriteLine($"  {_boardAreas[3]}|{_boardAreas[4]}|{_boardAreas[5]}");
             Console.WriteLine("  -+-+- ");
-            Console.WriteLine($"  {_testGameBoardList[6]}|{_testGameBoardList[7]}|{_testGameBoardList[8]}");
+            Console.WriteLine($"  {_boardAreas[6]}|{_boardAreas[7]}|{_boardAreas[8]}");
             Console.WriteLine();
         }
     }

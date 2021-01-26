@@ -8,8 +8,7 @@ namespace NEUKO.TicTacToe.TestConsole
         static void Main(string[] args)
         {
             // Objekte erstellen
-            List<string> testGameBoard = new List<string>();
-            TestData testData = new TestData(testGameBoard);
+            TestData testData = new TestData();
             MiniMax minimax = new MiniMax(testData);
             VisualMiniMax visualMinimax = new VisualMiniMax(testData, minimax);
 
