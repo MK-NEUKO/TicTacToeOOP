@@ -45,9 +45,12 @@ namespace NEUKO.TicTacToe.TestConsole
             if (Evaluate() != _gameIsOpen)
                 return Evaluate();
 
+            int maximumValue = -1000;
+            int minimumValue = 1000;
+
             if (player == 'X')
             {
-                int maximumValue = -1000;
+                
                 for (int index = 0; index < _testData.BoardAreas.Length; index++)
                 {
                     if (_testData.BoardAreas[index] == ' ')
@@ -62,12 +65,12 @@ namespace NEUKO.TicTacToe.TestConsole
                         _testData.BoardAreas[index] = ' ';
                     }
                 }
-                return maximumValue;
+                return minimumValue;
             }
 
             if (player == 'O')
             {
-                int minimumValue = 1000;
+                
                 for (int index = 0; index < _testData.BoardAreas.Length; index++)
                 {
                     if (_testData.BoardAreas[index] == ' ')
@@ -82,9 +85,9 @@ namespace NEUKO.TicTacToe.TestConsole
                         _testData.BoardAreas[index] = ' ';
                     }
                 }
-                return minimumValue;
+                return maximumValue;
             }
-            return 8888;
+            return 888; 
         }
 
         public int Max()
