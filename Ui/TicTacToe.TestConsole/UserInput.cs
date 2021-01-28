@@ -4,20 +4,21 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.TestConsole
 {
-    public class TestDateInput
+    public class UserInput
     {
         private char [] _boardAreas;
         private string _testGameBoardInput;
         private string _searchDepth;
-        private string _nextPlayer;
+        private char _nextPlayer;
+        private string _nextPlayerUserInput;
 
-        public TestDateInput()
+        public UserInput()
         {
             _boardAreas = new char[9];
         }
 
         public char[] BoardAreas { get => _boardAreas; }
-        public string NextPlayer{ get => _nextPlayer; }
+        public char NextPlayer{ get => _nextPlayer; }
         public string SearchDepth { get => _searchDepth; }
 
         public void GetTestData()
@@ -49,7 +50,7 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.Write(" Suchtiefe....: ");
             _searchDepth = Console.ReadLine();
             Console.Write(" Nächster Zug.: ");
-            _nextPlayer = Console.ReadLine();
+            _nextPlayerUserInput = Console.ReadLine();
             Console.WriteLine();   
         }
 
@@ -63,7 +64,8 @@ namespace NEUKO.TicTacToe.TestConsole
                 _boardAreas[index] = _testGameBoardInput[index];
             }
 
-            _nextPlayer = _nextPlayer.ToUpper();
+            _nextPlayerUserInput = _nextPlayerUserInput.ToUpper();
+            _nextPlayer = Convert.ToChar(_nextPlayerUserInput);
         }
 
         public void ShowTestData()

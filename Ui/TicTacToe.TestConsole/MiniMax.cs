@@ -12,7 +12,7 @@ namespace NEUKO.TicTacToe.TestConsole
         // definiere 0 für Unentschieden.
         // definiere 1 für alles offen.
 
-        private TestDateInput  _testData;
+        private UserInput  _testData;
         private const int _playerXIsWinner = 10;
         private const int _playerOIsWinner = -10;
         private const int _gameIsTie = 0;
@@ -24,7 +24,7 @@ namespace NEUKO.TicTacToe.TestConsole
         public int NextMoveX { get => _nextMoveX; }
         public int NextMoveO { get => _nextMoveO; }
 
-        public MiniMax(TestDateInput testData)
+        public MiniMax(UserInput testData)
         {
             _testData = testData;
             _winConstellation = new int[8, 3]
@@ -40,15 +40,13 @@ namespace NEUKO.TicTacToe.TestConsole
             };
         }
         
-        public int NextMove(string player)
+        public int NextMove(char player)
         {
             if (Evaluate() != _gameIsOpen)
                 return Evaluate();
 
-            if (player == "X")
+            if (player == 'X')
             {
-                if (Evaluate() != _gameIsOpen)
-                    return Evaluate();
                 int maximumValue = -1000;
                 for (int index = 0; index < _testData.BoardAreas.Length; index++)
                 {
@@ -67,7 +65,7 @@ namespace NEUKO.TicTacToe.TestConsole
                 return maximumValue;
             }
 
-            if (player == "O")
+            if (player == 'O')
             {
                 int minimumValue = 1000;
                 for (int index = 0; index < _testData.BoardAreas.Length; index++)
@@ -86,7 +84,7 @@ namespace NEUKO.TicTacToe.TestConsole
                 }
                 return minimumValue;
             }
-            return 100;
+            return 8888;
         }
 
         public int Max()
