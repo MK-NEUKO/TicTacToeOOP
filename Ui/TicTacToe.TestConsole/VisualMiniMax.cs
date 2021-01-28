@@ -6,13 +6,13 @@ namespace NEUKO.TicTacToe.TestConsole
 {
     public class VisualMiniMax
     {
-        private TestData _testData;
+        private TestDateInput _testDataInput;
         private MiniMax _minimax;
         private bool _repeatQuery = true;
 
-        public VisualMiniMax(TestData testData, MiniMax minimax)
+        public VisualMiniMax(TestDateInput testDataInput, MiniMax minimax)
         {
-            _testData = testData;
+            _testDataInput = testDataInput;
             _minimax = minimax;
         }
 
@@ -20,14 +20,16 @@ namespace NEUKO.TicTacToe.TestConsole
         {
             do
             {
-                // Eingaben für die Testkonfiguration holen
-                _testData.GetTestData();
+                // Eingaben für die Testkonfiguration holen.
+                _testDataInput.GetTestData();
                 // Testkonfiguraton Anzeigen
-                _testData.ShowTestData();
+                _testDataInput.ShowTestData();
+                // Testdaten werde´n ausgegeben.
                 Console.WriteLine();
-                Console.WriteLine($" Evatuate(): {_minimax.Evaluate()}");
-                Console.WriteLine($" Min().....: {_minimax.Min()}");
-                Console.WriteLine($" Max().....: {_minimax.Max()}");
+                Console.WriteLine($" Evatuate()...: {_minimax.Evaluate()}");        
+                Console.WriteLine($" Zugbewertung.: {_minimax.NextMove(_testDataInput.NextPlayer)}");
+                Console.WriteLine($" ZugO.........: {_minimax.NextMoveO}");
+                Console.WriteLine($" ZugX.........: {_minimax.NextMoveX}");
                 AskForRepeat();
 
             } while (_repeatQuery);

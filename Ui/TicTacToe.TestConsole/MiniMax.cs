@@ -12,15 +12,19 @@ namespace NEUKO.TicTacToe.TestConsole
         // definiere 0 für Unentschieden.
         // definiere 1 für alles offen.
 
-        private TestData  _testData;
+        private TestDateInput  _testData;
         private const int _playerXIsWinner = 10;
         private const int _playerOIsWinner = -10;
         private const int _gameIsTie = 0;
         private const int _gameIsOpen = 1;
+        private int _nextMoveX;
+        private int _nextMoveO;
         private readonly int[,] _winConstellation;
 
+        public int NextMoveX { get => _nextMoveX; }
+        public int NextMoveO { get => _nextMoveO; }
 
-        public MiniMax(TestData testData)
+        public MiniMax(TestDateInput testData)
         {
             _testData = testData;
             _winConstellation = new int[8, 3]
@@ -34,7 +38,56 @@ namespace NEUKO.TicTacToe.TestConsole
                 {0,4,8}, /*  +---+---+---+  */
                 {2,4,6},
             };
-        }       
+        }
+        
+        public int NextMove(string player)
+        {
+            if (Evaluate() != _gameIsOpen)
+                return Evaluate();
+
+            if (player == "X")
+            {
+                if (Evaluate() != _gameIsOpen)
+                    return Evaluate();
+                int maximumValue = -1000;
+                for (int index = 0; index < _testData.BoardAreas.Length; index++)
+                {
+                    if (_testData.BoardAreas[index] == ' ')
+                    {
+                        _testData.BoardAreas[index] = 'X';
+                        int minReturnValue = Min();
+                        if (minReturnValue > maximumValue)
+                        {
+                            maximumValue = minReturnValue;
+                            _nextMoveX = index;
+                        }
+                        _testData.BoardAreas[index] = ' ';
+                    }
+                }
+                return maximumValue;
+            }
+
+            if (player == "O")
+            {
+                int minimumValue = 1000;
+                for (int index = 0; index < _testData.BoardAreas.Length; index++)
+                {
+                    if (_testData.BoardAreas[index] == ' ')
+                    {
+                        _testData.BoardAreas[index] = 'O';
+                        int maxReturnValue = Max();
+                        if (maxReturnValue < minimumValue)
+                        {
+                            minimumValue = maxReturnValue;
+                            _nextMoveO = index;
+                        }
+                        _testData.BoardAreas[index] = ' ';
+                    }
+                }
+                return minimumValue;
+            }
+            return 100;
+        }
 
         public int Max()
         {
@@ -49,7 +102,7 @@ namespace NEUKO.TicTacToe.TestConsole
                     int minReturnValue = Min();
                     if (minReturnValue > maximumValue)
                     {
-                        maximumValue = minReturnValue;
+                        maximumValue = minReturnValue;                       
                     }
                     _testData.BoardAreas[index] = ' ';
                 }

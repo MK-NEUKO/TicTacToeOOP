@@ -4,18 +4,21 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.TestConsole
 {
-    public class TestData
+    public class TestDateInput
     {
         private char [] _boardAreas;
         private string _testGameBoardInput;
         private string _searchDepth;
+        private string _nextPlayer;
 
-        public TestData()
+        public TestDateInput()
         {
             _boardAreas = new char[9];
         }
 
         public char[] BoardAreas { get => _boardAreas; }
+        public string NextPlayer{ get => _nextPlayer; }
+        public string SearchDepth { get => _searchDepth; }
 
         public void GetTestData()
         {
@@ -33,18 +36,20 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine();
             Console.WriteLine(" Eingabe der Testdaten:");
             Console.WriteLine();
-            Console.WriteLine("  1|2|3                    X| |X");
+            Console.WriteLine("  0|1|2                    X| |X");
             Console.WriteLine("  -+-+-                    -+-+-");
-            Console.WriteLine("  4|5|6    Zum Beispiel    X|O|     =>  <X,-,X,X,O,-,-,O,O>");
+            Console.WriteLine("  3|4|5    Zum Beispiel    X|O|     =>  <X-X,XO-,-OO>");
             Console.WriteLine("  -+-+-                    -+-+-");
-            Console.WriteLine("  7|8|9                     |O|O");
+            Console.WriteLine("  6|7|8                     |O|O");
             Console.WriteLine();
             Console.WriteLine(" Testdaten eingeben:");
             Console.WriteLine(" ----------------------------------------- ");
             Console.Write(" TestGameBoard: ");
             _testGameBoardInput = Console.ReadLine();
-            Console.Write(" Suchtiefe: ");
+            Console.Write(" Suchtiefe....: ");
             _searchDepth = Console.ReadLine();
+            Console.Write(" Nächster Zug.: ");
+            _nextPlayer = Console.ReadLine();
             Console.WriteLine();   
         }
 
@@ -57,6 +62,8 @@ namespace NEUKO.TicTacToe.TestConsole
             {
                 _boardAreas[index] = _testGameBoardInput[index];
             }
+
+            _nextPlayer = _nextPlayer.ToUpper();
         }
 
         public void ShowTestData()
@@ -64,8 +71,8 @@ namespace NEUKO.TicTacToe.TestConsole
             Console.WriteLine();
             Console.WriteLine(" Folgende Testdaten wurden eingegeben:");
             Console.WriteLine(" ----------------------------------------- ");
-            Console.WriteLine($"  {_boardAreas[0]}|{_boardAreas[1]}|{_boardAreas[2]}    Suchtiefe: {_searchDepth}");
-            Console.WriteLine("  -+-+- ");
+            Console.WriteLine($"  {_boardAreas[0]}|{_boardAreas[1]}|{_boardAreas[2]}    Suchtiefe...: {_searchDepth}");
+            Console.WriteLine($"  -+-+-    Nächster Zug: {_nextPlayer}");
             Console.WriteLine($"  {_boardAreas[3]}|{_boardAreas[4]}|{_boardAreas[5]}");
             Console.WriteLine("  -+-+- ");
             Console.WriteLine($"  {_boardAreas[6]}|{_boardAreas[7]}|{_boardAreas[8]}");

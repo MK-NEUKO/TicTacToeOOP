@@ -8,9 +8,9 @@ namespace NEUKO.TicTacToe.TestConsole
         static void Main(string[] args)
         {
             // Objekte erstellen
-            TestData testData = new TestData();
-            MiniMax minimax = new MiniMax(testData);
-            VisualMiniMax visualMinimax = new VisualMiniMax(testData, minimax);
+            TestDateInput testDataInput = new TestDateInput();
+            MiniMax minimax = new MiniMax(testDataInput);
+            VisualMiniMax visualMinimax = new VisualMiniMax(testDataInput, minimax);
 
             // Test fahren, dabei den Suchbaum visualisieren.
             visualMinimax.VisualizeMiniMaxAlgorithem();
