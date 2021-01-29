@@ -23,6 +23,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.WPFClient", "Ui\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Core.Test", "Test\TicTacToe.Core.Test\TicTacToe.Core.Test.csproj", "{56A0B642-DECC-4285-A67D-760F8FC83A0F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report_TicTacTorCoreTest", "Report_TicTacTorCoreTest", "{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67}"
+	ProjectSection(SolutionItems) = preProject
+		_Shared\Report_TicTacToeCoreTest\class.js = _Shared\Report_TicTacToeCoreTest\class.js
+		_Shared\Report_TicTacToeCoreTest\icon_cube.svg = _Shared\Report_TicTacToeCoreTest\icon_cube.svg
+		_Shared\Report_TicTacToeCoreTest\icon_down-dir_active.svg = _Shared\Report_TicTacToeCoreTest\icon_down-dir_active.svg
+		_Shared\Report_TicTacToeCoreTest\icon_fork.svg = _Shared\Report_TicTacToeCoreTest\icon_fork.svg
+		_Shared\Report_TicTacToeCoreTest\icon_info-circled.svg = _Shared\Report_TicTacToeCoreTest\icon_info-circled.svg
+		_Shared\Report_TicTacToeCoreTest\icon_minus.svg = _Shared\Report_TicTacToeCoreTest\icon_minus.svg
+		_Shared\Report_TicTacToeCoreTest\icon_plus.svg = _Shared\Report_TicTacToeCoreTest\icon_plus.svg
+		_Shared\Report_TicTacToeCoreTest\icon_search-minus.svg = _Shared\Report_TicTacToeCoreTest\icon_search-minus.svg
+		_Shared\Report_TicTacToeCoreTest\icon_search-plus.svg = _Shared\Report_TicTacToeCoreTest\icon_search-plus.svg
+		_Shared\Report_TicTacToeCoreTest\icon_sponsor.svg = _Shared\Report_TicTacToeCoreTest\icon_sponsor.svg
+		_Shared\Report_TicTacToeCoreTest\icon_star.svg = _Shared\Report_TicTacToeCoreTest\icon_star.svg
+		_Shared\Report_TicTacToeCoreTest\icon_up-dir.svg = _Shared\Report_TicTacToeCoreTest\icon_up-dir.svg
+		_Shared\Report_TicTacToeCoreTest\icon_up-dir_active.svg = _Shared\Report_TicTacToeCoreTest\icon_up-dir_active.svg
+		_Shared\Report_TicTacToeCoreTest\icon_wrench.svg = _Shared\Report_TicTacToeCoreTest\icon_wrench.svg
+		_Shared\Report_TicTacToeCoreTest\index.htm = _Shared\Report_TicTacToeCoreTest\index.htm
+		_Shared\Report_TicTacToeCoreTest\index.html = _Shared\Report_TicTacToeCoreTest\index.html
+		_Shared\Report_TicTacToeCoreTest\main.js = _Shared\Report_TicTacToeCoreTest\main.js
+		_Shared\Report_TicTacToeCoreTest\report.css = _Shared\Report_TicTacToeCoreTest\report.css
+		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_AI.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_AI.html
+		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_GameBoard.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_GameBoard.html
+		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_GameBoardArea.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_GameBoardArea.html
+		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_Player.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_Player.html
+		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +86,7 @@ Global
 		{0B00AF9B-534A-4A26-8C54-AD8EDF87A531} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F} = {7E01E8A4-3BD8-43D9-9783-037BACE16646}
+		{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67} = {5918CD42-DEB8-430C-9E5A-495CCC6A1C3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}
