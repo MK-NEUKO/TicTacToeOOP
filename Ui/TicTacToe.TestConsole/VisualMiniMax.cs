@@ -26,11 +26,13 @@ namespace NEUKO.TicTacToe.TestConsole
                 _userInput.ShowTestData();
                 // Testdaten werde´n ausgegeben.
                 Console.WriteLine();
-                Console.WriteLine($" Evatuate().: {_minimax.Evaluate()}");
-                //Console.WriteLine($" NextMove().: {_minimax.NextMove(_userInput.NextPlayer)}");
-                _minimax.NextMove(_userInput.NextPlayer);
-                Console.WriteLine($" ZugO.......: {_minimax.NextMoveO}");
-                Console.WriteLine($" ZugX.......: {_minimax.NextMoveX}");
+                Console.WriteLine($" Evatuate()...: {_minimax.Evaluate()}");
+                Console.WriteLine($" Min()........: {_minimax.Min()}");
+                Console.WriteLine($" Max()........: {_minimax.Max()}");
+                _minimax.NextMoveForO();
+                Console.WriteLine($" NextMoveForO.: {_minimax.NextMoveO}");
+                _minimax.NextMoveForX();
+                Console.WriteLine($" NextMoveForX.: {_minimax.NextMoveX}");
                 AskForRepeat();
 
             } while (_repeatQuery);

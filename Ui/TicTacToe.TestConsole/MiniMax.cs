@@ -39,55 +39,49 @@ namespace NEUKO.TicTacToe.TestConsole
                 {2,4,6},
             };
         }
-        
-        public int NextMove(char player)
+
+        public int NextMoveForX()
         {
             if (Evaluate() != _gameIsOpen)
                 return Evaluate();
-
             int maximumValue = -1000;
+            for (int index = 0; index < _testData.BoardAreas.Length; index++)
+            {
+                if (_testData.BoardAreas[index] == ' ')
+                {
+                    _testData.BoardAreas[index] = 'X';
+                    int minReturnValue = Min();
+                    if (minReturnValue > maximumValue)
+                    {
+                        maximumValue = minReturnValue;
+                        _nextMoveX = index;
+                    }
+                    _testData.BoardAreas[index] = ' ';
+                }
+            }
+            return maximumValue;
+        }
+
+        public int NextMoveForO()
+        {
+            if (Evaluate() != _gameIsOpen)
+                return Evaluate();
             int minimumValue = 1000;
-
-            if (player == 'X')
+            for (int index = 0; index < _testData.BoardAreas.Length; index++)
             {
-                
-                for (int index = 0; index < _testData.BoardAreas.Length; index++)
+                if (_testData.BoardAreas[index] == ' ')
                 {
-                    if (_testData.BoardAreas[index] == ' ')
+                    _testData.BoardAreas[index] = 'O';
+                    int maxReturnValue = Max();
+                    if (maxReturnValue < minimumValue)
                     {
-                        _testData.BoardAreas[index] = 'X';
-                        int minReturnValue = Min();
-                        if (minReturnValue > maximumValue)
-                        {
-                            maximumValue = minReturnValue;
-                            _nextMoveX = index;
-                        }
-                        _testData.BoardAreas[index] = ' ';
+                        minimumValue = maxReturnValue;
+                        _nextMoveO = index;
                     }
+                    _testData.BoardAreas[index] = ' ';
                 }
-                return minimumValue;
             }
-
-            if (player == 'O')
-            {
-                
-                for (int index = 0; index < _testData.BoardAreas.Length; index++)
-                {
-                    if (_testData.BoardAreas[index] == ' ')
-                    {
-                        _testData.BoardAreas[index] = 'O';
-                        int maxReturnValue = Max();
-                        if (maxReturnValue < minimumValue)
-                        {
-                            minimumValue = maxReturnValue;
-                            _nextMoveO = index;
-                        }
-                        _testData.BoardAreas[index] = ' ';
-                    }
-                }
-                return maximumValue;
-            }
-            return 888; 
+            return minimumValue;
         }
 
         public int Max()
