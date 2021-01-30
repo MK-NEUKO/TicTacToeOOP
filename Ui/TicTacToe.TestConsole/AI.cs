@@ -6,7 +6,7 @@ using System.Text;
 namespace NEUKO.TicTacToe.TestConsole
 {
     public class AI
-    {
+    {                               
         private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
         private IPlayer _playerX;
