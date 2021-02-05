@@ -12,7 +12,7 @@ namespace NEUKO.TicTacToe.TestConsole
         private IPlayer _playerX;
         private IPlayer _playerO;
         private readonly int[,] _winConstellation;
-        private readonly double[] _boardAreaFineValue;
+        //private readonly double[] _boardAreaFineValue;
         private const int _xIsWinner = 1;
         private const int _oIsWinner = -1;
         private const int _gameIsTie = 0;
@@ -43,12 +43,12 @@ namespace NEUKO.TicTacToe.TestConsole
                 {2,4,6},
             };
 
-            _boardAreaFineValue = new double[9]
-            {
-                0.03,0.02,0.03,
-                0.02,0.04,0.02,
-                0.03,0.02,0.03
-            };
+            //_boardAreaFineValue = new double[9]
+            //{
+            //    0.03,0.02,0.03,
+            //    0.02,0.04,0.02,
+            //    0.03,0.02,0.03
+            //};
         }
 
         public int AreaIDForO { get => _areaIDForO; }
@@ -71,8 +71,8 @@ namespace NEUKO.TicTacToe.TestConsole
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (depth == 0)
-                return EvaluateBoardAreas();
+            //if (depth == 0)
+            //    return EvaluateBoardAreas();
 
             foreach (GameBoardArea area in _evaluationList)
             {
@@ -98,8 +98,8 @@ namespace NEUKO.TicTacToe.TestConsole
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (depth == 0)
-                return EvaluateBoardAreas();
+            //if (depth == 0)
+            //    return EvaluateBoardAreas();
 
             foreach (GameBoardArea area in _evaluationList)
             {
@@ -145,19 +145,19 @@ namespace NEUKO.TicTacToe.TestConsole
             return _gameIsTie;
         }
 
-        private double EvaluateBoardAreas()
-        {
-            double value = 0;
-            int index = 0;
-            foreach (GameBoardArea area in _evaluationList)
-            {
-                if (area.Area == "O")
-                    value -= _boardAreaFineValue[index];
-                if (area.Area == "X")
-                    value += _boardAreaFineValue[index];
-                index++;
-            }
-            return value;
-        }
+        //private double EvaluateBoardAreas()
+        //{
+        //    double value = 0;
+        //    int index = 0;
+        //    foreach (GameBoardArea area in _evaluationList)
+        //    {
+        //        if (area.Area == "O")
+        //            value -= _boardAreaFineValue[index];
+        //        if (area.Area == "X")
+        //            value += _boardAreaFineValue[index];
+        //        index++;
+        //    }
+        //    return value;
+        //}
     }
 }
