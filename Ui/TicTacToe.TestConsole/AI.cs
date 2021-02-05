@@ -18,7 +18,12 @@ namespace NEUKO.TicTacToe.TestConsole
         private const int _gameIsTie = 0;
         private const int _gameIsOpen = -2;
         private int _areaIDForX;
-        private int _areaIDForO;       
+        private int _areaIDForO;
+
+        public AI()
+        {
+
+        }
         
         public AI(IList<GameBoardArea> evaluationList, IGameBoard board, IPlayer playerX, IPlayer playerO)
         {

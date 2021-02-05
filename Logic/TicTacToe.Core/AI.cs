@@ -45,6 +45,10 @@ namespace NEUKO.TicTacToe.Core
             };
         }
 
+        public AI()
+        {
+        }
+
         public int AreaIDForO { get => _areaIDForO; }
         public int AreaIDForX { get => _areaIDForX; }
        
