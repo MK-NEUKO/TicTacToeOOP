@@ -11,7 +11,7 @@ namespace NEUKO.TicTacToe.Core
         private IPlayer _playerX;
         private IPlayer _playerO;
         private readonly int[,] _winConstellation;
-        private readonly double[] _boardAreaFineValue;
+        //private readonly double[] _boardAreaFineValue;
         private const int _xIsWinner = 1;
         private const int _oIsWinner = -1;
         private const int _gameIsTie = 0;
@@ -37,12 +37,12 @@ namespace NEUKO.TicTacToe.Core
                 {2,4,6},
             };
 
-            _boardAreaFineValue = new double[9]
-            {
-                0.03,0.02,0.03,
-                0.02,0.04,0.02,
-                0.03,0.02,0.03
-            };
+            //_boardAreaFineValue = new double[9]
+            //{
+            //    0.03,0.02,0.03,
+            //    0.02,0.04,0.02,
+            //    0.03,0.02,0.03
+            //};
         }
 
         public AI()
@@ -59,64 +59,100 @@ namespace NEUKO.TicTacToe.Core
             _areaIDForO = -1;
 
             if(_playerX.InAction)
-                Max(_playerX.MaximumDepth, int.MinValue, int.MaxValue);
+                GetMoveForPlayerX();
             if(_playerO.InAction)
-                Min(_playerO.MaximumDepth, int.MinValue, int.MaxValue);
+                GetMoveForPlayerO();
         }
 
-
-        private double Max(int depth, double alpha, double beta)
+        private int GetMoveForPlayerX()
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (depth == 0)
-                return EvaluateBoardAreas();
 
+            int maximumValue = int.MinValue;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    double min = Min(depth - 1, alpha, beta);
+                    int returnMinValue = Min();
                     area.Area = " ";
-                    if (min > alpha)
+                    if (returnMinValue > maximumValue)
                     {
-                        alpha = min;
-                        if(depth == _playerX.MaximumDepth)
-                            _areaIDForX = area.AreaID;
-                    }                        
-                    if (alpha >= beta)
-                        return beta;
+                        maximumValue = returnMinValue;
+                        _areaIDForX = area.AreaID;
+                    }
                 }
             }
-            return alpha;
+            return maximumValue;
         }
 
-        private double Min(int depth, double alpha, double beta)
+        private int GetMoveForPlayerO()
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (depth == 0)
-                return EvaluateBoardAreas();
 
+            int minmumValue = int.MaxValue;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    double max = Max(depth - 1, alpha, beta);
+                    int returnMaxValue = Max();
                     area.Area = " ";
-                    if (max < beta)
+                    if (returnMaxValue < minmumValue)
                     {
-                        beta = max;
-                        if (depth == _playerO.MaximumDepth)
-                            _areaIDForO = area.AreaID;
-                    }                        
-                    if (beta <= alpha)
-                        return alpha;
+                        minmumValue = returnMaxValue;
+                        _areaIDForO = area.AreaID;
+                    }
                 }
             }
-            return beta;
+            return minmumValue;
+        }
+
+
+        private int Max()
+        {
+            if (EvaluateGameBoard() != _gameIsOpen)
+                return EvaluateGameBoard();
+
+            int maximumValue = int.MinValue;
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "X";
+                    int returnMinValue = Min();
+                    area.Area = " ";
+                    if (returnMinValue > maximumValue)
+                    {
+                        maximumValue = returnMinValue;
+                    }                                        
+                }
+            }
+            return maximumValue;
+        }
+
+        private int Min()
+        {
+            if (EvaluateGameBoard() != _gameIsOpen)
+                return EvaluateGameBoard();
+
+            int minmumValue = int.MaxValue;
+            foreach (GameBoardArea area in _evaluationList)
+            {
+                if (area.Area == " ")
+                {
+                    area.Area = "O";
+                    int returnMaxValue = Max();
+                    area.Area = " ";
+                    if (returnMaxValue < minmumValue)
+                    {
+                        minmumValue = returnMaxValue;
+                    }                        
+                }
+            }
+            return minmumValue;
         }
 
         
@@ -143,19 +179,19 @@ namespace NEUKO.TicTacToe.Core
             return _gameIsTie;
         }
 
-        private double EvaluateBoardAreas()
-        {
-            double value = 0;
-            int index = 0;
-            foreach (GameBoardArea area in _evaluationList)
-            {
-                if (area.Area == "O")
-                    value -= _boardAreaFineValue[index];
-                if (area.Area == "X")
-                    value += _boardAreaFineValue[index];
-                index++;
-            }
-            return value;
-        }
+        //private double EvaluateBoardAreas()
+        //{
+        //    double value = 0;
+        //    int index = 0;
+        //    foreach (GameBoardArea area in _evaluationList)
+        //    {
+        //        if (area.Area == "O")
+        //            value -= _boardAreaFineValue[index];
+        //        if (area.Area == "X")
+        //            value += _boardAreaFineValue[index];
+        //        index++;
+        //    }
+        //    return value;
+        //}
     }
 }
