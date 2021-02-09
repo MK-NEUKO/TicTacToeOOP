@@ -69,22 +69,23 @@ namespace NEUKO.TicTacToe.Core
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
 
-            int maximumValue = int.MinValue;
+            int alpha = int.MinValue;
+            int beta = int.MaxValue;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    int returnMinValue = Min(maximumDepth);
+                    int returnMinValue = Min(maximumDepth, alpha, beta);
                     area.Area = " ";
-                    if (returnMinValue > maximumValue)
+                    if (returnMinValue > alpha)
                     {
-                        maximumValue = returnMinValue;
+                        alpha = returnMinValue;
                         _areaIDForX = area.AreaID;
                     }
                 }
             }
-            return maximumValue;
+            return alpha;
         }
 
         private int GetMoveForPlayerO(int maximumDepth)
@@ -92,71 +93,70 @@ namespace NEUKO.TicTacToe.Core
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
 
-            int minmumValue = int.MaxValue;
+            int alpha = int.MinValue;
+            int beta = int.MaxValue;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    int returnMaxValue = Max(maximumDepth);
+                    int returnMaxValue = Max(maximumDepth, alpha, beta);
                     area.Area = " ";
-                    if (returnMaxValue < minmumValue)
+                    if (returnMaxValue < beta)
                     {
-                        minmumValue = returnMaxValue;
+                        beta = returnMaxValue;
                         _areaIDForO = area.AreaID;
                     }
                 }
             }
-            return minmumValue;
+            return beta;
         }
 
 
-        private int Max(int maximumDepth)
+        private int Max(int maximumDepth, int alpha, int beta)
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (maximumDepth == 0 && (_playerX.MaximumDepth == 2 || _playerO.MaximumDepth == 2))
+            if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
 
-            int maximumValue = int.MinValue;
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "X";
-                    int returnMinValue = Min(maximumDepth - 1);
+                    int returnMinValue = Min(maximumDepth - 1, alpha, beta);                    
+                    if (returnMinValue > alpha)               
+                        alpha = returnMinValue;
                     area.Area = " ";
-                    if (returnMinValue > maximumValue)
-                    {
-                        maximumValue = returnMinValue;
-                    }                                        
+                    if (alpha >= beta)
+                        return beta;
                 }
             }
-            return maximumValue;
+            return alpha;
         }
 
-        private int Min(int maximumDepth)
+        private int Min(int maximumDepth, int alpha, int beta)
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (maximumDepth == 0 && (_playerX.MaximumDepth == 2 || _playerO.MaximumDepth == 2))
+            if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
-
-            int minmumValue = int.MaxValue;
+         
             foreach (GameBoardArea area in _evaluationList)
             {
                 if (area.Area == " ")
                 {
                     area.Area = "O";
-                    int returnMaxValue = Max(maximumDepth - 1);
+                    int returnMaxValue = Max(maximumDepth - 1, alpha, beta);                    
+                    if (returnMaxValue < beta)
+                         beta = returnMaxValue;
                     area.Area = " ";
-                    if (returnMaxValue < minmumValue)
-                    {
-                        minmumValue = returnMaxValue;
-                    }                        
+                    if (beta <= alpha)
+                        return alpha;
                 }
             }
-            return minmumValue;
+            return beta;
         }
 
         
