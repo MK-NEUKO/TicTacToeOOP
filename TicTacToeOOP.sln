@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report_TicTacTorCoreTest", 
 		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFSample", "Ui\WPFSample\WPFSample.csproj", "{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F} = {7E01E8A4-3BD8-43D9-9783-037BACE16646}
 		{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67} = {5918CD42-DEB8-430C-9E5A-495CCC6A1C3F}
+		{E9A273AE-1D0F-41CE-B1AF-E2013EEE7D75} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}
