@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:NEUKO.TicTacToe.WPFClient"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
+            <local:GameBoard/>
+        </DataTemplate>
+        
     </Application.Resources>
 </Application>

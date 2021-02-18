@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\Logic\TicTacToe.Core\TicTacToe.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SampleData\" />
-  </ItemGroup>
-
 </Project>

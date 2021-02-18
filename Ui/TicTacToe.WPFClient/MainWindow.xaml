@@ -3,10 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NEUKO.TicTacToe.WPFClient"
+        xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1080">
+    
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="450"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <ContentControl Content="{Binding Path=GameBoardViewModel}"
+                        ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"
+                        Grid.Column="0" Grid.Row="1"/>
+
 
     </Grid>
 </Window>

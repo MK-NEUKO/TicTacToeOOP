@@ -3,45 +3,137 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFSample"
+        xmlns:sd="clr-namespace:WPFSample.SampleData"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450">
-    <Grid>
-        <ItemsControl x:Name="gameBoardControl">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
-                    <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
+        Title="MainWindow" Height="600" Width="450">
+    
+    <Window.DataContext>
+        <sd:GameBoardViewModelSampleData/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        
+        <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </ItemsPanelTemplate>
+
+
+        <Style x:Key="gameBoardItemsContainerStyle" TargetType="{x:Type ContentPresenter}">
+            <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
+            <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
+        </Style>
+
+
+        <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
+            <Grid>
+
+                <!--GameBoardArea - If nothing is shown-->
+                <Rectangle x:Name="boardAreaLightEffect" Fill="LawnGreen" Margin="5" Visibility="Hidden">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle x:Name="boardArea" Fill="#212121" Margin="11"/>
+                <Rectangle x:Name="boardAreaDropShadow" Fill="#212121" Margin="11">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="10"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="7" BorderBrush="#1D1D1D" CornerRadius="1"/>
+                <Line x:Name="boardAreaXone" X1="35" Y1="35" X2="95" Y2="95" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                <Line x:Name="boardAreaXtwo" X1="35" Y1="95" X2="95" Y2="35" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                <Ellipse x:Name="boardAreaO" Fill="Transparent" Width="75" Height="75" Stroke="#1D1D1D" StrokeThickness="9"/>
+                <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
+                <!--GameBordArea - If game is starting-->
+                <!--GameBordArea - If X is shown-->
+                <!--GameBordArea - If O is shown-->
+                
+
+
+                <!--GameBordArea - If mous over and Area is occupied -->
+
+            </Grid>
+            
+            <!--GameBordArea - If game is started-->
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=GameBoardAreaList.Area}" Value="O" >
+                    <Setter Property="Ellipse.Stroke" Value="Yellow"/>
+                </DataTrigger>
+                
+                <Trigger Property="IsMouseOver" Value="True" SourceName="rectangleTrigger">
+                    <Setter Property="Rectangle.Visibility" Value="Visible" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Visibility" Value="Hidden" TargetName="boardAreaDropShadow"/>
+                    <Setter Property="Border.BorderBrush" Value="#404040" TargetName="boardAreaBorder"/>
+                    <Setter Property="Rectangle.Fill" Value="#484848" TargetName="boardArea"/>
+                    <Setter Property="Line.Stroke" Value="#404040" TargetName="boardAreaXone"/>
+                    <Setter Property="Line.Stroke" Value="#404040" TargetName="boardAreaXtwo"/>
+                    <Setter Property="Ellipse.Stroke" Value="#404040" TargetName="boardAreaO"/>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        
+        <Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemsContainerStyle}"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
+        </Style>
+
+        
+        <Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
+            <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemsContainerStyle}"/>
+        </Style>
+
+        
+        <Style  x:Key="gameBoardAreaButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+                    
+        </Style>
+                
+    </Window.Resources>
+
+
+    <Grid Background="#484848">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="434"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <ItemsControl ItemsSource="{Binding GameBoardAreaList}" Style="{StaticResource gameBoardDataPresenter}"/>
+
+        <!--<ItemsControl ItemsSource="{Binding GameBoardCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="10">
-                        <StackPanel>
-                            <TextBlock Text="{Binding AreaID}"/>
-                            <TextBlock Text="{Binding Area}" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button>klick</Button>
-                        </StackPanel>
-                    </Border>
+                    <Button Style="{StaticResource gameBoardAreaButton}" x:Name="gameBoardAreaButton" Click="GameBoardAreaButton_Click" Content="{Binding AreaID}" BorderBrush="Black"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            
-        </ItemsControl>
+        </ItemsControl>-->
+
+
+        <StackPanel Grid.Row="1">
+            <Button x:Name="buttonIsPlayed" Content="IsPlayed" Click="ButtonIsPlayed_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
