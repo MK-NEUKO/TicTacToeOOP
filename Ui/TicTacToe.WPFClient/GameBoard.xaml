@@ -6,9 +6,9 @@
              xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
-    <d:Window.DataContext>
+    <d:UserControl.DataContext>
         <sd:GameBoardViewModelSampleData/>
-    </d:Window.DataContext>
+    </d:UserControl.DataContext>
     
     <UserControl.Resources>
 
@@ -36,7 +36,6 @@
 
         <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
             <Grid>
-
                 <!--GameBoardArea - If nothing is shown-->
                 <Rectangle x:Name="boardAreaLightEffect" Fill="LawnGreen" Margin="5" Visibility="Hidden">
                     <Rectangle.Effect>
@@ -61,7 +60,7 @@
 
 
                 <!--GameBordArea - If mous over and Area is occupied -->
-
+                
             </Grid>
 
             <!--GameBordArea - If game is started-->
