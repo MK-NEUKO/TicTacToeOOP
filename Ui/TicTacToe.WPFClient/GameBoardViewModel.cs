@@ -7,13 +7,13 @@ namespace NEUKO.TicTacToe.WPFClient
 {
     public class GameBoardViewModel : IGameBoardViewModel
     {
-        private readonly IReadOnlyList<GameBoardArea> _gameBoardAreaList;
+        private readonly IList<GameBoardArea> _gameBoardAreaList;
 
-        public GameBoardViewModel(IReadOnlyList<GameBoardArea> gameBoardAreaList)
+        public GameBoardViewModel(IList<GameBoardArea> gameBoardAreaList)
         {
             _gameBoardAreaList = gameBoardAreaList;
         }
 
-        public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
+        public IList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
     }
 }

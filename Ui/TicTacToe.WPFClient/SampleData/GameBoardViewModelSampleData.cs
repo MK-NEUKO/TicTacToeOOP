@@ -12,7 +12,7 @@ namespace NEUKO.TicTacToe.WPFClient.SampleData
 
         public GameBoardViewModelSampleData()
         {
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 0, RowIndex = 0, ColumnIndex = 0 });
+            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 0, RowIndex = 0, ColumnIndex = 0, IsWinArea = true});
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "O", AreaID = 1, RowIndex = 0, ColumnIndex = 1 });
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 2, RowIndex = 0, ColumnIndex = 2 });
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 3, RowIndex = 1, ColumnIndex = 0 });

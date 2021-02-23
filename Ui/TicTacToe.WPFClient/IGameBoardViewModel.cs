@@ -7,6 +7,6 @@ namespace NEUKO.TicTacToe.WPFClient
 {
     public interface IGameBoardViewModel
     {
-        IReadOnlyList<GameBoardArea> GameBoardAreaList { get; }
+        IList<GameBoardArea> GameBoardAreaList { get; }
     }
 }

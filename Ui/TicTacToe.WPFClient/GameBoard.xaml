@@ -65,7 +65,7 @@
 
             <!--GameBordArea - If game is started-->
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=GameBoardAreaList.Area}" Value="O" >
+                <DataTrigger Binding="{Binding IsWinArea}" Value="true" >
                     <Setter Property="Ellipse.Stroke" Value="Yellow"/>
                 </DataTrigger>
 
@@ -96,7 +96,7 @@
         </Style>
 
 
-        <Style  x:Key="gameBoardAreaButton" TargetType="Button">
+        <!--<Style  x:Key="gameBoardAreaButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Background" Value="Aqua"/>
             <Setter Property="Template">
@@ -107,7 +107,7 @@
                 </Setter.Value>
             </Setter>
 
-        </Style>
+        </Style>-->
 
     </UserControl.Resources>
 
@@ -117,13 +117,13 @@
 
         <ItemsControl ItemsSource="{Binding GameBoardAreaList}" Style="{StaticResource gameBoardDataPresenter}"/>
 
-        <ItemsControl ItemsSource="{Binding GameBoardCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
+        <!--<ItemsControl ItemsSource="{Binding GameBoardCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Style="{StaticResource gameBoardAreaButton}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>-->
 
 
         
