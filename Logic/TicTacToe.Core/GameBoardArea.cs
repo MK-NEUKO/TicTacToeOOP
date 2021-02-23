@@ -6,6 +6,8 @@
         private string _area;
         private bool _areaHasToken;
         private bool _isWinArea;
+        private int _columnIndex;
+        private int _rowIndex;
         
 
         public GameBoardArea(int areaID)
@@ -35,5 +37,7 @@
         }
 
         public int AreaID { get => _areaID; }
+        public int ColumnIndex { get => _columnIndex; set => _columnIndex = value; }
+        public int RowIndex { get => _rowIndex; set => _rowIndex = value; }
     }
 }
