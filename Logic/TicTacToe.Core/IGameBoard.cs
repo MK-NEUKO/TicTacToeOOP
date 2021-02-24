@@ -5,9 +5,9 @@ namespace NEUKO.TicTacToe.Core
     public interface IGameBoard
     {
         IList<GameBoardArea> BoardAreaList { get; }
-        bool PlayerXIsWinner { get; }
-        bool PlayerOIsWinner { get; }
-        bool GameIsTie { get; }
+        bool IsPlayerXWinner { get; }
+        bool IsPlayerOWinner { get; }
+        bool IsGameTie { get; }
         void PlaceAToken(int areaID, string token);
         void CheckGameBoardState();
         void ResetGameBoard();

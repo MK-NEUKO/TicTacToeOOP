@@ -40,7 +40,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
 
         public void ShowGameBoard()
         {
-            if (_board.PlayerXIsWinner || _board.PlayerOIsWinner)
+            if (_board.IsPlayerXWinner || _board.IsPlayerOWinner)
             {
                 ShowGameBoardWhenWon();
             }
@@ -223,9 +223,9 @@ namespace NEUKO.TicTacToe.ConsoleClient
         public void ShowWinner()
         {                    
             Console.BackgroundColor = ConsoleColor.DarkRed;
-            if (_board.PlayerXIsWinner)
+            if (_board.IsPlayerXWinner)
                 Console.WriteLine("{0} hat gewonnen!!!", _playerX.Name);
-            else if (_board.PlayerOIsWinner)               
+            else if (_board.IsPlayerOWinner)               
                 Console.WriteLine("{0} hat gewonnen!!!", _playerO.Name);
             Console.ResetColor();            
         }

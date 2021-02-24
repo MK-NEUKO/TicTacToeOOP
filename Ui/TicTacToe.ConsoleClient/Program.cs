@@ -18,14 +18,14 @@ namespace NEUKO.TicTacToe.ConsoleClient
             #region Objects of the API TicTacToe.Core
             var boardAreaList = new List<GameBoardArea>();
             var board = new GameBoardFactory(boardAreaList).CreateGameBoard();
-            List<GameBoardArea> evaluationList = new List<GameBoardArea>();           
-            for (int areaID = 0; areaID < 9; areaID++)
-            {
-                evaluationList.Add(new GameBoardArea(areaID));
-            }           
+            //List<GameBoardArea> evaluationList = new List<GameBoardArea>();           
+            //for (int areaID = 0; areaID < 9; areaID++)
+            //{
+            //    evaluationList.Add(new GameBoardArea(areaID));
+            //}           
             Player playerX = new Player() { Name = "PlayerX", InAction = true };
             Player playerO = new Player() { Name = "PlayerO" };
-            AI aimimax = new AI(evaluationList, board, playerX, playerO);
+            AI aimimax = new AI(/*evaluationList,*/ board, playerX, playerO);
             PlayerController playerController = new PlayerController(playerX, playerO, board, aimimax);
             #endregion
 

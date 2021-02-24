@@ -17,10 +17,10 @@ namespace NEUKO.TicTacToe.Core
 
         #region Felder
         private readonly IList<GameBoardArea> _boardAreaList;
-        private bool _playerXIsWinner;
-        private bool _playerOIsWinner;
-        private bool _gameIsTie;
-        private readonly int[,] _winConstellation;
+        private bool _isPlayerXWinner;
+        private bool _isPlayerOWinner;
+        private bool _isGameTie;
+        private readonly int[,] _winConstellations;
         #endregion
 
 
@@ -29,7 +29,7 @@ namespace NEUKO.TicTacToe.Core
         public GameBoard(IList<GameBoardArea> boardAreaList)
         {
             _boardAreaList = boardAreaList;
-            _winConstellation = new int[8, 3]
+            _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /*  +---+---+---+  */
                 {3,4,5}, /*  | 0 | 1 | 2 |  */
@@ -45,9 +45,9 @@ namespace NEUKO.TicTacToe.Core
 
         #region Eigenschaften
         public IList<GameBoardArea> BoardAreaList { get => _boardAreaList; }
-        public bool PlayerXIsWinner { get => _playerXIsWinner; }
-        public bool PlayerOIsWinner { get => _playerOIsWinner; }
-        public bool GameIsTie { get => _gameIsTie; }
+        public bool IsPlayerXWinner { get => _isPlayerXWinner; }
+        public bool IsPlayerOWinner { get => _isPlayerOWinner; }
+        public bool IsGameTie { get => _isGameTie; }
         #endregion
 
 
@@ -59,33 +59,33 @@ namespace NEUKO.TicTacToe.Core
 
         private void CheckForWinner()
         {
-        	for(int i = 0; i < _winConstellation.GetLength(0); i++)
+        	for(int i = 0; i < _winConstellations.GetLength(0); i++)
         	{                
-        		string actualContent = _boardAreaList[_winConstellation[i,0]].Area;
-        		actualContent += _boardAreaList[_winConstellation[i,1]].Area;
-        		actualContent += _boardAreaList[_winConstellation[i,2]].Area;
+        		string actualContent = _boardAreaList[_winConstellations[i,0]].Area;
+        		actualContent += _boardAreaList[_winConstellations[i,1]].Area;
+        		actualContent += _boardAreaList[_winConstellations[i,2]].Area;
         		
         		if(actualContent == "XXX")
                 {
-                    _playerXIsWinner = true;
-                    _boardAreaList[_winConstellation[i, 0]].IsWinArea = true;
-                    _boardAreaList[_winConstellation[i, 1]].IsWinArea = true;
-                    _boardAreaList[_winConstellation[i, 2]].IsWinArea = true;
+                    _isPlayerXWinner = true;
+                    _boardAreaList[_winConstellations[i, 0]].IsWinArea = true;
+                    _boardAreaList[_winConstellations[i, 1]].IsWinArea = true;
+                    _boardAreaList[_winConstellations[i, 2]].IsWinArea = true;
                 }        			
      	
         		if(actualContent == "OOO")
                 {
-                    _playerOIsWinner = true;
-                    _boardAreaList[_winConstellation[i, 0]].IsWinArea = true;
-                    _boardAreaList[_winConstellation[i, 1]].IsWinArea = true;
-                    _boardAreaList[_winConstellation[i, 2]].IsWinArea = true;
+                    _isPlayerOWinner = true;
+                    _boardAreaList[_winConstellations[i, 0]].IsWinArea = true;
+                    _boardAreaList[_winConstellations[i, 1]].IsWinArea = true;
+                    _boardAreaList[_winConstellations[i, 2]].IsWinArea = true;
                 }        			
         	}            
         }
         
         private void CheckForGameIsATie()
         {
-            if (_playerXIsWinner || _playerOIsWinner)
+            if (_isPlayerXWinner || _isPlayerOWinner)
                 return;
 
             foreach (GameBoardArea area in _boardAreaList)
@@ -93,7 +93,7 @@ namespace NEUKO.TicTacToe.Core
                 if (area.Area == " ")
                     return;
             }
-            _gameIsTie = true;
+            _isGameTie = true;
         }
 
         public void PlaceAToken(int areaID, string token)
@@ -115,9 +115,9 @@ namespace NEUKO.TicTacToe.Core
                 area.AreaHasToken = false;
                 area.IsWinArea = false;
             }
-            _playerXIsWinner = false;
-            _playerOIsWinner = false;
-            _gameIsTie = false;
+            _isPlayerXWinner = false;
+            _isPlayerOWinner = false;
+            _isGameTie = false;
         }
     }
 }

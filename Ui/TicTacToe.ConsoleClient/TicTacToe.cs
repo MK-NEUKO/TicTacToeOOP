@@ -39,7 +39,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
                 if (_query.GetAdvancedSettings)
                     _query.AskForAdvancedSettings();
 
-                while (!_board.PlayerXIsWinner && !_board.PlayerOIsWinner && !_board.GameIsTie)
+                while (!(_board.IsPlayerXWinner || _board.IsPlayerOWinner || _board.IsGameTie))
                 {
                     _display.ResetConsole();
                     _display.ShowTitle();

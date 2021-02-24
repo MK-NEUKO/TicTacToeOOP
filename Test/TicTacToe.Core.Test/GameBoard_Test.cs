@@ -73,9 +73,9 @@ namespace TicTacToe.Core.Test
             _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsTrue(_board.PlayerXIsWinner);
-            Assert.IsFalse(_board.PlayerOIsWinner);
-            Assert.IsFalse(_board.GameIsTie);
+            Assert.IsTrue(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsGameTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -128,9 +128,9 @@ namespace TicTacToe.Core.Test
             _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsTrue(_board.PlayerOIsWinner);
-            Assert.IsFalse(_board.PlayerXIsWinner);
-            Assert.IsFalse(_board.GameIsTie);
+            Assert.IsTrue(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsGameTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -161,9 +161,9 @@ namespace TicTacToe.Core.Test
             _board.CheckGameBoardState();
 
             // Assert
-            Assert.IsFalse(_board.PlayerXIsWinner);
-            Assert.IsFalse(_board.PlayerOIsWinner);
-            Assert.IsTrue(_board.GameIsTie);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsTrue(_board.IsGameTie);
             TestContext.WriteLine(TestContext.FullyQualifiedTestClassName);
             TestContext.WriteLine(TestContext.TestName);
             TestContext.WriteLine("TestGameBoard:");
@@ -207,9 +207,9 @@ namespace TicTacToe.Core.Test
                     allValuesOf_AreaHasAToken = true;
             }
 
-            Assert.IsFalse(_board.PlayerXIsWinner);
-            Assert.IsFalse(_board.PlayerOIsWinner);
-            Assert.IsFalse(_board.GameIsTie);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsPlayerXWinner);
+            Assert.IsFalse(_board.IsGameTie);
             Assert.IsFalse(allValuesOf_IsWinnArea);
             Assert.IsFalse(allValuesOf_AreaHasAToken);
             Assert.AreEqual(expexted_allValuesOf_Area, allValuesOf_Area);

@@ -6,12 +6,11 @@ namespace NEUKO.TicTacToe.Core
 {
     public class AI : IAI
     {
-        private IList<GameBoardArea> _evaluationList;
         private IGameBoard _board;
         private IPlayer _playerX;
         private IPlayer _playerO;
-        private readonly int[,] _winConstellation;
-        private readonly int[] _boardAreaFineValue;
+        private readonly int[,] _winConstellations;
+        private readonly int[] _boardAreaFineValues;
         private const int _xIsWinner = 100;
         private const int _oIsWinner = -100;
         private const int _gameIsTie = 0;
@@ -19,13 +18,12 @@ namespace NEUKO.TicTacToe.Core
         private int _areaIDForX;
         private int _areaIDForO;       
         
-        public AI(IList<GameBoardArea> evaluationList, IGameBoard board, IPlayer playerX, IPlayer playerO)
+        public AI(IGameBoard board, IPlayer playerX, IPlayer playerO)
         {
-            _evaluationList = evaluationList;
             _board = board;
             _playerX = playerX;
             _playerO = playerO;
-            _winConstellation = new int[8, 3]
+            _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/
                 {3,4,5}, /* | 0 | 1 | 2 |*/
@@ -37,7 +35,7 @@ namespace NEUKO.TicTacToe.Core
                 {2,4,6},
             };
 
-            _boardAreaFineValue = new int[9]
+            _boardAreaFineValues = new int[9]
             {
                 3, 2, 3,
                 2, 4, 2,
@@ -53,8 +51,7 @@ namespace NEUKO.TicTacToe.Core
         public int AreaIDForX { get => _areaIDForX; }
        
         public void GetAMove()
-        {
-            _evaluationList = _board.BoardAreaList;
+        {           
             _areaIDForX = -1;
             _areaIDForO = -1;
 
@@ -71,7 +68,7 @@ namespace NEUKO.TicTacToe.Core
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (GameBoardArea area in _evaluationList)
+            foreach (GameBoardArea area in _board.BoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -95,7 +92,7 @@ namespace NEUKO.TicTacToe.Core
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (GameBoardArea area in _evaluationList)
+            foreach (GameBoardArea area in _board.BoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -120,7 +117,7 @@ namespace NEUKO.TicTacToe.Core
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
 
-            foreach (GameBoardArea area in _evaluationList)
+            foreach (GameBoardArea area in _board.BoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -143,7 +140,7 @@ namespace NEUKO.TicTacToe.Core
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
          
-            foreach (GameBoardArea area in _evaluationList)
+            foreach (GameBoardArea area in _board.BoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -162,11 +159,11 @@ namespace NEUKO.TicTacToe.Core
         
         private int EvaluateGameBoard()
         {        
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < _winConstellations.GetLength(0); i++)
             {
-                string actualContent = _evaluationList[_winConstellation[i, 0]].Area;
-                actualContent += _evaluationList[_winConstellation[i, 1]].Area;
-                actualContent += _evaluationList[_winConstellation[i, 2]].Area;
+                string actualContent = _board.BoardAreaList[_winConstellations[i, 0]].Area;
+                actualContent += _board.BoardAreaList[_winConstellations[i, 1]].Area;
+                actualContent += _board.BoardAreaList[_winConstellations[i, 2]].Area;
 
                 if (actualContent == "XXX")
                     return _xIsWinner;
@@ -175,7 +172,7 @@ namespace NEUKO.TicTacToe.Core
                     return _oIsWinner;
             }
 
-            foreach (GameBoardArea area in _evaluationList)
+            foreach (GameBoardArea area in _board.BoardAreaList)
             {
                 if (area.Area == " ")
                     return _gameIsOpen;
@@ -187,12 +184,12 @@ namespace NEUKO.TicTacToe.Core
         {
             int value = 0;
             int index = 0;
-            foreach (var area in _evaluationList)
+            foreach (var area in _board.BoardAreaList)
             {
                 if (area.Area == "O")
-                    value -= _boardAreaFineValue[index];
+                    value -= _boardAreaFineValues[index];
                 if (area.Area == "X")
-                    value += _boardAreaFineValue[index];
+                    value += _boardAreaFineValues[index];
                 index++;
             }
             return value;

@@ -70,11 +70,11 @@ namespace NEUKO.TicTacToe.Core
 
         public void GivePoints()
         {
-            if (_board.PlayerXIsWinner)
+            if (_board.IsPlayerXWinner)
                 _playerX.Points++;
-            if (_board.PlayerOIsWinner)
+            if (_board.IsPlayerXWinner)
                 _playerO.Points++;
-            if (_board.GameIsTie)
+            if (_board.IsGameTie)
                 _gameIsTie++;
         }
 
