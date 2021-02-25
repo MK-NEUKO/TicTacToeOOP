@@ -11,6 +11,8 @@ namespace NEUKO.TicTacToe.WPFClient
 
         public GameBoardViewModel(IList<GameBoardArea> gameBoardAreaList)
         {
+            if (gameBoardAreaList == null) throw new ArgumentNullException("GameBoardAreaList");
+
             _gameBoardAreaList = gameBoardAreaList;
         }
 

@@ -10,6 +10,8 @@ namespace NEUKO.TicTacToe.WPFClient
 
         public MainWindowViewModel(IGameBoardViewModel gameBoardViewModel)
         {
+            if (gameBoardViewModel == null) throw new ArgumentNullException("GameBoardViewModel");
+
             _gameBoardViewModel = gameBoardViewModel;
         }
 
