@@ -13,7 +13,7 @@ namespace NEUKO.TicTacToe.WPFClient
         {
             base.OnStartup(e);
 
-            // Composition root
+            //Composition root
             var gameBoardAreaList = new List<GameBoardArea>();
             var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
 
@@ -21,7 +21,13 @@ namespace NEUKO.TicTacToe.WPFClient
 
             var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel);
 
-            MainWindow = new MainWindow { DataContext = mainWindowViewModel };
+            
+            MainWindow.DataContext = mainWindowViewModel;
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow = new MainWindow();
             MainWindow.Show();
         }
     }

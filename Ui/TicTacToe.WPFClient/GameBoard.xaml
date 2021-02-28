@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"           
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="450">
+             d:DesignHeight="300" d:DesignWidth="300">
     <d:UserControl.DataContext>
         <sd:GameBoardViewModelSampleData/>
     </d:UserControl.DataContext>
@@ -136,9 +136,9 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="5">
                         <Border BorderBrush="Black" BorderThickness="4"/>
-                        <TextBlock FontSize="100" HorizontalAlignment="Center" Text="{Binding Area}"/>
+                        <TextBlock FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Area}"/>
                         <TextBlock Margin="10 5" FontSize="20" Text="{Binding AreaID}"/>
                     </Grid>
                 </DataTemplate>

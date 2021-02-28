@@ -1,7 +1,8 @@
 ﻿<Application x:Class="NEUKO.TicTacToe.WPFClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l="clr-namespace:NEUKO.TicTacToe.WPFClient">
+             xmlns:l="clr-namespace:NEUKO.TicTacToe.WPFClient"
+             Startup="Application_Startup">
     <Application.Resources>
 
         <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
@@ -9,4 +10,5 @@
         </DataTemplate>
         
     </Application.Resources>
+    
 </Application>

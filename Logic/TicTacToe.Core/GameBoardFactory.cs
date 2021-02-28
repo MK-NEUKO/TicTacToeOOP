@@ -17,25 +17,28 @@ namespace NEUKO.TicTacToe.Core
         {
             int gameBoardAreas = 9;            
 
-            for (int index = 0; index < gameBoardAreas; index++)
+            for (int areaID = 0; areaID < gameBoardAreas; areaID++)
             {
-                _gameBoardAreaList.Add(new GameBoardArea(index));
-                SetColumnRowIndex(index);
+                _gameBoardAreaList.Add(new GameBoardArea(areaID));               
             }
+            SetColumnRowIndex();
             return new GameBoard(_gameBoardAreaList);
         }
 
-        private void SetColumnRowIndex(int index)
-        {
-            int columns = 3;
-            int rows = 3;
+        private void SetColumnRowIndex()
 
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++)
+        {
+            int numberOfColumns = 3;
+            int numberOfRows = 3;
+            int listIndex = 0;
+
+            for (int row = 0; row < numberOfRows; row++)
             {
-                for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+                for (int column = 0; column < numberOfColumns; column++)
                 {
-                    _gameBoardAreaList[index].ColumnIndex = columnIndex;
-                    _gameBoardAreaList[index].RowIndex = rowIndex;
+                    _gameBoardAreaList[listIndex].RowIndex = row;
+                    _gameBoardAreaList[listIndex].ColumnIndex = column;
+                    listIndex++;
                 }
             }
         }

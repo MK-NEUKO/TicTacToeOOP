@@ -3,29 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"
+        xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"        
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="650">
+        Title="TicTacToe" Height="500" Width="800">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
-
+   
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="450"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
 
         <ContentControl Content="{Binding Path=GameBoardViewModel}"
-                        ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"
+                        ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
                         Grid.Column="0" Grid.Row="1"/>
 
+        
 
     </Grid>
 </Window>

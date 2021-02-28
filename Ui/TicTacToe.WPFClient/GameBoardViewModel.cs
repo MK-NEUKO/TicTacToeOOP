@@ -14,6 +14,8 @@ namespace NEUKO.TicTacToe.WPFClient
             if (gameBoardAreaList == null) throw new ArgumentNullException("GameBoardAreaList");
 
             _gameBoardAreaList = gameBoardAreaList;
+
+            _gameBoardAreaList[2].Area = "X";
         }
 
         public IList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
