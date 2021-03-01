@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace NEUKO.TicTacToe.WPFClient
 {
     /// <summary>
-    /// Interaktionslogik für VisualMinimax.xaml
+    /// Interaktionslogik für GameInfoView.xaml
     /// </summary>
-    public partial class VisualMinimax : UserControl
+    public partial class GameInfoView : UserControl
     {
-        public VisualMinimax()
+        public GameInfoView()
         {
             InitializeComponent();
         }

@@ -6,7 +6,7 @@
     <Application.Resources>
 
         <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
-            <l:GameBoard/>
+            <l:GameBoardView/>
         </DataTemplate>
         
     </Application.Resources>
