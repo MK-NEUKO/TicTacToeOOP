@@ -9,6 +9,8 @@
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
+    
+    
    
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,7 +28,9 @@
                         ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
                         Grid.Column="0" Grid.Row="1"/>
 
-        
+        <ContentControl Content="{Binding Path=GameInfoViewModel}"
+                        ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
+                        Grid.Column="0" Grid.Row="2"/>
 
     </Grid>
 </Window>

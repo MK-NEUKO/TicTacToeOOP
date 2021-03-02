@@ -7,5 +7,6 @@ namespace NEUKO.TicTacToe.WPFClient
     public interface IMainWindowViewModel
     {
         IGameBoardViewModel GameBoardViewModel { get; }
+        IGameInfoViewModel GameInfoViewModel { get; }
     }
 }

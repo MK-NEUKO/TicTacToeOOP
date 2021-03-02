@@ -8,6 +8,7 @@ namespace NEUKO.TicTacToe.WPFClient.SampleData
     {
         private readonly PlayerDummy _playerX;
         private readonly PlayerDummy _playerO;
+        private readonly int _pie;
 
         public GameInfoViewModelSampleData()
         {
@@ -15,7 +16,7 @@ namespace NEUKO.TicTacToe.WPFClient.SampleData
             {
                 IsHuman = true,
                 InAction = true,
-                Name = "PlayerX",
+                Name = "Jens Hag",
                 Points = 23
             };
 
@@ -26,9 +27,12 @@ namespace NEUKO.TicTacToe.WPFClient.SampleData
                 Name = "Hal",
                 Points = 35
             };
+
+            _pie = 77;
         }
 
         public PlayerDummy PlayerO => _playerO;
         public PlayerDummy PlayerX => _playerX;
+        public int Pie => _pie;
     }
 }

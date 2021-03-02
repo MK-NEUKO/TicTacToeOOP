@@ -8,6 +8,10 @@
         <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
             <l:GameBoardView/>
         </DataTemplate>
+
+        <DataTemplate x:Key="GameInfoViewModelDataTemplate" DataType="{x:Type l:IGameInfoViewModel}">
+            <l:GameInfoView/>
+        </DataTemplate>
         
     </Application.Resources>
     

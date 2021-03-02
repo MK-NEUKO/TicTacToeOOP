@@ -9,8 +9,11 @@
         private int _maximumDepth;
 
 
-        public Player()
+        public Player(string name, bool inAction, bool isHuman)
         {
+            _name = name;
+            _inAction = inAction;
+            _isHuman = isHuman;
             _points = 0;
             _maximumDepth = 0;
             

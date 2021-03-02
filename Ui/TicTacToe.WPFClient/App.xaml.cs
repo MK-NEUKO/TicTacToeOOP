@@ -19,7 +19,12 @@ namespace NEUKO.TicTacToe.WPFClient
 
             var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList);
 
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel);
+            var playerX = new Player("PlayerX", true, true);
+            var playerO = new Player("PlayerO", false, false);
+
+            var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);
+
+            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel);
 
             
             MainWindow.DataContext = mainWindowViewModel;

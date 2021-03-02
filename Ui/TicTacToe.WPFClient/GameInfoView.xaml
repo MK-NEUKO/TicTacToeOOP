@@ -9,7 +9,106 @@
     <d:UserControl.DataContext>
         <sd:GameInfoViewModelSampleData/>
     </d:UserControl.DataContext>
-    <Grid>
+
+    <UserControl.Resources>
+
+        <Style x:Key="PlayerDisplay" TargetType="Grid">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#484848">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--PlayerX, Name, IsHuman, InAction-->
+
+        
+        <Grid Style="{StaticResource PlayerDisplay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Fill="#484848"/>
+            <Rectangle Grid.Column="1"  Fill="LawnGreen"/>
+            <TextBlock Foreground="DarkGray" Text="  AI "/>
+            <TextBlock HorizontalAlignment="Center" Grid.Column="1" Text="PlayerX"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold" 
+                       Foreground="DarkGray" Text="{Binding PlayerX.Name}"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" BorderBrush="LawnGreen" BorderThickness="2"/>
             
+        </Grid>
+        
+        
+
+        <!--PlayerO, Name, IsHuman, InAction-->
+
+        
+        <Grid Grid.Column="1" Style="{StaticResource PlayerDisplay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Fill="Red"/>
+            <Rectangle Grid.Column="1"  Fill="#484848"/>
+            <TextBlock Foreground="DarkGray" Text="  AI "/>
+            <TextBlock Foreground="DarkGray" HorizontalAlignment="Center" Grid.Column="1" Text="PlayerO"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" FontSize="20" FontWeight="SemiBold"
+                       Foreground="DarkGray" Text="{Binding PlayerO.Name}"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="2"/>
+            
+        </Grid>
+        
+
+        <!--Points-->
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   Text="Points"/>
+
+        <Grid Style="{StaticResource PlayerDisplay}" Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"
+                       Text="{Binding PlayerX.Points}"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="20" Margin="0 0 0 5" Text=":"/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontSize="20" Text="{Binding PlayerO.Points}"/>
+        </Grid>
+
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="20" Text="{Binding Pie}"/>
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   Text="Unenrschieden"/>
+
     </Grid>
 </UserControl>
