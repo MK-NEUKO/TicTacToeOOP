@@ -17,7 +17,9 @@ namespace NEUKO.TicTacToe.WPFClient
             var gameBoardAreaList = new List<GameBoardArea>();
             var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
 
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList);
+            var placeATokenCommands = new PlaceATokenCommandFactory().CreateCommands();
+
+            var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
 
             var playerX = new Player("PlayerX", true, true);
             var playerO = new Player("PlayerO", false, false);

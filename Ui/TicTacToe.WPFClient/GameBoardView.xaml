@@ -12,7 +12,7 @@
     
     <UserControl.Resources>
 
-        <!--<ItemsPanelTemplate x:Key="gameBoardItemsPanel">
+        <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -25,14 +25,14 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
             </Grid>
-        </ItemsPanelTemplate>-->
+        </ItemsPanelTemplate>
 
 
 
 
-        <!--<DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
+        <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
             <Grid>
-                --><!--GameBoardArea - If nothing is shown--><!--
+                <!--GameBoardArea - If nothing is shown-->
                 <Rectangle x:Name="boardAreaLightEffect" Fill="LawnGreen" Margin="5" Visibility="Hidden">
                     <Rectangle.Effect>
                         <BlurEffect Radius="15" />
@@ -49,17 +49,17 @@
                 <Line x:Name="boardAreaXtwo" X1="35" Y1="95" X2="95" Y2="35" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 <Ellipse x:Name="boardAreaO" Fill="Transparent" Width="75" Height="75" Stroke="#1D1D1D" StrokeThickness="9"/>
                 <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
-                --><!--GameBordArea - If game is starting-->
-                <!--GameBordArea - If X is shown-->
-                <!--GameBordArea - If O is shown-->
+                <!--GameBordArea - If game is starting
+                GameBordArea - If X is shown
+                GameBordArea - If O is shown
 
 
 
-                <!--GameBordArea - If mous over and Area is occupied --><!--
+                GameBordArea - If mous over and Area is occupied--> 
                 
             </Grid>
 
-            --><!--GameBordArea - If game is started--><!--
+            <!--GameBordArea - If game is started-->
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsWinArea}" Value="true" >
                     <Setter Property="Ellipse.Stroke" Value="Yellow"/>
@@ -75,15 +75,15 @@
                     <Setter Property="Ellipse.Stroke" Value="#404040" TargetName="boardAreaO"/>
                 </Trigger>
             </DataTemplate.Triggers>
-        </DataTemplate>-->
+        </DataTemplate>
 
 
-        <!--<Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
-            <Setter Property="Margin" Value="20"/>
+        <Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
+            
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
             
             <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
-        </Style>-->
+        </Style>
 
 
         <!--<Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
@@ -111,8 +111,8 @@
 
 
 
-        <ItemsControl ItemsSource="{Binding GameBoardAreaList}">
-            <ItemsControl.ItemsPanel>
+        <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
+            <!--<ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -127,14 +127,14 @@
                         </Grid.RowDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+            </ItemsControl.ItemsPanel>-->
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
                     <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
+            <!--<ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">
                         <Border BorderBrush="Black" BorderThickness="4"/>
@@ -142,7 +142,7 @@
                         <TextBlock Margin="10 5" FontSize="20" Text="{Binding AreaID}"/>
                     </Grid>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.ItemTemplate>-->
         </ItemsControl>
 
         <!--<ItemsControl ItemsSource="{Binding GameBoardCommands}" Style="{StaticResource gameBoardCommandsPresenter}">

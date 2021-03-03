@@ -8,5 +8,6 @@ namespace NEUKO.TicTacToe.WPFClient
     public interface IGameBoardViewModel
     {
         IList<GameBoardArea> GameBoardAreaList { get; }
+        IList<PlaceATokenCommand> PlaceATokenCommands { get; }
     }
 }

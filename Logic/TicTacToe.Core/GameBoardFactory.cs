@@ -24,7 +24,6 @@ namespace NEUKO.TicTacToe.Core
         }
 
         private void SetColumnRowIndex()
-
         {
             int numberOfColumns = 3;
             int numberOfRows = 3;

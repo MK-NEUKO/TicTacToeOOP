@@ -5,32 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"        
         mc:Ignorable="d"
-        Title="TicTacToe" Height="500" Width="800">
+        Title="TicTacToe" Height="600" Width="800">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
-    
-    
-   
-    <Grid>
+
+
+    <Border BorderBrush="DarkSlateGray" BorderThickness="10">
+    <Grid Background="#484848">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="300"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
+        
 
 
         <ContentControl Content="{Binding Path=GameBoardViewModel}"
                         ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
-                        Grid.Column="0" Grid.Row="1"/>
-
+                        Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2"/>
+        
+        
         <ContentControl Content="{Binding Path=GameInfoViewModel}"
                         ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
-                        Grid.Column="0" Grid.Row="2"/>
-
+                        Grid.Column="0" Grid.Row="2" Margin="5"/>
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2"/>
+        
+        
     </Grid>
+    </Border>
 </Window>
