@@ -17,7 +17,7 @@ namespace NEUKO.TicTacToe.WPFClient
             var gameBoardAreaList = new List<GameBoardArea>();
             var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
 
-            var placeATokenCommands = new PlaceATokenCommandFactory().CreateCommands();
+            var placeATokenCommands = new List<PlaceATokenCommand>();
 
             var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
 
@@ -25,10 +25,14 @@ namespace NEUKO.TicTacToe.WPFClient
             var playerO = new Player("PlayerO", false, false);
 
             var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);
-
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel);
-
             
+            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, gameBoard);
+
+            placeATokenCommands = new PlaceATokenCommandFactory(placeATokenCommands, mainWindowViewModel).CreateCommands();
+            
+
+
+
             MainWindow.DataContext = mainWindowViewModel;
         }
 

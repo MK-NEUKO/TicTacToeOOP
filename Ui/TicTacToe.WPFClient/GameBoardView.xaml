@@ -49,6 +49,7 @@
                 <Line x:Name="boardAreaXtwo" X1="35" Y1="95" X2="95" Y2="35" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 <Ellipse x:Name="boardAreaO" Fill="Transparent" Width="75" Height="75" Stroke="#1D1D1D" StrokeThickness="9"/>
                 <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
+                <TextBlock HorizontalAlignment="Center" Foreground="LawnGreen" FontSize="80" Text="{Binding Area}"/>
                 <!--GameBordArea - If game is starting
                 GameBordArea - If X is shown
                 GameBordArea - If O is shown
@@ -86,24 +87,20 @@
         </Style>
 
 
-        <!--<Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
+        <Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemsContainerStyle}"/>
-        </Style>-->
+        </Style>
 
 
-        <!--<Style  x:Key="gameBoardAreaButton" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="Aqua"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style  x:Key="gameBoardAreaButton" TargetType="Button">
+            <Setter Property="Command" Value="{Binding}"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Opacity" Value="0.5"/>
 
-        </Style>-->
+
+
+
+        </Style>
 
     </UserControl.Resources>
 
@@ -145,13 +142,20 @@
             </ItemsControl.ItemTemplate>-->
         </ItemsControl>
 
-        <!--<ItemsControl ItemsSource="{Binding GameBoardCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
+        
+        <ItemsControl ItemsSource="{Binding PlaceATokenCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
+                    <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Style="{StaticResource gameBoardAreaButton}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
+        </ItemsControl>
 
 
         

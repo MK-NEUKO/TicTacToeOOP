@@ -1,6 +1,6 @@
 ﻿namespace NEUKO.TicTacToe.Core
 {
-    public class GameBoardArea
+    public class GameBoardArea : CoreBase
     {
         private readonly int _areaID;
         private string _area;
@@ -33,7 +33,11 @@
         public string Area
         {
             get { return _area; }
-            set { _area = value; }
+            set 
+            {
+                _area = value;
+                OnPropertyChanged();    
+            }
         }
 
         public int AreaID { get => _areaID; }

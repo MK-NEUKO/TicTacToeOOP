@@ -6,23 +6,25 @@ namespace NEUKO.TicTacToe.WPFClient
 {
     public class PlaceATokenCommandFactory
     {
-        private readonly List<PlaceATokenCommand> _placeATokenCommands;
+        private IList<PlaceATokenCommand> _placeATokenCommands;
+        private MainWindowViewModel _mainWindowViewModel;
 
-        public PlaceATokenCommandFactory()
+        public PlaceATokenCommandFactory(IList<PlaceATokenCommand> placeATokenCommands, MainWindowViewModel mainWindowViewModel)
         {
-            _placeATokenCommands = new List<PlaceATokenCommand>();
+            _placeATokenCommands = placeATokenCommands;
+            _mainWindowViewModel = mainWindowViewModel;
         }
 
         public List<PlaceATokenCommand> CreateCommands()
         {
             int numberOfCommands = 9;
 
-            for (int i = 0; i < numberOfCommands; i++)
+            for (int areaID = 0; areaID < numberOfCommands; areaID++)
             {
-                _placeATokenCommands.Add(new PlaceATokenCommand());
+                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, _mainWindowViewModel));
             }
             SetColumnRowIndex();
-            return _placeATokenCommands;
+            return (List<PlaceATokenCommand>)_placeATokenCommands;
         }
 
         private void SetColumnRowIndex()
