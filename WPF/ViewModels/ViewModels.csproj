@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>NEUKO.TicTacToe.Wpf.ViewModels</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Logic\TicTacToe.Core\TicTacToe.Core.csproj" />
+    <ProjectReference Include="..\MvvmFramework\MvvmFramework.csproj" />
+  </ItemGroup>
+
+</Project>

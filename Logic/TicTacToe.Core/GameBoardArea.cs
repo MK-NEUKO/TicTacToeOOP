@@ -21,13 +21,21 @@
         public bool IsWinArea
         {
             get { return _isWinArea; }
-            set { _isWinArea = value; }
+            set 
+            {
+                _isWinArea = value;
+                OnPropertyChanged();
+            }
         }
 
         public bool AreaHasToken 
         {
             get { return _areaHasToken; }
-            set { _areaHasToken = value; }
+            set 
+            { 
+                _areaHasToken = value;
+                OnPropertyChanged();
+            }
         }
 
         public string Area

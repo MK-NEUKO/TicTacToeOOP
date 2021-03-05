@@ -45,11 +45,10 @@
                     </Rectangle.Effect>
                 </Rectangle>
                 <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="7" BorderBrush="#1D1D1D" CornerRadius="1"/>
-                <Line x:Name="boardAreaXone" X1="35" Y1="35" X2="95" Y2="95" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                <Line x:Name="boardAreaXtwo" X1="35" Y1="95" X2="95" Y2="35" Stroke="#1D1D1D" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                <Ellipse x:Name="boardAreaO" Fill="Transparent" Width="75" Height="75" Stroke="#1D1D1D" StrokeThickness="9"/>
-                <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
+                
+                
                 <TextBlock HorizontalAlignment="Center" Foreground="LawnGreen" FontSize="80" Text="{Binding Area}"/>
+                <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
                 <!--GameBordArea - If game is starting
                 GameBordArea - If X is shown
                 GameBordArea - If O is shown
@@ -65,7 +64,7 @@
                 <DataTrigger Binding="{Binding IsWinArea}" Value="true" >
                     <Setter Property="Ellipse.Stroke" Value="Yellow"/>
                 </DataTrigger>
-
+                
                 <Trigger Property="IsMouseOver" Value="True" SourceName="rectangleTrigger">
                     <Setter Property="Rectangle.Visibility" Value="Visible" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Visibility" Value="Hidden" TargetName="boardAreaDropShadow"/>
@@ -94,12 +93,8 @@
 
         <Style  x:Key="gameBoardAreaButton" TargetType="Button">
             <Setter Property="Command" Value="{Binding}"/>
-            <Setter Property="Background" Value="Gray"/>
-            <Setter Property="Opacity" Value="0.5"/>
-
-
-
-
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.3"/>
         </Style>
 
     </UserControl.Resources>
@@ -152,7 +147,7 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Style="{StaticResource gameBoardAreaButton}"/>
+                    <Button x:Name="placeATokenButton" Style="{StaticResource gameBoardAreaButton}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
