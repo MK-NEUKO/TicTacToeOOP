@@ -9,10 +9,10 @@ namespace NEUKO.TicTacToe.WPFClient
     {
         private int _rowIndex;
         private int _columnIndex;
-        private int _areaID;
-        private MainWindowViewModel _mainWindowViewModel;
+        private readonly int _areaID;
+        private IMainWindowViewModel _mainWindowViewModel;
 
-        public PlaceATokenCommand(int areaID, MainWindowViewModel mainWindowViewModel)
+        public PlaceATokenCommand(int areaID, IMainWindowViewModel mainWindowViewModel)
         {
             _areaID = areaID;
             _mainWindowViewModel = mainWindowViewModel;
@@ -20,7 +20,7 @@ namespace NEUKO.TicTacToe.WPFClient
 
         public int RowIndex { get => _rowIndex; set => _rowIndex = value; }
         public int ColumnIndex { get => _columnIndex; set => _columnIndex = value; }
-        public int AreaID { get => _areaID; set => _areaID = value; }
+        public int AreaID { get => _areaID; }
 
         public event EventHandler CanExecuteChanged;
 
@@ -31,7 +31,7 @@ namespace NEUKO.TicTacToe.WPFClient
 
         public void Execute(object parameter)
         {
-            _mainWindowViewModel.PlayAMove(_areaID);
+            _mainWindowViewModel.PlayAMove(AreaID);
         }
     }
 }

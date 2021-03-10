@@ -17,18 +17,22 @@ namespace NEUKO.TicTacToe.WPFClient
             var gameBoardAreaList = new List<GameBoardArea>();
             var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
 
-            var placeATokenCommands = new List<PlaceATokenCommand>();
-
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
-
             var playerX = new Player("PlayerX", true, true);
             var playerO = new Player("PlayerO", false, false);
 
-            var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);
+            var aimimax = new AI(gameBoard, playerX, playerO);
             
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, gameBoard);
+            var playerController = new PlayerController(playerX, playerO, gameBoard, aimimax);
 
-            placeATokenCommands = new PlaceATokenCommandFactory(placeATokenCommands, mainWindowViewModel).CreateCommands();
+            var placeATokenCommands = new List<PlaceATokenCommand>();
+
+            var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);            
+
+            var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
+
+            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, gameBoard, playerController);
+
+            new PlaceATokenCommandFactory(placeATokenCommands, mainWindowViewModel).CreateCommands();
             
 
 

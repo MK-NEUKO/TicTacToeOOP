@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
     public class PlaceATokenCommandFactory
     {
         private IList<PlaceATokenCommand> _placeATokenCommands;
-        private MainWindowViewModel _mainWindowViewModel;
+        private readonly IMainWindowViewModel _mainWondowViewModel;
 
-        public PlaceATokenCommandFactory(IList<PlaceATokenCommand> placeATokenCommands, MainWindowViewModel mainWindowViewModel)
+        public PlaceATokenCommandFactory(IList<PlaceATokenCommand> placeATokenCommands, IMainWindowViewModel mainWindowViewModel)
         {
+            _mainWondowViewModel = mainWindowViewModel;
             _placeATokenCommands = placeATokenCommands;
-            _mainWindowViewModel = mainWindowViewModel;
         }
 
-        public List<PlaceATokenCommand> CreateCommands()
+        public void CreateCommands()
         {
             int numberOfCommands = 9;
 
             for (int areaID = 0; areaID < numberOfCommands; areaID++)
             {
-                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, _mainWindowViewModel));
+                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, _mainWondowViewModel));
             }
             SetColumnRowIndex();
-            return (List<PlaceATokenCommand>)_placeATokenCommands;
         }
 
         private void SetColumnRowIndex()

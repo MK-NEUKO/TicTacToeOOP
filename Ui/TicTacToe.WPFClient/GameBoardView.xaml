@@ -62,18 +62,10 @@
             <!--GameBordArea - If game is started-->
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsWinArea}" Value="true" >
-                    <Setter Property="Ellipse.Stroke" Value="Yellow"/>
+                    <Setter Property="Ellipse.Stroke" Value="Yellow" />
                 </DataTrigger>
                 
-                <Trigger Property="IsMouseOver" Value="True" SourceName="rectangleTrigger">
-                    <Setter Property="Rectangle.Visibility" Value="Visible" TargetName="boardAreaLightEffect"/>
-                    <Setter Property="Rectangle.Visibility" Value="Hidden" TargetName="boardAreaDropShadow"/>
-                    <Setter Property="Border.BorderBrush" Value="#404040" TargetName="boardAreaBorder"/>
-                    <Setter Property="Rectangle.Fill" Value="#484848" TargetName="boardArea"/>
-                    <Setter Property="Line.Stroke" Value="#404040" TargetName="boardAreaXone"/>
-                    <Setter Property="Line.Stroke" Value="#404040" TargetName="boardAreaXtwo"/>
-                    <Setter Property="Ellipse.Stroke" Value="#404040" TargetName="boardAreaO"/>
-                </Trigger>
+                
             </DataTemplate.Triggers>
         </DataTemplate>
 

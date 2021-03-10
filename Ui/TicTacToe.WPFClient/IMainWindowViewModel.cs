@@ -8,5 +8,6 @@ namespace NEUKO.TicTacToe.WPFClient
     {
         IGameBoardViewModel GameBoardViewModel { get; }
         IGameInfoViewModel GameInfoViewModel { get; }
+        void PlayAMove(int areaID);
     }
 }

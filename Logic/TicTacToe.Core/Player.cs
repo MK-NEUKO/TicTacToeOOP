@@ -1,6 +1,6 @@
 ﻿namespace NEUKO.TicTacToe.Core
 {
-    public class Player : IPlayer
+    public class Player : CoreBase, IPlayer
     {
         private bool _inAction;
         private bool _isHuman;
@@ -22,24 +22,40 @@
         public int Points
         {
             get { return _points; }
-            set { _points = value; }
+            set 
+            { 
+                _points = value;
+                OnPropertyChanged();
+            }
         }
 
         public bool InAction
         {
             get { return _inAction; }
-            set { _inAction = value; } 
+            set
+            { 
+                _inAction = value;
+                OnPropertyChanged();
+            } 
         }
         public bool IsHuman 
         { 
             get { return _isHuman; }
-            set { _isHuman = value; }
+            set 
+            { 
+                _isHuman = value;
+                OnPropertyChanged();
+            }
              
         }
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set 
+            { 
+                _name = value;
+                OnPropertyChanged();
+            }
         }
 
         public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
