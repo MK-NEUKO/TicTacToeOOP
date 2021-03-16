@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
@@ -9,5 +10,6 @@ namespace NEUKO.TicTacToe.WPFClient
         IGameBoardViewModel GameBoardViewModel { get; }
         IGameInfoViewModel GameInfoViewModel { get; }
         void PlayAMove(int areaID);
+        ICommand OnIsPlayingCommand { get; }
     }
 }

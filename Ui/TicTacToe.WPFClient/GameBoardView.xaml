@@ -32,10 +32,10 @@
 
         <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
             <Grid>
-                <!--GameBoardArea - If nothing is shown-->
-                <Rectangle x:Name="boardAreaLightEffect" Fill="LawnGreen" Margin="5" Visibility="Hidden">
+                
+                <Rectangle x:Name="boardAreaLightEffect" Margin="5" Opacity="0.7">
                     <Rectangle.Effect>
-                        <BlurEffect Radius="15" />
+                        <BlurEffect Radius="20"/>
                     </Rectangle.Effect>
                 </Rectangle>
                 <Rectangle x:Name="boardArea" Fill="#212121" Margin="11"/>
@@ -45,28 +45,105 @@
                     </Rectangle.Effect>
                 </Rectangle>
                 <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="7" BorderBrush="#1D1D1D" CornerRadius="1"/>
+
+                <Viewbox Stretch="Fill" Margin="28">
+                    <Path x:Name="backgroundO" StrokeThickness="6">
+                        <Path.Data>
+                            <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
+                        </Path.Data>
+                    </Path>
+                </Viewbox>
+                <Viewbox Stretch="Fill" Margin="25">
+                    <Path x:Name="backgroundX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Data>
+                            <GeometryGroup>
+                                <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
+                                <LineGeometry StartPoint="4, 60" EndPoint="60, 4"/>
+                            </GeometryGroup>
+                        </Path.Data>
+                    </Path>
+                </Viewbox>
                 
+
+                <Viewbox Stretch="Fill" Margin="25">
+                    <Path x:Name="theX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Data>
+                            <GeometryGroup>
+                                <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
+                                <LineGeometry StartPoint="4, 60" EndPoint="60, 4"/>
+                            </GeometryGroup>
+                        </Path.Data>
+                    </Path>
+                </Viewbox>
+                <Viewbox Stretch="Fill" Margin="25">
+                    <Path x:Name="theXBlurEffect" StrokeThickness="8" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Data>
+                            <GeometryGroup>
+                                <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
+                                <LineGeometry StartPoint="4, 60" EndPoint="60, 4"/>
+                            </GeometryGroup>
+                        </Path.Data>
+                        <Path.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Path.Effect>
+                    </Path>
+                </Viewbox>
+
+                <Viewbox Stretch="Fill" Margin="28">
+                    <Path x:Name="theO" StrokeThickness="6">
+                        <Path.Data>
+                            <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
+                        </Path.Data>
+                    </Path>
+                </Viewbox>
+                <Viewbox Stretch="Fill" Margin="28">
+                    <Path x:Name="theOBlurEffect" StrokeThickness="6">
+                        <Path.Data>
+                            <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
+                        </Path.Data>
+                        <Path.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Path.Effect>
+                    </Path>
+                </Viewbox>
                 
-                <TextBlock HorizontalAlignment="Center" Foreground="LawnGreen" FontSize="80" Text="{Binding Area}"/>
-                <Rectangle x:Name="rectangleTrigger" Fill="Transparent"/>
-                <!--GameBordArea - If game is starting
-                GameBordArea - If X is shown
-                GameBordArea - If O is shown
-
-
-
-                GameBordArea - If mous over and Area is occupied--> 
                 
             </Grid>
 
-            <!--GameBordArea - If game is started-->
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding IsWinArea}" Value="true" >
-                    <Setter Property="Ellipse.Stroke" Value="Yellow" />
+                
+                
+                
+                <DataTrigger Binding="{Binding IsGameRunning}" Value="true">
+                    <Setter Property="Rectangle.Fill" Value="#FFF8FF6E" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
+                    <Setter Property="Border.BorderBrush" Value="#FF292929" TargetName="boardAreaBorder"/>
+                    <Setter Property="Rectangle.Fill" Value="#212121" TargetName="boardArea"/>
+                    <Setter Property="Path.Stroke" Value="#FF303030" TargetName="backgroundX"/>
+                    <Setter Property="Path.Stroke" Value="#FF303030" TargetName="backgroundO"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding AreaHasToken}" Value="false">
+                    <Setter Property="Path.Stroke" Value="#FF2B2B2B" TargetName="backgroundX"/>
+                    <Setter Property="Path.Stroke" Value="#FF2B2B2B" TargetName="backgroundO"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Area}" Value="X">
+                    <Setter Property="Path.Stroke" Value="LawnGreen" TargetName="theX"/>
+                    <Setter Property="Path.Stroke" Value="LawnGreen" TargetName="theXBlurEffect"/>
+                    <Setter Property="Path.Stroke" Value="#FF323232" TargetName="backgroundO"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Area}" Value="O">
+                    <Setter Property="Path.Stroke" Value="Yellow" TargetName="theO"/>
+                    <Setter Property="Path.Stroke" Value="Yellow" TargetName="theOBlurEffect"/>
+                    <Setter Property="Path.Stroke" Value="#FF323232" TargetName="backgroundX"/>
                 </DataTrigger>
                 
                 
+                
             </DataTemplate.Triggers>
+            
         </DataTemplate>
 
 
@@ -84,49 +161,36 @@
 
 
         <Style  x:Key="gameBoardAreaButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="5"/>
             <Setter Property="Command" Value="{Binding}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Opacity" Value="0.3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Rectangle Fill="Transparent"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </UserControl.Resources>
 
-    <Grid Background="#484848">
+    <Grid Background="#FF303030">
 
 
 
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
-            <!--<ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>-->
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
                     <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
-            <!--<ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="5">
-                        <Border BorderBrush="Black" BorderThickness="4"/>
-                        <TextBlock FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Area}"/>
-                        <TextBlock Margin="10 5" FontSize="20" Text="{Binding AreaID}"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>-->
         </ItemsControl>
 
         

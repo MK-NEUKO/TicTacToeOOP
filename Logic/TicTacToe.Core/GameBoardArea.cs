@@ -8,6 +8,7 @@
         private bool _isWinArea;
         private int _columnIndex;
         private int _rowIndex;
+        private bool _isGameRunning;
         
 
         public GameBoardArea(int areaID)
@@ -16,6 +17,7 @@
             _area = " ";
             _areaHasToken = false;
             _isWinArea = false;
+            _isGameRunning = false;
         }
 
         public bool IsWinArea
@@ -51,5 +53,14 @@
         public int AreaID { get => _areaID; }
         public int ColumnIndex { get => _columnIndex; set => _columnIndex = value; }
         public int RowIndex { get => _rowIndex; set => _rowIndex = value; }
+        public bool IsGameRunning
+        {
+            get { return _isGameRunning; }
+            set
+            {
+                _isGameRunning = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

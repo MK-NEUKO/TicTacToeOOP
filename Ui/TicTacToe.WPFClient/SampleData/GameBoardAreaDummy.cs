@@ -9,6 +9,8 @@
         public int RowIndex { get; set; }
         public int ColumnIndex { get; set; }
 
+        public bool IsGameRunning { get; set; }
+
         public GameBoardAreaDummy()
         {
             IsWinArea = false;

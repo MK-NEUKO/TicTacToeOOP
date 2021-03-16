@@ -53,6 +53,17 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="TextBlockTriggerPlayerXAI" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="false">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="true">
+                    <Setter Property="Foreground" Value="DarkGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="BorderTriggerPlayerOInAction" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="true">
@@ -86,6 +97,17 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="TextBlockTriggerPlayerOAI" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="false">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="true">
+                    <Setter Property="Foreground" Value="DarkGray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
     
     
@@ -103,7 +125,7 @@
                     <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,1,0">
+                <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,2,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -111,9 +133,11 @@
                         </Grid.RowDefinitions>
 
                         <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}"/>
-                        <TextBlock Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
+                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
+                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
+                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
+                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Top" HorizontalAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -135,14 +159,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,1,0">
-                            <TextBlock FontSize="25" FontWeight="ExtraBold"
+                        <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,2,0">
+                            <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
                                        VerticalAlignment="Center" HorizontalAlignment="Center"
                                        Text="{Binding PlayerX.Name}"/>
                         </Border>
                         <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                                   Text="{Binding PlayerX.Points}"/>
+                                   Foreground="Gray" Text="{Binding PlayerX.Points}"/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -157,17 +181,19 @@
                     <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,1,0">
+                <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,2,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-
+                        
                         <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
-                        <TextBlock Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
+                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
+                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
+                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
+                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Top" HorizontalAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -184,14 +210,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,1,0">
-                            <TextBlock FontSize="25" FontWeight="ExtraBold"
+                        <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,2,0">
+                            <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
                                        VerticalAlignment="Center" HorizontalAlignment="Center"
                                        Text="{Binding PlayerO.Name}"/>
                         </Border>
                         <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                                   Text="{Binding PlayerO.Points}"/>
+                                   Foreground="Gray" Text="{Binding PlayerO.Points}"/>
                     </Grid>
 
                     <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}"/>

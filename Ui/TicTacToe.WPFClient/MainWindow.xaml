@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"        
         mc:Ignorable="d"
-        Title="TicTacToe" Height="800" Width="400">
+        WindowStartupLocation="CenterScreen"
+        Title="TicTacToe" Height="650" Width="400">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
@@ -14,15 +15,15 @@
     <Border BorderBrush="DarkSlateGray" BorderThickness="10">
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="306"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        
 
+        <Button Content="Game On OFF" Command="{Binding OnIsPlayingCommand}"/>
 
         <ContentControl Content="{Binding Path=GameBoardViewModel}"
                         ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      

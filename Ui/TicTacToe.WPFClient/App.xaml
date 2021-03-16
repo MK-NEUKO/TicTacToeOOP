@@ -5,6 +5,8 @@
              Startup="Application_Startup">
     <Application.Resources>
 
+        <Color x:Key="GameBoardXOn">LawnGreen</Color>
+
         <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
             <l:GameBoardView/>
         </DataTemplate>

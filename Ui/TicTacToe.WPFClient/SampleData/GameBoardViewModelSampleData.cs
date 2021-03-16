@@ -17,9 +17,9 @@ namespace NEUKO.TicTacToe.WPFClient.SampleData
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 3, RowIndex = 1, ColumnIndex = 0 });
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 4, RowIndex = 1, ColumnIndex = 1 });
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 5, RowIndex = 1, ColumnIndex = 2 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 6, RowIndex = 2, ColumnIndex = 0 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 7, RowIndex = 2, ColumnIndex = 1 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 8, RowIndex = 2, ColumnIndex = 2 });
+            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 6, RowIndex = 2, ColumnIndex = 0, IsGameRunning = true });
+            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 7, RowIndex = 2, ColumnIndex = 1, IsGameRunning = true });
+            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "O", AreaID = 8, RowIndex = 2, ColumnIndex = 2, IsGameRunning = true });
             
             _isPlayed = false;
         }

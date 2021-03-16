@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
-    public class GameBoardViewModel : IGameBoardViewModel
+    public class GameBoardViewModel : ViewModelBase, IGameBoardViewModel
     {
         private readonly IList<GameBoardArea> _gameBoardAreaList;
         private readonly IList<PlaceATokenCommand> _placeATokenCommands;

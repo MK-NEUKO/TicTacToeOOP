@@ -6,12 +6,13 @@ using System.Windows.Input;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
-    public class MainWindowViewModel : IMainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGameBoard _gameBoard;
         private readonly IPlayerController _playerController;
+        public ICommand OnIsPlayingCommand { get; }
 
         public MainWindowViewModel(IGameBoardViewModel gameBoardViewModel, IGameInfoViewModel gameInfoViewModel, 
                                    IGameBoard gameBoard, IPlayerController playerController)
@@ -23,6 +24,19 @@ namespace NEUKO.TicTacToe.WPFClient
             _gameInfoViewModel = gameInfoViewModel;
             _gameBoard = gameBoard;
             _playerController = playerController;
+
+            OnIsPlayingCommand = new RelayCommand(IsPlayingExecute);
+        }
+
+        private void IsPlayingExecute(object obj)
+        {
+            foreach (var area in _gameBoard.BoardAreaList)
+            {
+                if (area.IsGameRunning)
+                    area.IsGameRunning = false;
+                else
+                    area.IsGameRunning = true;
+            }        
         }
 
         public void PlayAMove(int areaID)
@@ -42,6 +56,6 @@ namespace NEUKO.TicTacToe.WPFClient
         }
 
         public IGameBoardViewModel GameBoardViewModel => _gameBoardViewModel;
-        public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;
+        public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;       
     }
 }
