@@ -9,7 +9,7 @@
     <d:UserControl.DataContext>
         <sd:GameBoardViewModelSampleData/>
     </d:UserControl.DataContext>
-    
+
     <UserControl.Resources>
 
         <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
@@ -32,7 +32,7 @@
 
         <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
             <Grid>
-                
+
                 <Rectangle x:Name="boardAreaLightEffect" Margin="5" Opacity="0.7">
                     <Rectangle.Effect>
                         <BlurEffect Radius="20"/>
@@ -44,7 +44,14 @@
                         <DropShadowEffect ShadowDepth="10"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="7" BorderBrush="#1D1D1D" CornerRadius="1"/>
+                <Border x:Name="boardAreaBorderBlurEffect" BorderThickness="5" Margin="10" CornerRadius="2" Opacity="0.5">
+                    <Border.Effect>
+                        <BlurEffect Radius="20"/>
+                    </Border.Effect>
+                </Border>
+                <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="4" BorderBrush="#1D1D1D" CornerRadius="1"/>
+
+
 
                 <Viewbox Stretch="Fill" Margin="28">
                     <Path x:Name="backgroundO" StrokeThickness="6">
@@ -63,7 +70,7 @@
                         </Path.Data>
                     </Path>
                 </Viewbox>
-                
+
 
                 <Viewbox Stretch="Fill" Margin="25">
                     <Path x:Name="theX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
@@ -106,51 +113,52 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-                
-                
+
+
             </Grid>
 
             <DataTemplate.Triggers>
-                
-                
-                
+
+
+
                 <DataTrigger Binding="{Binding IsGameRunning}" Value="true">
-                    <Setter Property="Rectangle.Fill" Value="#FFF8FF6E" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
-                    <Setter Property="Border.BorderBrush" Value="#FF292929" TargetName="boardAreaBorder"/>
+                    <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorder"/>
+                    <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorderBlurEffect"/>
                     <Setter Property="Rectangle.Fill" Value="#212121" TargetName="boardArea"/>
-                    <Setter Property="Path.Stroke" Value="#FF303030" TargetName="backgroundX"/>
-                    <Setter Property="Path.Stroke" Value="#FF303030" TargetName="backgroundO"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding AreaHasToken}" Value="false">
-                    <Setter Property="Path.Stroke" Value="#FF2B2B2B" TargetName="backgroundX"/>
-                    <Setter Property="Path.Stroke" Value="#FF2B2B2B" TargetName="backgroundO"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Area}" Value="X">
-                    <Setter Property="Path.Stroke" Value="LawnGreen" TargetName="theX"/>
-                    <Setter Property="Path.Stroke" Value="LawnGreen" TargetName="theXBlurEffect"/>
-                    <Setter Property="Path.Stroke" Value="#FF323232" TargetName="backgroundO"/>
+                    <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theX"/>
+                    <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theXBlurEffect"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Area}" Value="O">
-                    <Setter Property="Path.Stroke" Value="Yellow" TargetName="theO"/>
-                    <Setter Property="Path.Stroke" Value="Yellow" TargetName="theOBlurEffect"/>
-                    <Setter Property="Path.Stroke" Value="#FF323232" TargetName="backgroundX"/>
+                    <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theO"/>
+                    <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theOBlurEffect"/>
+                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
                 </DataTrigger>
-                
-                
-                
+
+
+
             </DataTemplate.Triggers>
-            
+
         </DataTemplate>
 
 
         <Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
-            
+
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
-            
+
             <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
         </Style>
 
@@ -180,7 +188,7 @@
 
     </UserControl.Resources>
 
-    <Grid Background="#FF303030">
+    <Grid Background="#FF272727">
 
 
 
@@ -193,7 +201,7 @@
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
 
-        
+
         <ItemsControl ItemsSource="{Binding PlaceATokenCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
             <ItemsControl.ItemContainerStyle>
                 <Style>
@@ -209,6 +217,6 @@
         </ItemsControl>
 
 
-        
+
     </Grid>
 </UserControl>

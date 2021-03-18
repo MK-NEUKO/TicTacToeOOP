@@ -13,9 +13,11 @@
     <UserControl.Resources>
 
         <Style x:Key="DropShadowGrid" TargetType="Grid">
+            <Setter Property="Background" Value="#FF272727"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect/>
+                    <DropShadowEffect ShadowDepth="10"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -23,10 +25,15 @@
         <Style x:Key="BorderTriggerPlayerXInAction" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="true">
-                    <Setter Property="BorderBrush" Value="LawnGreen"/>
+                    <Setter Property="BorderBrush" Value="#6AFF00"/>
+                    <!--<Setter Property="Border.Effect">
+                        <Setter.Value>
+                            <BlurEffect Radius="15"/>
+                        </Setter.Value>
+                    </Setter>-->
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="false">
-                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="BorderBrush" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -34,10 +41,10 @@
         <Style x:Key="RectangleTriggerPlayerXInAction" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="true">
-                    <Setter Property="Fill" Value="LawnGreen"/>
+                    <Setter Property="Fill" Value="#6AFF00"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="false">
-                    <Setter Property="Fill" Value="Gray"/>
+                    <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -48,7 +55,7 @@
                     <Setter Property="Fill" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="true">
-                    <Setter Property="Fill" Value="Gray"/>
+                    <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -56,10 +63,10 @@
         <Style x:Key="TextBlockTriggerPlayerXAI" TargetType="TextBlock">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="false">
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Foreground" Value="#333333"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="true">
-                    <Setter Property="Foreground" Value="DarkGray"/>
+                    <Setter Property="Foreground" Value="#333333"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -67,10 +74,10 @@
         <Style x:Key="BorderTriggerPlayerOInAction" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="true">
-                    <Setter Property="BorderBrush" Value="Yellow"/>
+                    <Setter Property="BorderBrush" Value="#FF4F00"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="false">
-                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="BorderBrush" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -78,10 +85,10 @@
         <Style x:Key="RectangleTriggerPlayerOInAction" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="true">
-                    <Setter Property="Fill" Value="Yellow"/>
+                    <Setter Property="Fill" Value="#FF4F00"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="false">
-                    <Setter Property="Fill" Value="Gray"/>
+                    <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -89,10 +96,10 @@
         <Style x:Key="RectangleTriggerPlayerOAI" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="false">
-                    <Setter Property="Fill" Value="Red"/>
+                    <Setter Property="Fill" Value="#0589FF"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="true">
-                    <Setter Property="Fill" Value="Gray"/>
+                    <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -100,10 +107,10 @@
         <Style x:Key="TextBlockTriggerPlayerOAI" TargetType="TextBlock">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="false">
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Foreground" Value="#333333"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="true">
-                    <Setter Property="Foreground" Value="DarkGray"/>
+                    <Setter Property="Foreground" Value="#333333"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -111,122 +118,125 @@
     </UserControl.Resources>
     
     
-    <Grid Style="{StaticResource DropShadowGrid}">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         
         <!--PlayerX-Properties, Name, IsHuman, InAction, Points-->
-        <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="3">
+
+        
+        <Grid Style="{StaticResource DropShadowGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            
+            
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="9*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,2,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}"/>
-                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
+                <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}"/>
+                <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
                                    Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
+                <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
                                    Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                    </Grid>
-                </Border>
+            </Grid>
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="2*"/>
-                    </Grid.RowDefinitions>
 
-                    <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}"/>
-                    <TextBlock Grid.Row="0" FontSize="18" FontWeight="ExtraBold"
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}"/>
+                <TextBlock Grid.Row="0" FontSize="18" FontWeight="ExtraBold" Foreground="#333333"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Text="PLAYER X"/>
 
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,2,0">
-                            <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
+                    <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,4,0">
+                        <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
                                        VerticalAlignment="Center" HorizontalAlignment="Center"
                                        Text="{Binding PlayerX.Name}"/>
-                        </Border>
-                        <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
+                    </Border>
+                    <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
                                    Foreground="Gray" Text="{Binding PlayerX.Points}"/>
-                    </Grid>
                 </Grid>
             </Grid>
-        </Border>
+        </Grid>
+
 
 
         <!--PlayerO-Properties, Name, IsHuman, InAction, Points-->
-        <Border Grid.Row="1" Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="9*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,2,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        
-                        <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
-                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                    </Grid>
-                </Border>
-
-                <Grid Grid.Column="1">
+        
+        <Grid Grid.Row="1" Style="{StaticResource DropShadowGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+           
+            
+            
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+                    <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
+                    <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
+                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
+                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
+                                   VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                </Grid>
+           
 
-                        <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,2,0">
-                            <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,4,0">
+                        <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
                                        VerticalAlignment="Center" HorizontalAlignment="Center"
                                        Text="{Binding PlayerO.Name}"/>
-                        </Border>
-                        <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
+                    </Border>
+                    <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
                                    Foreground="Gray" Text="{Binding PlayerO.Points}"/>
-                    </Grid>
+                </Grid>
 
-                    <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}"/>
-                    <TextBlock Grid.Row="1" FontSize="18" FontWeight="ExtraBold"
+                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}"/>
+                <TextBlock Grid.Row="1" FontSize="18" FontWeight="ExtraBold" Foreground="#333333"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Text="PLAYER O"/>
-                </Grid>
             </Grid>
-        </Border>
+        </Grid>
+
 
     </Grid>
 </UserControl>
