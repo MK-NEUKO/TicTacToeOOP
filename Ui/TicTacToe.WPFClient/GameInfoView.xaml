@@ -141,6 +141,11 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
+                <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
                 <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}"/>
                 <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
                                    Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
@@ -158,9 +163,14 @@
                 </Grid.RowDefinitions>
 
                 <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}"/>
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
                 <TextBlock Grid.Row="0" FontSize="18" FontWeight="ExtraBold" Foreground="#333333"
-                               VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Text="PLAYER X"/>
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="PLAYER X"/>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -168,14 +178,34 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
+                    <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,4,0"/>
                     <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,4,0">
-                        <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                       Text="{Binding PlayerX.Name}"/>
+                        <Border.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Border.Effect>
                     </Border>
+                    <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="#0589FF"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding PlayerX.Name}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="#0589FF"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding PlayerX.Name}">
+                        
+                    </TextBlock>
                     <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                                   Foreground="Gray" Text="{Binding PlayerX.Points}"/>
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#0589FF" Text="{Binding PlayerX.Points}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#0589FF" Text="{Binding PlayerX.Points}"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -198,13 +228,18 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}">
+                        <Rectangle.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
                     <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
                     <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                               Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                     <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                               Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
+                               VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 </Grid>
            
 
@@ -219,18 +254,41 @@
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-
+            
+                    <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,4,0"/>
                     <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,4,0">
-                        <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="Gray"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                       Text="{Binding PlayerO.Name}"/>
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
                     </Border>
+                    <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="#0589FF"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding PlayerO.Name}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock FontSize="25" FontWeight="ExtraBold" Foreground="#0589FF"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding PlayerO.Name}"/>
                     <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                                   Foreground="Gray" Text="{Binding PlayerO.Points}"/>
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#0589FF" Text="{Binding PlayerO.Points}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" FontSize="25" FontWeight="ExtraBold"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#0589FF" Text="{Binding PlayerO.Points}"/>
                 </Grid>
 
                 <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}"/>
+                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
                 <TextBlock Grid.Row="1" FontSize="18" FontWeight="ExtraBold" Foreground="#333333"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Text="PLAYER O"/>
