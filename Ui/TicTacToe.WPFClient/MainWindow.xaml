@@ -6,41 +6,34 @@
         xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="TicTacToe" Height="650" Width="350">
+        Title="TicTacToe" Height="600" Width="300">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
 
 
-    <Border BorderBrush="Gray" BorderThickness="25">
+
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-
+        
         <ContentControl Content="{Binding Path=MenuViewModel}"
                         ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
                         Grid.Row="0"/>
-        
-        
 
         <ContentControl Content="{Binding Path=GameBoardViewModel}"
                         ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
-                        Grid.Column="0" Grid.Row="1"/>
-        
-        
-        
+                        Grid.Row="1"/>
+
         <ContentControl Content="{Binding Path=GameInfoViewModel}"
                         ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
-                        Grid.Column="0" Grid.Row="2"/>
-        
-        
-        
+                        Grid.Row="2"/>
+
     </Grid>
-    </Border>
 </Window>

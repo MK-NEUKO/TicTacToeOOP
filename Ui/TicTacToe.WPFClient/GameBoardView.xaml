@@ -38,8 +38,8 @@
                         <BlurEffect Radius="20"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Rectangle x:Name="boardArea" Fill="#212121" Margin="11"/>
-                <Rectangle x:Name="boardAreaDropShadow" Fill="#212121" Margin="11">
+                <Rectangle x:Name="boardArea" Fill="#212121" Margin="10" RadiusX="2" RadiusY="2"/>
+                <Rectangle x:Name="boardAreaDropShadow" Fill="#212121" Margin="10">
                     <Rectangle.Effect>
                         <DropShadowEffect ShadowDepth="10"/>
                     </Rectangle.Effect>
@@ -121,7 +121,7 @@
 
 
 
-                <DataTrigger Binding="{Binding IsGameRunning}" Value="true">
+                <DataTrigger Binding="{Binding IsShown}" Value="true">
                     <Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                     <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorder"/>
@@ -148,7 +148,16 @@
                     <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
                 </DataTrigger>
 
-
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsWinArea}" Value="true"/>
+                        <Condition Binding="{Binding Area}" Value="X"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Border.BorderBrush" Value="#6AFF00" TargetName="boardAreaBorder"/>
+                    <Setter Property="Border.BorderBrush" Value="#6AFF00" TargetName="boardAreaBorderBlurEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="#6AFF00" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
+                </MultiDataTrigger>
 
             </DataTemplate.Triggers>
 

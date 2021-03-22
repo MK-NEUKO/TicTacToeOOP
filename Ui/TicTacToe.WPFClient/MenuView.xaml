@@ -8,10 +8,10 @@
              d:DesignHeight="150" d:DesignWidth="800">
     <Grid>
 
-        <Ribbon>
+        <Ribbon Background="#FF272727">
             <RibbonTab Header="Game">
                 <RibbonGroup Header="Start">
-                    <RibbonButton Content="Start Game"/>
+                    <RibbonButton Label="Start Game" BorderBrush="Blue" Command="{Binding StartGameCommand}"/>
                 </RibbonGroup>
                 <RibbonGroup Header="PlayerX">
                     

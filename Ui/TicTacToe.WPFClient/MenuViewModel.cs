@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEUKO.TicTacToe.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -8,20 +9,33 @@ namespace NEUKO.TicTacToe.WPFClient
 
     public class MenuViewModel : IMenuViewModel
     {
-        public ICommand StartGameCommand { get; }
-        public MenuViewModel()
-        {
-            StartGameCommand = new RelayCommand(StartGame, CanStartGame);
-        }
+        private readonly IGameBoard _gameBoard;
 
-        private void StartGame(object obj)
+        public ICommand StartGameCommand { get; }
+        public MenuViewModel(IGameBoard gameBoard)
         {
-            throw new NotImplementedException();
+            if (gameBoard == null) throw new ArgumentNullException("GameBoard");
+
+            _gameBoard = gameBoard;
+
+            StartGameCommand = new RelayCommand(StartGame, CanStartGame);
         }
 
         private bool CanStartGame()
         {
-            throw new NotImplementedException();
-        }        
+            return true;
+        }
+
+        private void StartGame(object obj)
+        {
+            foreach (var area in _gameBoard.BoardAreaList)
+            {
+                if (area.IsShown)
+                    area.IsShown = false;
+                else
+                    area.IsShown = true;
+            }
+        }
+
     }
 }

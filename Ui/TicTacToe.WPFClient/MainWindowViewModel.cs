@@ -12,8 +12,7 @@ namespace NEUKO.TicTacToe.WPFClient
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGameBoard _gameBoard;
-        private readonly IPlayerController _playerController;
-        public ICommand OnIsPlayingCommand { get; }
+        private readonly IPlayerController _playerController;        
 
         public MainWindowViewModel(IGameBoardViewModel gameBoardViewModel, IGameInfoViewModel gameInfoViewModel, 
                                    IGameBoard gameBoard, IPlayerController playerController, IMenuViewModel menuViewModel)
@@ -26,22 +25,10 @@ namespace NEUKO.TicTacToe.WPFClient
             _gameBoardViewModel = gameBoardViewModel;
             _gameInfoViewModel = gameInfoViewModel;
             _gameBoard = gameBoard;
-            _playerController = playerController;
-
-            OnIsPlayingCommand = new RelayCommand(IsPlayingExecute);
+            _playerController = playerController;           
         }
 
-        private void IsPlayingExecute(object obj)
-        {
-            foreach (var area in _gameBoard.BoardAreaList)
-            {
-                if (area.IsGameRunning)
-                    area.IsGameRunning = false;
-                else
-                    area.IsGameRunning = true;
-            }        
-        }
-
+        
         public void PlayAMove(int areaID)
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());

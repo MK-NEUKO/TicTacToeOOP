@@ -55,6 +55,8 @@ namespace NEUKO.TicTacToe.Core
         {
             CheckForWinner();
             CheckForGameIsATie();
+            if (_isPlayerXWinner || _isPlayerOWinner)            
+                ShowWinner();
         }
 
         private void CheckForWinner()
@@ -94,6 +96,15 @@ namespace NEUKO.TicTacToe.Core
                     return;
             }
             _isGameTie = true;
+        }
+
+        private void ShowWinner()
+        {
+            foreach (GameBoardArea area in _boardAreaList)
+            {
+                if (!area.IsWinArea)               
+                    area.IsShown = false;
+            }
         }
 
         public void PlaceAToken(int areaID, string token)

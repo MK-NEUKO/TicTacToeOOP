@@ -13,8 +13,8 @@
     <UserControl.Resources>
 
         <Style x:Key="DropShadowGrid" TargetType="Grid">
-            <Setter Property="Background" Value="#FF272727"/>
-            <Setter Property="Margin" Value="5"/>
+            <!--<Setter Property="Background" Value="#FF272727"/>-->
+            <Setter Property="Margin" Value="10, 5"/>
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect ShadowDepth="10"/>
@@ -26,11 +26,6 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="true">
                     <Setter Property="BorderBrush" Value="#6AFF00"/>
-                    <!--<Setter Property="Border.Effect">
-                        <Setter.Value>
-                            <BlurEffect Radius="15"/>
-                        </Setter.Value>
-                    </Setter>-->
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="false">
                     <Setter Property="BorderBrush" Value="#212121"/>
@@ -116,9 +111,9 @@
         </Style>
 
     </UserControl.Resources>
-    
-    
-    <Grid>
+
+
+    <Grid Background="#FF272727">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
@@ -152,7 +147,7 @@
                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
                                    Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                                   VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.335,0.229"/>
             </Grid>
 
 
@@ -239,7 +234,7 @@
                                VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                     <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
                                Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                               VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                               VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.719,0.085"/>
                 </Grid>
            
 
