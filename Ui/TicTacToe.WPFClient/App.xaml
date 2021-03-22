@@ -7,6 +7,10 @@
 
         <Color x:Key="GameBoardXOn">LawnGreen</Color>
 
+        <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type l:IMenuViewModel}">
+            <l:MenuView/>
+        </DataTemplate>
+
         <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
             <l:GameBoardView/>
         </DataTemplate>

@@ -30,7 +30,9 @@ namespace NEUKO.TicTacToe.WPFClient
 
             var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
 
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, gameBoard, playerController);
+            var menuViewModel = new MenuViewModel();
+
+            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, gameBoard, playerController, menuViewModel);
 
             new PlaceATokenCommandFactory(placeATokenCommands, mainWindowViewModel).CreateCommands();
             

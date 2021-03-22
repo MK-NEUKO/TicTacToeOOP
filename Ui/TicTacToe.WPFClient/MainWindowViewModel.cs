@@ -8,6 +8,7 @@ namespace NEUKO.TicTacToe.WPFClient
 {
     public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
+        private readonly IMenuViewModel _menuViewModel;
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGameBoard _gameBoard;
@@ -15,11 +16,13 @@ namespace NEUKO.TicTacToe.WPFClient
         public ICommand OnIsPlayingCommand { get; }
 
         public MainWindowViewModel(IGameBoardViewModel gameBoardViewModel, IGameInfoViewModel gameInfoViewModel, 
-                                   IGameBoard gameBoard, IPlayerController playerController)
+                                   IGameBoard gameBoard, IPlayerController playerController, IMenuViewModel menuViewModel)
         {
             if (gameBoardViewModel == null) throw new ArgumentNullException("GameBoardViewModel");
             if (gameInfoViewModel == null) throw new ArgumentNullException("GameInfoViewModel");
+            if (menuViewModel == null) throw new ArgumentNullException("MenuViewModel");
 
+            _menuViewModel = menuViewModel;
             _gameBoardViewModel = gameBoardViewModel;
             _gameInfoViewModel = gameInfoViewModel;
             _gameBoard = gameBoard;
@@ -56,6 +59,7 @@ namespace NEUKO.TicTacToe.WPFClient
         }
 
         public IGameBoardViewModel GameBoardViewModel => _gameBoardViewModel;
-        public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;       
+        public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;
+        public IMenuViewModel MenuViewModel => _menuViewModel;
     }
 }
