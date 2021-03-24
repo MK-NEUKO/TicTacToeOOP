@@ -78,6 +78,14 @@ namespace NEUKO.TicTacToe.Core
                 _gameIsTie++;
         }
 
+        public void SetWinner()
+        {
+            if (_board.IsPlayerXWinner)
+                _playerX.IsWinner = true;
+            if (_board.IsPlayerOWinner)
+                _playerO.IsWinner = true;
+        }
+
     }
 
 }

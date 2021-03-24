@@ -33,17 +33,11 @@ namespace NEUKO.TicTacToe.WPFClient
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
             _gameBoard.CheckGameBoardState();
-            if (!(_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner || _gameBoard.IsGameTie))
-            {
-                ShowWinner();
-            }
+            
             _playerController.ChangePlayer();
+            _playerController.SetWinner();
         }
 
-        private void ShowWinner()
-        {
-            
-        }
 
         public IGameBoardViewModel GameBoardViewModel => _gameBoardViewModel;
         public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;

@@ -7,6 +7,7 @@
         void GivePoints();
         IPlayer GiveCurrentPlayer();
         void ResetPlayers();
+        void SetWinner();
         int GameIsTie { get; }
     }
 }

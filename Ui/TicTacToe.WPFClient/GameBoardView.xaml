@@ -27,7 +27,10 @@
             </Grid>
         </ItemsPanelTemplate>
 
-
+        <Style x:Key="gameBoardItemContainerStyle">
+            <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
+            <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
+        </Style>
 
 
         <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
@@ -113,13 +116,9 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-
-
             </Grid>
 
             <DataTemplate.Triggers>
-
-
 
                 <DataTrigger Binding="{Binding IsShown}" Value="true">
                     <Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
@@ -159,21 +158,31 @@
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
 
-            </DataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsWinArea}" Value="true"/>
+                        <Condition Binding="{Binding Area}" Value="O"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Border.BorderBrush" Value="#FF4F00" TargetName="boardAreaBorder"/>
+                    <Setter Property="Border.BorderBrush" Value="#FF4F00" TargetName="boardAreaBorderBlurEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="#FF4F00" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
+                </MultiDataTrigger>
 
+            </DataTemplate.Triggers>
         </DataTemplate>
 
 
         <Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
-
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
-
+            <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemContainerStyle}"/>
             <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
         </Style>
 
 
         <Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemContainerStyle}"/>
         </Style>
 
 
@@ -199,33 +208,16 @@
 
     <Grid Background="#FF272727">
 
-
-
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
-                    <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
 
-
         <ItemsControl ItemsSource="{Binding PlaceATokenCommands}" Style="{StaticResource gameBoardCommandsPresenter}">
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
-                    <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button x:Name="placeATokenButton" Style="{StaticResource gameBoardAreaButton}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-
 
     </Grid>
 </UserControl>

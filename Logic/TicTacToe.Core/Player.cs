@@ -7,6 +7,7 @@
         private string _name;
         private int _points;
         private int _maximumDepth;
+        private bool _isWinner;
 
 
         public Player(string name, bool inAction, bool isHuman)
@@ -16,6 +17,7 @@
             _isHuman = isHuman;
             _points = 0;
             _maximumDepth = 0;
+            _isWinner = false;
             
         }
 
@@ -54,6 +56,16 @@
             set 
             { 
                 _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsWinner
+        {
+            get { return _isWinner; }
+            set 
+            { 
+                _isWinner = value;
                 OnPropertyChanged();
             }
         }

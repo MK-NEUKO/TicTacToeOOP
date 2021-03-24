@@ -7,5 +7,6 @@
         string Name { get; set; }
         int Points { get; set; }
         int MaximumDepth { get; set; }
+        bool IsWinner { get; set; }
     }
 }

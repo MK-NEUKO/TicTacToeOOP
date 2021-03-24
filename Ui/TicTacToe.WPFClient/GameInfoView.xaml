@@ -22,7 +22,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="BorderTriggerPlayerXInAction" TargetType="Border">
+        <Style x:Key="BorderTriggerPlayerX" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="true">
                     <Setter Property="BorderBrush" Value="#6AFF00"/>
@@ -30,15 +30,27 @@
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="false">
                     <Setter Property="BorderBrush" Value="#212121"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="#6AFF00"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="#212121"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="RectangleTriggerPlayerXInAction" TargetType="Rectangle">
+        <Style x:Key="RectangleTriggerPlayerX" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="true">
                     <Setter Property="Fill" Value="#6AFF00"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.InAction}" Value="false">
+                    <Setter Property="Fill" Value="#212121"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="#6AFF00"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -47,26 +59,34 @@
         <Style x:Key="RectangleTriggerPlayerXAI" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="false">
-                    <Setter Property="Fill" Value="Red"/>
+                    <Setter Property="Fill" Value="#0589FF"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="true">
+                    <Setter Property="Fill" Value="#212121"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="TextBlockTriggerPlayerXAI" TargetType="TextBlock">
+        <Style x:Key="BorderWinAnimationPlayerX" TargetType="Border">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="false">
-                    <Setter Property="Foreground" Value="#333333"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding PlayerX.IsHuman}" Value="true">
-                    <Setter Property="Foreground" Value="#333333"/>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="BorderTriggerPlayerOInAction" TargetType="Border">
+        <Style x:Key="TextBlockWinAnimationPlayerX" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BorderTriggerPlayerO" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="true">
                     <Setter Property="BorderBrush" Value="#FF4F00"/>
@@ -74,15 +94,27 @@
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="false">
                     <Setter Property="BorderBrush" Value="#212121"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="#FF4F00"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="#212121"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="RectangleTriggerPlayerOInAction" TargetType="Rectangle">
+        <Style x:Key="RectangleTriggerPlayerO" TargetType="Rectangle">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="true">
                     <Setter Property="Fill" Value="#FF4F00"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding PlayerO.InAction}" Value="false">
+                    <Setter Property="Fill" Value="#212121"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="#FF4F00"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -96,16 +128,24 @@
                 <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="true">
                     <Setter Property="Fill" Value="#212121"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="#212121"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="TextBlockTriggerPlayerOAI" TargetType="TextBlock">
+        <Style x:Key="BorderWinAnimationPlayerO" TargetType="Border">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="false">
-                    <Setter Property="Foreground" Value="#333333"/>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding PlayerO.IsHuman}" Value="true">
-                    <Setter Property="Foreground" Value="#333333"/>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextBlockWinAnimationPlayerO" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerO.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -142,12 +182,12 @@
                     </Rectangle.Effect>
                 </Rectangle>
                 <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerXAI}"/>
-                <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
-                                   Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                <TextBlock Style="{StaticResource TextBlockTriggerPlayerXAI}"
-                                   Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                                   VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.335,0.229"/>
+                <TextBlock Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold" Foreground="#333333"
+                           VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+
+                <TextBlock Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold" Foreground="#333333"
+                           VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.335,0.229"/>
+                                   
             </Grid>
 
 
@@ -157,8 +197,8 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}"/>
-                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerXInAction}">
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerX}"/>
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerX}">
                     <Rectangle.Effect>
                         <BlurEffect Radius="15"/>
                     </Rectangle.Effect>
@@ -173,8 +213,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,4,0"/>
-                    <Border Style="{StaticResource BorderTriggerPlayerXInAction}" BorderThickness="0,0,4,0">
+                    <Border Style="{StaticResource BorderTriggerPlayerX}" BorderThickness="0,0,4,0"/>
+                    <Border Style="{StaticResource BorderTriggerPlayerX}" BorderThickness="0,0,4,0">
                         <Border.Effect>
                             <BlurEffect Radius="15"/>
                         </Border.Effect>
@@ -203,6 +243,31 @@
                                Foreground="#0589FF" Text="{Binding PlayerX.Points}"/>
                 </Grid>
             </Grid>
+            
+            <!--Shows PlayerO as the winner-->
+            <Border Grid.ColumnSpan="2" BorderBrush="#FF4F00" BorderThickness="4" CornerRadius="2"
+                    Style="{StaticResource BorderWinAnimationPlayerO}" Margin="15 ,4" Background="#FF272727">
+                <Border.Effect>
+                    <BlurEffect Radius="15"/>
+                </Border.Effect>
+            </Border>
+            <Border Grid.ColumnSpan="2" BorderBrush="#FF4F00" BorderThickness="4" CornerRadius="2"
+                    Style="{StaticResource BorderWinAnimationPlayerO}" Margin="15 ,4" Background="#FF272727">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
+                </Border.Effect>
+            </Border>
+            <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="34" FontWeight="ExtraBold" Foreground="#FF4F00" Margin="0,0,0,6"
+                       Style="{StaticResource TextBlockWinAnimationPlayerO}" Text="PlayerO Wins">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="15"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="34" FontWeight="ExtraBold" Foreground="#FF4F00" Margin="0,0,0,6"
+                       Style="{StaticResource TextBlockWinAnimationPlayerO}" Text="PlayerO Wins"/>
+            
         </Grid>
 
 
@@ -214,29 +279,29 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
-           
-            
-            
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
 
-                    <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}">
-                        <Rectangle.Effect>
-                            <BlurEffect Radius="15"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
-                    <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                               Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold"
-                               VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                    <TextBlock Style="{StaticResource TextBlockTriggerPlayerOAI}"
-                               Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold"
-                               VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.719,0.085"/>
-                </Grid>
-           
+            
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle Grid.RowSpan="2" Style="{StaticResource RectangleTriggerPlayerOAI}"/>
+                <TextBlock Grid.Row="0" Text="A" FontSize="25" FontWeight="ExtraBold" Foreground="#333333"
+                           VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+
+                <TextBlock Grid.Row="1" Text="I" FontSize="25" FontWeight="ExtraBold" Foreground="#333333"
+                           VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.719,0.085"/>
+            </Grid>
+
+
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -250,8 +315,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
             
-                    <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,4,0"/>
-                    <Border Style="{StaticResource BorderTriggerPlayerOInAction}" BorderThickness="0,0,4,0">
+                    <Border Style="{StaticResource BorderTriggerPlayerO}" BorderThickness="0,0,4,0"/>
+                    <Border Style="{StaticResource BorderTriggerPlayerO}" BorderThickness="0,0,4,0">
                         <Border.Effect>
                             <BlurEffect Radius="5"/>
                         </Border.Effect>
@@ -278,8 +343,8 @@
                                Foreground="#0589FF" Text="{Binding PlayerO.Points}"/>
                 </Grid>
 
-                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}"/>
-                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerOInAction}">
+                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerO}"/>
+                <Rectangle Grid.Row="1" Style="{StaticResource RectangleTriggerPlayerO}">
                     <Rectangle.Effect>
                         <BlurEffect Radius="15"/>
                     </Rectangle.Effect>
@@ -288,6 +353,31 @@
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Text="PLAYER O"/>
             </Grid>
+            
+            <!--Shows PlayerX as the winner-->
+            <Border Grid.ColumnSpan="2" BorderBrush="#6AFF00" BorderThickness="4" CornerRadius="2"
+                    Style="{StaticResource BorderWinAnimationPlayerX}" Margin="15 ,4" Background="#FF272727">
+                <Border.Effect>
+                    <BlurEffect Radius="15"/>
+                </Border.Effect>
+            </Border>
+            <Border Grid.ColumnSpan="2" BorderBrush="#6AFF00" BorderThickness="4" CornerRadius="2"
+                    Style="{StaticResource BorderWinAnimationPlayerX}" Margin="15 ,4" Background="#FF272727">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
+                </Border.Effect>
+            </Border>
+            <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="34" FontWeight="ExtraBold" Foreground="#6AFF00" Margin="0,0,0,6"
+                       Style="{StaticResource TextBlockWinAnimationPlayerX}" Text="PlayerX Wins">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="15"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="34" FontWeight="ExtraBold" Foreground="#6AFF00" Margin="0,0,0,6"
+                       Style="{StaticResource TextBlockWinAnimationPlayerX}" Text="PlayerX Wins"/>
+
         </Grid>
 
 
