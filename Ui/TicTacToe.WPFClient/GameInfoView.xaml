@@ -13,7 +13,6 @@
     <UserControl.Resources>
 
         <Style x:Key="DropShadowGrid" TargetType="Grid">
-            <!--<Setter Property="Background" Value="#FF272727"/>-->
             <Setter Property="Margin" Value="10, 5"/>
             <Setter Property="Effect">
                 <Setter.Value>
@@ -246,13 +245,16 @@
             
             <!--Shows PlayerO as the winner-->
             <Border Grid.ColumnSpan="2" BorderBrush="#FF4F00" BorderThickness="4" CornerRadius="2"
-                    Style="{StaticResource BorderWinAnimationPlayerO}" Margin="15 ,4" Background="#FF272727">
+                    Margin="15 ,4" Background="#FF272727"
+                    Style="{StaticResource BorderWinAnimationPlayerO}"> 
                 <Border.Effect>
                     <BlurEffect Radius="15"/>
                 </Border.Effect>
+                
             </Border>
             <Border Grid.ColumnSpan="2" BorderBrush="#FF4F00" BorderThickness="4" CornerRadius="2"
-                    Style="{StaticResource BorderWinAnimationPlayerO}" Margin="15 ,4" Background="#FF272727">
+                    Margin="15 ,4" Background="#FF272727"
+                    Style="{StaticResource BorderWinAnimationPlayerO}"> 
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
                 </Border.Effect>
@@ -356,13 +358,15 @@
             
             <!--Shows PlayerX as the winner-->
             <Border Grid.ColumnSpan="2" BorderBrush="#6AFF00" BorderThickness="4" CornerRadius="2"
-                    Style="{StaticResource BorderWinAnimationPlayerX}" Margin="15 ,4" Background="#FF272727">
+                    Margin="15 ,4" Background="#FF272727" 
+                    Style="{StaticResource BorderWinAnimationPlayerX}"> 
                 <Border.Effect>
                     <BlurEffect Radius="15"/>
                 </Border.Effect>
             </Border>
             <Border Grid.ColumnSpan="2" BorderBrush="#6AFF00" BorderThickness="4" CornerRadius="2"
-                    Style="{StaticResource BorderWinAnimationPlayerX}" Margin="15 ,4" Background="#FF272727">
+                    Margin="15 ,4" Background="#FF272727" 
+                    Style="{StaticResource BorderWinAnimationPlayerX}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
                 </Border.Effect>
