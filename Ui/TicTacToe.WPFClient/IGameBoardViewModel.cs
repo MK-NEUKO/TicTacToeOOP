@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
@@ -9,5 +10,6 @@ namespace NEUKO.TicTacToe.WPFClient
     {
         IList<GameBoardArea> GameBoardAreaList { get; }
         IList<PlaceATokenCommand> PlaceATokenCommands { get; }
+        ICommand StartAnimationCompletedCommand { get; }
     }
 }

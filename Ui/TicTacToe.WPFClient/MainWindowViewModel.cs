@@ -12,30 +12,41 @@ namespace NEUKO.TicTacToe.WPFClient
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGameBoard _gameBoard;
-        private readonly IPlayerController _playerController;        
+        private readonly IPlayerController _playerController;
+        private readonly IAI _aimimax;        
 
-        public MainWindowViewModel(IGameBoardViewModel gameBoardViewModel, IGameInfoViewModel gameInfoViewModel, 
-                                   IGameBoard gameBoard, IPlayerController playerController, IMenuViewModel menuViewModel)
+        public MainWindowViewModel(IMenuViewModel menuViewModel,
+                                   IGameBoardViewModel gameBoardViewModel, 
+                                   IGameInfoViewModel gameInfoViewModel, 
+                                   IGameBoard gameBoard, 
+                                   IPlayerController playerController,
+                                   IAI aimimax)
         {
+            if (menuViewModel == null) throw new ArgumentNullException("MenuViewModel");
             if (gameBoardViewModel == null) throw new ArgumentNullException("GameBoardViewModel");
             if (gameInfoViewModel == null) throw new ArgumentNullException("GameInfoViewModel");
-            if (menuViewModel == null) throw new ArgumentNullException("MenuViewModel");
+            if (gameBoard == null) throw new ArgumentNullException("GameBoard");
+            if (playerController == null) throw new ArgumentNullException("PlayerController");
+            if (aimimax == null) throw new ArgumentNullException("Aimimax");
 
             _menuViewModel = menuViewModel;
             _gameBoardViewModel = gameBoardViewModel;
             _gameInfoViewModel = gameInfoViewModel;
             _gameBoard = gameBoard;
-            _playerController = playerController;           
-        }
+            _playerController = playerController;
+            _aimimax = aimimax;            
+        }       
 
-        
         public void PlayAMove(int areaID)
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
             _gameBoard.CheckGameBoardState();
-            
             _playerController.ChangePlayer();
-            _playerController.SetWinner();
+            _aimimax.GetAMove();
+            _gameBoard.PlaceAToken(_aimimax.AreaIDForO, _playerController.GiveCurrentToken());
+            _gameBoard.CheckGameBoardState();
+            _playerController.ChangePlayer();
+            //_playerController.SetWinner();
         }
 
 

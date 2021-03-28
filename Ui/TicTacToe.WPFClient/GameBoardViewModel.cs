@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace NEUKO.TicTacToe.WPFClient
 {
@@ -10,6 +11,8 @@ namespace NEUKO.TicTacToe.WPFClient
         private readonly IList<GameBoardArea> _gameBoardAreaList;
         private readonly IList<PlaceATokenCommand> _placeATokenCommands;
 
+        public ICommand StartAnimationCompletedCommand { get; }
+
         public GameBoardViewModel(IList<GameBoardArea> gameBoardAreaList, IList<PlaceATokenCommand> placeATokenCommands)
         {
             if (gameBoardAreaList == null) throw new ArgumentNullException("GameBoardAreaList");
@@ -17,6 +20,21 @@ namespace NEUKO.TicTacToe.WPFClient
 
             _gameBoardAreaList = gameBoardAreaList;
             _placeATokenCommands = placeATokenCommands;
+
+            StartAnimationCompletedCommand = new RelayCommand(StartAnimationCompleted, CanStartAnimationCompleted);
+        }
+
+        private bool CanStartAnimationCompleted()
+        {
+            return true;
+        }
+
+        private void StartAnimationCompleted(object obj)
+        {
+            foreach (var area in _gameBoardAreaList)
+            {
+                area.Area = "X";
+            }
         }
 
         public IList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
