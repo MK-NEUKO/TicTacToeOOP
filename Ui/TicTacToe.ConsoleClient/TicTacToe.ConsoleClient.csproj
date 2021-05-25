@@ -14,7 +14,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Logic\TicTacToe.Core\TicTacToeCore.csproj" />
+    <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
   </ItemGroup>
   <ItemGroup>
     <RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />

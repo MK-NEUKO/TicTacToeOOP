@@ -11,6 +11,6 @@
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Logic\TicTacToe.Core\TicTacToeCore.csproj" />
+    <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
   </ItemGroup>
 </Project>

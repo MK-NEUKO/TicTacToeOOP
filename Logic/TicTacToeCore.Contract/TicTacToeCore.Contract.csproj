@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeCore\TicTacToeCore.csproj" />
+  </ItemGroup>
+
+</Project>
