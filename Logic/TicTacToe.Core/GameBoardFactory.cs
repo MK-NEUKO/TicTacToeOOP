@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NEUKO.TicTacToe.Core
+namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class GameBoardFactory
     {

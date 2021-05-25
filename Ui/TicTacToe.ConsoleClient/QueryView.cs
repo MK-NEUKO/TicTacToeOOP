@@ -1,4 +1,4 @@
-﻿using NEUKO.TicTacToe.Core;
+﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;

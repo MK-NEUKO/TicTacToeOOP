@@ -1,4 +1,4 @@
-﻿namespace NEUKO.TicTacToe.Core
+﻿namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class Player : CoreBase, IPlayer
     {
@@ -9,6 +9,11 @@
         private int _maximumDepth;
         private bool _isWinner;
 
+
+        public Player()
+        {
+
+        }
 
         public Player(string name, bool inAction, bool isHuman)
         {

@@ -1,4 +1,4 @@
-﻿namespace NEUKO.TicTacToe.Core
+﻿namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public interface IPlayerController
     {

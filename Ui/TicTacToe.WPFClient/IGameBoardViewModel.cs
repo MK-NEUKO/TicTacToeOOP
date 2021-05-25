@@ -1,4 +1,4 @@
-﻿using NEUKO.TicTacToe.Core;
+﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +10,6 @@ namespace NEUKO.TicTacToe.WPFClient
     {
         IList<GameBoardArea> GameBoardAreaList { get; }
         IList<PlaceATokenCommand> PlaceATokenCommands { get; }
-        ICommand StartAnimationCompletedCommand { get; }
+        ICommand InitializeGameCommand { get; }
     }
 }

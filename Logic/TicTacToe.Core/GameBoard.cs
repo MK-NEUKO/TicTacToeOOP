@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace NEUKO.TicTacToe.Core
+namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     // TODO Dokumentation erstellen, (Summary, etc.).
 

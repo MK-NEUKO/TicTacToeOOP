@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace NEUKO.TicTacToe.Core
+namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class CoreBase : INotifyPropertyChanged
     {

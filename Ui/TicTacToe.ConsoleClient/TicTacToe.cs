@@ -1,4 +1,4 @@
-﻿using NEUKO.TicTacToe.Core;
+﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using System;
 
 namespace NEUKO.TicTacToe.ConsoleClient

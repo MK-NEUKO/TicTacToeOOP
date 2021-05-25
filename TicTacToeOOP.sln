@@ -11,9 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E01E8A4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{043FB446-31CB-4591-AC49-A6EC6AC8B671}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.Core", "Logic\TicTacToe.Core\TicTacToe.Core.csproj", "{523990FA-A2B4-4C2F-9BCD-8F896AA1F290}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeCore", "Logic\TicTacToe.Core\TicTacToeCore.csproj", "{523990FA-A2B4-4C2F-9BCD-8F896AA1F290}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleClient", "Ui\TicTacToe.ConsoleClient\TicTacToe.ConsoleClient.csproj", "{EBCD5312-73CB-4F7C-A379-37291F00E863}"
 EndProject
@@ -50,7 +48,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report_TicTacTorCoreTest", 
 		_Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html = _Shared\Report_TicTacToeCoreTest\TicTacToe.Core_PlayerController.html
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{3136903A-5749-4117-A363-3F414100C34C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{61179EF0-4EA3-4CBF-8360-F00C2CEEAFB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{C7D841D1-8921-49F0-95A6-0F942617D9CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{293E8DEC-C28D-4917-90E6-8AEB9CCEB74C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClasses", "Data\DataClasses\DataClasses.csproj", "{1448E353-36F4-4F71-94BE-FD6052AAC973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +82,10 @@ Global
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1448E353-36F4-4F71-94BE-FD6052AAC973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1448E353-36F4-4F71-94BE-FD6052AAC973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1448E353-36F4-4F71-94BE-FD6052AAC973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1448E353-36F4-4F71-94BE-FD6052AAC973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,8 @@ Global
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{56A0B642-DECC-4285-A67D-760F8FC83A0F} = {7E01E8A4-3BD8-43D9-9783-037BACE16646}
 		{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67} = {5918CD42-DEB8-430C-9E5A-495CCC6A1C3F}
+		{293E8DEC-C28D-4917-90E6-8AEB9CCEB74C} = {C7D841D1-8921-49F0-95A6-0F942617D9CD}
+		{1448E353-36F4-4F71-94BE-FD6052AAC973} = {C7D841D1-8921-49F0-95A6-0F942617D9CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}
