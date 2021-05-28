@@ -1,7 +1,7 @@
-﻿namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+﻿namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class GameBoardArea : CoreBase
-    {
+    public class GameBoardArea : BaseDataClass
+    { 
         private readonly int _areaID;
         private string _area;
         private bool _areaHasToken;

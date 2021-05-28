@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +8,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class AI : IAI
     {
+        private IGameBoardRepository _gameBoardRepository;
         private IGameBoard _board;
         private IPlayer _playerX;
         private IPlayer _playerO;
@@ -18,8 +21,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private int _areaIDForX;
         private int _areaIDForO;       
         
-        public AI(IGameBoard board, IPlayer playerX, IPlayer playerO)
+        public AI(IGameBoardRepository gameBoardRepository, IGameBoard board, IPlayer playerX, IPlayer playerO)
         {
+            _gameBoardRepository = gameBoardRepository;
             _board = board;
             _playerX = playerX;
             _playerO = playerO;
@@ -68,7 +72,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (GameBoardArea area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -92,7 +96,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (GameBoardArea area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -117,7 +121,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
 
-            foreach (GameBoardArea area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -140,7 +144,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
          
-            foreach (GameBoardArea area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -161,9 +165,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {        
             for (int i = 0; i < _winConstellations.GetLength(0); i++)
             {
-                string actualContent = _board.BoardAreaList[_winConstellations[i, 0]].Area;
-                actualContent += _board.BoardAreaList[_winConstellations[i, 1]].Area;
-                actualContent += _board.BoardAreaList[_winConstellations[i, 2]].Area;
+                string actualContent = _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 0]].Area;
+                actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 1]].Area;
+                actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 2]].Area;
 
                 if (actualContent == "XXX")
                     return _xIsWinner;
@@ -172,7 +176,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                     return _oIsWinner;
             }
 
-            foreach (GameBoardArea area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == " ")
                     return _gameIsOpen;
@@ -184,7 +188,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             int value = 0;
             int index = 0;
-            foreach (var area in _board.BoardAreaList)
+            foreach (var area in _gameBoardRepository.GameBoardAreaList)
             {
                 if (area.Area == "O")
                     value -= _boardAreaFineValues[index];

@@ -1,4 +1,5 @@
 ﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +29,7 @@ namespace NEUKO.TicTacToe.WPFClient
 
         private void StartGame(object obj)
         {
-            foreach (var area in _gameBoard.BoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.IsShown)
                     area.IsShown = false;

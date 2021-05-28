@@ -1,4 +1,6 @@
-﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
+﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Data.DataStoring;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -14,21 +16,23 @@ namespace NEUKO.TicTacToe.WPFClient
             base.OnStartup(e);
 
             //Composition root
-            var gameBoardAreaList = new List<GameBoardArea>();
-            var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
+            //var gameBoardAreaList = new List<GameBoardArea>();
+            //var gameBoard = new GameBoardFactory(gameBoardAreaList).CreateGameBoard();
+            var gameBoardRepository = new GameBoardRepository();
+            var gameBoard = new GameBoard(gameBoardRepository);
 
-            var playerX = new Player("PlayerX", true, true);
-            var playerO = new Player("PlayerO", false, false);
-
+            //var playerX = new Player("PlayerX", true, true);
+            //var playerO = new Player("PlayerO", false, false);
+            var playerReposytory = new PlayerRepository();
             var aimimax = new AI(gameBoard, playerX, playerO);
             
-            var playerController = new PlayerController(playerX, playerO, gameBoard, aimimax);
+            var playerController = new PlayerController(playerReposytory, gameBoard, aimimax);
 
             var placeATokenCommands = new List<PlaceATokenCommand>();
 
             var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);            
 
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard.BoardAreaList, placeATokenCommands);
+            var gameBoardViewModel = new GameBoardViewModel(gameBoard.GameBoardAreaList, placeATokenCommands);
 
             var menuViewModel = new MenuViewModel(gameBoard);
 

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>MichaelKoch.TicTacToe.Data.DataStoring</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataStoring.Contarct\DataStoring.Contarct.csproj" />
+  </ItemGroup>
+
+</Project>

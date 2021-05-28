@@ -5,4 +5,9 @@
     <RootNamespace>MichaelKoch.TicTacToe.Logik.TicTacToeCore</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\DataStoring.Contarct\DataStoring.Contarct.csproj" />
+    <ProjectReference Include="..\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

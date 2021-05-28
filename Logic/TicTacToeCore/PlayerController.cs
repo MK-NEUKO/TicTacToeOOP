@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,18 +9,19 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class PlayerController : IPlayerController
     {
-        private readonly IPlayer _playerX;
-        private readonly IPlayer _playerO;
+        private readonly IPlayerReposytory _playerReposytory;
+        private readonly Player _playerX;
+        private readonly Player _playerO;
         private readonly IGameBoard _board;
         private readonly IAI _aimimax;
         private int _gameIsTie;
 
         public int GameIsTie { get => _gameIsTie; }
 
-        public PlayerController(IPlayer playerX, IPlayer playerO, IGameBoard board, IAI aimimax)
+        public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
         {
-            _playerX = playerX;
-            _playerO = playerO;
+            _playerX = playerRepository.PlayerList[0];
+            _playerO = playerRepository.PlayerList[1];
             _board = board;
             _aimimax = aimimax;
             
@@ -36,7 +40,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             _gameIsTie = 0;
         }
 
-        public IPlayer GiveCurrentPlayer()
+        public Player GiveCurrentPlayer()
         {
             if (_playerX.InAction)
                 return _playerX;

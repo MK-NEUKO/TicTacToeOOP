@@ -1,6 +1,8 @@
-﻿namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+
+namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class Player : CoreBase, IPlayer
+    public class Player : BaseDataClass
     {
         private bool _inAction;
         private bool _isHuman;

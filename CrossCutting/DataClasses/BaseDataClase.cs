@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class CoreBase : INotifyPropertyChanged
+    public class BaseDataClass : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
