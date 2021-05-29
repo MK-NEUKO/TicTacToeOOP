@@ -18,9 +18,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         //public event AreaIsOccupiedEventHandler AreaIsOccupied;
         #endregion
 
-        #region Felder
-        private readonly IList<GameBoardArea> _gameBoardAreaList;
+        #region Felder       
         private readonly IGameBoardRepository _gameBoardRepository;
+        private readonly IList<GameBoardArea> _gameBoardAreaList;
         private bool _isPlayerXWinner;
         private bool _isPlayerOWinner;
         private bool _isGameTie;
@@ -31,9 +31,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         #region Konstruktor
         // TODO Standardkonstruktor erstellen, (Konstruktorverkettung üben).
         public GameBoard(IGameBoardRepository gameBoardRepository)
-        {
-            _gameBoardAreaList = _gameBoardRepository.GameBoardAreaList; 
+        {            
             _gameBoardRepository = gameBoardRepository;
+            _gameBoardAreaList = _gameBoardRepository.GameBoardAreaList;
             _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /*  +---+---+---+  */

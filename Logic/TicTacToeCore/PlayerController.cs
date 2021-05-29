@@ -10,13 +10,15 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     public class PlayerController : IPlayerController
     {
         private readonly IPlayerReposytory _playerReposytory;
-        private readonly Player _playerX;
-        private readonly Player _playerO;
+        private Player _playerX;
+        private Player _playerO;
         private readonly IGameBoard _board;
         private readonly IAI _aimimax;
         private int _gameIsTie;
 
         public int GameIsTie { get => _gameIsTie; }
+        public Player PlayerX { get => _playerX; set => _playerX = value; }
+        public Player PlayerO { get => _playerO; set => _playerO = value; }
 
         public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
         {
@@ -26,6 +28,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             _aimimax = aimimax;
             
         }
+
+        
 
         public void ResetPlayers()
         {

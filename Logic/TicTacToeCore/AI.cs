@@ -1,4 +1,5 @@
-﻿using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
+﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
 using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     public class AI : IAI
     {
         private IGameBoardRepository _gameBoardRepository;
+        private IPlayerReposytory _playerRepository;
         private IGameBoard _board;
-        private IPlayer _playerX;
-        private IPlayer _playerO;
+        private Player _playerX;
+        private Player _playerO;
         private readonly int[,] _winConstellations;
         private readonly int[] _boardAreaFineValues;
         private const int _xIsWinner = 100;
@@ -21,12 +23,12 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private int _areaIDForX;
         private int _areaIDForO;       
         
-        public AI(IGameBoardRepository gameBoardRepository, IGameBoard board, IPlayer playerX, IPlayer playerO)
+        public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoard board)
         {
             _gameBoardRepository = gameBoardRepository;
             _board = board;
-            _playerX = playerX;
-            _playerO = playerO;
+            _playerX = playerReposytory.PlayerList[0];
+            _playerO = playerReposytory.PlayerList[1];
             _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/

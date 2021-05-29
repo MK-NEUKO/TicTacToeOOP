@@ -10,13 +10,11 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
 {
     public class PlayerRepository : IPlayerReposytory
     {
-        IList<Player> PlayerList =>
+        public IList<Player> PlayerList =>
             new List<Player>
             {
                 new Player("PlayerX", true, true),
                 new Player("PlyaerO", false, false)
             };
-
-        IList<Player> IPlayerReposytory.PlayerList => throw new NotImplementedException();
     }
 }

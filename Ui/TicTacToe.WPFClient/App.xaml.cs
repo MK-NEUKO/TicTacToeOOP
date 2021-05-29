@@ -24,15 +24,15 @@ namespace NEUKO.TicTacToe.WPFClient
             //var playerX = new Player("PlayerX", true, true);
             //var playerO = new Player("PlayerO", false, false);
             var playerReposytory = new PlayerRepository();
-            var aimimax = new AI(gameBoard, playerX, playerO);
+            var aimimax = new AI(gameBoardRepository, playerReposytory, gameBoard);
             
             var playerController = new PlayerController(playerReposytory, gameBoard, aimimax);
 
             var placeATokenCommands = new List<PlaceATokenCommand>();
 
-            var gameInfoViewModel = new GameInfoViewModel(playerX, playerO);            
+            var gameInfoViewModel = new GameInfoViewModel(playerController);            
 
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard.GameBoardAreaList, placeATokenCommands);
+            var gameBoardViewModel = new GameBoardViewModel(gameBoard, placeATokenCommands);
 
             var menuViewModel = new MenuViewModel(gameBoard);
 
