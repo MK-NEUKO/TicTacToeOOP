@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
     /// Interaktionslogik für GameInfoView.xaml

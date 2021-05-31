@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="NEUKO.TicTacToe.WPFClient.GameBoardView"
+﻿<UserControl x:Class="MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.GameBoardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"           
+             xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"           
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <d:UserControl.DataContext>
@@ -34,15 +34,15 @@
         </Style>
 
         <Storyboard x:Key="StartAnimation" RepeatBehavior="1x">
-            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
-                                                              Storyboard.TargetName="backgroundX"
-                                                              Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)">
+            <!--<ColorAnimationUsingKeyFrames BeginTime="0:0:1" Duration="0:0:1"
+                                                              Storyboard.TargetName="theX"
+                                                              Storyboard.TargetProperty="(Path.Stroke).GeometryGroup.(SolidColorBrush.Color)"
+                                                              FillBehavior="Stop">
                 <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
                 <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.2"/>
                 <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.5"/>
                 <LinearColorKeyFrame Value="#333333" KeyTime="0:0:0.9"/>
-                <DiscreteColorKeyFrame Value="Transparent" KeyTime="0:0:1"/>
-            </ColorAnimationUsingKeyFrames>
+            </ColorAnimationUsingKeyFrames>-->
 
             <ColorAnimationUsingKeyFrames BeginTime="0:0:1" Duration="0:0:1"
                                                               Storyboard.TargetName="theO"
@@ -112,14 +112,15 @@
 
 
                 <Viewbox Stretch="Fill" Margin="28">
-                    <Path x:Name="backgroundO" StrokeThickness="6">
+                    <Path x:Name="theOBackground" StrokeThickness="6" Stroke="#333333">
                         <Path.Data>
                             <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
                         </Path.Data>
                     </Path>
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="25">
-                    <Path x:Name="backgroundX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path x:Name="theXBackground" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                          Stroke="#333333">
                         <Path.Data>
                             <GeometryGroup>
                                 <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
@@ -179,30 +180,30 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource StartAnimation}"/>
                     </DataTrigger.EnterActions>
-                    <!--<Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>-->
-                    <!--<Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>-->
+                    <Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                     <!--<Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorder"/>
                     <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorderBlurEffect"/>-->
                     <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
                     <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>-->
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding AreaHasToken}" Value="false">
+                <!--<DataTrigger Binding="{Binding AreaHasToken}" Value="false">
                     <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
                     <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
-                </DataTrigger>
+                </DataTrigger>-->
 
                 <DataTrigger Binding="{Binding Area}" Value="X">
                     <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theX"/>
                     <!--<Setter Property="Path.Stroke" Value="Transparent" TargetName="theO"/>-->
                     <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theXBlurEffect"/>
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
+                    <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>-->
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Area}" Value="O">
                     <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theO"/>
                     <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theOBlurEffect"/>
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
+                    <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>-->
                 </DataTrigger>
 
                 <MultiDataTrigger>

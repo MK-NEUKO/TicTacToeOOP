@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,11 +16,11 @@ using System.Windows.Shapes;
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
-    /// Interaktionslogik für MenuView.xaml
+    /// Interaktionslogik für VisualMinimaxView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class VisualMinimaxView : UserControl
     {
-        public MenuView()
+        public VisualMinimaxView()
         {
             InitializeComponent();
         }

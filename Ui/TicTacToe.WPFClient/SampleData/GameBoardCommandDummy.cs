@@ -1,4 +1,4 @@
-﻿namespace NEUKO.TicTacToe.WPFClient.SampleData
+﻿namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
     public class GameBoardCommandDummy
     {

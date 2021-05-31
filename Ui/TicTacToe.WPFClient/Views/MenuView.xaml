@@ -1,24 +1,59 @@
-﻿<UserControl x:Class="NEUKO.TicTacToe.WPFClient.MenuView"
+﻿<UserControl x:Class="MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.MenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NEUKO.TicTacToe.WPFClient"
+             xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+        <Style x:Key="tttRibbonStyle" TargetType="Ribbon">
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Height" Value="150"/>
+        </Style>
+
+        <Style x:Key="tttRibbonGroupStyle" TargetType="RibbonGroup">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#333333"/>
+        </Style>
+        
+    </UserControl.Resources>
     <Grid>
 
-        <Ribbon Background="#FF272727">
-            <RibbonTab Header="Game">
-                <RibbonGroup Header="Start">
-                    <RibbonButton Label="Start Game" BorderBrush="Blue" Command="{Binding StartGameCommand}"/>
+        <Ribbon Style="{StaticResource tttRibbonStyle}">
+            <RibbonTab Header="Game" BorderBrush="LawnGreen" BorderThickness="5">
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="Start Options">
+                    <RibbonButton Label="Start New Game" BorderBrush="Blue" Command="{Binding StartGameCommand}"/>
+                    <RibbonButton Label="Start Last Game"/>
                 </RibbonGroup>
-                <RibbonGroup Header="PlayerX">
-                    
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="PlayerX" Foreground="LawnGreen" BorderBrush="LawnGreen">
+                    <RibbonRadioButton Label="Human"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RibbonRadioButton Label="AI"/>
+                        <RibbonComboBox Text="Level">
+                            <ComboBoxItem>Easy</ComboBoxItem>
+                            <ComboBoxItem>Normal</ComboBoxItem>
+                        </RibbonComboBox>
+                    </StackPanel>
+                    <RibbonTextBox Text="Name"/>
                 </RibbonGroup>
-                <RibbonGroup Header="PlayerO">
-                    
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="PlayerO">
+                    <RibbonRadioButton Label="Human"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RibbonRadioButton Label="AI"/>
+                        <RibbonComboBox Text="Level">
+                            <ComboBoxItem>Easy</ComboBoxItem>
+                            <ComboBoxItem>Normal</ComboBoxItem>
+                        </RibbonComboBox>
+                    </StackPanel>
+                    <RibbonTextBox Text="Name"/>
                 </RibbonGroup>
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" VerticalContentAlignment="Center">
+                    <RibbonButton BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
+                </RibbonGroup>
+                
             </RibbonTab>
         </Ribbon>
         

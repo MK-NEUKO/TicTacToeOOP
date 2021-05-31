@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
     /// Interaktionslogik für GameBoard.xaml

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public class GameInfoViewModel : IGameInfoViewModel
     {

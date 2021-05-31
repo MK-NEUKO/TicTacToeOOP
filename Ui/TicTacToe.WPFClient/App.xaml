@@ -1,7 +1,7 @@
-﻿<Application x:Class="NEUKO.TicTacToe.WPFClient.App"
+﻿<Application x:Class="MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l="clr-namespace:NEUKO.TicTacToe.WPFClient"
+             xmlns:l="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              Startup="Application_Startup">
     <Application.Resources>
 
@@ -18,7 +18,11 @@
         <DataTemplate x:Key="GameInfoViewModelDataTemplate" DataType="{x:Type l:IGameInfoViewModel}">
             <l:GameInfoView/>
         </DataTemplate>
-        
+
+        <DataTemplate x:Key="VisualMinimaxViewModelDataTemplate" DataType="{x:Type l:IVisualMinimaxViewModel}">
+            <l:VisualMinimaxView/>
+        </DataTemplate>
+
     </Application.Resources>
     
 </Application>

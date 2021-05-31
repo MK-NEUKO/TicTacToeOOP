@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

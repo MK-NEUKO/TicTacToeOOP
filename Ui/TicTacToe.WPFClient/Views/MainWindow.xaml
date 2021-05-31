@@ -1,12 +1,12 @@
-﻿<Window x:Class="NEUKO.TicTacToe.WPFClient.MainWindow"
+﻿<Window x:Class="MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sd="clr-namespace:NEUKO.TicTacToe.WPFClient.SampleData"        
+        xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="TicTacToe" Height="600" Width="300">
+        Title="TicTacToe" Height="600" Width="800">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
@@ -15,7 +15,8 @@
 
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
@@ -25,7 +26,7 @@
         
         <ContentControl Content="{Binding Path=MenuViewModel}"
                         ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
-                        Grid.Row="0"/>
+                        Grid.Row="0" Grid.ColumnSpan="2"/>
 
         <ContentControl Content="{Binding Path=GameBoardViewModel}"
                         ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
@@ -35,5 +36,9 @@
                         ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
                         Grid.Row="2"/>
 
+        <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"
+                        ContentTemplate="{StaticResource VisualMinimaxViewModelDataTemplate}"
+                        Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
+        
     </Grid>
 </Window>

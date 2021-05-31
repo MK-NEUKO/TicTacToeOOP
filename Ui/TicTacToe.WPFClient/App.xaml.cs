@@ -4,7 +4,7 @@ using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

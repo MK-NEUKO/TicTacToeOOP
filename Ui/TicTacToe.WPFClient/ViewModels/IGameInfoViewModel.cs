@@ -2,7 +2,7 @@
 using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
 using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public interface IGameInfoViewModel
     {

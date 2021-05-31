@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace NEUKO.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public interface IMenuViewModel
     {
