@@ -28,6 +28,21 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             InitializeGameCommand = new RelayCommand(InitializeGame, CanInitializeGame);                      
         }
 
+        public void InitializeNewGameBoard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InitializeLastGameBoard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowStartAnimation()
+        {
+            throw new NotImplementedException();
+        }
+
         private bool CanInitializeGame()
         {
             return true;
@@ -37,7 +52,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             foreach (var area in _gameBoardAreaList)
             {
-                area.Area = "X";
+                area.Area = " ";
             }
         }
 

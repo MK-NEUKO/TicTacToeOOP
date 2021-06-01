@@ -34,7 +34,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
             var gameBoardViewModel = new GameBoardViewModel(gameBoard, placeATokenCommands);
 
-            var menuViewModel = new MenuViewModel(gameBoard);
+            var menuViewModel = new MenuViewModel(gameBoardViewModel, gameInfoViewModel, playerController);
 
             var mainWindowViewModel = new MainWindowViewModel(menuViewModel, gameBoardViewModel, gameInfoViewModel, gameBoard, playerController, aimimax);
 

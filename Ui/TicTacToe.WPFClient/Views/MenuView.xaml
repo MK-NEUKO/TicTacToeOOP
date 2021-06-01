@@ -11,7 +11,9 @@
         <Style x:Key="tttRibbonStyle" TargetType="Ribbon">
             <Setter Property="Background" Value="#333333"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Height" Value="150"/>
+            <Setter Property="BorderBrush" Value="LawnGreen"/>
+        
+
         </Style>
 
         <Style x:Key="tttRibbonGroupStyle" TargetType="RibbonGroup">
@@ -23,12 +25,12 @@
     <Grid>
 
         <Ribbon Style="{StaticResource tttRibbonStyle}">
-            <RibbonTab Header="Game" BorderBrush="LawnGreen" BorderThickness="5">
+            <RibbonTab Header="Game">
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="Start Options">
-                    <RibbonButton Label="Start New Game" BorderBrush="Blue" Command="{Binding StartGameCommand}"/>
-                    <RibbonButton Label="Start Last Game"/>
+                    <RibbonButton Label="Start New Game" Command="{Binding UserChoosesStartNewGameCommand}"/>
+                    <RibbonButton Label="Start Last Game" Command="{Binding UserChoosesStartLastGameCommand}"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="PlayerX" Foreground="LawnGreen" BorderBrush="LawnGreen">
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[0]}" Header="PlayerX" Foreground="LawnGreen" BorderBrush="LawnGreen">
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
@@ -37,9 +39,9 @@
                             <ComboBoxItem>Normal</ComboBoxItem>
                         </RibbonComboBox>
                     </StackPanel>
-                    <RibbonTextBox Text="Name"/>
+                    <RibbonTextBox Text="{Binding Name}"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="PlayerO">
+                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[1]}" Header="PlayerO">
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
@@ -53,7 +55,6 @@
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" VerticalContentAlignment="Center">
                     <RibbonButton BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
                 </RibbonGroup>
-                
             </RibbonTab>
         </Ribbon>
         

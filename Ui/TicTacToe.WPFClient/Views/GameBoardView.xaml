@@ -34,18 +34,38 @@
         </Style>
 
         <Storyboard x:Key="StartAnimation" RepeatBehavior="1x">
-            <!--<ColorAnimationUsingKeyFrames BeginTime="0:0:1" Duration="0:0:1"
-                                                              Storyboard.TargetName="theX"
-                                                              Storyboard.TargetProperty="(Path.Stroke).GeometryGroup.(SolidColorBrush.Color)"
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
+                                                              Storyboard.TargetName="theXColor"
+                                                              Storyboard.TargetProperty="Color"
                                                               FillBehavior="Stop">
                 <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
                 <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.2"/>
                 <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.5"/>
                 <LinearColorKeyFrame Value="#333333" KeyTime="0:0:0.9"/>
-            </ColorAnimationUsingKeyFrames>-->
+            </ColorAnimationUsingKeyFrames>
+
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
+                                                              Storyboard.TargetName="theXBlurEffectColor"
+                                                              Storyboard.TargetProperty="Color"
+                                                              FillBehavior="Stop">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.2"/>
+                <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.5"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:0.9"/>
+            </ColorAnimationUsingKeyFrames>
 
             <ColorAnimationUsingKeyFrames BeginTime="0:0:1" Duration="0:0:1"
                                                               Storyboard.TargetName="theO"
+                                                              Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                                              FillBehavior="Stop">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.2"/>
+                <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.5"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:0.9"/>
+            </ColorAnimationUsingKeyFrames>
+
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:1" Duration="0:0:1"
+                                                              Storyboard.TargetName="theOBlurEffect"
                                                               Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                               FillBehavior="Stop">
                 <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
@@ -133,6 +153,9 @@
 
                 <Viewbox Stretch="Fill" Margin="25">
                     <Path x:Name="theX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Stroke>
+                            <SolidColorBrush x:Name="theXColor" Color="Transparent"/>
+                        </Path.Stroke>
                         <Path.Data>
                             <GeometryGroup>
                                 <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
@@ -143,6 +166,9 @@
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="25">
                     <Path x:Name="theXBlurEffect" StrokeThickness="8" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Stroke>
+                            <SolidColorBrush x:Name="theXBlurEffectColor" Color="Transparent"/>
+                        </Path.Stroke>
                         <Path.Data>
                             <GeometryGroup>
                                 <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
@@ -163,7 +189,7 @@
                     </Path>
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="28">
-                    <Path x:Name="theOBlurEffect" StrokeThickness="6">
+                    <Path x:Name="theOBlurEffect" StrokeThickness="6" Stroke="Transparent">
                         <Path.Data>
                             <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
                         </Path.Data>
@@ -180,8 +206,8 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource StartAnimation}"/>
                     </DataTrigger.EnterActions>
-                    <Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
+                    <!--<Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>-->
                     <!--<Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorder"/>
                     <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorderBlurEffect"/>-->
                     <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
