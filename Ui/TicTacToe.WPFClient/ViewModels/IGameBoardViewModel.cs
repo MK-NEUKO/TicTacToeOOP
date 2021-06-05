@@ -9,9 +9,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public interface IGameBoardViewModel
     {
-        IList<GameBoardArea> GameBoardAreaList { get; }
-        IList<PlaceATokenCommand> PlaceATokenCommands { get; }
-        ICommand InitializeGameCommand { get; }
+        List<GameBoardArea> GameBoardAreaList { get; }
+        List<PlaceATokenCommand> PlaceATokenCommands { get; }
+        //ICommand InitializeGameCommand { get; }
 
         void InitializeLastGameBoard();
         void InitializeNewGameBoard();

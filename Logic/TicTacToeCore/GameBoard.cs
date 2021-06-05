@@ -1,38 +1,28 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
-    // TODO Dokumentation erstellen, (Summary, etc.).
-
-    //public delegate void AreaIsOccupiedEventHandler();
-
     public class GameBoard : IGameBoard
     {
-        #region Events
-        //public event AreaIsOccupiedEventHandler AreaIsOccupied;
-        #endregion
-
-        #region Felder       
         private readonly IGameBoardRepository _gameBoardRepository;
-        private readonly IList<GameBoardArea> _gameBoardAreaList;
+        private List<GameBoardArea> _gameBoardAreaList;
         private bool _isPlayerXWinner;
         private bool _isPlayerOWinner;
         private bool _isGameTie;
         private readonly int[,] _winConstellations;
-        #endregion
+        
 
 
-        #region Konstruktor
-        // TODO Standardkonstruktor erstellen, (Konstruktorverkettung üben).
+       
         public GameBoard(IGameBoardRepository gameBoardRepository)
-        {            
-            _gameBoardRepository = gameBoardRepository;
+        {
+            _gameBoardRepository = gameBoardRepository ?? throw new ArgumentNullException(nameof(gameBoardRepository));
             _gameBoardAreaList = _gameBoardRepository.GameBoardAreaList;
             _winConstellations = new int[8, 3]
             {
@@ -46,15 +36,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                 {2,4,6},
             };
         }
-        #endregion
 
-        #region Eigenschaften
         public bool IsPlayerXWinner { get => _isPlayerXWinner; }
         public bool IsPlayerOWinner { get => _isPlayerOWinner; }
         public bool IsGameTie { get => _isGameTie; }
-        public IList<GameBoardArea> GameBoardAreaList { get => _gameBoardAreaList; }
-        #endregion
+        public List<GameBoardArea> GameBoardAreaList { get => _gameBoardAreaList; }
 
+
+        public List<GameBoardArea> GetNewGameBoard()
+        {
+            return _gameBoardRepository.NewGameBoardAreaList;
+        }
 
         public void CheckGameBoardState()
         {
@@ -66,49 +58,55 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         private void CheckForWinner()
         {
-        	for(int i = 0; i < _winConstellations.GetLength(0); i++)
-        	{                
-        		string actualContent = _gameBoardRepository.GameBoardAreaList[_winConstellations[i,0]].Area;
-        		actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i,1]].Area;
-        		actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i,2]].Area;
+            for (int i = 0; i < _winConstellations.GetLength(0); i++)
+            {
+                string actualContent = _gameBoardAreaList[_winConstellations[i, 0]].Area;
+                actualContent += _gameBoardAreaList[_winConstellations[i, 1]].Area;
+                actualContent += _gameBoardAreaList[_winConstellations[i, 2]].Area;
         		
         		if(actualContent == "XXX")
                 {
                     _isPlayerXWinner = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 0]].IsWinArea = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 1]].IsWinArea = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 2]].IsWinArea = true;
-                }        			
+                    _gameBoardAreaList[_winConstellations[i, 0]].IsWinArea = true;
+                    _gameBoardAreaList[_winConstellations[i, 1]].IsWinArea = true;
+                    _gameBoardAreaList[_winConstellations[i, 2]].IsWinArea = true;
+                }
      	
         		if(actualContent == "OOO")
                 {
                     _isPlayerOWinner = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 0]].IsWinArea = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 1]].IsWinArea = true;
-                    _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 2]].IsWinArea = true;
-                }        			
-        	}            
+                    _gameBoardAreaList[_winConstellations[i, 0]].IsWinArea = true;
+                    _gameBoardAreaList[_winConstellations[i, 1]].IsWinArea = true;
+                    _gameBoardAreaList[_winConstellations[i, 2]].IsWinArea = true;
+                }
+        	}
         }
-        
+
         private void CheckForGameIsATie()
         {
             if (_isPlayerXWinner || _isPlayerOWinner)
+            {
                 return;
+            }
 
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoardAreaList)
             {
                 if (area.Area == " ")
+                {
                     return;
+                }
             }
             _isGameTie = true;
         }
 
         private void ShowWinner()
         {
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoardAreaList)
             {
-                if (!area.IsWinArea)               
-                    area.IsShown = false;
+                if (!area.IsWinArea)
+                {
+                    area.IsAnimated = false;
+                }
             }
         }
 
@@ -119,13 +117,13 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             //if (_boardAreaList[areaID].AreaHasToken)
             //    AreaIsOccupied();
 
-            _gameBoardRepository.GameBoardAreaList[areaID].Area = token;
-            _gameBoardRepository.GameBoardAreaList[areaID].AreaHasToken = true;
+            _gameBoardAreaList[areaID].Area = token;
+            _gameBoardAreaList[areaID].AreaHasToken = true;
         }
 
         public void ResetGameBoard()
         {
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoardAreaList)
             {
                 area.Area = " ";
                 area.AreaHasToken = false;

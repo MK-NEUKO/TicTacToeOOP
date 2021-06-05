@@ -9,6 +9,7 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring.Contarct
 {
     public interface IGameBoardRepository
     {
-        IList<GameBoardArea> GameBoardAreaList { get; }
+        List<GameBoardArea> GameBoardAreaList { get; }
+        List<GameBoardArea> NewGameBoardAreaList { get; }
     }
 }

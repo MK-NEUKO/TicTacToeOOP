@@ -5,7 +5,6 @@
              Startup="Application_Startup">
     <Application.Resources>
 
-        <Color x:Key="GameBoardXOn">LawnGreen</Color>
 
         <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type l:IMenuViewModel}">
             <l:MenuView/>
@@ -21,7 +20,8 @@
 
         <DataTemplate x:Key="VisualMinimaxViewModelDataTemplate" DataType="{x:Type l:IVisualMinimaxViewModel}">
             <l:VisualMinimaxView/>
-        </DataTemplate>
+        </DataTemplate>           
+           
 
     </Application.Resources>
     

@@ -5,7 +5,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
 {
     public interface IGameBoard
     {
-        IList<GameBoardArea> GameBoardAreaList { get; }
+        List<GameBoardArea> GetNewGameBoard();
+        List<GameBoardArea> GameBoardAreaList { get; }
         bool IsPlayerXWinner { get; }
         bool IsPlayerOWinner { get; }
         bool IsGameTie { get; }

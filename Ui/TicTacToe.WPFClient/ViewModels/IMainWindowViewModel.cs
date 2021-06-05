@@ -9,6 +9,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         IGameBoardViewModel GameBoardViewModel { get; }
         IGameInfoViewModel GameInfoViewModel { get; }
-        void PlayAMove(int areaID);       
+        ICommand InitializeGameCommand { get; }
     }
 }

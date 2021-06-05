@@ -27,8 +27,8 @@
         <Ribbon Style="{StaticResource tttRibbonStyle}">
             <RibbonTab Header="Game">
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="Start Options">
-                    <RibbonButton Label="Start New Game" Command="{Binding UserChoosesStartNewGameCommand}"/>
-                    <RibbonButton Label="Start Last Game" Command="{Binding UserChoosesStartLastGameCommand}"/>
+                    <RibbonButton Label="Start New Game" Command="{Binding StartNewGameCommand}"/>
+                    <RibbonButton Label="Start Last Game" Command="{Binding StartLastGameCommand}"/>
                 </RibbonGroup>
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[0]}" Header="PlayerX" Foreground="LawnGreen" BorderBrush="LawnGreen">
                     <RibbonRadioButton Label="Human"/>
@@ -39,7 +39,7 @@
                             <ComboBoxItem>Normal</ComboBoxItem>
                         </RibbonComboBox>
                     </StackPanel>
-                    <RibbonTextBox Text="{Binding Name}"/>
+                    <RibbonTextBox Text="{Binding Name}" Foreground="Black"/>
                 </RibbonGroup>
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[1]}" Header="PlayerO">
                     <RibbonRadioButton Label="Human"/>
@@ -50,10 +50,10 @@
                             <ComboBoxItem>Normal</ComboBoxItem>
                         </RibbonComboBox>
                     </StackPanel>
-                    <RibbonTextBox Text="Name"/>
+                    <RibbonTextBox Text="Name" Foreground="Black"/>
                 </RibbonGroup>
                 <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" VerticalContentAlignment="Center">
-                    <RibbonButton BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
+                    <RibbonButton Command="{Binding StartGameCommand}" BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>

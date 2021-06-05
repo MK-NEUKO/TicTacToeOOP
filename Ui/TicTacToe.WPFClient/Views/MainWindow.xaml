@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"        
+        xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="TicTacToe" Height="600" Width="800">
@@ -11,7 +12,13 @@
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
 
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
@@ -39,6 +46,12 @@
         <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"
                         ContentTemplate="{StaticResource VisualMinimaxViewModelDataTemplate}"
                         Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
-        
+
+        <i:Interaction.Triggers>
+            <i:StoryboardCompletedTrigger Storyboard="{StaticResource StartAnimation}">
+                <i:InvokeCommandAction Command="{Binding InitializeGameCommand}"/>
+            </i:StoryboardCompletedTrigger>
+        </i:Interaction.Triggers>
+
     </Grid>
 </Window>

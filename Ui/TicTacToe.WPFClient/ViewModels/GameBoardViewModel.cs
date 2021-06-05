@@ -11,26 +11,44 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     public class GameBoardViewModel : ViewModelBase, IGameBoardViewModel
     {
         private readonly IGameBoard _gameBoard;
-        private readonly IList<GameBoardArea> _gameBoardAreaList;
-        private readonly IList<PlaceATokenCommand> _placeATokenCommands;
+        private List<GameBoardArea> _gameBoardAreaList;
+        private List<PlaceATokenCommand> _placeATokenCommands;
 
-        public ICommand InitializeGameCommand { get; }
-        
 
-        public GameBoardViewModel(IGameBoard gameBoard, IList<PlaceATokenCommand> placeATokenCommands)
+        public GameBoardViewModel(IGameBoard gameBoard)
         {
-            if (placeATokenCommands == null) throw new ArgumentNullException("PlaceATokenCommands");
+            _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
+            _gameBoardAreaList = _gameBoard.GameBoardAreaList;
+            _placeATokenCommands = CreatePlaceATokenCommands();
+        }
 
-            _gameBoard = gameBoard;
-            _gameBoardAreaList = gameBoard.GameBoardAreaList;
-            _placeATokenCommands = placeATokenCommands;
+        private List<PlaceATokenCommand> CreatePlaceATokenCommands()
+        {
+            _placeATokenCommands = new List<PlaceATokenCommand>();
+            int numberOfCommands = 9;
+            for (int areaID = 0; areaID < numberOfCommands; areaID++)
+            {
+                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, PlaceAToken, CanPlaceAToken));
+                _placeATokenCommands[areaID].RowIndex = _gameBoardAreaList[areaID].RowIndex;
+                _placeATokenCommands[areaID].ColumnIndex = _gameBoardAreaList[areaID].ColumnIndex;
+            }
 
-            InitializeGameCommand = new RelayCommand(InitializeGame, CanInitializeGame);                      
+            return _placeATokenCommands;
+        }
+
+        private bool CanPlaceAToken()
+        {
+            return true;
+        }
+
+        private void PlaceAToken(int areaID)
+        {
+            _gameBoard.PlaceAToken(areaID, "X");
         }
 
         public void InitializeNewGameBoard()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void InitializeLastGameBoard()
@@ -40,24 +58,20 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public void ShowStartAnimation()
         {
-            throw new NotImplementedException();
+            _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
         }
 
-        private bool CanInitializeGame()
+        public List<GameBoardArea> GameBoardAreaList
         {
-            return true;
-        }
-
-        private void InitializeGame(object obj)
-        {
-            foreach (var area in _gameBoardAreaList)
+            get => _gameBoardAreaList;
+            private set
             {
-                area.Area = " ";
+                _gameBoardAreaList = value;
+                OnPropertyChanged();
             }
         }
+        
 
-        public IList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
-
-        public IList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands;
+        public List<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands;
     }
 }

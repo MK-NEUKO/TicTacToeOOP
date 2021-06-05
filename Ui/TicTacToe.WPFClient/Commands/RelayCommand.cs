@@ -8,7 +8,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
-        private readonly Func<bool> _canExecute;       
+        private readonly Func<bool> _canExecute;
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
@@ -32,7 +32,11 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public bool CanExecute(object parameter)
         {
-            if (_canExecute == null) return true;
+            if (_canExecute == null)
+            {
+                return true;
+            }
+
             return _canExecute();
         }
 

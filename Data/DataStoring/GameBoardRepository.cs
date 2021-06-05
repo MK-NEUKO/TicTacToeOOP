@@ -11,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
 {
     public class GameBoardRepository : IGameBoardRepository
     {
-        public IList<GameBoardArea> GameBoardAreaList =>        
+        public List<GameBoardArea> GameBoardAreaList =>        
             new List<GameBoardArea>
             {
                 new GameBoardArea(0){RowIndex = 0, ColumnIndex = 0},
@@ -23,6 +23,21 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
                 new GameBoardArea(6){RowIndex = 2, ColumnIndex = 0},
                 new GameBoardArea(7){RowIndex = 2, ColumnIndex = 1},
                 new GameBoardArea(8){RowIndex = 2, ColumnIndex = 2},
+            };
+
+
+        public List<GameBoardArea> NewGameBoardAreaList =>
+            new List<GameBoardArea>
+            {
+                new GameBoardArea(0){RowIndex = 0, IsAnimated = true, ColumnIndex = 0, Area = "X"},
+                new GameBoardArea(1){RowIndex = 0, IsAnimated = true, ColumnIndex = 1},
+                new GameBoardArea(2){RowIndex = 0, IsAnimated = true, ColumnIndex = 2, Area = "X"},
+                new GameBoardArea(3){RowIndex = 1, IsAnimated = true, ColumnIndex = 0},
+                new GameBoardArea(4){RowIndex = 1, IsAnimated = true, ColumnIndex = 1},
+                new GameBoardArea(5){RowIndex = 1, IsAnimated = true, ColumnIndex = 2, Area = "X"},
+                new GameBoardArea(6){RowIndex = 2, IsAnimated = true, ColumnIndex = 0},
+                new GameBoardArea(7){RowIndex = 2, IsAnimated = true, ColumnIndex = 1},
+                new GameBoardArea(8){RowIndex = 2, IsAnimated = true, ColumnIndex = 2},
             };
     }
 }

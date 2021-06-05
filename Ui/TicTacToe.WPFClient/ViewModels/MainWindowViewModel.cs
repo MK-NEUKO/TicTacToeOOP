@@ -14,7 +14,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGameBoard _gameBoard;
         private readonly IPlayerController _playerController;
-        private readonly IAI _aimimax;        
+        private readonly IAI _aimimax;
+
+        public ICommand InitializeGameCommand { get; }
 
         public MainWindowViewModel(IMenuViewModel menuViewModel,
                                    IGameBoardViewModel gameBoardViewModel, 
@@ -23,33 +25,28 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
                                    IPlayerController playerController,
                                    IAI aimimax)
         {
-            if (menuViewModel == null) throw new ArgumentNullException("MenuViewModel");
-            if (gameBoardViewModel == null) throw new ArgumentNullException("GameBoardViewModel");
-            if (gameInfoViewModel == null) throw new ArgumentNullException("GameInfoViewModel");
-            if (gameBoard == null) throw new ArgumentNullException("GameBoard");
-            if (playerController == null) throw new ArgumentNullException("PlayerController");
-            if (aimimax == null) throw new ArgumentNullException("Aimimax");
-
-            _menuViewModel = menuViewModel;
-            _gameBoardViewModel = gameBoardViewModel;
-            _gameInfoViewModel = gameInfoViewModel;
-            _gameBoard = gameBoard;
+            _menuViewModel = menuViewModel ?? throw new ArgumentNullException(nameof(menuViewModel));
+            _gameBoardViewModel = gameBoardViewModel ?? throw new ArgumentNullException(nameof(gameBoardViewModel));
+            _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
+            _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
             _playerController = playerController;
-            _aimimax = aimimax;            
-        }       
+            _aimimax = aimimax;
 
-        public void PlayAMove(int areaID)
-        {
-            _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
-            _gameBoard.CheckGameBoardState();
-            _playerController.ChangePlayer();
-            _aimimax.GetAMove();
-            _gameBoard.PlaceAToken(_aimimax.AreaIDForO, _playerController.GiveCurrentToken());
-            _gameBoard.CheckGameBoardState();
-            _playerController.ChangePlayer();
-            //_playerController.SetWinner();
+            InitializeGameCommand = new RelayCommand(InitializeGame, CanInitializeGame);
         }
 
+        private bool CanInitializeGame()
+        {
+            return true;
+        }
+
+        private void InitializeGame(object obj)
+        {
+            if (_menuViewModel.UserChoosesStartNewGame)
+            {
+                _gameBoardViewModel.InitializeNewGameBoard();
+            }
+        }
 
         public IGameBoardViewModel GameBoardViewModel => _gameBoardViewModel;
         public IGameInfoViewModel GameInfoViewModel => _gameInfoViewModel;

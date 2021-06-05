@@ -23,6 +23,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public ICommand StartNewGameCommand { get; }
         public ICommand StartLastGameCommand { get; }
         public IList<Player> PlayerDataOnTheRibbon { get => _playerDataOnTheRibbon; set => _playerDataOnTheRibbon = value; }
+        public bool UserChoosesStartNewGame { get => _userChoosesStartNewGame; set => _userChoosesStartNewGame = value; }
+        public bool UserChoosesStartLastGame { get => _userChoosesStartLastGame; set => _userChoosesStartLastGame = value; }
 
         public MenuViewModel(IGameBoardViewModel gameBoardViewModel,
                              IGameInfoViewModel gameInfoViewModel,
@@ -38,51 +40,27 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             };
 
             StartGameCommand = new RelayCommand(StartGame, CanStartGame);
-            StartNewGameCommand = new RelayCommand(UserChoosesStartNewGame, UserChoosesCanStartNewGame);
-            StartLastGameCommand = new RelayCommand(UserChoosesStartLastGame, UserChoosesCanStartLastGame);
-            
+            StartNewGameCommand = new RelayCommand(UserChoosesStartNewGameCommand, CanUserChoosesStartNewGameCommand);
+            StartLastGameCommand = new RelayCommand(UserChoosesStartLastGameCommand, CanUserChoosesStartLastGameCommand);
         }
 
-        private void InitilizeGame()
+        private bool CanUserChoosesStartLastGameCommand()
         {
-            if(_userChoosesStartNewGame)
-            {
-                InitilizeNewGame();
-            }
-
-            if (_userChoosesStartLastGame)
-            {
-                InitilizeLastGame();
-            }
+            return true;
         }
 
-        private void InitilizeLastGame()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void InitilizeNewGame()
-        {
-            _gameBoardViewModel.InitializeNewGameBoard();
-        }
-
-        private bool UserChoosesCanStartLastGame()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void UserChoosesStartLastGame(object obj)
+        private void UserChoosesStartLastGameCommand(object obj)
         {
             _userChoosesStartLastGame = true;
             _userChoosesStartNewGame = false;
         }
 
-        private bool UserChoosesCanStartNewGame()
+        private bool CanUserChoosesStartNewGameCommand()
         {
-            throw new NotImplementedException();
+           return true;
         }
 
-        private void UserChoosesStartNewGame(object obj)
+        private void UserChoosesStartNewGameCommand(object obj)
         {
             _userChoosesStartNewGame = true;
             _userChoosesStartLastGame = false;
