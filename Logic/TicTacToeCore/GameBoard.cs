@@ -40,12 +40,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public bool IsPlayerXWinner { get => _isPlayerXWinner; }
         public bool IsPlayerOWinner { get => _isPlayerOWinner; }
         public bool IsGameTie { get => _isGameTie; }
-        public List<GameBoardArea> GameBoardAreaList { get => _gameBoardAreaList; }
+        public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList.AsReadOnly();
 
 
         public List<GameBoardArea> GetNewGameBoard()
         {
             return _gameBoardRepository.NewGameBoardAreaList;
+        }
+
+        public void ShowStartAnimation()
+        {
+            _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
         }
 
         public void CheckGameBoardState()

@@ -9,28 +9,32 @@
     <UserControl.Resources>
         
         <Style x:Key="tttRibbonStyle" TargetType="Ribbon">
-            <Setter Property="Background" Value="#333333"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="BorderBrush" Value="LawnGreen"/>
-        
+
+            <Setter Property="Background" Value="#FF272727"/>
+            <Setter Property="Foreground" Value="LawnGreen"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
 
         </Style>
 
-        <Style x:Key="tttRibbonGroupStyle" TargetType="RibbonGroup">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="#333333"/>
+        <Style x:Key="tttRibbonGroup" TargetType="RibbonGroup">
+            <Setter Property="Background" Value="#FF272727"/>
+        </Style>
+
+        <Style x:Key="tttRibbonTabStyle" TargetType="RibbonTab">
+            <Setter Property="BorderBrush" Value="blue"/>
+            
         </Style>
         
     </UserControl.Resources>
     <Grid>
 
         <Ribbon Style="{StaticResource tttRibbonStyle}">
-            <RibbonTab Header="Game">
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" Header="Start Options">
+            <RibbonTab Style="{StaticResource tttRibbonTabStyle}" Header="Game">
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" Header="Start Options">
                     <RibbonButton Label="Start New Game" Command="{Binding StartNewGameCommand}"/>
                     <RibbonButton Label="Start Last Game" Command="{Binding StartLastGameCommand}"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[0]}" Header="PlayerX" Foreground="LawnGreen" BorderBrush="LawnGreen">
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" ItemsSource="{Binding PlayerDataOnTheRibbon[0]}" Header="PlayerX" >
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
@@ -41,18 +45,18 @@
                     </StackPanel>
                     <RibbonTextBox Text="{Binding Name}" Foreground="Black"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" ItemsSource="{Binding PlayerDataOnTheRibbon[1]}" Header="PlayerO">
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" ItemsSource="{Binding PlayerDataOnTheRibbon[1]}" Header="PlayerO">
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
                         <RibbonComboBox Text="Level">
-                            <ComboBoxItem>Easy</ComboBoxItem>
-                            <ComboBoxItem>Normal</ComboBoxItem>
+                            <ComboBoxItem Content="Easy"/>
+                            <ComboBoxItem Content="Normal"/>
                         </RibbonComboBox>
                     </StackPanel>
                     <RibbonTextBox Text="Name" Foreground="Black"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroupStyle}" VerticalContentAlignment="Center">
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" VerticalContentAlignment="Center">
                     <RibbonButton Command="{Binding StartGameCommand}" BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
                 </RibbonGroup>
             </RibbonTab>

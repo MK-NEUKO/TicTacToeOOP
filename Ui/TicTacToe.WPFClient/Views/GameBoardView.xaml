@@ -22,12 +22,6 @@
 
 
     <Grid Background="#FF272727">
-       
-        <!--<i:Interaction.Triggers>
-            <i:StoryboardCompletedTrigger Storyboard="{StaticResource StartAnimation}">
-                <i:InvokeCommandAction Command="{Binding InitializeGameCommand}"/>
-            </i:StoryboardCompletedTrigger>
-        </i:Interaction.Triggers>-->
 
         <ItemsControl Style="{DynamicResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
         </ItemsControl>

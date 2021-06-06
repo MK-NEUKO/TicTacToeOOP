@@ -11,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     public class GameBoardViewModel : ViewModelBase, IGameBoardViewModel
     {
         private readonly IGameBoard _gameBoard;
-        private List<GameBoardArea> _gameBoardAreaList;
+        private IReadOnlyList<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
 
 
@@ -58,10 +58,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public void ShowStartAnimation()
         {
-            _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
+            _gameBoard.ShowStartAnimation();
         }
 
-        public List<GameBoardArea> GameBoardAreaList
+        public IReadOnlyList<GameBoardArea> GameBoardAreaList
         {
             get => _gameBoardAreaList;
             private set
@@ -72,6 +72,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         }
         
 
-        public List<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands;
+        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
     }
 }
