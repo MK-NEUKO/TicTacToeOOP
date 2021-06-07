@@ -39,39 +39,43 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
                 new Player(){Name = "PlayerO"}
             };
 
-            StartGameCommand = new RelayCommand(StartGame, CanStartGame);
-            StartNewGameCommand = new RelayCommand(UserChoosesStartNewGameCommand, CanUserChoosesStartNewGameCommand);
-            StartLastGameCommand = new RelayCommand(UserChoosesStartLastGameCommand, CanUserChoosesStartLastGameCommand);
+            StartGameCommand = new RelayCommand(StartGameExecute, StartGameCanExecute);
+            StartNewGameCommand = new RelayCommand(UserChoosesStartNewGameExecute, UserChoosesStartNewGameCanExecute);
+            StartLastGameCommand = new RelayCommand(UserChoosesStartLastGameExecute, UserChoosesStartLastGameCanExecute);
         }
 
-        private bool CanUserChoosesStartLastGameCommand()
+        private bool UserChoosesStartLastGameCanExecute()
         {
             return true;
         }
 
-        private void UserChoosesStartLastGameCommand(object obj)
+        private void UserChoosesStartLastGameExecute(object obj)
         {
             _userChoosesStartLastGame = true;
             _userChoosesStartNewGame = false;
         }
 
-        private bool CanUserChoosesStartNewGameCommand()
+        private bool UserChoosesStartNewGameCanExecute()
         {
            return true;
         }
 
-        private void UserChoosesStartNewGameCommand(object obj)
+        private void UserChoosesStartNewGameExecute(object obj)
         {
             _userChoosesStartNewGame = true;
             _userChoosesStartLastGame = false;
         }
 
-        private bool CanStartGame()
+        private bool StartGameCanExecute()
         {
-            return true;
+            if (_userChoosesStartNewGame || _userChoosesStartLastGame)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void StartGame(object obj)
+        private void StartGameExecute(object obj)
         {
             _gameBoardViewModel.ShowStartAnimation();
         }

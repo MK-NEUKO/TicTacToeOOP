@@ -32,15 +32,15 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _playerController = playerController;
             _aimimax = aimimax;
 
-            InitializeGameCommand = new RelayCommand(InitializeGame, CanInitializeGame);
+            InitializeGameCommand = new RelayCommand(InitializeGameExecute, InitializeGameCanExecute);
         }
 
-        private bool CanInitializeGame()
+        private bool InitializeGameCanExecute()
         {
             return true;
         }
 
-        private void InitializeGame(object obj)
+        private void InitializeGameExecute(object obj)
         {
             if (_menuViewModel.UserChoosesStartNewGame)
             {

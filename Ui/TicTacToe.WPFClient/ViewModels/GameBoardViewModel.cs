@@ -8,15 +8,18 @@ using System.Windows.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
-    public class GameBoardViewModel : ViewModelBase, IGameBoardViewModel
+    public class GameBoardViewModel : IGameBoardViewModel
     {
         private readonly IGameBoard _gameBoard;
+        private readonly IGamePlay _gamePlay;
         private IReadOnlyList<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
+        private bool _isAnimationCompleted;
 
-        public GameBoardViewModel(IGameBoard gameBoard)
+        public GameBoardViewModel(IGameBoard gameBoard, IGamePlay gamePlay)
         {
             _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
+            _gamePlay = gamePlay ?? throw new ArgumentNullException(nameof(gamePlay));
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
         }
@@ -31,7 +34,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             int numberOfCommands = 9;
             for (int areaID = 0; areaID < numberOfCommands; areaID++)
             {
-                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, PlaceAToken, CanPlaceAToken));
+                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, PlaceATokenExecute, PlaceATokenCanExecute));
                 _placeATokenCommands[areaID].RowIndex = _gameBoardAreaList[areaID].RowIndex;
                 _placeATokenCommands[areaID].ColumnIndex = _gameBoardAreaList[areaID].ColumnIndex;
             }
@@ -39,19 +42,23 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             return _placeATokenCommands;
         }
 
-        private bool CanPlaceAToken()
+        private bool PlaceATokenCanExecute()
         {
-            return true;
+            if (_isAnimationCompleted)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void PlaceAToken(int areaID)
+        private void PlaceATokenExecute(int areaID)
         {
-            _gameBoard.PlaceAToken(areaID, "X");
+            _gamePlay.TakeAMove(areaID);
         }
 
         public void InitializeNewGameBoard()
         {
-            
+            _isAnimationCompleted = true;
         }
 
         public void InitializeLastGameBoard()
@@ -63,7 +70,5 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             _gameBoard.ShowStartAnimation();
         }
-
-        
     }
 }

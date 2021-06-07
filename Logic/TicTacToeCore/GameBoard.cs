@@ -37,13 +37,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             };
         }
 
-        public bool IsPlayerXWinner { get => _isPlayerXWinner; }
-        public bool IsPlayerOWinner { get => _isPlayerOWinner; }
-        public bool IsGameTie { get => _isGameTie; }
+        public bool IsPlayerXWinner => _isPlayerXWinner;
+        public bool IsPlayerOWinner => _isPlayerOWinner;
+        public bool IsGameTie => _isGameTie;
         public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList.AsReadOnly();
 
-
-        public List<GameBoardArea> GetNewGameBoard() => _gameBoardRepository.LoadNewGameBoard();
 
         public void ShowStartAnimation() => _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
 
@@ -57,7 +55,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         private void CheckForWinner()
         {
-            for (int i = 0; i < _winConstellations.GetLength(0); i++)
+            var numberOfWinnconstellations = _winConstellations.GetLength(0);
+            for (int i = 0; i < numberOfWinnconstellations; i++)
             {
                 string actualContent = _gameBoardAreaList[_winConstellations[i, 0]].Area;
                 actualContent += _gameBoardAreaList[_winConstellations[i, 1]].Area;

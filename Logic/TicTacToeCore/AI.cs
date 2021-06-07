@@ -11,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     {
         private IGameBoardRepository _gameBoardRepository;
         private IPlayerReposytory _playerRepository;
-        private IGameBoard _board;
+        private IGameBoard _gameBoard;
         private Player _playerX;
         private Player _playerO;
         private readonly int[,] _winConstellations;
@@ -26,7 +26,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoard board)
         {
             _gameBoardRepository = gameBoardRepository;
-            _board = board;
+            _gameBoard = board;
             _playerX = playerReposytory.PlayerList[0];
             _playerO = playerReposytory.PlayerList[1];
             _winConstellations = new int[8, 3]
@@ -74,7 +74,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -98,7 +98,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -123,7 +123,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
 
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -146,7 +146,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
                 return EvaluateBoardAreas();
          
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == " ")
                 {
@@ -167,9 +167,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {        
             for (int i = 0; i < _winConstellations.GetLength(0); i++)
             {
-                string actualContent = _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 0]].Area;
-                actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 1]].Area;
-                actualContent += _gameBoardRepository.GameBoardAreaList[_winConstellations[i, 2]].Area;
+                string actualContent = _gameBoard.GameBoardAreaList[_winConstellations[i, 0]].Area;
+                actualContent += _gameBoard.GameBoardAreaList[_winConstellations[i, 1]].Area;
+                actualContent += _gameBoard.GameBoardAreaList[_winConstellations[i, 2]].Area;
 
                 if (actualContent == "XXX")
                     return _xIsWinner;
@@ -178,7 +178,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                     return _oIsWinner;
             }
 
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == " ")
                     return _gameIsOpen;
@@ -190,7 +190,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             int value = 0;
             int index = 0;
-            foreach (var area in _gameBoardRepository.GameBoardAreaList)
+            foreach (var area in _gameBoard.GameBoardAreaList)
             {
                 if (area.Area == "O")
                     value -= _boardAreaFineValues[index];
