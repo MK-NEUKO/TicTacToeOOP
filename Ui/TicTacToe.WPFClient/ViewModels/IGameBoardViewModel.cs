@@ -11,8 +11,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         IReadOnlyList<GameBoardArea> GameBoardAreaList { get; }
         IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands { get; }
-        //ICommand InitializeGameCommand { get; }
-
         void InitializeLastGameBoard();
         void InitializeNewGameBoard();
         void ShowStartAnimation();

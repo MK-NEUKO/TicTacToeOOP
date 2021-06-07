@@ -14,13 +14,16 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private IReadOnlyList<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
 
-
         public GameBoardViewModel(IGameBoard gameBoard)
         {
             _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
         }
+
+        public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
+        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
+
 
         private List<PlaceATokenCommand> CreatePlaceATokenCommands()
         {
@@ -61,17 +64,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoard.ShowStartAnimation();
         }
 
-        public IReadOnlyList<GameBoardArea> GameBoardAreaList
-        {
-            get => _gameBoardAreaList;
-            private set
-            {
-                _gameBoardAreaList = value;
-                OnPropertyChanged();
-            }
-        }
         
-
-        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
     }
 }

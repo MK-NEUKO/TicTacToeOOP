@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
+using System.ComponentModel;
+using System.Collections.Generic;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
 using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
@@ -23,7 +23,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public GameBoard(IGameBoardRepository gameBoardRepository)
         {
             _gameBoardRepository = gameBoardRepository ?? throw new ArgumentNullException(nameof(gameBoardRepository));
-            _gameBoardAreaList = _gameBoardRepository.GameBoardAreaList;
+            _gameBoardAreaList = _gameBoardRepository.LoadNewGameBoard();
             _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /*  +---+---+---+  */
@@ -43,15 +43,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList.AsReadOnly();
 
 
-        public List<GameBoardArea> GetNewGameBoard()
-        {
-            return _gameBoardRepository.NewGameBoardAreaList;
-        }
+        public List<GameBoardArea> GetNewGameBoard() => _gameBoardRepository.LoadNewGameBoard();
 
-        public void ShowStartAnimation()
-        {
-            _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
-        }
+        public void ShowStartAnimation() => _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
 
         public void CheckGameBoardState()
         {
