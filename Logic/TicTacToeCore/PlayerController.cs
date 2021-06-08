@@ -10,26 +10,29 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     public class PlayerController : IPlayerController
     {
         private readonly IPlayerReposytory _playerReposytory;
+        private readonly IGameBoard _board;
         private Player _playerX;
         private Player _playerO;
-        private readonly IGameBoard _board;
+        
         private readonly IAI _aimimax;
         private int _gameIsTie;
 
-        public int GameIsTie { get => _gameIsTie; }
-        public Player PlayerX { get => _playerX; set => _playerX = value; }
-        public Player PlayerO { get => _playerO; set => _playerO = value; }
+        
 
         public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
         {
-            _playerX = playerRepository.PlayerList[0];
-            _playerO = playerRepository.PlayerList[1];
+            _playerReposytory = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
             _board = board;
+            _playerX = _playerReposytory.LoadNewPlayerList()[0];
+            _playerO = _playerReposytory.LoadNewPlayerList()[1];
+            
             _aimimax = aimimax;
             
         }
 
-        
+        public int GameIsTie { get => _gameIsTie; }
+        public Player PlayerX { get => _playerX; set => _playerX = value; }
+        public Player PlayerO { get => _playerO; set => _playerO = value; }
 
         public void ResetPlayers()
         {

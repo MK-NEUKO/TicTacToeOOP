@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class BaseDataClass : INotifyPropertyChanged
+    public class DataClassBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -2,7 +2,7 @@
 
 namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class Player : BaseDataClass
+    public class Player : DataClassBase
     {
         private bool _inAction;
         private bool _isHuman;

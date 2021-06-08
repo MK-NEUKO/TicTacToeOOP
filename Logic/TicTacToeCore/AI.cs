@@ -26,9 +26,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoard board)
         {
             _gameBoardRepository = gameBoardRepository;
+            _playerRepository = playerReposytory;
             _gameBoard = board;
-            _playerX = playerReposytory.PlayerList[0];
-            _playerO = playerReposytory.PlayerList[1];
+            _playerX = _playerRepository.LoadNewPlayerList()[0];
+            _playerO = _playerRepository.LoadNewPlayerList()[1];
             _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/

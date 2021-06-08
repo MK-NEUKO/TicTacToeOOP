@@ -11,6 +11,6 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring.Contarct
     {
         List<GameBoardArea> LoadNewGameBoard();
         List<GameBoardArea> LoadLastGameBoard();
-        void SaveGameBoard(List<GameBoardArea> gameBoard);
+        void StoreGameBoard(List<GameBoardArea> gameBoard);
     }
 }

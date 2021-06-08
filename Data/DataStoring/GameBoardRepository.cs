@@ -44,7 +44,7 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
             };
         }
 
-        public void SaveGameBoard(List<GameBoardArea> gameBoard)
+        public void StoreGameBoard(List<GameBoardArea> gameBoard)
         {
             throw new NotImplementedException();
         }

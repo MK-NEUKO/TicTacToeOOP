@@ -9,6 +9,8 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring.Contarct
 {
     public interface IPlayerReposytory
     {
-        IList<Player> PlayerList { get; }
+        List<Player> LoadLastPlayerList();
+        List<Player> LoadNewPlayerList();
+        void StorePlayerList();
     }
 }

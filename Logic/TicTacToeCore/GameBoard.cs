@@ -16,9 +16,6 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private bool _isPlayerOWinner;
         private bool _isGameTie;
         private readonly int[,] _winConstellations;
-        
-
-
        
         public GameBoard(IGameBoardRepository gameBoardRepository)
         {
@@ -111,9 +108,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public void PlaceAToken(int areaID, string token)
         {
             // TODO Exception auslösen wenn: übergebene Parameter nicht initialisiert sind, oder das Feld bereits besetzt ist.
-            // TODO Eventuell eine Eigene Exception erstellen, aus Übungszwecken, da sonst nicht erforderlich (AreaIsOccupiedException).
-            //if (_boardAreaList[areaID].AreaHasToken)
-            //    AreaIsOccupied();
+            // TODO Eventuell eine Eigene Exception erstellen, aus Übungszwecken, da sonst nicht erforderlich (AreaIsOccupiedException).          
 
             _gameBoardAreaList[areaID].Area = token;
             _gameBoardAreaList[areaID].AreaHasToken = true;
