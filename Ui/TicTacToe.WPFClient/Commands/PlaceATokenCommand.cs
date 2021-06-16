@@ -32,11 +32,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public bool CanExecute(object parameter)
         {
-            if (_canExecute == null)
-            {
-                return true;
-            }
-
             return _canExecute();
         }
 

@@ -6,8 +6,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public interface IGameInfoViewModel
     {
-        public Player PlayerX { get; set; }
-        public Player PlayerO { get; set; }
-        public int NumberOfTie { get; set; }
+        public Player PlayerX { get; }
+        public Player PlayerO { get; }
+
+        void InitializeNewPlayerList();
     }
 }

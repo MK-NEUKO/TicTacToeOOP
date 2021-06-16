@@ -2,23 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:view="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="TicTacToe" Height="600" Width="800">
-    <d:Window.DataContext>
-        <sd:MainWindowViewModelSampleDate/>
-    </d:Window.DataContext>
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary1.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+    
+    
 
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
@@ -30,28 +21,33 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        
+
         <ContentControl Content="{Binding Path=MenuViewModel}"
                         ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
                         Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <ContentControl Content="{Binding Path=GameBoardViewModel}"
-                        ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"                      
-                        Grid.Row="1"/>
+        <view:GameBoardView DataContext="{Binding GameBoardViewModel}" Grid.Row="1"                           
+                            x:Name="gameBoard"/>
+
+
+
+
 
         <ContentControl Content="{Binding Path=GameInfoViewModel}"
                         ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
                         Grid.Row="2"/>
 
-        <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"
+        <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"                       
                         ContentTemplate="{StaticResource VisualMinimaxViewModelDataTemplate}"
                         Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
-
+        
+        
         <i:Interaction.Triggers>
-            <i:StoryboardCompletedTrigger Storyboard="{StaticResource StartAnimation}">
+            <i:EventTrigger EventName="StartAnimationCompletedEvent" 
+                            SourceObject="{Binding ElementName=gameBoard}">
                 <i:InvokeCommandAction Command="{Binding InitializeGameCommand}"/>
-            </i:StoryboardCompletedTrigger>
+            </i:EventTrigger>
         </i:Interaction.Triggers>
-
+        
     </Grid>
 </Window>

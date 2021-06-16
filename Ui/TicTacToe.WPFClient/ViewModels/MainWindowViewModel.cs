@@ -45,6 +45,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             if (_menuViewModel.UserChoosesStartNewGame)
             {
                 _gameBoardViewModel.InitializeNewGameBoard();
+                _gameInfoViewModel.InitializeNewPlayerList();
             }
         }
 

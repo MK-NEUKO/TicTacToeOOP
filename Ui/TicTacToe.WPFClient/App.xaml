@@ -3,15 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              Startup="Application_Startup">
+    
     <Application.Resources>
+
 
 
         <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type l:IMenuViewModel}">
             <l:MenuView/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type l:IGameBoardViewModel}">
-            <l:GameBoardView/>
         </DataTemplate>
 
         <DataTemplate x:Key="GameInfoViewModelDataTemplate" DataType="{x:Type l:IGameInfoViewModel}">

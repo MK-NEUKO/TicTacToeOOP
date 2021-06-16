@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {

@@ -34,7 +34,7 @@
                     <RibbonButton Label="Start New Game" Command="{Binding StartNewGameCommand}"/>
                     <RibbonButton Label="Start Last Game" Command="{Binding StartLastGameCommand}"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroup}" ItemsSource="{Binding PlayerDataOnTheRibbon[0]}" Header="PlayerX" >
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" Header="PlayerX" >
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
@@ -43,9 +43,9 @@
                             <ComboBoxItem>Normal</ComboBoxItem>
                         </RibbonComboBox>
                     </StackPanel>
-                    <RibbonTextBox Text="{Binding Name}" Foreground="Black"/>
+                    <RibbonTextBox Text="{Binding PlayerListOnRibbon[0].Name}" Foreground="Black"/>
                 </RibbonGroup>
-                <RibbonGroup Style="{StaticResource tttRibbonGroup}" ItemsSource="{Binding PlayerDataOnTheRibbon[1]}" Header="PlayerO">
+                <RibbonGroup Style="{StaticResource tttRibbonGroup}" Header="PlayerO">
                     <RibbonRadioButton Label="Human"/>
                     <StackPanel Orientation="Horizontal">
                         <RibbonRadioButton Label="AI"/>
@@ -54,7 +54,7 @@
                             <ComboBoxItem Content="Normal"/>
                         </RibbonComboBox>
                     </StackPanel>
-                    <RibbonTextBox Text="Name" Foreground="Black"/>
+                    <RibbonTextBox Text="{Binding PlayerListOnRibbon[1].Name}" Foreground="Black"/>
                 </RibbonGroup>
                 <RibbonGroup Style="{StaticResource tttRibbonGroup}" VerticalContentAlignment="Center">
                     <RibbonButton Command="{Binding StartGameCommand}" BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>

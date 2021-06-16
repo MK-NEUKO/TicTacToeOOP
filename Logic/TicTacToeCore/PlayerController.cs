@@ -11,6 +11,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     {
         private readonly IPlayerReposytory _playerReposytory;
         private readonly IGameBoard _board;
+        private List<Player> _playerList;
         private Player _playerX;
         private Player _playerO;
         
@@ -22,17 +23,22 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
         {
             _playerReposytory = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
-            _board = board;
-            _playerX = _playerReposytory.LoadNewPlayerList()[0];
-            _playerO = _playerReposytory.LoadNewPlayerList()[1];
+            _board = board ?? throw new ArgumentNullException(nameof(board));
+            _playerList = new List<Player>
+            {
+                new Player("PlayerX", false, true),
+                new Player("PlayerO", false, true)
+            };
+            _playerX = _playerList[0];
+            _playerO = _playerList[1];
             
             _aimimax = aimimax;
             
         }
 
-        public int GameIsTie { get => _gameIsTie; }
-        public Player PlayerX { get => _playerX; set => _playerX = value; }
-        public Player PlayerO { get => _playerO; set => _playerO = value; }
+        public IReadOnlyList<Player> PlayerList => _playerList.AsReadOnly();
+
+        public void GetNewPlayerList() => _playerList = _playerReposytory.LoadNewPlayerList();
 
         public void ResetPlayers()
         {
@@ -83,7 +89,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             if (_board.IsPlayerXWinner)
                 _playerX.Points++;
-            if (_board.IsPlayerXWinner)
+            if (_board.IsPlayerOWinner)
                 _playerO.Points++;
             if (_board.IsGameTie)
                 _gameIsTie++;

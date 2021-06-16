@@ -24,6 +24,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
             _gameBoard.CheckGameBoardState();
+            _playerController.GivePoints();
+            _playerController.SetWinner();
             _playerController.ChangePlayer();
         }
     }

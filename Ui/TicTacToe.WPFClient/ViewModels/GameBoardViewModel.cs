@@ -59,6 +59,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public void InitializeNewGameBoard()
         {
             _isAnimationCompleted = true;
+            CommandManager.InvalidateRequerySuggested();
         }
 
         public void InitializeLastGameBoard()

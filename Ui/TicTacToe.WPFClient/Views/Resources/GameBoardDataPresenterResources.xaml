@@ -21,7 +21,7 @@
         <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
     </Style>
 
-    <!--<Storyboard x:Key="StartAnimation" RepeatBehavior="1x">
+    <Storyboard x:Key="StartAnimation" RepeatBehavior="1x">
         <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
                                                               Storyboard.TargetName="theXColor"
                                                               Storyboard.TargetProperty="Color"
@@ -93,7 +93,7 @@
             <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0"/>
             <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="0.0"/>
         </DoubleAnimationUsingKeyFrames>
-    </Storyboard>-->
+    </Storyboard>
 
     <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
         <Grid>

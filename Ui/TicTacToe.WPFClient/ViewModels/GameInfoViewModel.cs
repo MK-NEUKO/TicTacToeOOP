@@ -10,20 +10,24 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     public class GameInfoViewModel : IGameInfoViewModel
     {
         private IPlayerController _playerController;
-        private Player _playerX;
-        private Player _playerO;
-        private int _numberOfTie;
+        private readonly Player _playerX;
+        private readonly Player _playerO;
 
         public GameInfoViewModel(IPlayerController playerController)
         {
-            
+            _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
 
-            _playerX = playerController.PlayerX;
-            _playerO = playerController.PlayerO;
+            _playerX = _playerController.PlayerList[0];
+            _playerO = _playerController.PlayerList[1];
+            
         }
 
-        public Player PlayerX { get => _playerX; set => _playerX = value; }
-        public Player PlayerO { get => _playerO; set => _playerO = value; }
-        public int NumberOfTie { get => _numberOfTie; set => _numberOfTie = value; }
+        public Player PlayerX => _playerX;
+        public Player PlayerO => _playerO;
+
+        public void InitializeNewPlayerList()
+        {
+            _playerController.GetNewPlayerList();
+        }
     }
 }
