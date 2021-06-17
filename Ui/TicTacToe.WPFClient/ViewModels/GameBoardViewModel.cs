@@ -44,7 +44,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         private bool PlaceATokenCanExecute()
         {
-            if (_isAnimationCompleted)
+            var canExecute = _isAnimationCompleted && !(_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner) && !_gameBoard.IsGameTie;
+            if (canExecute)
             {
                 return true;
             }

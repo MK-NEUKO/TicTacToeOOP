@@ -41,7 +41,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         }
 
         private void InitializeGameExecute(object obj)
-        {
+        {         
             if (_menuViewModel.UserChoosesStartNewGame)
             {
                 _gameBoardViewModel.InitializeNewGameBoard();
