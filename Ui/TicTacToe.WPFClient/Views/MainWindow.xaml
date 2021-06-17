@@ -9,7 +9,9 @@
         WindowStartupLocation="CenterScreen"
         Title="TicTacToe" Height="600" Width="800">
     
-    
+
+
+
 
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
@@ -26,7 +28,8 @@
                         ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
                         Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <view:GameBoardView DataContext="{Binding GameBoardViewModel}" Grid.Row="1"                           
+        <view:GameBoardView DataContext="{Binding GameBoardViewModel}"
+                            Grid.Row="1"                           
                             x:Name="gameBoard"/>
 
 

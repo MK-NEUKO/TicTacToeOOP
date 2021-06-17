@@ -6,7 +6,11 @@
     
     <Application.Resources>
 
-
+        <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
+        <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>
+        <SolidColorBrush x:Key="TTTBackgroundLightGray" Color="#333333"/>
+        <SolidColorBrush x:Key="TTTBackgroundMediumGray" Color="#FF272727"/>
+        <SolidColorBrush x:Key="TTTBackgroundDarkGrey" Color="#212121"/>
 
         <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type l:IMenuViewModel}">
             <l:MenuView/>

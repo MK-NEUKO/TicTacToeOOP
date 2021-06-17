@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"
-             xmlns:rs="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
+             xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"            
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <d:UserControl.DataContext>
@@ -12,26 +11,9 @@
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-        <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </ItemsPanelTemplate>
 
-        <Style x:Key="gameBoardItemContainerStyle">
-            <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
-            <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
-        </Style>
-
+<!--+++++++ Start Animation +++++++-->
+        
         <Storyboard x:Key="StartAnimation" RepeatBehavior="1x" Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
                                                               Storyboard.TargetName="theXColor"
@@ -106,40 +88,142 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
+<!--+++++++ Animation wehn PlayerX win +++++++-->
+        
+        <Storyboard x:Key="WinnerXAnimation">
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaBorder"
+                                                              Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                                              RepeatBehavior="Forever">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaLightEffect"
+                                                              Storyboard.TargetProperty="Opacity"
+                                                              RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaBorderBlurEffect"
+                                                              Storyboard.TargetProperty="Opacity"
+                                                              RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+<!--+++++++ Animation wehn PlayerO win +++++++-->
+
+        <Storyboard x:Key="WinnerOAnimation">
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaBorder"
+                                                              Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                                              RepeatBehavior="Forever">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaLightEffect"
+                                                              Storyboard.TargetProperty="Opacity"
+                                                              RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                              Storyboard.TargetName="boardAreaBorderBlurEffect"
+                                                              Storyboard.TargetProperty="Opacity"
+                                                              RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+<!--+++++++ For both ItemsControls +++++++-->
+        
+        <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="gameBoardItemContainerStyle">
+            <Setter Property="Grid.Column" Value="{Binding ColumnIndex}"/>
+            <Setter Property="Grid.Row" Value="{Binding RowIndex}"/>
+        </Style>
+
+<!--+++++++ GameBoard visualiz Data +++++++-->
+
         <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
             <Grid>
 
-                <Rectangle x:Name="boardAreaLightEffect" Margin="5" Opacity="0.7" Fill="Transparent">
+                <Rectangle x:Name="boardAreaLightEffect" 
+                           Margin="5" Opacity="0.7" 
+                           Fill="Transparent">
                     <Rectangle.Effect>
                         <BlurEffect Radius="20"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Rectangle x:Name="boardArea" Fill="#212121" Margin="10" RadiusX="2" RadiusY="2"/>
-                <Rectangle x:Name="boardAreaDropShadow" Fill="#212121" Margin="10">
+                
+                <Rectangle x:Name="boardArea"
+                           Margin="10" RadiusX="2" RadiusY="2"
+                           Fill="{StaticResource TTTBackgroundDarkGrey}"/>
+                <Rectangle x:Name="boardAreaDropShadow"
+                           Margin="10" 
+                           Fill="{StaticResource TTTBackgroundDarkGrey}">
                     <Rectangle.Effect>
                         <DropShadowEffect ShadowDepth="10"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Border x:Name="boardAreaBorderBlurEffect" BorderThickness="5" Margin="10" CornerRadius="2" 
-                        Opacity="0.5" BorderBrush="Transparent">
+                
+                <Border x:Name="boardAreaBorderBlurEffect" 
+                        BorderThickness="5" Margin="10" CornerRadius="2" 
+                        Opacity="0.5" 
+                        BorderBrush="Transparent">
                     <Border.Effect>
                         <BlurEffect Radius="20"/>
                     </Border.Effect>
                 </Border>
-                <Border x:Name="boardAreaBorder" Margin="10" BorderThickness="4" BorderBrush="#333333" CornerRadius="1"/>
-
-
+                
+                <Border x:Name="boardAreaBorder" 
+                        Margin="10" BorderThickness="4" CornerRadius="1"
+                        BorderBrush="{StaticResource TTTBackgroundLightGray}"/>
 
                 <Viewbox Stretch="Fill" Margin="28">
-                    <Path x:Name="theOBackground" StrokeThickness="6" Stroke="#333333">
+                    <Path x:Name="theOBackground" 
+                          StrokeThickness="6" 
+                          Stroke="{StaticResource TTTBackgroundLightGray}">
                         <Path.Data>
                             <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
                         </Path.Data>
                     </Path>
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="25">
-                    <Path x:Name="theXBackground" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                          Stroke="#333333">
+                    <Path x:Name="theXBackground" 
+                          StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                          Stroke="{StaticResource TTTBackgroundLightGray}">
                         <Path.Data>
                             <GeometryGroup>
                                 <LineGeometry StartPoint="4, 4" EndPoint="60, 60"/>
@@ -149,9 +233,9 @@
                     </Path>
                 </Viewbox>
 
-
                 <Viewbox Stretch="Fill" Margin="25">
-                    <Path x:Name="theX" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path x:Name="theX" 
+                          StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                         <Path.Stroke>
                             <SolidColorBrush x:Name="theXColor" Color="Transparent"/>
                         </Path.Stroke>
@@ -164,7 +248,8 @@
                     </Path>
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="25">
-                    <Path x:Name="theXBlurEffect" StrokeThickness="8" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path x:Name="theXBlurEffect" 
+                          StrokeThickness="8" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                         <Path.Stroke>
                             <SolidColorBrush x:Name="theXBlurEffectColor" Color="Transparent"/>
                         </Path.Stroke>
@@ -179,16 +264,20 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-
+                
                 <Viewbox Stretch="Fill" Margin="28">
-                    <Path x:Name="theO" StrokeThickness="6" Stroke="Transparent">
+                    <Path x:Name="theO" 
+                          StrokeThickness="6" 
+                          Stroke="Transparent">
                         <Path.Data>
                             <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
                         </Path.Data>
                     </Path>
                 </Viewbox>
                 <Viewbox Stretch="Fill" Margin="28">
-                    <Path x:Name="theOBlurEffect" StrokeThickness="6" Stroke="Transparent">
+                    <Path x:Name="theOBlurEffect" 
+                          StrokeThickness="6" 
+                          Stroke="Transparent">
                         <Path.Data>
                             <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
                         </Path.Data>
@@ -205,30 +294,16 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource StartAnimation}"/>
                     </DataTrigger.EnterActions>
-                    <!--<Setter Property="Rectangle.Fill" Value="#0069C7" TargetName="boardAreaLightEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
-                    <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorder"/>
-                    <Setter Property="Border.BorderBrush" Value="#0589FF" TargetName="boardAreaBorderBlurEffect"/>
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>-->
                 </DataTrigger>
 
-                <!--<DataTrigger Binding="{Binding AreaHasToken}" Value="false">
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>
-                    <Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>
-                </DataTrigger>-->
-
                 <DataTrigger Binding="{Binding Area}" Value="X">
-                    <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theX"/>
-                    <Setter Property="Path.Stroke" Value="Transparent" TargetName="theO"/>
-                    <Setter Property="Path.Stroke" Value="#6AFF00" TargetName="theXBlurEffect"/>
-                    <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundO"/>-->
+                    <Setter Property="Path.Stroke" Value="{StaticResource TTTGreen}" TargetName="theX"/>
+                    <Setter Property="Path.Stroke" Value="{StaticResource TTTGreen}" TargetName="theXBlurEffect"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Area}" Value="O">
-                    <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theO"/>
-                    <Setter Property="Path.Stroke" Value="#FF4F00" TargetName="theOBlurEffect"/>
-                    <!--<Setter Property="Path.Stroke" Value="#333333" TargetName="backgroundX"/>-->
+                    <Setter Property="Path.Stroke" Value="{StaticResource TTTOrange}" TargetName="theO"/>
+                    <Setter Property="Path.Stroke" Value="{StaticResource TTTOrange}" TargetName="theOBlurEffect"/>
                 </DataTrigger>
 
                 <MultiDataTrigger>
@@ -237,40 +312,10 @@
                         <Condition Binding="{Binding Area}" Value="X"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaBorder"
-                                                              Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                                              RepeatBehavior="Forever">
-                                    <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
-                                    <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.3"/>
-                                    <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:1"/>
-                                    <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
-                                </ColorAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaLightEffect"
-                                                              Storyboard.TargetProperty="Opacity"
-                                                              RepeatBehavior="Forever">
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaBorderBlurEffect"
-                                                              Storyboard.TargetProperty="Opacity"
-                                                              RepeatBehavior="Forever">
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
+                        <BeginStoryboard Storyboard="{StaticResource WinnerXAnimation}"/>
                     </MultiDataTrigger.EnterActions>
-                    <Setter Property="Border.BorderBrush" Value="#6AFF00" TargetName="boardAreaBorderBlurEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="#6AFF00" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Border.BorderBrush" Value="{StaticResource TTTGreen}" TargetName="boardAreaBorderBlurEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="{StaticResource TTTGreen}" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
 
@@ -280,39 +325,10 @@
                         <Condition Binding="{Binding Area}" Value="O"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaBorder"
-                                                              Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
-                                                              RepeatBehavior="Forever">
-                                    <LinearColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.3"/>
-                                    <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:1"/>
-                                    <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
-                                </ColorAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaLightEffect"
-                                                              Storyboard.TargetProperty="Opacity"
-                                                              RepeatBehavior="Forever">
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                              Storyboard.TargetName="boardAreaBorderBlurEffect"
-                                                              Storyboard.TargetProperty="Opacity"
-                                                              RepeatBehavior="Forever">
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                                    <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
+                        <BeginStoryboard Storyboard="{StaticResource WinnerOAnimation}"/>
                     </MultiDataTrigger.EnterActions>
-                    <Setter Property="Border.BorderBrush" Value="#FF4F00" TargetName="boardAreaBorderBlurEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="#FF4F00" TargetName="boardAreaLightEffect"/>
+                    <Setter Property="Border.BorderBrush" Value="{StaticResource TTTOrange}" TargetName="boardAreaBorderBlurEffect"/>
+                    <Setter Property="Rectangle.Fill" Value="{StaticResource TTTOrange}" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
 
@@ -326,7 +342,8 @@
             <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
         </Style>
 
-
+<!--+++++++ GameBoard Commands +++++++-->
+        
         <Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
             <Setter Property="ItemContainerStyle" Value="{StaticResource gameBoardItemContainerStyle}"/>
@@ -360,7 +377,7 @@
 
 
 
-    <Grid Background="#FF272727">
+    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
 
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
         </ItemsControl>
