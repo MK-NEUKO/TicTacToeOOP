@@ -1,12 +1,7 @@
-# TicTacToeOOP    https://mk-neuko.github.io/TicTacToeOOP/
+# TicTacToeOOP
 
-Ein Lernprojekt für verschiedene Techniken der Objektorientierten Programmierung. 
+TicTacToeOOP is a learning project, the focus is on the functionality and handling of .NET, C#, WPF, MVVM.
 
-# Ziel: 
-Implementieren des Spiels mit Ai in einer Klassenbibliothek, diese wird dann von mehreren Clients verwendet. 
+## Website
 
-* Console-Client
-* WPF-Client
-* UWP-Client
-* Android-App 
-* Web-Client
+https://mk-neuko.github.io/TicTacToeOOP/
