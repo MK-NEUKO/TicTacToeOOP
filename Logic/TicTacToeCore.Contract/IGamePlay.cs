@@ -9,5 +9,6 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
     public interface IGamePlay
     {
         void TakeAMove(int areaID);
+        void IsAIToTakeAMove();
     }
 }

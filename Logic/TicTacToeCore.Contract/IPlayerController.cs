@@ -12,7 +12,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
         void ResetPlayers();
         void SetWinner();
         void GetNewPlayerList();
-
-        IReadOnlyList<Player> PlayerList { get; }
+        void GetLastPlayerList();
+        Player PlayerX { get; }
+        Player PlayerO { get; }
     }
 }

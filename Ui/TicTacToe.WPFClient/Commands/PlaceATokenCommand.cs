@@ -11,9 +11,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private int _columnIndex;
         private readonly int _areaID;
         private readonly Action<int> _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Func<int, bool> _canExecute;
 
-        public PlaceATokenCommand(int areaID, Action<int> execute, Func<bool> canExecute)
+        public PlaceATokenCommand(int areaID, Action<int> execute, Func<int, bool> canExecute)
         {
             _areaID = areaID;
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -32,7 +32,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute();
+            return _canExecute(_areaID);
         }
 
         public void Execute(object parameter)

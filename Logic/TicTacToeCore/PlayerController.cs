@@ -9,9 +9,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 {
     public class PlayerController : IPlayerController
     {
-        private readonly IPlayerReposytory _playerReposytory;
+        private readonly IPlayerReposytory _playerRepository;
         private readonly IGameBoard _board;
-        private List<Player> _playerList;
         private Player _playerX;
         private Player _playerO;
         
@@ -22,23 +21,32 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
         {
-            _playerReposytory = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
+            _playerRepository = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
             _board = board ?? throw new ArgumentNullException(nameof(board));
-            _playerList = new List<Player>
-            {
-                new Player("PlayerX", false, true),
-                new Player("PlayerO", false, true)
-            };
-            _playerX = _playerList[0];
-            _playerO = _playerList[1];
+            _playerX = _playerRepository.LoadDefaultPlayerList()[0];
+            _playerO = _playerRepository.LoadDefaultPlayerList()[1];
             
             _aimimax = aimimax;
             
         }
 
-        public IReadOnlyList<Player> PlayerList => _playerList.AsReadOnly();
+        public Player PlayerX => _playerX;
 
-        public void GetNewPlayerList() => _playerList = _playerReposytory.LoadNewPlayerList();
+        public Player PlayerO => _playerO;
+
+        public void GetNewPlayerList()
+        {
+            var playerList = _playerRepository.LoadNewPlayerList();
+            _playerX = playerList[0];
+            _playerO = playerList[1];
+        }
+
+        public void GetLastPlayerList()
+        {
+            var playerList = _playerRepository.LoadLastPlayerList();
+            _playerX = playerList[0];
+            _playerO = playerList[1];
+        }
 
         public void ResetPlayers()
         {

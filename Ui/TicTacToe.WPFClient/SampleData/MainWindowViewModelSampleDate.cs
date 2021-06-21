@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
-    public class MainWindowViewModelSampleDate
+    public class MainWindowViewModelSampleDate : IMainWindowViewModel
     {
-        private readonly GameBoardViewModelSampleData _gameBoardViewModelSeplaData;
+        public IGameBoardViewModel GameBoardViewModel => throw new NotImplementedException();
 
-        public MainWindowViewModelSampleDate()
-        {
-            _gameBoardViewModelSeplaData = new GameBoardViewModelSampleData();
-        }
+        public IGameInfoViewModel GameInfoViewModel => throw new NotImplementedException();
 
-        public GameBoardViewModelSampleData GameBoardViewModelSeplaData => _gameBoardViewModelSeplaData;
+        public ICommand InitializeGameCommand => throw new NotImplementedException();
     }
 }

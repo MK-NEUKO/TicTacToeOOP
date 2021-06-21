@@ -111,7 +111,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             // TODO Eventuell eine Eigene Exception erstellen, aus Übungszwecken, da sonst nicht erforderlich (AreaIsOccupiedException).          
 
             _gameBoardAreaList[areaID].Area = token;
-            _gameBoardAreaList[areaID].AreaHasToken = true;
+            _gameBoardAreaList[areaID].IsOccupied = true;
         }
 
         public void ResetGameBoard()
@@ -119,7 +119,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             foreach (var area in _gameBoardAreaList)
             {
                 area.Area = " ";
-                area.AreaHasToken = false;
+                area.IsOccupied = false;
                 area.IsWinArea = false;
             }
             _isPlayerXWinner = false;

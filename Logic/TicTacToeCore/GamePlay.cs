@@ -20,6 +20,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             _aimiamx = aimiamx ?? throw new ArgumentNullException(nameof(aimiamx));
         }
 
+        public void IsAIToTakeAMove()
+        {
+            
+        }
+
         public void TakeAMove(int areaID)
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());

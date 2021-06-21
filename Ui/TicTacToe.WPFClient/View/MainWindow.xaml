@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:view="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
+        xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="TicTacToe" Height="600" Width="800">
-    
-
+    <d:Window.DataContext>
+        <sd:MainWindowViewModelSampleDate/>
+    </d:Window.DataContext>
 
 
 
@@ -33,12 +35,12 @@
                             x:Name="gameBoard"/>
 
 
-
-
-
-        <ContentControl Content="{Binding Path=GameInfoViewModel}"
+        <view:GameInfoView DataContext="{Binding GameInfoViewModel}"
+                           Grid.Row="2"/>
+        
+        <!--<ContentControl Content="{Binding GameInfoViewModel}"
                         ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
-                        Grid.Row="2"/>
+                        Grid.Row="2"/>-->
 
         <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"                       
                         ContentTemplate="{StaticResource VisualMinimaxViewModelDataTemplate}"

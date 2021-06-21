@@ -4,7 +4,7 @@
     { 
         private readonly int _areaID;
         private string _area;
-        private bool _areaHasToken;
+        private bool _isOccupied;
         private bool _isWinArea;
         private int _columnIndex;
         private int _rowIndex;
@@ -16,7 +16,7 @@
         {
             _areaID = areaID;
             _area = " ";
-            _areaHasToken = false;
+            _isOccupied = false;
             _isWinArea = false;
             _isAnimated = false;
         }
@@ -31,12 +31,16 @@
             }
         }
 
-        public bool AreaHasToken 
+        public bool IsOccupied 
         {
-            get { return _areaHasToken; }
-            set 
-            { 
-                _areaHasToken = value;
+            get { return _isOccupied; }
+            set
+            {
+                if (_area != " ")
+                {
+                    _isOccupied = false;
+                }
+                _isOccupied = value;
                 OnPropertyChanged();
             }
         }

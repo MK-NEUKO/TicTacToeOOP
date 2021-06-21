@@ -152,7 +152,38 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
-<!--+++++++ For both ItemsControls +++++++-->
+
+        <Storyboard x:Key="AreaIsOccupiedAnimation">
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                            Storyboard.TargetName="boardAreaBorder"
+                                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                                            RepeatBehavior="Forever">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="Red" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="Red" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                            Storyboard.TargetName="boardAreaLightEffect"
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                            Storyboard.TargetName="boardAreaBorderBlurEffect"
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!--+++++++ For both ItemsControls +++++++-->
         
         <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
             <Grid>
@@ -353,14 +384,16 @@
         <Style  x:Key="gameBoardAreaButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="BorderThickness" Value="4"/>
             <Setter Property="Command" Value="{Binding}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="1">
                             <Rectangle Fill="Transparent"/>
                         </Border>
                     </ControlTemplate>
@@ -383,8 +416,7 @@
         </ItemsControl>
 
         <ItemsControl Style="{StaticResource gameBoardCommandsPresenter}"
-                      ItemsSource="{Binding PlaceATokenCommands}"
-                      Focusable="True">
+                      ItemsSource="{Binding PlaceATokenCommands}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button x:Name="placeATokenButton" Style="{StaticResource gameBoardAreaButton}"/>

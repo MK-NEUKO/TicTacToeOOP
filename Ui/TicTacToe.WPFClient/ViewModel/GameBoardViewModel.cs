@@ -1,10 +1,9 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
 using System.Windows.Input;
+using System.Collections.Generic;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
@@ -12,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         private readonly IGameBoard _gameBoard;
         private readonly IGamePlay _gamePlay;
-        private IReadOnlyList<GameBoardArea> _gameBoardAreaList;
+        private readonly IReadOnlyList<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
 
@@ -42,9 +41,12 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             return _placeATokenCommands;
         }
 
-        private bool PlaceATokenCanExecute()
+        private bool PlaceATokenCanExecute(int areaID)
         {
-            var canExecute = _isAnimationCompleted && !(_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner) && !_gameBoard.IsGameTie;
+            var canExecute = _isAnimationCompleted
+                             && !(_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner)
+                             && !_gameBoard.IsGameTie
+                             && !_gameBoardAreaList[areaID].IsOccupied;
             if (canExecute)
             {
                 return true;
