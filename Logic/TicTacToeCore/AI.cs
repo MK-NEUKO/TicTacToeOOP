@@ -10,7 +10,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     public class AI : IAI
     {
         private IGameBoardRepository _gameBoardRepository;
-        private IPlayerReposytory _playerRepository;
+        private IPlayerReposytory _playerRepository;     
         private IGameBoard _gameBoard;
         private Player _playerX;
         private Player _playerO;
@@ -57,15 +57,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public int AreaIDForO { get => _areaIDForO; }
         public int AreaIDForX { get => _areaIDForX; }
        
-        public void GetAMove()
+        public void GetAMove(Player currentPlayer)
         {           
             _areaIDForX = -1;
             _areaIDForO = -1;
 
-            if(_playerX.InAction)
-                GetMoveForPlayerX(_playerX.MaximumDepth);
-            if(_playerO.InAction)
-                GetMoveForPlayerO(_playerO.MaximumDepth);
+            //if(_playerX.InAction)
+            //    GetMoveForPlayerX(_playerX.MaximumDepth);
+            //if(_playerO.InAction)
+            //    GetMoveForPlayerO(_playerO.MaximumDepth);
+
+            GetMoveForPlayerO(0);
         }
 
         private int GetMoveForPlayerX(int maximumDepth)

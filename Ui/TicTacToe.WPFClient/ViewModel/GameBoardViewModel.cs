@@ -56,7 +56,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         private void PlaceATokenExecute(int areaID)
         {
-            _gamePlay.TakeAMove(areaID);
+            _gamePlay.MakeAMove(areaID);
+            _gamePlay.MakePossibleNextMove();
         }
 
         public void InitializeNewGameBoard()

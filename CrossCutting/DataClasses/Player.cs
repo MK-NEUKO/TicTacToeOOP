@@ -6,6 +6,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
     {
         private bool _inAction;
         private bool _isHuman;
+        private bool _isAI;
         private string _name;
         private int _points;
         private int _maximumDepth;
@@ -21,7 +22,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         {
             _name = name;
             _inAction = inAction;
-            _isHuman = isHuman;
+            IsHuman = isHuman;
             _points = 0;
             _maximumDepth = 0;
             _isWinner = false;
@@ -48,14 +49,30 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
             } 
         }
         public bool IsHuman 
-        { 
-            get { return _isHuman; }
-            set 
-            { 
+        {
+            get => _isHuman;
+            private set 
+            {
                 _isHuman = value;
-                OnPropertyChanged();
+                if (_isHuman)
+                {
+                    _isAI = false;
+                }
+                else
+                {
+                    _isAI = true;
+                }              
             }
              
+        }
+
+        public bool IsAI
+        {
+            get => _isAI;
+            private set
+            {
+                _isAI = value;
+            }
         }
         public string Name
         {

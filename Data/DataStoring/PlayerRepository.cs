@@ -23,8 +23,8 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
         {
             return new List<Player>
             {
-                new Player("PlayerX", true, true),
-                new Player("PlyaerO", false, false)
+                new Player("Michael", true, true),
+                new Player("Aimimax", false, false)
             };
         }
 
