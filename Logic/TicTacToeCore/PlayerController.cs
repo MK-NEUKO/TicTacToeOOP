@@ -50,15 +50,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void ResetPlayers()
         {
-            _playerX.Points = 0;
-            _playerX.Name = "PlayerX";
-            _playerX.InAction = true;
-
-            _playerO.Points = 0;
-            _playerO.Name = "PlayerO";
-            _playerO.InAction = true;
-
-            _gameIsTie = 0;
+            _playerX.IsWinner = false;
+            _playerO.IsWinner = false;
         }
 
         public Player GiveCurrentPlayer()

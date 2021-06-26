@@ -12,7 +12,7 @@
 
     <UserControl.Resources>
 
-<!--+++++++ Start Animation +++++++-->
+        <!--+++++++ Start Animation +++++++-->
         
         <Storyboard x:Key="StartAnimation" RepeatBehavior="1x" Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
@@ -152,7 +152,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
-
+        
         <Storyboard x:Key="AreaIsOccupiedAnimation">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaBorder"
@@ -343,7 +343,8 @@
                         <Condition Binding="{Binding Area}" Value="X"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource WinnerXAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource WinnerXAnimation}"
+                                         x:Name="WinnerXAnimation"/>
                     </MultiDataTrigger.EnterActions>
                     <Setter Property="Border.BorderBrush" Value="{StaticResource TTTGreen}" TargetName="boardAreaBorderBlurEffect"/>
                     <Setter Property="Rectangle.Fill" Value="{StaticResource TTTGreen}" TargetName="boardAreaLightEffect"/>
@@ -356,12 +357,20 @@
                         <Condition Binding="{Binding Area}" Value="O"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource WinnerOAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource WinnerOAnimation}"
+                                         x:Name="WinnerOAnimation"/>
                     </MultiDataTrigger.EnterActions>
                     <Setter Property="Border.BorderBrush" Value="{StaticResource TTTOrange}" TargetName="boardAreaBorderBlurEffect"/>
                     <Setter Property="Rectangle.Fill" Value="{StaticResource TTTOrange}" TargetName="boardAreaLightEffect"/>
                     <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
+
+                <DataTrigger Binding="{Binding IsWinArea}" Value="False">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard BeginStoryboardName="WinnerOAnimation"/>
+                        <StopStoryboard BeginStoryboardName="WinnerXAnimation"/>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
 
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -406,12 +415,31 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="continueButton" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Content" Value="Continue"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsGameDecided}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsGameDecided}" Value="False">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
 
 
 
     <Grid Background="{StaticResource TTTBackgroundMediumGray}">
-
+      
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
         </ItemsControl>
 
@@ -423,6 +451,10 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <Button Style="{StaticResource continueButton}" Command="{Binding ContinueCommand}"               
+                x:Name="ContinueButton" />
+
 
     </Grid>
 </UserControl>

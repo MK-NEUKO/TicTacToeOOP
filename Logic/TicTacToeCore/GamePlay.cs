@@ -36,9 +36,24 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
             _gameBoard.CheckGameBoardState();
-            _playerController.GivePoints();
-            _playerController.SetWinner();
+
+            var isGameDecided = _gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner || _gameBoard.IsGameTie;
+            if (isGameDecided)
+            {
+                _playerController.SetWinner();
+                _playerController.GivePoints();
+            }
+            else
+            {
+                _playerController.ChangePlayer();
+            }
+        }
+
+        public void SetupNextGame()
+        {
             _playerController.ChangePlayer();
+            _gameBoard.ResetGameBoard();
+            _playerController.ResetPlayers();
         }
     }
 }

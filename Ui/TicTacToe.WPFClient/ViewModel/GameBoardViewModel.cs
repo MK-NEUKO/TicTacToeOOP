@@ -7,13 +7,14 @@ using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
-    public class GameBoardViewModel : IGameBoardViewModel
+    public class GameBoardViewModel : ViewModelBase, IGameBoardViewModel
     {
         private readonly IGameBoard _gameBoard;
         private readonly IGamePlay _gamePlay;
         private readonly IReadOnlyList<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
+        private bool _isGameDecided;
 
         public GameBoardViewModel(IGameBoard gameBoard, IGamePlay gamePlay)
         {
@@ -21,11 +22,23 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gamePlay = gamePlay ?? throw new ArgumentNullException(nameof(gamePlay));
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
+            ContinueCommand = new RelayCommand(ContinueExecute, ContinueCanExecute);
         }
 
         public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
 
+        public ICommand ContinueCommand { get; }
+
+        public bool IsGameDecided 
+        { 
+            get => _isGameDecided; 
+            set
+            {
+                _isGameDecided = value;
+                OnPropertyChanged();
+            }
+        }
 
         private List<PlaceATokenCommand> CreatePlaceATokenCommands()
         {
@@ -39,6 +52,17 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             }
 
             return _placeATokenCommands;
+        }
+
+        private bool ContinueCanExecute()
+        {
+            return true;
+        }
+
+        private void ContinueExecute(object obj)
+        {
+            _gamePlay.SetupNextGame();
+            IsGameDecided = false;
         }
 
         private bool PlaceATokenCanExecute(int areaID)
@@ -58,6 +82,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             _gamePlay.MakeAMove(areaID);
             _gamePlay.MakePossibleNextMove();
+            if (_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner || _gameBoard.IsGameTie)
+            {
+                IsGameDecided = true;
+            }
         }
 
         public void InitializeNewGameBoard()

@@ -10,5 +10,6 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
     {
         void MakeAMove(int areaID);
         void MakePossibleNextMove();
+        void SetupNextGame();
     }
 }
