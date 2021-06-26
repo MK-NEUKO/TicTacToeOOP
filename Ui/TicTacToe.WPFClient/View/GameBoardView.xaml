@@ -12,7 +12,7 @@
 
     <UserControl.Resources>
 
-        <!--+++++++ Start Animation +++++++-->
+<!--+++++++ Start Animation +++++++-->
         
         <Storyboard x:Key="StartAnimation" RepeatBehavior="1x" Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
@@ -100,23 +100,32 @@
                 <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:1"/>
                 <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
             </ColorAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaLightEffect"
-                                                            Storyboard.TargetProperty="Opacity"
+                                                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                                                             RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaBorderBlurEffect"
-                                                            Storyboard.TargetProperty="Opacity"
+                                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
                                                             RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                             Storyboard.TargetName="boardAreaDropShadow"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="1.0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -132,23 +141,32 @@
                 <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:1"/>
                 <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
             </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                            Storyboard.TargetName="boardAreaLightEffect"
+                                                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
+                                                            RepeatBehavior="Forever">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
+                                                            Storyboard.TargetName="boardAreaBorderBlurEffect"
+                                                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                                                            RepeatBehavior="Forever">
+                <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
+                <LinearColorKeyFrame Value="#FF4F00" KeyTime="0:0:0.3"/>
+                <DiscreteColorKeyFrame Value="#FF4F00" KeyTime="0:0:1"/>
+                <LinearColorKeyFrame Value="#333333" KeyTime="0:0:1.8"/>
+            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                             Storyboard.TargetName="boardAreaLightEffect"
+                                                             Storyboard.TargetName="boardAreaDropShadow"
                                                              Storyboard.TargetProperty="Opacity"
                                                              RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
-                                                             Storyboard.TargetName="boardAreaBorderBlurEffect"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1.0"/>
-                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1.0"/>
-                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="0.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0.0"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="0.0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:1.8" Value="1.0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -346,9 +364,6 @@
                         <BeginStoryboard Storyboard="{StaticResource WinnerXAnimation}"
                                          x:Name="WinnerXAnimation"/>
                     </MultiDataTrigger.EnterActions>
-                    <Setter Property="Border.BorderBrush" Value="{StaticResource TTTGreen}" TargetName="boardAreaBorderBlurEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="{StaticResource TTTGreen}" TargetName="boardAreaLightEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
 
                 <MultiDataTrigger>
@@ -360,9 +375,6 @@
                         <BeginStoryboard Storyboard="{StaticResource WinnerOAnimation}"
                                          x:Name="WinnerOAnimation"/>
                     </MultiDataTrigger.EnterActions>
-                    <Setter Property="Border.BorderBrush" Value="{StaticResource TTTOrange}" TargetName="boardAreaBorderBlurEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="{StaticResource TTTOrange}" TargetName="boardAreaLightEffect"/>
-                    <Setter Property="Rectangle.Fill" Value="Transparent" TargetName="boardAreaDropShadow"/>
                 </MultiDataTrigger>
 
                 <DataTrigger Binding="{Binding IsWinArea}" Value="False">

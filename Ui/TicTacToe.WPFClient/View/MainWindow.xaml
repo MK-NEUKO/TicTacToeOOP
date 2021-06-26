@@ -14,7 +14,7 @@
     </d:Window.DataContext>
 
 
-
+    <Border BorderThickness="10" BorderBrush="{StaticResource TTTBackgroundMediumGray}">
     <Grid Background="#484848">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -55,4 +55,5 @@
         </i:Interaction.Triggers>
         
     </Grid>
+    </Border>
 </Window>

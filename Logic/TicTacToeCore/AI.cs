@@ -15,7 +15,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private Player _playerX;
         private Player _playerO;
         private readonly int[,] _winConstellations;
-        private readonly int[] _boardAreaFineValues;
+        //private readonly int[] _boardAreaFineValues;
         private const int _xIsWinner = 100;
         private const int _oIsWinner = -100;
         private const int _gameIsTie = 0;
@@ -42,12 +42,12 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                 {2,4,6},
             };
 
-            _boardAreaFineValues = new int[9]
-            {
-                3, 2, 3,
-                2, 4, 2,
-                3, 2, 3
-            };
+            //_boardAreaFineValues = new int[9]
+            //{
+            //    3, 2, 3,
+            //    2, 4, 2,
+            //    3, 2, 3
+            //};
         }
 
         public AI()
@@ -67,7 +67,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             //if(_playerO.InAction)
             //    GetMoveForPlayerO(_playerO.MaximumDepth);
 
-            GetMoveForPlayerO(0);
+            GetMoveForPlayerO(1);
         }
 
         private int GetMoveForPlayerX(int maximumDepth)
@@ -123,8 +123,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
-                return EvaluateBoardAreas();
+            //if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
+            //    return EvaluateBoardAreas();
 
             foreach (var area in _gameBoard.GameBoardAreaList)
             {
@@ -132,8 +132,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                 {
                     area.Area = "X";
                     int returnMinValue = Min(maximumDepth - 1, alpha, beta);                    
-                    if (returnMinValue > alpha)               
+                    if (returnMinValue > alpha)
+                    {
                         alpha = returnMinValue;
+                    }
+
                     area.Area = " ";
                     if (alpha >= beta)
                         return beta;
@@ -146,8 +149,8 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             if (EvaluateGameBoard() != _gameIsOpen)
                 return EvaluateGameBoard();
-            if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
-                return EvaluateBoardAreas();
+            //if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
+            //    return EvaluateBoardAreas();
          
             foreach (var area in _gameBoard.GameBoardAreaList)
             {
@@ -156,10 +159,15 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                     area.Area = "O";
                     int returnMaxValue = Max(maximumDepth - 1, alpha, beta);                    
                     if (returnMaxValue < beta)
-                         beta = returnMaxValue;
+                    {
+                        beta = returnMaxValue;
+                    }
+
                     area.Area = " ";
                     if (beta <= alpha)
+                    {
                         return alpha;
+                    }
                 }
             }
             return beta;
@@ -189,19 +197,19 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             return _gameIsTie;
         }
 
-        private int EvaluateBoardAreas()
-        {
-            int value = 0;
-            int index = 0;
-            foreach (var area in _gameBoard.GameBoardAreaList)
-            {
-                if (area.Area == "O")
-                    value -= _boardAreaFineValues[index];
-                if (area.Area == "X")
-                    value += _boardAreaFineValues[index];
-                index++;
-            }
-            return value;
-        }
+        //private int EvaluateBoardAreas()
+        //{
+        //    int value = 0;
+        //    int index = 0;
+        //    foreach (var area in _gameBoard.GameBoardAreaList)
+        //    {
+        //        if (area.Area == "O")
+        //            value -= _boardAreaFineValues[index];
+        //        if (area.Area == "X")
+        //            value += _boardAreaFineValues[index];
+        //        index++;
+        //    }
+        //    return value;
+        //}
     }
 }
