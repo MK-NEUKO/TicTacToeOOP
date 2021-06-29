@@ -1,9 +1,9 @@
-﻿using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
 using System.Windows.Input;
+using System.Collections.Generic;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
+using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
@@ -12,25 +12,19 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IMenuViewModel _menuViewModel;
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
-        private readonly IGameBoard _gameBoard;
-        private readonly IPlayerController _playerController;
-        private readonly IAI _aimimax;
+        private readonly IGamePlay _gamePlay;
 
         public ICommand InitializeGameCommand { get; }
 
         public MainWindowViewModel(IMenuViewModel menuViewModel,
-                                   IGameBoardViewModel gameBoardViewModel, 
-                                   IGameInfoViewModel gameInfoViewModel, 
-                                   IGameBoard gameBoard, 
-                                   IPlayerController playerController,
-                                   IAI aimimax)
+                                   IGameBoardViewModel gameBoardViewModel,
+                                   IGameInfoViewModel gameInfoViewModel,
+                                   IGamePlay gamePlay)
         {
             _menuViewModel = menuViewModel ?? throw new ArgumentNullException(nameof(menuViewModel));
             _gameBoardViewModel = gameBoardViewModel ?? throw new ArgumentNullException(nameof(gameBoardViewModel));
             _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
-            _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
-            _playerController = playerController;
-            _aimimax = aimimax;
+            _gamePlay = gamePlay ?? throw new ArgumentNullException(nameof(gamePlay));
 
             InitializeGameCommand = new RelayCommand(InitializeGameExecute, InitializeGameCanExecute);
         }
@@ -44,8 +38,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {         
             if (_menuViewModel.UserChoosesStartNewGame)
             {
-                _gameBoardViewModel.InitializeNewGameBoard();
                 _gameInfoViewModel.InitializeNewPlayerList();
+                _gameBoardViewModel.InitializeNewGameBoard();
             }
         }
 

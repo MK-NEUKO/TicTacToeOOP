@@ -261,7 +261,7 @@ namespace NEUKO.TicTacToe.ConsoleClient
         {
             _aimimax.GetAMove();
             if (_playerX.InAction)
-                return _aimimax.AreaIDForX;
+                return _aimimax.AreaIDForCurrentPlayer;
             if (_playerO.InAction)
                 return _aimimax.AreaIDForO;
             else

@@ -8,7 +8,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
     public interface IAI
     {
         void GetAMove(Player currentPlayer);
-        int AreaIDForX { get; }
+        int AreaIDForCurrentPlayer { get; }
         int AreaIDForO { get; }        
     }
 }

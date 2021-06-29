@@ -14,8 +14,8 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
         {
             return new List<Player>
             {
-                new Player("Hans", true, false),
-                new Player("Wurst", false, true)
+                new Player("X", "PlayerX", true, false),
+                new Player("O", "PlayerO", false, true)
             };
         }
 
@@ -23,8 +23,8 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
         {
             return new List<Player>
             {
-                new Player("Michael", true, true),
-                new Player("Aimimax", false, false)
+                new Player("X", "Michael", true, false),
+                new Player("O", "Aimimax", false, false)
             };
         }
 
@@ -32,8 +32,8 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
         {
             return new List<Player>
             {
-                new Player("Horst", true, true){ Points = 5 },
-                new Player("Detlef", false, false){ Points = 17}
+                new Player("X", "Horst", true, true){ Points = 5 },
+                new Player("O", "Detlef", false, false){ Points = 17}
             };
         }
 

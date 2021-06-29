@@ -50,6 +50,16 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void ResetPlayers()
         {
+            if (_playerX.IsWinner)
+            {
+                _playerO.InAction = true;
+                _playerX.InAction = false;
+            }
+            if (_playerO.IsWinner)
+            {
+                _playerO.InAction = false;
+                _playerX.InAction = true;
+            }
             _playerX.IsWinner = false;
             _playerO.IsWinner = false;
         }

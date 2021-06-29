@@ -12,8 +12,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private IGameBoardRepository _gameBoardRepository;
         private IPlayerReposytory _playerRepository;     
         private IGameBoard _gameBoard;
-        private Player _playerX;
-        private Player _playerO;
+        
+        //private Player _playerX;
+        //private Player _playerO;
         private readonly int[,] _winConstellations;
         //private readonly int[] _boardAreaFineValues;
         private const int _xIsWinner = 100;
@@ -21,15 +22,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private const int _gameIsTie = 0;
         private const int _gameIsOpen = -1;
         private int _areaIDForX;
-        private int _areaIDForO;       
+        private int _areaIDForO;
+        private int _areaIDForCurrentPlayer;
         
         public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoard board)
         {
             _gameBoardRepository = gameBoardRepository;
             _playerRepository = playerReposytory;
             _gameBoard = board;
-            _playerX = _playerRepository.LoadNewPlayerList()[0];
-            _playerO = _playerRepository.LoadNewPlayerList()[1];
+            
+            //_playerX = _playerRepository.LoadNewPlayerList()[0];
+            //_playerO = _playerRepository.LoadNewPlayerList()[1];
             _winConstellations = new int[8, 3]
             {
                 {0,1,2}, /* +---+---+---+*/
@@ -55,19 +58,25 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         }
 
         public int AreaIDForO { get => _areaIDForO; }
-        public int AreaIDForX { get => _areaIDForX; }
-       
+        
+        public int AreaIDForCurrentPlayer { get => _areaIDForCurrentPlayer; set => _areaIDForCurrentPlayer = value; }
+
         public void GetAMove(Player currentPlayer)
-        {           
+        {
             _areaIDForX = -1;
             _areaIDForO = -1;
+            _areaIDForCurrentPlayer = -1;
 
-            //if(_playerX.InAction)
-            //    GetMoveForPlayerX(_playerX.MaximumDepth);
-            //if(_playerO.InAction)
-            //    GetMoveForPlayerO(_playerO.MaximumDepth);
-
-            GetMoveForPlayerO(1);
+            if (currentPlayer.PlayerID == "X")
+            {
+                GetMoveForPlayerX(1);
+                _areaIDForCurrentPlayer = _areaIDForX;
+            }
+            if (currentPlayer.PlayerID == "O")
+            {
+                GetMoveForPlayerO(1);
+                _areaIDForCurrentPlayer = _areaIDForO;
+            }
         }
 
         private int GetMoveForPlayerX(int maximumDepth)

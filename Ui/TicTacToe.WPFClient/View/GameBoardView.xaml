@@ -201,7 +201,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
-        <!--+++++++ For both ItemsControls +++++++-->
+<!--+++++++ For both ItemsControls +++++++-->
         
         <ItemsPanelTemplate x:Key="gameBoardItemsPanel">
             <Grid>
@@ -386,7 +386,8 @@
 
             </DataTemplate.Triggers>
         </DataTemplate>
-
+        
+<!--+++++++ GameBoardArea Data +++++++-->
 
         <Style x:Key="gameBoardDataPresenter" TargetType="{x:Type ItemsControl}">
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>
@@ -394,7 +395,7 @@
             <Setter Property="ItemTemplate" Value="{StaticResource gameBoardAreaDataTemplate}"/>
         </Style>
 
-<!--+++++++ GameBoard Commands +++++++-->
+<!--+++++++ GameBoardArea Commands +++++++-->
         
         <Style x:Key="gameBoardCommandsPresenter" TargetType="{x:Type ItemsControl}">
             <Setter Property="ItemsPanel" Value="{StaticResource gameBoardItemsPanel}"/>

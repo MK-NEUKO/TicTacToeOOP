@@ -4,6 +4,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
     public class Player : DataClassBase
     {
+        private readonly string _playerID;
         private bool _inAction;
         private bool _isHuman;
         private bool _isAI;
@@ -18,8 +19,9 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 
         }
 
-        public Player(string name, bool inAction, bool isHuman)
+        public Player(string playerID, string name, bool inAction, bool isHuman)
         {
+            _playerID = playerID;
             _name = name;
             _inAction = inAction;
             IsHuman = isHuman;
@@ -95,5 +97,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         }
 
         public int MaximumDepth { get => _maximumDepth; set => _maximumDepth = value; }
+
+        public string PlayerID => _playerID;
     }
 }

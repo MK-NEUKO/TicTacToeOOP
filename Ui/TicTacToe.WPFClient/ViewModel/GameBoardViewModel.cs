@@ -15,6 +15,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
         private bool _isGameDecided;
+        private bool _userWantsToContinue = true;
 
         public GameBoardViewModel(IGameBoard gameBoard, IGamePlay gamePlay)
         {
@@ -30,12 +31,22 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public ICommand ContinueCommand { get; }
 
-        public bool IsGameDecided 
-        { 
-            get => _isGameDecided; 
+        public bool IsGameDecided
+        {
+            get => _isGameDecided;
             set
             {
                 _isGameDecided = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UserWantsToContinue
+        {
+            get => _userWantsToContinue;
+            set
+            {
+                _userWantsToContinue = value;
                 OnPropertyChanged();
             }
         }
@@ -63,6 +74,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             _gamePlay.SetupNextGame();
             IsGameDecided = false;
+            CheckHowItIsPlayed();
         }
 
         private bool PlaceATokenCanExecute(int areaID)
@@ -92,11 +104,25 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             _isAnimationCompleted = true;
             CommandManager.InvalidateRequerySuggested();
+            CheckHowItIsPlayed();
         }
 
         public void InitializeLastGameBoard()
         {
             throw new NotImplementedException();
+        }
+
+        private void CheckHowItIsPlayed()
+        {
+            if (_gamePlay.IsAIBattle())
+            {
+                _gamePlay.EnterAIBattleLoop();
+                IsGameDecided = true;
+            }
+            else
+            {
+                _gamePlay.MakePossibleNextMove();
+            }
         }
 
         public void ShowStartAnimation()
