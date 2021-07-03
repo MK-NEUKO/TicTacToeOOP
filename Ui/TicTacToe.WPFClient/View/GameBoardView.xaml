@@ -20,7 +20,7 @@
                                                             Storyboard.TargetProperty="Color"
                                                             FillBehavior="Stop">
                 <DiscreteColorKeyFrame Value="#333333" KeyTime="0:0:0"/>
-                <LinearColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.2"/>
+                <LinearColorKeyFrame Value="{StaticResource TTTGreenColor}" KeyTime="0:0:0.2"/>
                 <DiscreteColorKeyFrame Value="#6AFF00" KeyTime="0:0:0.5"/>
                 <LinearColorKeyFrame Value="#333333" KeyTime="0:0:0.9"/>
             </ColorAnimationUsingKeyFrames>
@@ -465,9 +465,19 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Style="{StaticResource continueButton}" Command="{Binding ContinueCommand}"               
-                x:Name="ContinueButton" />
+        <Grid Margin="50">
 
+            <!--<Image Source="Resources/background_glass_02.jpg" Stretch="Fill" Opacity="0.65">
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="20" Opacity="0.4"/>
+                </Image.Effect>
+            </Image>-->
+            <Button Style="{StaticResource continueButton}" 
+                    Command="{Binding ContinueCommand}"               
+                    x:Name="ContinueButton">
+                
+            </Button>
+        </Grid>
 
     </Grid>
 </UserControl>

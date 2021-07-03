@@ -13,6 +13,13 @@
         <SolidColorBrush x:Key="TTTBackgroundMediumGray" Color="#FF272727"/>
         <SolidColorBrush x:Key="TTTBackgroundDarkGrey" Color="#212121"/>
 
+        <Color x:Key="TTTGreenColor">#6AFF00</Color>
+        <Color x:Key="TTTOrangeColor">#FF4F00</Color>
+        <Color x:Key="TTTBlueColor">#0589FF</Color>
+        <Color x:Key="TTTBackgroundLightGrayColor">#333333</Color>
+        <Color x:Key="TTTBackgroundMediumGrayColor">#FF272727</Color>
+        <Color x:Key="TTTBackgroundDarkGreyColor">#212121</Color>
+
         <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type local:IMenuViewModel}">
             <local:MenuView/>
         </DataTemplate>
