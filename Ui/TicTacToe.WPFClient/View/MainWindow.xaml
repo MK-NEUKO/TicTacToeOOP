@@ -15,15 +15,15 @@
 
 
     <Border BorderThickness="10" BorderBrush="{StaticResource TTTBackgroundMediumGray}">
-    <Grid Background="#484848">
+    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <ContentControl Content="{Binding Path=MenuViewModel}"
@@ -32,8 +32,10 @@
 
         <view:GameBoardView DataContext="{Binding GameBoardViewModel}"
                             Grid.Row="1"                           
-                            x:Name="gameBoard"/>
-
+                            x:Name="gameBoard"
+                            MaxHeight="300"
+                            MaxWidth="300"/>
+                            
 
         <view:GameInfoView DataContext="{Binding GameInfoViewModel}"
                            Grid.Row="2"/>

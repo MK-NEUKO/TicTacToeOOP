@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="800">
     <UserControl.Resources>
         
         <Style x:Key="tttRibbonStyle" TargetType="Ribbon">
@@ -70,7 +70,7 @@
                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                     KeyboardNavigation.TabIndex="2"
                                     Background="{StaticResource TTTBackgroundMediumGray}"
-                                    BorderBrush="{StaticResource TTTGreen}">
+                                    BorderBrush="{StaticResource TTTGreen}">                                
                                 <ContentPresenter x:Name="PART_SelectedContentHost"
                                                   Margin="4"
                                                   ContentSource="SelectedContent" />
@@ -90,7 +90,7 @@
                         <Grid x:Name="Root">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Unselected"/>
                                     <VisualState x:Name="Selected">
                                         <Storyboard>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
@@ -140,12 +140,131 @@
                 </Setter.Value>
             </Setter>
         </Style>
-       
+
+
+
+
+        <Style TargetType="GroupBox">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0"
+                                    BorderThickness="0,0,1,0"
+                                    BorderBrush="{StaticResource TTTBlue}">
+                                <ContentPresenter Margin="4"
+                                                  ContentSource="Header"
+                                                  RecognizesAccessKey="True">
+                                    <ContentPresenter.Effect>
+                                        <DropShadowEffect ShadowDepth="5"/>
+                                    </ContentPresenter.Effect>
+                                </ContentPresenter>
+                            </Border>
+                            <Border Grid.Row="1"
+                                    BorderThickness="0,0,1,0"
+                                    BorderBrush="{StaticResource TTTBlue}">
+                                <ContentPresenter Margin="4"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"                                                            
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"></VisualState>
+                                    <VisualState x:Name="Indeterminate"></VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <!--<ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>-->
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed"></VisualState>
+                                    <VisualState x:Name="Disabled"></VisualState>
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="*" To="Pressed" GeneratedDuration="0:0:0.2"/>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                                
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"></VisualState>
+                                    <VisualState x:Name="Unfocused"></VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="BorderBlurEffect"
+                                BorderBrush="Transparent"
+                                BorderThickness="2"
+                                CornerRadius="4">
+                                <Border.Effect>
+                                    <BlurEffect Radius="10"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Background="Transparent"
+                                    BorderBrush="{StaticResource TTTGreen}"
+                                    x:Name="Border"                                    
+                                    BorderThickness="3"
+                                    CornerRadius="2"
+                                    TextBlock.Foreground="{StaticResource TTTBlue}">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Margin="2"
+                                                  RecognizesAccessKey="True"/>
+
+                            </Border>
+                        </Grid>
+                        
+
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
-    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
+    
+    <Grid>
 
         <TabControl Style="{StaticResource TTTTabControl}">
-            <TabItem Header="Game Options">
+            <TabItem Header="Game">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -155,16 +274,111 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <GroupBox Header="Game Options" BorderBrush="{StaticResource TTTGreen}" Margin="5,0,5,5">
-                 
+                    <GroupBox Header="Game Options">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Style="{StaticResource RadioButtonStyle}"
+                                         Grid.Row="0"
+                                         Content="Load NewGame"
+                                         Height="25"
+                                         Width="130" 
+                                         Margin="5"
+                                         Command="{Binding StartNewGameCommand}"/>
+
+                            <RadioButton Style="{StaticResource RadioButtonStyle}"
+                                          Grid.Row="1"                                          
+                                          Height="25"
+                                          Width="130"
+                                          Margin="5"
+                                          Content="Load Last Game"
+                                         Command="{Binding StartLastGameCommand}"/>
+                        </Grid>
                     </GroupBox>
 
-                    <Border Grid.Column="1"
-                            BorderBrush="blue"
-                            BorderThickness="5">
-                                    
-                        <ContentPresenter Content="Test"/>
-                    </Border>
+                    <GroupBox Header="PlayerX"
+                              Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton Style="{StaticResource RadioButtonStyle}"
+                                         Grid.Row="0"
+                                         Content="Human"
+                                         ToolTip="If you are no machien"/>
+
+                            <RadioButton Style="{StaticResource RadioButtonStyle}"
+                                         Grid.Row="1"
+                                         Content="AI"/>
+
+                            <ComboBox Grid.Row="1"
+                                      Grid.Column="1"/>
+                            
+                            <TextBox Grid.Row="2"
+                                     Grid.ColumnSpan="2"
+                                     Text="PlayerX"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"/>
+                            
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="PlayerO"
+                              Grid.Column="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox Grid.Row="0"
+                                      Content="Human"
+                                      VerticalAlignment="Center"/>
+
+                            <CheckBox Grid.Row="1"
+                                      Content="AI"
+                                      VerticalAlignment="Center"/>
+
+                            <ComboBox Grid.Row="1"
+                                      Grid.Column="1"/>
+
+                            <TextBox Grid.Row="2"
+                                     Grid.ColumnSpan="2"
+                                     Text="PlayerX"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"/>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="3"
+                              Header="Start">
+                        <Button Width="60"
+                                Height="60"
+                                Content="Play"
+                                Command="{Binding StartGameCommand}"/>
+
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="4"
+                              Header="Info">
+                        
+                    </GroupBox>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Options old">
@@ -173,8 +387,8 @@
                 <Ribbon Style="{StaticResource tttRibbonStyle}" Grid.Column="4">
                     <RibbonTab Style="{StaticResource tttRibbonTabStyle}" Header="Game">
                         <RibbonGroup Style="{StaticResource tttRibbonGroup}" Header="Start Options">
-                            <RibbonButton Label="Start New Game" Command="{Binding StartNewGameCommand}"/>
-                            <RibbonButton Label="Start Last Game" Command="{Binding StartLastGameCommand}"/>
+                            <RibbonButton Label="Start New Game" />
+                            <RibbonButton Label="Start Last Game"/>
                         </RibbonGroup>
                         <RibbonGroup Style="{StaticResource tttRibbonGroup}" Header="PlayerX" >
                             <RibbonRadioButton Label="Human"/>
@@ -199,7 +413,7 @@
                             <RibbonTextBox Text="{Binding PlayerListOnRibbon[1].Name}" Foreground="Black"/>
                         </RibbonGroup>
                         <RibbonGroup Style="{StaticResource tttRibbonGroup}" VerticalContentAlignment="Center">
-                            <RibbonButton Command="{Binding StartGameCommand}" BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
+                            <RibbonButton BorderBrush="Black" Height="50" Width="50" Label="Start" VerticalContentAlignment="Center"/>
                         </RibbonGroup>
                     </RibbonTab>
                 </Ribbon>

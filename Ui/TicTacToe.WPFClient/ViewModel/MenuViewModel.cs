@@ -55,7 +55,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         private bool UserChoosesStartNewGameCanExecute()
         {
-           return true;
+            return true;
         }
 
         private void UserChoosesStartNewGameExecute(object obj)

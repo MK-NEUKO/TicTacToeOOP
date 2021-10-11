@@ -451,7 +451,7 @@
 
 
 
-    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
+    <Grid>
       
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" ItemsSource="{Binding GameBoardAreaList}">
         </ItemsControl>

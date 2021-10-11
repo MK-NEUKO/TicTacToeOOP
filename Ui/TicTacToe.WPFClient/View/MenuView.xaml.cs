@@ -21,6 +21,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public MenuView()
         {
             InitializeComponent();
-        }
+        }     
     }
 }

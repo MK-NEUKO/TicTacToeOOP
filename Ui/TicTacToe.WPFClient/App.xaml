@@ -9,6 +9,7 @@
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
         <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>
         <SolidColorBrush x:Key="TTTBlue" Color="#0589FF"/>
+        <SolidColorBrush x:Key="TTTForgroundLightGray" Color="#5c5c5c"/>
         <SolidColorBrush x:Key="TTTBackgroundLightGray" Color="#333333"/>
         <SolidColorBrush x:Key="TTTBackgroundMediumGray" Color="#FF272727"/>
         <SolidColorBrush x:Key="TTTBackgroundDarkGrey" Color="#212121"/>
@@ -16,6 +17,7 @@
         <Color x:Key="TTTGreenColor">#6AFF00</Color>
         <Color x:Key="TTTOrangeColor">#FF4F00</Color>
         <Color x:Key="TTTBlueColor">#0589FF</Color>
+        <Color x:Key="TTTForgroundLightGrayColor">#5c5c5c</Color>
         <Color x:Key="TTTBackgroundLightGrayColor">#333333</Color>
         <Color x:Key="TTTBackgroundMediumGrayColor">#FF272727</Color>
         <Color x:Key="TTTBackgroundDarkGreyColor">#212121</Color>
