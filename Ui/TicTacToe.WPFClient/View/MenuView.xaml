@@ -258,6 +258,52 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="CaretBrush" Value="{StaticResource TTTOrange}"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="{StaticResource TTTOrange}"
+                                BorderThickness="2"
+                                CornerRadius="2">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"></VisualState>
+                                    <VisualState x:Name="MouseOver"></VisualState>
+                                    <VisualState x:Name="Disabled"></VisualState>
+                                    <VisualState x:Name="ReadOnly"></VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates"></VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates"></VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ScrollViewer Margin="0"
+                                          x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
     </UserControl.Resources>
     
@@ -304,7 +350,6 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -313,22 +358,36 @@
 
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="0"
+                                         Grid.Column="0"
+                                         Height="25"
+                                         Width="60"
+                                         Margin="2"
                                          Content="Human"
                                          ToolTip="If you are no machien"/>
 
-                            <RadioButton Style="{StaticResource RadioButtonStyle}"
-                                         Grid.Row="1"
-                                         Content="AI"/>
-
-                            <ComboBox Grid.Row="1"
-                                      Grid.Column="1"/>
-                            
-                            <TextBox Grid.Row="2"
-                                     Grid.ColumnSpan="2"
+                            <TextBox Style="{StaticResource TextBoxStyle}"
+                                     Grid.Row="0" 
+                                     Grid.Column="1"
+                                     Height="25" 
+                                     Width="100"
+                                     Margin="2"
                                      Text="PlayerX"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"/>
-                            
+
+                            <RadioButton Style="{StaticResource RadioButtonStyle}"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         Height="25"
+                                         Margin="2"
+                                         Content="AI"/>
+
+                            <ComboBox Style="{StaticResource ComboBoxStyle}"
+                                      Grid.Row="1"
+                                      Grid.Column="1"
+                                      Height="25"
+                                      Margin="2"/>
+                                                                    
                         </Grid>
                     </GroupBox>
 
