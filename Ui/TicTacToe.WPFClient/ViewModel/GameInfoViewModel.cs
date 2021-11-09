@@ -9,9 +9,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public class GameInfoViewModel : ViewModelBase, IGameInfoViewModel
     {
-        private IPlayerController _playerController;
-        private Player _playerX;
-        private Player _playerO;
+        private readonly IPlayerController _playerController;
+        private readonly Player _playerX;
+        private readonly Player _playerO;
 
         public GameInfoViewModel(IPlayerController playerController)
         {
@@ -20,31 +20,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _playerO = _playerController.PlayerO;
         }
 
-        public Player PlayerX
-        {
-            get => _playerX;
-            set
-            {
-                _playerX = value;
-                OnPropertyChanged();
-            }
-        }
+        public Player PlayerX => _playerX;
 
-        public Player PlayerO
-        {
-            get => _playerO;
-            set
-            {
-                _playerO = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public void InitializeNewPlayerList()
-        {
-            _playerController.GetNewPlayerList();
-            PlayerX = _playerController.PlayerX;
-            PlayerO = _playerController.PlayerO;
-        }
+        public Player PlayerO => _playerO;
     }
 }

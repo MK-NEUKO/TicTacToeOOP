@@ -8,7 +8,5 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         public Player PlayerX { get; }
         public Player PlayerO { get; }
-
-        void InitializeNewPlayerList();
     }
 }

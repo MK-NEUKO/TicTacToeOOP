@@ -11,10 +11,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
     {
         private readonly IPlayerReposytory _playerRepository;
         private readonly IGameBoard _board;
+        private readonly IAI _aimimax;
         private Player _playerX;
         private Player _playerO;
         
-        private readonly IAI _aimimax;
         private int _gameIsTie;
 
         
@@ -23,10 +23,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             _playerRepository = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
             _board = board ?? throw new ArgumentNullException(nameof(board));
+            _aimimax = aimimax ?? throw new ArgumentNullException(nameof(aimimax));
             _playerX = _playerRepository.LoadDefaultPlayerList()[0];
             _playerO = _playerRepository.LoadDefaultPlayerList()[1];
             
-            _aimimax = aimimax;
             
         }
 

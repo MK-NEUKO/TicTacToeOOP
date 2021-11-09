@@ -13,18 +13,21 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IGamePlay _gamePlay;
+        private readonly IPlayerController _playerController;
 
         public ICommand InitializeGameCommand { get; }
 
         public MainWindowViewModel(IMenuViewModel menuViewModel,
                                    IGameBoardViewModel gameBoardViewModel,
                                    IGameInfoViewModel gameInfoViewModel,
-                                   IGamePlay gamePlay)
+                                   IGamePlay gamePlay,
+                                   IPlayerController playerController)
         {
             _menuViewModel = menuViewModel ?? throw new ArgumentNullException(nameof(menuViewModel));
             _gameBoardViewModel = gameBoardViewModel ?? throw new ArgumentNullException(nameof(gameBoardViewModel));
             _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
             _gamePlay = gamePlay ?? throw new ArgumentNullException(nameof(gamePlay));
+            _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
 
             InitializeGameCommand = new RelayCommand(InitializeGameExecute, InitializeGameCanExecute);
         }
@@ -37,8 +40,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void InitializeGameExecute(object obj)
         {         
             if (_menuViewModel.UserChoosesStartNewGame)
-            {
-                _gameInfoViewModel.InitializeNewPlayerList();
+            {               
                 _gameBoardViewModel.InitializeNewGameBoard();
             }
         }
