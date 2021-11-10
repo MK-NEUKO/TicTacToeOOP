@@ -14,7 +14,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IGameBoardViewModel _gameBoardViewModel;
         private readonly IGameInfoViewModel _gameInfoViewModel;
         private readonly IPlayerController _playerController;
-        private IReadOnlyList<Player> _playerListOnRibbon;
+        private Player _playerX;
+        private Player _playerO;
         
         private bool _userChoosesStartNewGame;
         private bool _userChoosesStartLastGame;
@@ -27,7 +28,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoardViewModel = gameBoardViewModel ?? throw new ArgumentNullException(nameof(gameBoardViewModel));
             _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
             _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
-            
+            _playerX = _playerController.PlayerX;
+            _playerO = _playerController.PlayerO;
 
             StartGameCommand = new RelayCommand(StartGameExecute, StartGameCanExecute);
             StartNewGameCommand = new RelayCommand(UserChoosesStartNewGameExecute, UserChoosesStartNewGameCanExecute);
@@ -37,9 +39,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public ICommand StartGameCommand { get; }
         public ICommand StartNewGameCommand { get; }
         public ICommand StartLastGameCommand { get; }
-        public IReadOnlyList<Player> PlayerListOnRibbon => _playerListOnRibbon;
         public bool UserChoosesStartNewGame { get => _userChoosesStartNewGame; set => _userChoosesStartNewGame = value; }
         public bool UserChoosesStartLastGame { get => _userChoosesStartLastGame; set => _userChoosesStartLastGame = value; }
+        public Player PlayerX { get => _playerX; set => _playerX = value; }
+        public Player PlayerO { get => _playerO; set => _playerO = value; }
 
         private bool UserChoosesStartLastGameCanExecute()
         {
@@ -50,6 +53,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             _userChoosesStartLastGame = true;
             _userChoosesStartNewGame = false;
+            _playerController.GetLastPlayerList();
+            _gameInfoViewModel.RenewInfoBoard();
             
         }
 

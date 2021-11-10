@@ -6,6 +6,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     public interface IGameInfoViewModel
     {
+        public void RenewInfoBoard();
         public Player PlayerX { get; }
         public Player PlayerO { get; }
     }
