@@ -55,7 +55,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
 
-        IReadOnlyList<GameBoardArea> IGameBoardViewModel.GameBoardAreaList => throw new NotImplementedException();
+        List<GameBoardArea> IGameBoardViewModel.GameBoardAreaList => throw new NotImplementedException();
+
+       
 
         public void InitializeLastGameBoard()
         {
@@ -68,6 +70,11 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
         }
 
         public void ShowStartAnimation()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IGameBoardViewModel.SetLastGameBoard()
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         private readonly IGameBoard _gameBoard;
         private readonly IGamePlay _gamePlay;
-        private readonly IReadOnlyList<GameBoardArea> _gameBoardAreaList;
+        private List<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
         private bool _isGameDecided;
@@ -26,7 +26,16 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             ContinueCommand = new RelayCommand(ContinueExecute, ContinueCanExecute);
         }
 
-        public IReadOnlyList<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
+        public List<GameBoardArea> GameBoardAreaList
+        {
+            get => _gameBoardAreaList;
+            private set
+            {
+                _gameBoardAreaList = value;
+                OnPropertyChanged();
+            }
+            
+        }
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
 
         public ICommand ContinueCommand { get; }
@@ -128,6 +137,12 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public void ShowStartAnimation()
         {
             _gameBoard.ShowStartAnimation();
+        }
+
+        public void SetLastGameBoard()
+        {
+            _gameBoard.LoadLastGameBoard(); 
+            GameBoardAreaList = _gameBoard.GameBoardAreaList;
         }
     }
 }

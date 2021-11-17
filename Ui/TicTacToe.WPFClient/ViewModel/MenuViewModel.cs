@@ -54,6 +54,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _userChoosesStartLastGame = true;
             _userChoosesStartNewGame = false;
             _playerController.GetLastPlayerList();
+            _gameBoardViewModel.SetLastGameBoard();
             _gameInfoViewModel.RenewInfoBoard();
             
         }

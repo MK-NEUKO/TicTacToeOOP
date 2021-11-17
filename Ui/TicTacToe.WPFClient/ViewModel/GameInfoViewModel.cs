@@ -29,7 +29,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public Player PlayerX
         {
             get => _playerX;
-            set
+            private set
             {
                 _playerX = value;
                 OnPropertyChanged();
@@ -39,7 +39,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public Player PlayerO
         {
             get => _playerO;
-            set
+            private set
             {
                 _playerO = value;
                 OnPropertyChanged();
