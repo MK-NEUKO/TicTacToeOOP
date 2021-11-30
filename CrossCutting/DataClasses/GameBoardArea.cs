@@ -8,7 +8,8 @@
         private bool _isWinArea;
         private int _columnIndex;
         private int _rowIndex;
-        private bool _isAnimated;
+        private bool _isNewGameAnimated;
+        private bool _isLastGameAnimated;
         private bool _isInGame;
         
 
@@ -18,7 +19,7 @@
             _area = " ";
             _isOccupied = false;
             _isWinArea = false;
-            _isAnimated = false;
+            _isNewGameAnimated = false;
         }
 
         public bool IsWinArea
@@ -58,12 +59,22 @@
         public int AreaID { get => _areaID; }
         public int ColumnIndex { get => _columnIndex; set => _columnIndex = value; }
         public int RowIndex { get => _rowIndex; set => _rowIndex = value; }
-        public bool IsAnimated
+        public bool IsNewGameAnimated
         {
-            get { return _isAnimated; }
+            get { return _isNewGameAnimated; }
             set
             {
-                _isAnimated = value;
+                _isNewGameAnimated = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsLastGameAnimated
+        {
+            get => _isLastGameAnimated;
+            set
+            {
+                _isLastGameAnimated = value;
                 OnPropertyChanged();
             }
         }

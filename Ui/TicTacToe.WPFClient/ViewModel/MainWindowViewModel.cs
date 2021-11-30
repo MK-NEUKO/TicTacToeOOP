@@ -28,21 +28,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
             _gamePlay = gamePlay ?? throw new ArgumentNullException(nameof(gamePlay));
             _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
-
-            InitializeGameCommand = new RelayCommand(InitializeGameExecute, InitializeGameCanExecute);
-        }
-
-        private bool InitializeGameCanExecute()
-        {
-            return true;
-        }
-
-        private void InitializeGameExecute(object obj)
-        {         
-            if (_menuViewModel.UserChoosesStartNewGame)
-            {               
-                _gameBoardViewModel.InitializeNewGameBoard();
-            }
         }
 
         public IGameBoardViewModel GameBoardViewModel => _gameBoardViewModel;

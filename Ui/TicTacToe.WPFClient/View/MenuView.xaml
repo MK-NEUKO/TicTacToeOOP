@@ -720,7 +720,7 @@
                                           Width="130"
                                           Margin="5"
                                           Content="Load Last Game"
-                                         Command="{Binding StartLastGameCommand}"/>
+                                         Command="{Binding PlayerSelectStartLastGame}"/>
                         </Grid>
                     </GroupBox>
 

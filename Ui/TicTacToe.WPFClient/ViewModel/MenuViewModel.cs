@@ -32,44 +32,45 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _playerO = _playerController.PlayerO;
 
             StartGameCommand = new RelayCommand(StartGameExecute, StartGameCanExecute);
-            StartNewGameCommand = new RelayCommand(UserChoosesStartNewGameExecute, UserChoosesStartNewGameCanExecute);
-            StartLastGameCommand = new RelayCommand(UserChoosesStartLastGameExecute, UserChoosesStartLastGameCanExecute);
+            StartNewGameCommand = new RelayCommand(StartNewGameExecute, StartNewGameCanExecute);
+            PlayerSelectStartLastGame = new RelayCommand(PlayerSelectStartLastGameExecute, PlayerSelecttartLastGameCanExecute);
         }
 
         public ICommand StartGameCommand { get; }
         public ICommand StartNewGameCommand { get; }
-        public ICommand StartLastGameCommand { get; }
+        public ICommand PlayerSelectStartLastGame { get; }
         public bool UserChoosesStartNewGame { get => _userChoosesStartNewGame; set => _userChoosesStartNewGame = value; }
         public bool UserChoosesStartLastGame { get => _userChoosesStartLastGame; set => _userChoosesStartLastGame = value; }
         public Player PlayerX { get => _playerX; set => _playerX = value; }
         public Player PlayerO { get => _playerO; set => _playerO = value; }
 
-        private bool UserChoosesStartLastGameCanExecute()
+        private bool StartNewGameCanExecute()
         {
             return true;
         }
 
-        private void UserChoosesStartLastGameExecute(object obj)
-        {
-            _userChoosesStartLastGame = true;
-            _userChoosesStartNewGame = false;
-            _playerController.GetLastPlayerList();
-            _gameBoardViewModel.SetLastGameBoard();
-            _gameInfoViewModel.RenewInfoBoard();
-            
-        }
-
-        private bool UserChoosesStartNewGameCanExecute()
-        {
-            return true;
-        }
-
-        private void UserChoosesStartNewGameExecute(object obj)
+        private void StartNewGameExecute(object obj)
         {
             _userChoosesStartNewGame = true;
             _userChoosesStartLastGame = false;
             
         }
+
+        private bool PlayerSelecttartLastGameCanExecute()
+        {
+            return true;
+        }
+
+        private void PlayerSelectStartLastGameExecute(object obj)
+        {
+            _userChoosesStartLastGame = true;
+            _userChoosesStartNewGame = false;
+            _playerController.GetLastPlayerList();
+            _gameBoardViewModel.InitializeLastGameBoard();
+            _gameInfoViewModel.RenewInfoBoard();
+            
+        }
+
 
         private bool StartGameCanExecute()
         {

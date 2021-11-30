@@ -13,6 +13,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
         void CheckGameBoardState();
         void ResetGameBoard();
         void ShowStartAnimation();
-        public void LoadLastGameBoard();
+        void ResetAnimationValue();
+        void LoadLastGameBoard();
     }
 }

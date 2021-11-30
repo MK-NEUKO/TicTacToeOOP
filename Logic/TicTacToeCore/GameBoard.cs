@@ -40,7 +40,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public List<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
 
 
-        public void ShowStartAnimation() => _gameBoardAreaList.ForEach(area => area.IsAnimated = true);
+        public void ShowStartAnimation() => _gameBoardAreaList.ForEach(area => area.IsNewGameAnimated = true);
+
+        public void ResetAnimationValue() => _gameBoardAreaList.ForEach(area => area.IsNewGameAnimated = false);
 
         public void LoadLastGameBoard() => _gameBoardAreaList = _gameBoardRepository.LoadLastGameBoard();
 
@@ -102,7 +104,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             {
                 if (!area.IsWinArea)
                 {
-                    area.IsAnimated = false;
+                    area.IsNewGameAnimated = false;
                 }
             }
         }

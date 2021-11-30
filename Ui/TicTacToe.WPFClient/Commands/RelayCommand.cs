@@ -9,10 +9,16 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
     {
         private readonly Action<object> _execute;
         private readonly Func<bool> _canExecute;
+        private ICommand startLastGameCommand;
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
         {
+        }
+
+        public RelayCommand(ICommand startLastGameCommand)
+        {
+            this.startLastGameCommand = startLastGameCommand;
         }
 
         public RelayCommand(Action<object> execute, Func<bool> canExecute)
