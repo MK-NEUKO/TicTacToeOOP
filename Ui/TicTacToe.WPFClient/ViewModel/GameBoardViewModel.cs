@@ -24,20 +24,17 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
             ContinueCommand = new RelayCommand(ContinueExecute, ContinueCanExecute);
-            StartNewGameAnimationCompledet = new RelayCommand(StartNewGameAnimationCompledetCommand);
-            StartLastGameAnimationCompledetCommand = new RelayCommand(StartLastAnimationCompledetGameCommand);
-
+            StartGameWhenStartanimationCompletedCommand = new RelayCommand(StaranimationCompletedExecute);
         }
 
-        private void StartNewGameAnimationCompledetCommand(object obj)
+        private void StaranimationCompletedExecute(object obj)
         {
             throw new NotImplementedException();
         }
 
-        private void StartLastAnimationCompledetGameCommand(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
+        public ICommand ContinueCommand { get; }
+        public ICommand StartGameWhenStartanimationCompletedCommand { get; }
 
         public List<GameBoardArea> GameBoardAreaList
         {
@@ -49,12 +46,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             }
             
         }
-        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
-
-        public ICommand ContinueCommand { get; }
         
-        public ICommand StartLastGameAnimationCompledetCommand { get; }
-        public ICommand StartNewGameAnimationCompledet { get; }
+        
 
         public bool IsGameDecided
         {

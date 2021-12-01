@@ -12,5 +12,11 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             InitializeComponent();
         }
+
+        private void StartAnimationCompleted(object sender, EventArgs e)
+        {
+            var gameBoardViewModel = (GameBoardViewModel)this.DataContext;
+            gameBoardViewModel.StartGameWhenStartanimationCompletedCommand.Execute(null);
+        }
     }
 }
