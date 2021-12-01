@@ -8,46 +8,38 @@
         xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="TicTacToe" Height="700" Width="800">
+        Title="TicTacToe" Height="700" Width="1000">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
 
 
-    <Border BorderThickness="10" BorderBrush="{StaticResource TTTBackgroundMediumGray}">
-    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <DockPanel>
+        <view:MenuView DataContext="{Binding MenuViewModel}"
+                       DockPanel.Dock="Top"/>
 
-        <ContentControl Content="{Binding Path=MenuViewModel}"
-                        ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
-                        Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Grid DockPanel.Dock="Left"
+              Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
 
-        <view:GameBoardView DataContext="{Binding GameBoardViewModel}"
-                            Grid.Row="1"                           
-                            x:Name="gameBoard"
-                            MaxHeight="300"
-                            MaxWidth="300"/>
-                            
+            <view:GameBoardView DataContext="{Binding GameBoardViewModel}"
+                                Grid.Row="0"/>
 
-        <view:GameInfoView DataContext="{Binding GameInfoViewModel}"
-                           Grid.Row="2"/>
+            <view:GameInfoView DataContext="{Binding GameInfoViewModel}"
+                               Grid.Row="1"/>
+            
+        </Grid>
+
+        <Grid DockPanel.Dock="Right"
+              Width="auto"
+              Height="Auto">
+            
+        </Grid>
         
-        <!--<ContentControl Content="{Binding GameInfoViewModel}"
-                        ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
-                        Grid.Row="2"/>-->
-
-        <ContentControl Content="{Binding Path=VisualMinimaxViewModel}"                       
-                        ContentTemplate="{StaticResource VisualMinimaxViewModelDataTemplate}"
-                        Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
-        
-    </Grid>
-    </Border>
+    </DockPanel>
+    
+    
 </Window>

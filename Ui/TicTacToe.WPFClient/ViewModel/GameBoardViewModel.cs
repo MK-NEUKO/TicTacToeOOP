@@ -24,10 +24,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
             ContinueCommand = new RelayCommand(ContinueExecute, ContinueCanExecute);
-            StartGameWhenStartanimationCompletedCommand = new RelayCommand(StaranimationCompletedExecute);
+            StartGameWhenStartanimationCompletedCommand = new RelayCommand(StartanimationCompletedExecute);
         }
 
-        private void StaranimationCompletedExecute(object obj)
+        private void StartanimationCompletedExecute(object obj)
         {
             throw new NotImplementedException();
         }

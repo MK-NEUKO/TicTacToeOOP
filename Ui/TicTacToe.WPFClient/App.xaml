@@ -22,22 +22,6 @@
         <Color x:Key="TTTBackgroundMediumGrayColor">#FF272727</Color>
         <Color x:Key="TTTBackgroundDarkGreyColor">#212121</Color>
 
-        <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type local:IMenuViewModel}">
-            <local:MenuView/>
-        </DataTemplate>
-
-        <!--<DataTemplate x:Key="GameInfoViewModelDataTemplate" DataType="{x:Type local:IGameInfoViewModel}">
-            <local:GameInfoView/>
-        </DataTemplate>-->
-
-        <DataTemplate x:Key="VisualMinimaxViewModelDataTemplate" DataType="{x:Type local:IVisualMinimaxViewModel}">
-            <local:VisualMinimaxView/>
-        </DataTemplate>
-
-        <!--<DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
-            
-        </DataTemplate>-->
-        
     </Application.Resources>
     
 </Application>
