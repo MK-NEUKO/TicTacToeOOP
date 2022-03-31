@@ -693,11 +693,11 @@
             <TabItem Header="Game">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Header="Game Options">
@@ -748,9 +748,8 @@
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
-                                     Height="25" 
-                                     Width="100"
-                                     Margin="2"
+                                     Height="25"
+                                     Margin="4"
                                      Text="PlayerX"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"/>
@@ -765,8 +764,8 @@
                             <ComboBox Style="{StaticResource ComboBox}"
                                       Grid.Row="1"
                                       Grid.Column="1"
-                                      Height="25"
-                                      Margin="2">
+                                      Height="25"                                     
+                                      Margin="4">
                                 <ComboBoxItem>Easy</ComboBoxItem>
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
@@ -799,9 +798,8 @@
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
-                                     Height="25" 
-                                     Width="100"
-                                     Margin="2"
+                                     Height="25"
+                                     Margin="4"
                                      Text="PlayerX"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"/>
@@ -817,7 +815,7 @@
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Height="25"
-                                      Margin="2">
+                                      Margin="4">
                                 <ComboBoxItem>Easy</ComboBoxItem>
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
@@ -831,6 +829,7 @@
                         <Button Style="{StaticResource ButtonStyle}"
                                 Width="60"
                                 Height="60"
+                                Margin="4"
                                 Content="Play"
                                 Command="{Binding StartGameCommand}"/>
 
@@ -838,12 +837,11 @@
 
                     <GroupBox Grid.Column="4"
                               Header="Info">
-                        
+
                     </GroupBox>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Options old"/>
         </TabControl>
         
 

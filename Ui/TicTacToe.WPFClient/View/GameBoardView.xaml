@@ -89,7 +89,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         
-<!--+++++++ StartLastGame Animation +++++++-->
+        <!--+++++++ StartLastGame Animation +++++++-->
 
         <Storyboard x:Key="StartLastGameAnimation" RepeatBehavior="1x"
                     Completed="StartAnimationCompleted">
@@ -126,7 +126,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         
-<!--+++++++ Animation wehn PlayerX win +++++++-->
+        <!--+++++++ Animation wehn PlayerX win +++++++-->
         
         <Storyboard x:Key="WinnerXAnimation">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
@@ -167,7 +167,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
-<!--+++++++ Animation wehn PlayerO win +++++++-->
+        <!--+++++++ Animation wehn PlayerO win +++++++-->
 
         <Storyboard x:Key="WinnerOAnimation">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"

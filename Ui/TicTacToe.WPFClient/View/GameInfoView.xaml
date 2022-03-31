@@ -152,7 +152,8 @@
     </UserControl.Resources>
 
 
-    <Grid Background="#FF272727">
+    <Grid Background="{StaticResource TTTBackgroundDarkGrey}"
+          Margin="0, 8">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>

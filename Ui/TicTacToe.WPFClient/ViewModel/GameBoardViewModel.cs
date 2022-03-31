@@ -27,10 +27,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             StartGameWhenStartanimationCompletedCommand = new RelayCommand(StartanimationCompletedExecute);
         }
 
-        private void StartanimationCompletedExecute(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        private void StartanimationCompletedExecute(object obj) => InitializeNewGameBoard();    
+        
 
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
         public ICommand ContinueCommand { get; }

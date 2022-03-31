@@ -8,13 +8,13 @@
         xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="TicTacToe" Height="700" Width="1000">
+        Title="TicTacToe" Height="650" Width="1000">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
 
 
-    <DockPanel>
+    <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
         <view:MenuView DataContext="{Binding MenuViewModel}"
                        DockPanel.Dock="Top"/>
 
