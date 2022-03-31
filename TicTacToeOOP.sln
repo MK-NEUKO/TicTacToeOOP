@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{5918CD42-DEB8-430C-9E5A-495CCC6A1C3F}"
 EndProject
@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E01E8A4
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.ConsoleClient", "Ui\TicTacToe.ConsoleClient\TicTacToe.ConsoleClient.csproj", "{EBCD5312-73CB-4F7C-A379-37291F00E863}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.WPFClient", "Ui\TicTacToe.WPFClient\TicTacToe.WPFClient.csproj", "{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}"
 EndProject
@@ -70,10 +68,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBCD5312-73CB-4F7C-A379-37291F00E863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBCD5312-73CB-4F7C-A379-37291F00E863}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBCD5312-73CB-4F7C-A379-37291F00E863}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBCD5312-73CB-4F7C-A379-37291F00E863}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -103,7 +97,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EBCD5312-73CB-4F7C-A379-37291F00E863} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67} = {5918CD42-DEB8-430C-9E5A-495CCC6A1C3F}
 		{293E8DEC-C28D-4917-90E6-8AEB9CCEB74C} = {C7D841D1-8921-49F0-95A6-0F942617D9CD}
