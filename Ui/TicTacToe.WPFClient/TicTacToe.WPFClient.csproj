@@ -6,6 +6,8 @@
     <RootNamespace>MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\LogoInfo.png" />
+    <None Remove="Resources\LogoInfo.svg" />
     <None Remove="View\Resources\background_glass.jpg" />
     <None Remove="View\Resources\background_glass_02.jpg" />
   </ItemGroup>
@@ -20,10 +22,14 @@
     <ProjectReference Include="..\..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="View\Resources\LogoInfo.png" />
+    <Resource Include="View\Resources\LogoInfo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="View\Resources\background_glass.jpg" />
     <Resource Include="View\Resources\background_glass_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 </Project>

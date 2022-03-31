@@ -8,7 +8,7 @@
         xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="TicTacToe" Height="650" Width="1000">
+        Title="TicTacToe" Height="650" Width="850">
     <d:Window.DataContext>
         <sd:MainWindowViewModelSampleDate/>
     </d:Window.DataContext>
@@ -36,7 +36,6 @@
         <Grid DockPanel.Dock="Right"
               Width="auto"
               Height="Auto">
-            
         </Grid>
         
     </DockPanel>

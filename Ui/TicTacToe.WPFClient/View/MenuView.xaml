@@ -837,7 +837,9 @@
 
                     <GroupBox Grid.Column="4"
                               Header="Info">
-
+                        <StackPanel Orientation="Vertical">
+                            <Image Width="150" Source="Resources/LogoInfo.png"/>
+                        </StackPanel>
                     </GroupBox>
 
                 </Grid>
