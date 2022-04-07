@@ -21,6 +21,11 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public MenuView()
         {
             InitializeComponent();
-        }     
+        }
+
+        private void AiButton_Checked(object sender, RoutedEventArgs e)
+        {
+            diffLevelPlayerX.IsEnabled = true;
+        }
     }
 }

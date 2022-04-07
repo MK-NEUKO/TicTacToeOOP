@@ -739,14 +739,16 @@
                                          Grid.Column="0"
                                          Height="25"
                                          Margin="2"
-                                         Content="AI"/>
+                                         Content="AI"
+                                         Checked="AiButton_Checked"/>
 
                             <ComboBox Style="{StaticResource ComboBox}"
+                                      x:Name="diffLevelPlayerX"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Height="25"                                     
                                       Margin="4"
-                                      >
+                                      IsEnabled="False">
                                 <ComboBoxItem>Easy</ComboBoxItem>
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
