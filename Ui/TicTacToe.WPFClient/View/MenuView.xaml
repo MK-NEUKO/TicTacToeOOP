@@ -253,22 +253,39 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="{StaticResource TTTOrange}"
-                                BorderThickness="2"
-                                CornerRadius="2">
+                        <Grid>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"></VisualState>
-                                    <VisualState x:Name="MouseOver"></VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        Storyboard.TargetName="BorderBlurEffect"
+                                                        To="{StaticResource TTTOrangeColor}"
+                                                        Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
                                     <VisualState x:Name="Disabled"></VisualState>
                                     <VisualState x:Name="ReadOnly"></VisualState>
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="FocusStates"></VisualStateGroup>
                                 <VisualStateGroup x:Name="ValidationStates"></VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ScrollViewer Margin="0"
-                                          x:Name="PART_ContentHost" />
-                        </Border>
+                            <Border x:Name="BorderBlurEffect"
+                                BorderBrush="Transparent"
+                                BorderThickness="2"
+                                CornerRadius="4">
+                                <Border.Effect>
+                                    <BlurEffect Radius="10"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border BorderBrush="{StaticResource TTTOrange}"
+                                BorderThickness="2"
+                                CornerRadius="2">
+                                <ScrollViewer Margin="0"
+                                              x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
