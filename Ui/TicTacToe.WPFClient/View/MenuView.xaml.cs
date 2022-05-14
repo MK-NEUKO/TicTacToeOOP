@@ -23,9 +23,14 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             InitializeComponent();
         }
 
+        
+
         private void AiButton_Checked(object sender, RoutedEventArgs e)
         {
             diffLevelPlayerX.IsEnabled = true;
+            radioButtonHumanPlayerX.IsEnabled = false;
+            //VisualStateManager.GoToElementState(this.radioButtonHumanPlayerX, "Checked", false);
+            VisualStateManager.GoToElementState(this.radioButtonHumanPlayerX, "Disabled", true);
         }
     }
 }
