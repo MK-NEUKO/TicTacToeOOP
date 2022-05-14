@@ -21,16 +21,14 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public MenuView()
         {
             InitializeComponent();
-        }
+        } 
 
-        
-
-        private void AiButton_Checked(object sender, RoutedEventArgs e)
+        private void LoadNewGame_Checked(object sender, RoutedEventArgs e)
         {
-            diffLevelPlayerX.IsEnabled = true;
-            radioButtonHumanPlayerX.IsEnabled = false;
-            //VisualStateManager.GoToElementState(this.radioButtonHumanPlayerX, "Checked", false);
-            VisualStateManager.GoToElementState(this.radioButtonHumanPlayerX, "Disabled", true);
+            selectHumanPlayerX.IsEnabled = true;
+            selectAiPlayerX.IsEnabled=true;
+            namePlayerX.IsEnabled = true;
+            selectDiffecultylevelPlayerX.IsEnabled = true;
         }
     }
 }
