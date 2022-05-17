@@ -27,13 +27,38 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             EnableControlsPlayerXPlayerO();
         }
+        private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void SelectHumanPlayerX_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDiffecultylevelPlayerX.IsEnabled = false;
+        }
+        private void SelectAiPlayerX_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDiffecultylevelPlayerX.IsEnabled = true;
+        }
+        private void SelectHumamnPlayerO_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDiffecultylevelPlayerO.IsEnabled = false;
+        }
+
+        private void SelectAiPlayerO_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDiffecultylevelPlayerO.IsEnabled = true;
+        }
 
         private void EnableControlsPlayerXPlayerO()
         {
             selectHumanPlayerX.IsEnabled = true;
+            selectHumamnPlayerO.IsEnabled = true;
             selectAiPlayerX.IsEnabled = true;
+            selectAiPlayerO.IsEnabled = true;
             namePlayerX.IsEnabled = true;
+            namePlayerO.IsEnabled = true;
             selectDiffecultylevelPlayerX.IsEnabled = true;
+            selectDiffecultylevelPlayerO.IsEnabled = true;
         }
     }
 }

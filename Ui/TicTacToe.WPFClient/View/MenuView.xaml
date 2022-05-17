@@ -655,7 +655,7 @@
                             </Grid.RowDefinitions>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="0"
-                                         Content="Load NewGame"
+                                         Content="Load New Game"
                                          Height="25"
                                          Width="130" 
                                          Margin="5"
@@ -668,7 +668,8 @@
                                           Width="130"
                                           Margin="5"
                                           Content="Load Last Game"
-                                          Command="{Binding PlayerSelectStartLastGame}"/>
+                                          Command="{Binding PlayerSelectStartLastGame}"
+                                          Checked="LoadLastGame_Checked"/>
                         </Grid>
                     </GroupBox>
 
@@ -693,7 +694,8 @@
                                          Margin="2"
                                          Content="Human"
                                          ToolTip="If you are no machien"
-                                         IsEnabled="False"/>
+                                         IsEnabled="False"
+                                         Checked="SelectHumanPlayerX_Checked"/>
 
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
@@ -713,7 +715,8 @@
                                          Margin="2"
                                          Content="AI"
                                          x:Name="selectAiPlayerX"
-                                         IsEnabled="False"/>
+                                         IsEnabled="False"
+                                         Checked="SelectAiPlayerX_Checked"/>
 
                             <ComboBox Style="{StaticResource ComboBox}"
                                       x:Name="selectDiffecultylevelPlayerX"
@@ -749,7 +752,10 @@
                                          Width="60"
                                          Margin="2"
                                          Content="Human"
-                                         ToolTip="If you are no machien"/>
+                                         ToolTip="If you are no machien"
+                                         x:Name="selectHumamnPlayerO"
+                                         Checked="SelectHumamnPlayerO_Checked"
+                                         IsEnabled="False"/>
 
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
@@ -758,20 +764,27 @@
                                      Margin="4"
                                      Text="PlayerX"
                                      HorizontalContentAlignment="Center"
-                                     VerticalContentAlignment="Center"/>
+                                     VerticalContentAlignment="Center"
+                                     x:Name="namePlayerO"
+                                     IsEnabled="False"/>
 
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="1"
                                          Grid.Column="0"
                                          Height="25"
                                          Margin="2"
-                                         Content="AI"/>
+                                         Content="AI"
+                                         x:Name="selectAiPlayerO"
+                                         Checked="SelectAiPlayerO_Checked"
+                                         IsEnabled="False"/>
 
                             <ComboBox Style="{StaticResource ComboBox}"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Height="25"
-                                      Margin="4">
+                                      Margin="4"
+                                      x:Name="selectDiffecultylevelPlayerO"
+                                      IsEnabled="False">
                                 <ComboBoxItem IsSelected="True">Easy</ComboBoxItem>
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
