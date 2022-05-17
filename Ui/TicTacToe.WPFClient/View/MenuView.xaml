@@ -343,10 +343,6 @@
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="MouseOver">
                                         <Storyboard>
-                                            <!--<ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Storyboard.TargetName="Border"
-                                                            To="{StaticResource TTTGreenColor}"
-                                                            Duration="0:0:0"/>-->
                                             <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
                                                             Storyboard.TargetName="BorderBlurEffect"
                                                             To="{StaticResource TTTGreenColor}"
@@ -354,7 +350,18 @@
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed"></VisualState>
-                                    <VisualState x:Name="Disabled"></VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
                                     <VisualStateGroup.Transitions>
                                         <VisualTransition From="*" To="Pressed" GeneratedDuration="0:0:0.2"/>
                                     </VisualStateGroup.Transitions>
@@ -800,7 +807,9 @@
                                 Height="60"
                                 Margin="4"
                                 Content="Play"
-                                Command="{Binding StartGameCommand}"/>
+                                Command="{Binding StartGameCommand}"
+                                x:Name="startGameButton"
+                                IsEnabled="False"/>
 
                     </GroupBox>
 
