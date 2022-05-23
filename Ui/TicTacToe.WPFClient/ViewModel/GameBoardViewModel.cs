@@ -126,7 +126,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public void InitializeLastGameBoard()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void CheckHowItIsPlayed()

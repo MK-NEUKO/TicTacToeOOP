@@ -675,13 +675,14 @@
                                           Width="130"
                                           Margin="5"
                                           Content="Load Last Game"
-                                          Command="{Binding PlayerSelectStartLastGame}"
+                                          Command="{Binding LoadLastGameCommand}"
                                           Checked="LoadLastGame_Checked"/>
                         </Grid>
                     </GroupBox>
 
                     <GroupBox Header="PlayerX"
-                              Grid.Column="1">
+                              Grid.Column="1"
+                              DataContext="{Binding PlayerX}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -709,7 +710,7 @@
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="PlayerX"
+                                     Text="{Binding Name}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="namePlayerX"
@@ -741,7 +742,8 @@
                     </GroupBox>
 
                     <GroupBox Header="PlayerO"
-                              Grid.Column="2">
+                              Grid.Column="2"
+                              DataContext="{Binding PlayerO}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -769,7 +771,7 @@
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="PlayerX"
+                                     Text="{Binding Name}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="namePlayerO"

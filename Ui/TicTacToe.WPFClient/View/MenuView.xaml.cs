@@ -26,6 +26,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void LoadNewGame_Checked(object sender, RoutedEventArgs e)
         {
             EnableControlsPlayerXPlayerO();
+            startGameButton.IsEnabled = true;
         }
         private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
         {
