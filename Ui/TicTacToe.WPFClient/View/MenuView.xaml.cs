@@ -30,7 +30,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         }
         private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
         {
-
+            FreezControlsPlayerXPlayerO();
         }
         private void SelectHumanPlayerX_Checked(object sender, RoutedEventArgs e)
         {
@@ -61,5 +61,13 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             selectDiffecultylevelPlayerX.IsEnabled = true;
             selectDiffecultylevelPlayerO.IsEnabled = true;
         }
+
+        private void FreezControlsPlayerXPlayerO()
+        {
+            //selectAiPlayerO.IsEnabled = false;
+            //VisualStateManager.GoToState(selectAiPlayerO, "Normal", true);
+
+        }
+
     }
 }

@@ -703,7 +703,8 @@
                                          Content="Human"
                                          ToolTip="If you are no machien"
                                          IsEnabled="False"
-                                         Checked="SelectHumanPlayerX_Checked"/>
+                                         Checked="SelectHumanPlayerX_Checked"
+                                         IsChecked="{Binding IsHuman}"/>
 
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
@@ -724,7 +725,8 @@
                                          Content="AI"
                                          x:Name="selectAiPlayerX"
                                          IsEnabled="False"
-                                         Checked="SelectAiPlayerX_Checked"/>
+                                         Checked="SelectAiPlayerX_Checked"
+                                         IsChecked="{Binding IsAI}"/>
 
                             <ComboBox Style="{StaticResource ComboBox}"
                                       x:Name="selectDiffecultylevelPlayerX"
@@ -764,7 +766,8 @@
                                          ToolTip="If you are no machien"
                                          x:Name="selectHumamnPlayerO"
                                          Checked="SelectHumamnPlayerO_Checked"
-                                         IsEnabled="False"/>
+                                         IsEnabled="False"
+                                         IsChecked="{Binding IsHuman}"/>
 
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
@@ -785,7 +788,8 @@
                                          Content="AI"
                                          x:Name="selectAiPlayerO"
                                          Checked="SelectAiPlayerO_Checked"
-                                         IsEnabled="False"/>
+                                         IsEnabled="False"
+                                         IsChecked="{Binding IsAI}"/>
 
                             <ComboBox Style="{StaticResource ComboBox}"
                                       Grid.Row="1"

@@ -53,7 +53,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         public bool IsHuman 
         {
             get => _isHuman;
-            private set 
+            set 
             {
                 _isHuman = value;
                 if (_isHuman)
@@ -71,7 +71,7 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         public bool IsAI
         {
             get => _isAI;
-            private set
+            set
             {
                 _isAI = value;
             }
