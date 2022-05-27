@@ -28,9 +28,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoardViewModel = gameBoardViewModel ?? throw new ArgumentNullException(nameof(gameBoardViewModel));
             _gameInfoViewModel = gameInfoViewModel ?? throw new ArgumentNullException(nameof(gameInfoViewModel));
             _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
-            _playerX = _playerController.PlayerX;
-            _playerO = _playerController.PlayerO;
 
+            _playerX = new Player { Name = "PlayerX", IsAI = false, IsHuman = false};
+            _playerO = new Player { Name = "PlayerX", IsAI = false, IsHuman = false};
             StartGameCommand = new RelayCommand(StartGameExecute, StartGameCanExecute);
             StartNewGameCommand = new RelayCommand(StartNewGameExecute, StartNewGameCanExecute);
             LoadLastGameCommand = new RelayCommand(LoadLastGameExecute, LoadLastGameCanExecute);
@@ -68,8 +68,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void StartNewGameExecute(object obj)
         {
             _userChoosesStartNewGame = true;
-            _userChoosesStartLastGame = false;
-            
+            _userChoosesStartLastGame = false;         
         }
 
         private bool LoadLastGameCanExecute()

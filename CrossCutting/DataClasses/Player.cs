@@ -56,14 +56,6 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
             set 
             {
                 _isHuman = value;
-                if (_isHuman)
-                {
-                    _isAI = false;
-                }
-                else
-                {
-                    _isAI = true;
-                }              
             }
              
         }

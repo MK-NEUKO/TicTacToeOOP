@@ -26,8 +26,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void LoadNewGame_Checked(object sender, RoutedEventArgs e)
         {
             EnableControlsPlayerXPlayerO();
+            UncheckRadioButtonsPlayerXPlayerO();
             startGameButton.IsEnabled = true;
         }
+
         private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
         {
             FreezControlsPlayerXPlayerO();
@@ -40,7 +42,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             selectDiffecultylevelPlayerX.IsEnabled = true;
         }
-        private void SelectHumamnPlayerO_Checked(object sender, RoutedEventArgs e)
+        private void SelectHumanPlayerO_Checked(object sender, RoutedEventArgs e)
         {
             selectDiffecultylevelPlayerO.IsEnabled = false;
         }
@@ -53,13 +55,21 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void EnableControlsPlayerXPlayerO()
         {
             selectHumanPlayerX.IsEnabled = true;
-            selectHumamnPlayerO.IsEnabled = true;
+            selectHumanPlayerO.IsEnabled = true;
             selectAiPlayerX.IsEnabled = true;
             selectAiPlayerO.IsEnabled = true;
             namePlayerX.IsEnabled = true;
             namePlayerO.IsEnabled = true;
             selectDiffecultylevelPlayerX.IsEnabled = true;
             selectDiffecultylevelPlayerO.IsEnabled = true;
+        }
+
+        private void UncheckRadioButtonsPlayerXPlayerO()
+        {
+            selectHumanPlayerX.IsChecked = false;
+            selectHumanPlayerO.IsChecked = false;
+            selectAiPlayerX.IsChecked = false;
+            selectAiPlayerO.IsChecked = false;
         }
 
         private void FreezControlsPlayerXPlayerO()
