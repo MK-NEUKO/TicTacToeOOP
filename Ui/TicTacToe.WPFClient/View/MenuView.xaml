@@ -639,6 +639,18 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ControlsCoverButton" TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
     
     <Grid>
@@ -740,6 +752,12 @@
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
 
+                            <Button Grid.ColumnSpan="2"
+                                    Grid.RowSpan="2"
+                                    Style="{StaticResource ControlsCoverButton}"
+                                    x:Name="controlsCoverPlayerX"
+                                    Visibility="Hidden"/>
+
                         </Grid>
                     </GroupBox>
 
@@ -802,6 +820,12 @@
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
+
+                            <Button Grid.ColumnSpan="2"
+                                    Grid.RowSpan="2"
+                                    Style="{StaticResource ControlsCoverButton}"
+                                    x:Name="controlsCoverPlayerO"
+                                    Visibility="Hidden"/>
 
                         </Grid>
                     </GroupBox>
