@@ -16,10 +16,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IPlayerController _playerController;
         private Player _playerX;
         private Player _playerO;
-        
-        private bool _userChoosesStartNewGame;
-        private bool _userChoosesStartLastGame;
-
 
         public MenuViewModel(IGameBoardViewModel gameBoardViewModel,
                              IGameInfoViewModel gameInfoViewModel,
@@ -39,8 +35,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         public ICommand StartGameCommand { get; }
         public ICommand StartNewGameCommand { get; }
         public ICommand LoadLastGameCommand { get; }
-        public bool UserChoosesStartNewGame { get => _userChoosesStartNewGame; set => _userChoosesStartNewGame = value; }
-        public bool UserChoosesStartLastGame { get => _userChoosesStartLastGame; set => _userChoosesStartLastGame = value; }
+        
         public Player PlayerX 
         { 
             get => _playerX; 
@@ -67,8 +62,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         private void StartNewGameExecute(object obj)
         {
-            _userChoosesStartNewGame = true;
-            _userChoosesStartLastGame = false;         
+            throw new NotImplementedException("StartNewGameExecute");    
         }
 
         private bool LoadLastGameCanExecute()
@@ -78,30 +72,19 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         private void LoadLastGameExecute(object obj)
         {
-            //_userChoosesStartLastGame = true;
-            //_userChoosesStartNewGame = false;
             _playerController.GetLastPlayerList();
             PlayerX = _playerController.PlayerX;
             PlayerO = _playerController.PlayerO;
-            //_gameBoardViewModel.InitializeLastGameBoard();
-            //_gameInfoViewModel.RenewInfoBoard();
-            
         }
-
 
         private bool StartGameCanExecute()
         {
-            if (_userChoosesStartNewGame || _userChoosesStartLastGame)
-            {
-                return true;
-            }
-            return false;
+            return true;
         }
 
         private void StartGameExecute(object obj)
         {
             _gameBoardViewModel.ShowStartAnimation();
         }
-
     }
 }
