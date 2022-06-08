@@ -34,6 +34,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
         {
             ProtectControlsWithCoverPlayerXPlayerO();
+            EnableControlsPlayerXPlayerO();
+            startGameButton.IsEnabled = true;
         }
         private void SelectHumanPlayerX_Checked(object sender, RoutedEventArgs e)
         {

@@ -32,15 +32,15 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring
         {
             return new List<GameBoardArea>
             {
-                new GameBoardArea(0){RowIndex = 0, IsNewGameAnimated = false, ColumnIndex = 0, Area = "X"},
-                new GameBoardArea(1){RowIndex = 0, IsNewGameAnimated = false, ColumnIndex = 1, Area = "O"},
-                new GameBoardArea(2){RowIndex = 0, IsNewGameAnimated = false, ColumnIndex = 2, Area = "X"},
-                new GameBoardArea(3){RowIndex = 1, IsNewGameAnimated = false, ColumnIndex = 0, Area = "O"},
-                new GameBoardArea(4){RowIndex = 1, IsNewGameAnimated = false, ColumnIndex = 1, Area = "X"},
-                new GameBoardArea(5){RowIndex = 1, IsNewGameAnimated = false, ColumnIndex = 2, Area = "O"},
-                new GameBoardArea(6){RowIndex = 2, IsNewGameAnimated = false, ColumnIndex = 0, Area = "X"},
-                new GameBoardArea(7){RowIndex = 2, IsNewGameAnimated = false, ColumnIndex = 1, Area = "O"},
-                new GameBoardArea(8){RowIndex = 2, IsNewGameAnimated = false, ColumnIndex = 2, Area = "X"},
+                new GameBoardArea(0){RowIndex = 0, IsStartNewGameAnimation = false, ColumnIndex = 0, Area = "X"},
+                new GameBoardArea(1){RowIndex = 0, IsStartNewGameAnimation = false, ColumnIndex = 1, Area = "O"},
+                new GameBoardArea(2){RowIndex = 0, IsStartNewGameAnimation = false, ColumnIndex = 2, Area = "X"},
+                new GameBoardArea(3){RowIndex = 1, IsStartNewGameAnimation = false, ColumnIndex = 0, Area = "O"},
+                new GameBoardArea(4){RowIndex = 1, IsStartNewGameAnimation = false, ColumnIndex = 1, Area = "X"},
+                new GameBoardArea(5){RowIndex = 1, IsStartNewGameAnimation = false, ColumnIndex = 2, Area = "O"},
+                new GameBoardArea(6){RowIndex = 2, IsStartNewGameAnimation = false, ColumnIndex = 0, Area = "X"},
+                new GameBoardArea(7){RowIndex = 2, IsStartNewGameAnimation = false, ColumnIndex = 1, Area = "O"},
+                new GameBoardArea(8){RowIndex = 2, IsStartNewGameAnimation = false, ColumnIndex = 2, Area = "X"},
             };
         }
 

@@ -16,7 +16,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private bool _isPlayerOWinner;
         private bool _isGameTie;
         private readonly int[,] _winConstellations;
-       
+
         public GameBoard(IGameBoardRepository gameBoardRepository)
         {
             _gameBoardRepository = gameBoardRepository ?? throw new ArgumentNullException(nameof(gameBoardRepository));
@@ -40,9 +40,15 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public List<GameBoardArea> GameBoardAreaList => _gameBoardAreaList;
 
 
-        public void ShowStartAnimation() => _gameBoardAreaList.ForEach(area => area.IsNewGameAnimated = true);
+        public void ShowStartAnimation(bool isNewGame)
+        {
+            if (isNewGame)
+                _gameBoardAreaList.ForEach(area => area.IsStartNewGameAnimation = true);
 
-        public void ResetAnimationValue() => _gameBoardAreaList.ForEach(area => area.IsNewGameAnimated = false);
+            _gameBoardAreaList.ForEach(_area => _area.IsStartLastGameAnimation = true);
+        }
+
+        public void ResetAnimationValue() => _gameBoardAreaList.ForEach(area => area.IsStartNewGameAnimation = false);
 
         public void LoadLastGameBoard() => _gameBoardAreaList = _gameBoardRepository.LoadLastGameBoard();
 
@@ -104,7 +110,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             {
                 if (!area.IsWinArea)
                 {
-                    area.IsNewGameAnimated = false;
+                    area.IsStartNewGameAnimation = false;
                 }
             }
         }

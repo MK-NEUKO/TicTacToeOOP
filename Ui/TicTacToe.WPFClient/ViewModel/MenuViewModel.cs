@@ -16,6 +16,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private readonly IPlayerController _playerController;
         private Player _playerX;
         private Player _playerO;
+        private bool _isLoadNewGame = false;
+        private bool _isLoadLastGame = false;
 
         public MenuViewModel(IGameBoardViewModel gameBoardViewModel,
                              IGameInfoViewModel gameInfoViewModel,
@@ -26,14 +28,14 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
 
             _playerX = new Player { Name = "PlayerX", IsAI = false, IsHuman = false};
-            _playerO = new Player { Name = "PlayerX", IsAI = false, IsHuman = false};
+            _playerO = new Player { Name = "PlayerX", IsAI = false, IsHuman = false };
             StartGameCommand = new RelayCommand(StartGameExecute, StartGameCanExecute);
-            StartNewGameCommand = new RelayCommand(StartNewGameExecute, StartNewGameCanExecute);
+            LoadNewGameCommand = new RelayCommand(LoadNewGameExecute, LoadNewGameCanExecute);
             LoadLastGameCommand = new RelayCommand(LoadLastGameExecute, LoadLastGameCanExecute);
         }
 
         public ICommand StartGameCommand { get; }
-        public ICommand StartNewGameCommand { get; }
+        public ICommand LoadNewGameCommand { get; }
         public ICommand LoadLastGameCommand { get; }
         
         public Player PlayerX 
@@ -55,21 +57,33 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             }  
         }
 
-        private bool StartNewGameCanExecute()
+        public bool IsLoadNewGame 
+        { 
+            get => _isLoadNewGame; 
+            set 
+            {
+                _isLoadNewGame = value;
+                OnPropertyChanged();
+            }
+             
+        }
+        public bool IsLoadLastGame
         {
-            return true;
+            get => _isLoadLastGame;
+            set
+            {
+                _isLoadLastGame = value;
+                OnPropertyChanged();
+            }
         }
 
-        private void StartNewGameExecute(object obj)
+        private bool LoadNewGameCanExecute() => true;
+        private void LoadNewGameExecute(object obj)
         {
-            throw new NotImplementedException("StartNewGameExecute");    
+
         }
 
-        private bool LoadLastGameCanExecute()
-        {
-            return true;
-        }
-
+        private bool LoadLastGameCanExecute() => true;
         private void LoadLastGameExecute(object obj)
         {
             _playerController.GetLastPlayerList();
@@ -77,14 +91,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             PlayerO = _playerController.PlayerO;
         }
 
-        private bool StartGameCanExecute()
-        {
-            return true;
-        }
-
-        private void StartGameExecute(object obj)
-        {
-            _gameBoardViewModel.ShowStartAnimation();
-        }
+        private bool StartGameCanExecute() => true;         
+        private void StartGameExecute(object obj) => _gameBoardViewModel.ShowStartAnimation(_isLoadNewGame);
     }
 }

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData"  
+             xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData" 
+             xmlns:view="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <d:UserControl.DataContext>
@@ -13,8 +14,9 @@
     <UserControl.Resources>
 
         <!--+++++++ StartNewGame Animation +++++++-->
-        
-        <Storyboard x:Key="StartNewGameAnimation" RepeatBehavior="1x"
+
+        <Storyboard x:Key="startNewGameAnimation"
+                    RepeatBehavior="1x"
                     Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
                                                             Storyboard.TargetName="theXColor"
@@ -88,10 +90,11 @@
                 <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="0.0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        
+
+
         <!--+++++++ StartLastGame Animation +++++++-->
 
-        <Storyboard x:Key="StartLastGameAnimation" RepeatBehavior="1x"
+        <Storyboard x:Key="startLastGameAnimation" RepeatBehavior="1x"
                     Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:2" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaBorder"
@@ -263,7 +266,9 @@
 
 <!--+++++++ GameBoard visualiz Data +++++++-->
 
-        <DataTemplate x:Key="gameBoardAreaDataTemplate" DataType="{x:Type ItemContainerTemplate}">
+        <DataTemplate x:Key="gameBoardAreaDataTemplate" 
+                      DataType="{x:Type ItemContainerTemplate}">
+
             <Grid>
 
                 <Rectangle x:Name="boardAreaLightEffect" 
@@ -273,7 +278,7 @@
                         <BlurEffect Radius="20"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                
+
                 <Rectangle x:Name="boardArea"
                            Margin="10" RadiusX="2" RadiusY="2"
                            Fill="{StaticResource TTTBackgroundDarkGrey}"/>
@@ -284,7 +289,7 @@
                         <DropShadowEffect ShadowDepth="10"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                
+
                 <Border x:Name="boardAreaBorderBlurEffect" 
                         BorderThickness="5" Margin="10" CornerRadius="2" 
                         Opacity="0.5" 
@@ -293,7 +298,7 @@
                         <BlurEffect Radius="20"/>
                     </Border.Effect>
                 </Border>
-                
+
                 <Border x:Name="boardAreaBorder" 
                         Margin="10" BorderThickness="4" CornerRadius="1"
                         BorderBrush="{StaticResource TTTBackgroundLightGray}"/>
@@ -351,7 +356,7 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-                
+
                 <Viewbox Stretch="Fill" Margin="28">
                     <Path x:Name="theO" 
                           StrokeThickness="6" 
@@ -377,15 +382,15 @@
 
             <DataTemplate.Triggers>
 
-                <DataTrigger Binding="{Binding IsNewGameAnimated}" Value="true">
+                <DataTrigger Binding="{Binding IsStartNewGameAnimation}"  Value="true">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource startNewGameAnimation}"/>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding IsLastGameAnimated}" Value="true">
+                <DataTrigger Binding="{Binding IsStartLastGameAnimation}" Value="true">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource startLastGameAnimation}"/>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
                 
@@ -500,7 +505,8 @@
     <Grid Background="{StaticResource TTTBackgroundDarkGrey}">
 
         <ItemsControl Style="{StaticResource gameBoardDataPresenter}" 
-                      ItemsSource="{Binding GameBoardAreaList}">
+                      ItemsSource="{Binding GameBoardAreaList}"
+                      x:Name="gameBoardDataPresenter">
         </ItemsControl>
 
         <ItemsControl Style="{StaticResource gameBoardCommandsPresenter}"

@@ -78,5 +78,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
         {
             throw new NotImplementedException();
         }
+
+        public void ShowStartAnimation(bool isNewGame)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

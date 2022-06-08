@@ -14,7 +14,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private List<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
-        private bool _isGameDecided;
+        private bool _isGameDecided = true;
         private bool _userWantsToContinue = true;
 
         public GameBoardViewModel(IGameBoard gameBoard, IGamePlay gamePlay)
@@ -118,7 +118,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public void InitializeNewGameBoard()
         {
-            _gameBoard.ShowStartAnimation();
+            _gameBoard.ShowStartAnimation(true);
             _isAnimationCompleted = true;
             CommandManager.InvalidateRequerySuggested();
             CheckHowItIsPlayed();
@@ -142,9 +142,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             }
         }
 
-        public void ShowStartAnimation()
+        public void ShowStartAnimation(bool isNewGame)
         {
-            _gameBoard.ShowStartAnimation();
+            _gameBoard.ShowStartAnimation(isNewGame);
         }
 
         public void SetLastGameBoard()

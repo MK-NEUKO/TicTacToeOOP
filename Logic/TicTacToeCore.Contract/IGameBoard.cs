@@ -12,7 +12,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
         void PlaceAToken(int areaID, string token);
         void CheckGameBoardState();
         void ResetGameBoard();
-        void ShowStartAnimation();
+        void ShowStartAnimation(bool isNewGame);
         void ResetAnimationValue();
         void LoadLastGameBoard();
     }

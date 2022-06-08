@@ -16,7 +16,8 @@
 
     <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
         <view:MenuView DataContext="{Binding MenuViewModel}"
-                       DockPanel.Dock="Top"/>
+                       DockPanel.Dock="Top"
+                       x:Name="menuControl"/>
 
         <Grid DockPanel.Dock="Left"
               Width="300">
@@ -26,7 +27,8 @@
             </Grid.RowDefinitions>
 
             <view:GameBoardView DataContext="{Binding GameBoardViewModel}"
-                                Grid.Row="0"/>
+                                Grid.Row="0"
+                                x:Name="gameBoardControl"/>
 
             <view:GameInfoView DataContext="{Binding GameInfoViewModel}"
                                Grid.Row="1"/>

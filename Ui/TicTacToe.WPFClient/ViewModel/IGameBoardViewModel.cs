@@ -13,7 +13,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands { get; }
         void InitializeLastGameBoard();
         void InitializeNewGameBoard();
-        void ShowStartAnimation();
+        void ShowStartAnimation(bool isNewGame);
         void SetLastGameBoard();
     }
 }

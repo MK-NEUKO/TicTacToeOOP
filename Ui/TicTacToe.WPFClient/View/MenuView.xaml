@@ -678,17 +678,21 @@
                                          Height="25"
                                          Width="130" 
                                          Margin="5"
-                                         Command="{Binding StartNewGameCommand}"
-                                         Checked="LoadNewGame_Checked"/>
+                                         x:Name="loadNewGame"
+                                         Command="{Binding LoadNewGameCommand}"
+                                         Checked="LoadNewGame_Checked"
+                                         IsChecked="{Binding IsLoadNewGame}"/>
 
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
-                                          Grid.Row="1"                                          
-                                          Height="25"
-                                          Width="130"
-                                          Margin="5"
-                                          Content="Load Last Game"
-                                          Command="{Binding LoadLastGameCommand}"
-                                          Checked="LoadLastGame_Checked"/>
+                                         Grid.Row="1"                                          
+                                         Height="25"
+                                         Width="130"
+                                         Margin="5"
+                                         Content="Load Last Game"
+                                         x:Name="loadLastGame"
+                                         Command="{Binding LoadLastGameCommand}"
+                                         Checked="LoadLastGame_Checked"
+                                         IsChecked="{Binding IsLoadLastGame}"/>
                         </Grid>
                     </GroupBox>
 
