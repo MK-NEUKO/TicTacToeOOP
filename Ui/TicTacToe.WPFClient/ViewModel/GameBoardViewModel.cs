@@ -147,9 +147,9 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoard.ShowStartAnimation(isNewGame);
         }
 
-        public void SetLastGameBoard()
+        public void LoadLastGameBoard()
         {
-            _gameBoard.LoadLastGameBoard(); 
+            _gameBoard.LoadLastGameBoard();
             GameBoardAreaList = _gameBoard.GameBoardAreaList;
         }
     }

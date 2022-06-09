@@ -74,12 +74,12 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
             throw new NotImplementedException();
         }
 
-        void IGameBoardViewModel.SetLastGameBoard()
+        public void ShowStartAnimation(bool isNewGame)
         {
             throw new NotImplementedException();
         }
 
-        public void ShowStartAnimation(bool isNewGame)
+        public void LoadLastGameBoard()
         {
             throw new NotImplementedException();
         }

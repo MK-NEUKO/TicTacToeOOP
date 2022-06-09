@@ -14,6 +14,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         void InitializeLastGameBoard();
         void InitializeNewGameBoard();
         void ShowStartAnimation(bool isNewGame);
-        void SetLastGameBoard();
+        void LoadLastGameBoard();
     }
 }
