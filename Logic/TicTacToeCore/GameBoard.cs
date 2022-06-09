@@ -43,19 +43,25 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public void ShowStartAnimation(bool isNewGame)
         {
             if (isNewGame)
+            {
                 _gameBoardAreaList.ForEach(area => area.IsStartNewGameAnimation = true);
-
-            _gameBoardAreaList.ForEach(_area => _area.IsStartLastGameAnimation = true);
+                return;
+            }
+            _gameBoardAreaList.ForEach(area => area.IsStartLastGameAnimation = true);
         }
 
-        public void ResetAnimationValue() => _gameBoardAreaList.ForEach(area => area.IsStartNewGameAnimation = false);
+        public void ResetAnimationValue() => _gameBoardAreaList.ForEach(area => 
+        {
+            area.IsStartNewGameAnimation = false;
+            area.IsStartLastGameAnimation = false;
+        });
 
         public void LoadLastGameBoard() => _gameBoardAreaList = _gameBoardRepository.LoadLastGameBoard();
 
         public void CheckGameBoardState()
         {
             CheckForWinner();
-            CheckForGameIsATie();
+            CheckForGameIsTie();
             if (_isPlayerXWinner || _isPlayerOWinner)            
                 ShowWinner();
         }
@@ -87,7 +93,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         	}
         }
 
-        private void CheckForGameIsATie()
+        private void CheckForGameIsTie()
         {
             if (_isPlayerXWinner || _isPlayerOWinner)
             {
@@ -116,10 +122,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         }
 
         public void PlaceAToken(int areaID, string token)
-        {
-            // TODO Exception auslösen wenn: übergebene Parameter nicht initialisiert sind, oder das Feld bereits besetzt ist.
-            // TODO Eventuell eine Eigene Exception erstellen, aus Übungszwecken, da sonst nicht erforderlich (AreaIsOccupiedException).          
-
+        {         
             _gameBoardAreaList[areaID].Area = token;
             _gameBoardAreaList[areaID].IsOccupied = true;
         }

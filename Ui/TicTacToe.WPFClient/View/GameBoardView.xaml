@@ -16,7 +16,6 @@
         <!--+++++++ StartNewGame Animation +++++++-->
 
         <Storyboard x:Key="startNewGameAnimation"
-                    RepeatBehavior="1x"
                     Completed="StartAnimationCompleted">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
                                                             Storyboard.TargetName="theXColor"
@@ -94,9 +93,9 @@
 
         <!--+++++++ StartLastGame Animation +++++++-->
 
-        <Storyboard x:Key="startLastGameAnimation" RepeatBehavior="1x"
+        <Storyboard x:Key="startLastGameAnimation"                    
                     Completed="StartAnimationCompleted">
-            <ColorAnimationUsingKeyFrames BeginTime="0:0:2" Duration="0:0:2"
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaBorder"
                                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
                                                             FillBehavior="HoldEnd">
@@ -104,7 +103,7 @@
                 <LinearColorKeyFrame Value="#0589FF" KeyTime="0:0:2.0"/>
             </ColorAnimationUsingKeyFrames>
 
-            <ColorAnimationUsingKeyFrames BeginTime="0:0:2" Duration="0:0:2"
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaBorderBlurEffect"
                                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
                                                             FillBehavior="HoldEnd">
@@ -112,7 +111,7 @@
                 <LinearColorKeyFrame Value="#0589FF" KeyTime="0:0:2.0"/>
             </ColorAnimationUsingKeyFrames>
 
-            <ColorAnimationUsingKeyFrames BeginTime="0:0:2" Duration="0:0:2"
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                             Storyboard.TargetName="boardAreaLightEffect"
                                                             Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                                                             FillBehavior="HoldEnd">
@@ -120,7 +119,7 @@
                 <LinearColorKeyFrame Value="#0589FF" KeyTime="0:0:2.0"/>
             </ColorAnimationUsingKeyFrames>
 
-            <DoubleAnimationUsingKeyFrames BeginTime="0:0:2" Duration="0:0:2"
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:2"
                                                              Storyboard.TargetName="boardAreaDropShadow"
                                                              Storyboard.TargetProperty="Opacity"
                                                              FillBehavior="HoldEnd">
