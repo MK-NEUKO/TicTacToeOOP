@@ -41,6 +41,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
             controlsCoverGameOptions.Visibility = Visibility.Visible;
+            loadLastGame.Focusable = false;
+            loadNewGame.Focusable = false;
             ProtectControlsWithCoverPlayerXPlayerO();
             if ((bool)loadNewGame.IsChecked)
             {
@@ -96,12 +98,28 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             controlsCoverPlayerX.Visibility = Visibility.Visible;
             controlsCoverPlayerO.Visibility = Visibility.Visible;
+            selectHumanPlayerX.Focusable = false;
+            selectHumanPlayerO.Focusable = false;
+            selectAiPlayerX.Focusable = false;
+            selectAiPlayerO.Focusable = false;
+            namePlayerX.Focusable = false;
+            namePlayerO.Focusable = false;
+            selectDiffecultylevelPlayerX.Focusable = false;
+            selectDiffecultylevelPlayerO.Focusable = false;
         }
 
         private void DisableControlsCoverPlayerXPlayerO()
         {
             controlsCoverPlayerX.Visibility = Visibility.Hidden;
             controlsCoverPlayerO.Visibility = Visibility.Hidden;
+            selectHumanPlayerX.Focusable = true;
+            selectHumanPlayerO.Focusable = true;
+            selectAiPlayerX.Focusable = true;
+            selectAiPlayerO.Focusable = true;
+            namePlayerX.Focusable = true;
+            namePlayerO.Focusable = true;
+            selectDiffecultylevelPlayerX.Focusable = true;
+            selectDiffecultylevelPlayerO.Focusable = true;
         }
     }
 }
