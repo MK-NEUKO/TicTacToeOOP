@@ -8,7 +8,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
     public class GameBoardViewModelSampleData : IGameBoardViewModel
     {
         private List<PlaceATokenCommand> _placeATokenCommands;
-        private IList<GameBoardAreaDummy> _gameBoardAreaList = new List<GameBoardAreaDummy>();        
+        private List<GameBoardAreaDummy> _gameBoardAreaList = new List<GameBoardAreaDummy>();        
         private bool _isPlayed;
 
         public GameBoardViewModelSampleData()
@@ -47,10 +47,10 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 
         private void PlaceATokenExecute(int obj)
         {
-            int i = 5;
+            return;
         }
 
-        public IList<GameBoardAreaDummy> GameBoardAreaList { get => _gameBoardAreaList; set => _gameBoardAreaList = value; }
+        public List<GameBoardAreaDummy> GameBoardAreaList { get => _gameBoardAreaList; set => _gameBoardAreaList = value; }
         public bool IsPlayed { get => _isPlayed; set => _isPlayed = value; }
 
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();

@@ -27,7 +27,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         {
             EnableControlsPlayerXPlayerO();
             UncheckRadioButtonsPlayerXPlayerO();
-            DisabledControlsCoverPlayerXPlayerO();
+            DisableControlsCoverPlayerXPlayerO();
             startGameButton.IsEnabled = true;
         }
 
@@ -37,14 +37,31 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             EnableControlsPlayerXPlayerO();
             startGameButton.IsEnabled = true;
         }
+
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            controlsCoverGameOptions.Visibility = Visibility.Visible;
+            ProtectControlsWithCoverPlayerXPlayerO();
+            if ((bool)loadNewGame.IsChecked)
+            {
+                loadLastGame.IsEnabled = false;
+            }
+            else
+            {
+                loadNewGame.IsEnabled = false;   
+            }
+        }
+
         private void SelectHumanPlayerX_Checked(object sender, RoutedEventArgs e)
         {
             selectDiffecultylevelPlayerX.IsEnabled = false;
         }
+
         private void SelectAiPlayerX_Checked(object sender, RoutedEventArgs e)
         {
             selectDiffecultylevelPlayerX.IsEnabled = true;
         }
+
         private void SelectHumanPlayerO_Checked(object sender, RoutedEventArgs e)
         {
             selectDiffecultylevelPlayerO.IsEnabled = false;
@@ -81,7 +98,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             controlsCoverPlayerO.Visibility = Visibility.Visible;
         }
 
-        private void DisabledControlsCoverPlayerXPlayerO()
+        private void DisableControlsCoverPlayerXPlayerO()
         {
             controlsCoverPlayerX.Visibility = Visibility.Hidden;
             controlsCoverPlayerO.Visibility = Visibility.Hidden;

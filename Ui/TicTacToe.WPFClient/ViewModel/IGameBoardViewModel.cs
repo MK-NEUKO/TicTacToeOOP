@@ -1,9 +1,5 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Collections.Generic;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {

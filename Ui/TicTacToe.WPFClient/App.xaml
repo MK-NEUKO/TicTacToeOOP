@@ -6,6 +6,22 @@
     
     <Application.Resources>
 
+        <DataTemplate x:Key="GameBoardViewDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
+            <local:GameBoardView/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GameInfoViewDataTemplate" DataType="{x:Type local:GameInfoViewModel}">
+            <local:GameInfoView/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MenuViewDataTemplate" DataType="{x:Type local:MenuViewModel}">
+            <local:MenuView/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VisualMinimaxViewDataTemplate" DataType="{x:Type local:VisualMinimaxViewModel}">
+            <local:VisualMinimaxView/>
+        </DataTemplate>
+
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
         <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>
         <SolidColorBrush x:Key="TTTBlue" Color="#0589FF"/>

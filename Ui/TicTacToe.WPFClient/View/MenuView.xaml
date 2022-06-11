@@ -693,6 +693,12 @@
                                          Command="{Binding LoadLastGameCommand}"
                                          Checked="LoadLastGame_Checked"
                                          IsChecked="{Binding IsLoadLastGame}"/>
+
+                            <Button Grid.RowSpan="2"
+                                    Style="{StaticResource ControlsCoverButton}"
+                                    Visibility="Hidden"
+                                    x:Name="controlsCoverGameOptions"/>
+
                         </Grid>
                     </GroupBox>
 
@@ -843,7 +849,8 @@
                                 Content="Play"
                                 Command="{Binding StartGameCommand}"
                                 x:Name="startGameButton"
-                                IsEnabled="False"/>
+                                IsEnabled="False"
+                                Click="StartGameButton_Click"/>
 
                     </GroupBox>
 
