@@ -32,7 +32,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
             var menuViewModel = new MenuViewModel(gameBoardViewModel, gameInfoViewModel, playerController);
 
-            var mainWindowViewModel = new MainWindowViewModel(menuViewModel, gameBoardViewModel, gameInfoViewModel, gamePlay, playerController);
+            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, menuViewModel);
 
             MainWindow.DataContext = mainWindowViewModel;
         }

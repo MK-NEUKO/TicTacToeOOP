@@ -10,16 +10,12 @@
             <local:GameBoardView/>
         </DataTemplate>
 
-        <DataTemplate x:Key="GameInfoViewDataTemplate" DataType="{x:Type local:GameInfoViewModel}">
+        <DataTemplate x:Key="GameInfoViewDataTemplate" DataType="{x:Type local:IGameInfoViewModel}">
             <local:GameInfoView/>
         </DataTemplate>
 
-        <DataTemplate x:Key="MenuViewDataTemplate" DataType="{x:Type local:MenuViewModel}">
+        <DataTemplate x:Key="MenuViewDataTemplate" DataType="{x:Type local:IMenuViewModel}">
             <local:MenuView/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="VisualMinimaxViewDataTemplate" DataType="{x:Type local:VisualMinimaxViewModel}">
-            <local:VisualMinimaxView/>
         </DataTemplate>
 
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>

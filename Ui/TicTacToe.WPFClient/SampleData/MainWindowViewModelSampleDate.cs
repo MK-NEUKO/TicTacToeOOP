@@ -7,10 +7,19 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
     public class MainWindowViewModelSampleDate : IMainWindowViewModel
     {
-        public IGameBoardViewModel GameBoardViewModel => throw new NotImplementedException();
+        private readonly IGameBoardViewModel _gameBoardViewModel;
+        private readonly IGameInfoViewModel _gameInfoViewModel;
+        private readonly IMenuViewModel _menuViewModel;
 
-        public IGameInfoViewModel GameInfoViewModel => throw new NotImplementedException();
+        public MainWindowViewModelSampleDate()
+        {
+            _gameBoardViewModel = new GameBoardViewModelSampleData();
+            _gameInfoViewModel = new GameInfoViewModelSampleData();
+            _menuViewModel = new MenuViewModelSampleData();
+        }
 
-        public ICommand InitializeGameCommand => throw new NotImplementedException();
+        public IGameBoardViewModel GameBoardViewModel { get => _gameBoardViewModel; }
+        public IGameInfoViewModel GameInfoViewModel { get => _gameInfoViewModel; }
+        public IMenuViewModel MenuViewModel { get => _menuViewModel; }
     }
 }
