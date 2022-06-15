@@ -15,7 +15,7 @@
     <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
 
         <ContentControl Content="{Binding Path=MenuViewModel}"
-                        ContentTemplate="{StaticResource MenuViewDataTemplate}"
+                        ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
                         DockPanel.Dock="Top"
                         x:Name="menuView"/>
 
@@ -27,21 +27,23 @@
             </Grid.RowDefinitions>
 
             <ContentControl Content="{Binding Path=GameBoardViewModel}"
-                            ContentTemplate="{StaticResource GameBoardViewDataTemplate}"
+                            ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"
                             Grid.Row="0"
                             x:Name="gameBoardView"/>
 
             <ContentControl Content="{Binding Path=GameInfoViewModel}"
-                            ContentTemplate="{StaticResource GameInfoViewDataTemplate}"
+                            ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
                             Grid.Row="1"
-                            x:Name="gameInfoView"/>
+                            x:Name="gameInfoView"
+                            IsEnabled="False"/>
 
         </Grid>
 
         <Grid DockPanel.Dock="Right"
               Width="auto"
               Height="Auto">
-            
+            <Image Source="Resources\TTTVisualMinimax.jpg"
+                   Stretch="Fill"/>
 
         </Grid>
         

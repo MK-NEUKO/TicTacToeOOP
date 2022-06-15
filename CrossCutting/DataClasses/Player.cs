@@ -2,7 +2,7 @@
 
 namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class Player : DataClassBase
+    public class Player : DataClassBase, IPlayer
     {
         private readonly string _playerID;
         private bool _inAction;
@@ -28,14 +28,14 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
             _points = 0;
             _maximumDepth = 0;
             _isWinner = false;
-            
+
         }
 
         public int Points
         {
             get { return _points; }
-            set 
-            { 
+            set
+            {
                 _points = value;
                 OnPropertyChanged();
             }
@@ -45,19 +45,19 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         {
             get { return _inAction; }
             set
-            { 
+            {
                 _inAction = value;
                 OnPropertyChanged();
-            } 
+            }
         }
-        public bool IsHuman 
+        public bool IsHuman
         {
             get => _isHuman;
-            set 
+            set
             {
                 _isHuman = value;
             }
-             
+
         }
 
         public bool IsAI
@@ -71,8 +71,8 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         public string Name
         {
             get { return _name; }
-            set 
-            { 
+            set
+            {
                 _name = value;
                 OnPropertyChanged();
             }
@@ -81,8 +81,8 @@ namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
         public bool IsWinner
         {
             get { return _isWinner; }
-            set 
-            { 
+            set
+            {
                 _isWinner = value;
                 OnPropertyChanged();
             }

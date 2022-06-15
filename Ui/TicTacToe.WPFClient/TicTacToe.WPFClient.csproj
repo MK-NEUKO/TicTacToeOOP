@@ -10,6 +10,7 @@
     <None Remove="Resources\LogoInfo.svg" />
     <None Remove="View\Resources\background_glass.jpg" />
     <None Remove="View\Resources\background_glass_02.jpg" />
+    <None Remove="View\Resources\TTTVisualMinimax.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
@@ -28,6 +29,7 @@
     </Resource>
     <Resource Include="View\Resources\background_glass.jpg" />
     <Resource Include="View\Resources\background_glass_02.jpg" />
+    <Resource Include="View\Resources\TTTVisualMinimax.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

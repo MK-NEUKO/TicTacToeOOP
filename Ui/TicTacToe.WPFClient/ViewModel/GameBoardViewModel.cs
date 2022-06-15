@@ -14,7 +14,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private List<GameBoardArea> _gameBoardAreaList;
         private List<PlaceATokenCommand> _placeATokenCommands;
         private bool _isAnimationCompleted;
-        private bool _isGameDecided = true;
+        private bool _isGameDecided;
         private bool _userWantsToContinue;
 
         public GameBoardViewModel(IGameBoard gameBoard, IGamePlay gamePlay)

@@ -6,15 +6,15 @@
     
     <Application.Resources>
 
-        <DataTemplate x:Key="GameBoardViewDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
+        <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
             <local:GameBoardView/>
         </DataTemplate>
 
-        <DataTemplate x:Key="GameInfoViewDataTemplate" DataType="{x:Type local:IGameInfoViewModel}">
+        <DataTemplate x:Key="GameInfoViewModelDataTemplate" DataType="{x:Type local:IGameInfoViewModel}">
             <local:GameInfoView/>
         </DataTemplate>
 
-        <DataTemplate x:Key="MenuViewDataTemplate" DataType="{x:Type local:IMenuViewModel}">
+        <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type local:IMenuViewModel}">
             <local:MenuView/>
         </DataTemplate>
 

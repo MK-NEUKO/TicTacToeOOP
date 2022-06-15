@@ -1,7 +1,7 @@
 ﻿namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class GameBoardArea : DataClassBase
-    { 
+    public class GameBoardArea : DataClassBase, IGameBoardArea
+    {
         private readonly int _areaID;
         private string _area;
         private bool _isOccupied;
@@ -11,7 +11,7 @@
         private bool _isStartNewGameAnimation;
         private bool _isStartLastGameAnimaton;
         private bool _isInGame;
-        
+
 
         public GameBoardArea(int areaID)
         {
@@ -25,14 +25,14 @@
         public bool IsWinArea
         {
             get { return _isWinArea; }
-            set 
+            set
             {
                 _isWinArea = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsOccupied 
+        public bool IsOccupied
         {
             get { return _isOccupied; }
             set
@@ -49,10 +49,10 @@
         public string Area
         {
             get { return _area; }
-            set 
+            set
             {
                 _area = value;
-                OnPropertyChanged();    
+                OnPropertyChanged();
             }
         }
 

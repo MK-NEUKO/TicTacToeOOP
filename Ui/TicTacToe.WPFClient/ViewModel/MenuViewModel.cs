@@ -90,6 +90,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             PlayerX = _playerController.PlayerX;
             PlayerO = _playerController.PlayerO;
             _gameBoardViewModel.LoadLastGameBoard();
+            _gameInfoViewModel.RenewInfoBoard();
         }
 
         private bool StartGameCanExecute() => true;         
