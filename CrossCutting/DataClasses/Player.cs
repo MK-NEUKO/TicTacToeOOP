@@ -2,7 +2,7 @@
 
 namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class Player : DataClassBase, IPlayer
+    public class Player : DataClassBase
     {
         private readonly string _playerID;
         private bool _inAction;

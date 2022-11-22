@@ -1,6 +1,6 @@
 ﻿namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses
 {
-    public class GameBoardArea : DataClassBase, IGameBoardArea
+    public class GameBoardArea : DataClassBase
     {
         private readonly int _areaID;
         private string _area;

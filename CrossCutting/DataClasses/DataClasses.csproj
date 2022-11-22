@@ -5,8 +5,4 @@
     <RootNamespace>MichaelKoch.TicTacToe.CrossCutting.DataClasses</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataClassesContract\DataClassesContract.csproj" />
-  </ItemGroup>
-
 </Project>
