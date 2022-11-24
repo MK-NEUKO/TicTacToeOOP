@@ -24,7 +24,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
             _gameBoardAreaList = _gameBoard.GameBoardAreaList;
             _placeATokenCommands = CreatePlaceATokenCommands();
             ContinueCommand = new RelayCommand(ContinueExecute, ContinueCanExecute);
-            StartGameWhenStartanimationCompletedCommand = new RelayCommand(StartanimationCompletedExecute);
+            StartGameAnimationCompletedCommand = new RelayCommand(StartanimationCompletedExecute);
         }
 
         private void StartanimationCompletedExecute(object obj) => InitializeNewGameBoard();    
@@ -32,7 +32,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
         public ICommand ContinueCommand { get; }
-        public ICommand StartGameWhenStartanimationCompletedCommand { get; }
+        public ICommand StartGameAnimationCompletedCommand { get; }
 
         public List<GameBoardArea> GameBoardAreaList
         {

@@ -23,7 +23,14 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 7, RowIndex = 2, ColumnIndex = 1, IsGameRunning = true });
             _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "O", AreaID = 8, RowIndex = 2, ColumnIndex = 2, IsGameRunning = true });
 
+            StartGameAnimationCompletedCommand = new RelayCommandDummy(Startgameexecute);
+
             _placeATokenCommands = CreatePlaceATokenCommands();
+        }
+
+        private void Startgameexecute(object obj)
+        {
+            
         }
 
         private List<PlaceATokenCommand> CreatePlaceATokenCommands()
@@ -56,6 +63,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
 
         List<GameBoardArea> IGameBoardViewModel.GameBoardAreaList => throw new NotImplementedException();
+
+        public RelayCommandDummy StartGameAnimationCompletedCommand { get; set; }
 
        
 

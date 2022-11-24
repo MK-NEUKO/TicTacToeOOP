@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sd="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData" 
-             xmlns:view="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:Behavior="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="300" d:DesignWidth="300">
     <d:UserControl.DataContext>
         <sd:GameBoardViewModelSampleData/>
@@ -526,7 +526,12 @@
             </Button>
 
         </Grid>
-
+        
+        <Behavior:Interaction.Triggers>
+            <Behavior:EventTrigger EventName="Completed" SourceObject="{Binding ElementName=startNewGameAnimation}">
+                <Behavior:InvokeCommandAction Command="{Binding StartGameAnimationCompletedCommand}"/>
+            </Behavior:EventTrigger>
+        </Behavior:Interaction.Triggers>        
 
     </Grid>
 </UserControl>

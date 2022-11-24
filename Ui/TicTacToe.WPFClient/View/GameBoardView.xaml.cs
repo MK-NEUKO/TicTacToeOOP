@@ -31,7 +31,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
         private void StartAnimationCompleted(object sender, EventArgs e)
         {
             var gameBoardViewModel = (GameBoardViewModel)this.DataContext;
-            gameBoardViewModel.StartGameWhenStartanimationCompletedCommand.Execute(null);
+            gameBoardViewModel.StartGameAnimationCompletedCommand.Execute(null);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
