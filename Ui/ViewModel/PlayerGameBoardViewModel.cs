@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    public interface IVisualMinimaxViewModel
+    public class PlayerGameBoardViewModel
     {
+       
     }
 }

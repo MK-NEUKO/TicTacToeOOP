@@ -7,7 +7,7 @@ using System.Windows.Media.Animation;
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 {
     /// <summary>
-    /// Interaktionslogik für GameBoard.xaml
+    /// Interaktionslogik für GameBoardManagerManager.xaml
     /// </summary>
     public partial class GameBoardView : UserControl, INotifyPropertyChanged
     {

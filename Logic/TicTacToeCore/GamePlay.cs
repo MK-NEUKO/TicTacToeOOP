@@ -3,20 +3,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore
 {
     public class GamePlay : IGamePlay
     {
-        private readonly IGameBoard _gameBoard;
+        private readonly IGameBoardManager _gameBoardManager;
         private readonly IPlayerController _playerController;
         private readonly IAI _aimiamx;
 
-        public GamePlay(IGameBoard gameBoard, IPlayerController playerController, IAI aimiamx)
+        public GamePlay(IGameBoardManager gameBoardManager, IPlayerController playerController, IAI aimiamx)
         {
-            _gameBoard = gameBoard ?? throw new ArgumentNullException(nameof(gameBoard));
+            _gameBoardManager = gameBoardManager ?? throw new ArgumentNullException(nameof(gameBoardManager));
             _playerController = playerController ?? throw new ArgumentNullException(nameof(playerController));
             _aimiamx = aimiamx ?? throw new ArgumentNullException(nameof(aimiamx));
         }
@@ -24,7 +24,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         public void MakePossibleNextMove()
         {
             var currentPlayer = _playerController.GiveCurrentPlayer();
-            var isNextMovePossible = !(_gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner || _gameBoard.IsGameTie);
+            var isNextMovePossible = !(_gameBoardManager.IsPlayerXWinner || _gameBoardManager.IsPlayerOWinner || _gameBoardManager.IsGameTie);
             if (currentPlayer.IsAI && isNextMovePossible)
             {
                 _aimiamx.GetAMove(currentPlayer);
@@ -34,7 +34,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void EnterAIBattleLoop()
         {          
-            while (!_gameBoard.IsPlayerXWinner && !_gameBoard.IsPlayerOWinner && !_gameBoard.IsGameTie)
+            while (!_gameBoardManager.IsPlayerXWinner && !_gameBoardManager.IsPlayerOWinner && !_gameBoardManager.IsGameTie)
             {
                 var currentPlayer = _playerController.GiveCurrentPlayer();
                 _aimiamx.GetAMove(currentPlayer);
@@ -46,10 +46,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void MakeAMove(int areaID)
         {
-            _gameBoard.PlaceAToken(areaID, _playerController.GiveCurrentToken());
-            _gameBoard.CheckGameBoardState();
+            _gameBoardManager.PlaceAToken(areaID, _playerController.GiveCurrentToken());
+            _gameBoardManager.CheckGameBoardState();
 
-            var isGameDecided = _gameBoard.IsPlayerXWinner || _gameBoard.IsPlayerOWinner || _gameBoard.IsGameTie;
+            var isGameDecided = _gameBoardManager.IsPlayerXWinner || _gameBoardManager.IsPlayerOWinner || _gameBoardManager.IsGameTie;
             if (isGameDecided)
             {
                 _playerController.SetWinner();
@@ -63,11 +63,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void SetupNextGame()
         {
-            if (_gameBoard.IsGameTie)
+            if (_gameBoardManager.IsGameTie)
             {
                 _playerController.ChangePlayer();
             }
-            _gameBoard.ResetGameBoard();
+            _gameBoardManager.ResetGameBoard();
             _playerController.ResetPlayers();
         }
 

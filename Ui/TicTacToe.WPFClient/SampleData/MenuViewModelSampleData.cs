@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
-    internal class MenuViewModelSampleData : IMenuViewModel
+    public class MenuViewModelSampleData
     {
         public ICommand StartGameCommand => throw new NotImplementedException();
     }

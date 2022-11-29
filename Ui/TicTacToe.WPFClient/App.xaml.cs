@@ -1,6 +1,6 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -17,22 +17,16 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
             //Composition root           
             var gameBoardRepository = new GameBoardRepository();
-            var gameBoard = new GameBoard(gameBoardRepository);
+            var gameBoard = new GameBoardManagerManager(gameBoardRepository);
 
-            var playerReposytory = new PlayerRepository();
-            var aimimax = new AI(gameBoardRepository, playerReposytory, gameBoard);
+            var playerRepository = new PlayerRepository();
+            var aimimax = new AI(gameBoardRepository, playerRepository, gameBoard);
             
-            var playerController = new PlayerController(playerReposytory, gameBoard, aimimax);
+            var playerController = new PlayerController(playerRepository, gameBoard, aimimax);
 
             var gamePlay = new GamePlay(gameBoard, playerController, aimimax);
 
-            var gameInfoViewModel = new GameInfoViewModel(playerController);            
-
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard, gamePlay);
-
-            var menuViewModel = new MenuViewModel(gameBoardViewModel, gameInfoViewModel, playerController);
-
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, menuViewModel);
+            
 
             MainWindow.DataContext = mainWindowViewModel;
         }

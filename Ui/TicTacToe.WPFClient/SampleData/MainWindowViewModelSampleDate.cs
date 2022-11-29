@@ -5,11 +5,11 @@ using System.Windows.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
-    public class MainWindowViewModelSampleDate : IMainWindowViewModel
+    public class MainWindowViewModelSampleDate
     {
-        private readonly IGameBoardViewModel _gameBoardViewModel;
-        private readonly IGameInfoViewModel _gameInfoViewModel;
-        private readonly IMenuViewModel _menuViewModel;
+        private readonly GameBoardViewModelSampleData _gameBoardViewModel;
+        private readonly GameInfoViewModelSampleData _gameInfoViewModel;
+        private readonly MenuViewModelSampleData _menuViewModel;
 
         public MainWindowViewModelSampleDate()
         {
@@ -18,8 +18,8 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
             _menuViewModel = new MenuViewModelSampleData();
         }
 
-        public IGameBoardViewModel GameBoardViewModel { get => _gameBoardViewModel; }
-        public IGameInfoViewModel GameInfoViewModel { get => _gameInfoViewModel; }
-        public IMenuViewModel MenuViewModel { get => _menuViewModel; }
+        public GameBoardViewModelSampleData GameBoardViewModel { get => _gameBoardViewModel; }
+        public GameInfoViewModelSampleData GameInfoViewModel { get => _gameInfoViewModel; }
+        public MenuViewModelSampleData MenuViewModel { get => _menuViewModel; }
     }
 }

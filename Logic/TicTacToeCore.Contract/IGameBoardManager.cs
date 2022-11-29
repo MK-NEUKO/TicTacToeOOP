@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract
 {
-    public interface IGameBoard
+    public interface IGameBoardManager
     {
         List<GameBoardArea> GameBoardAreaList { get; }
         bool IsPlayerXWinner { get; }

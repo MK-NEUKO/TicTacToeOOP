@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
-    public class GameInfoViewModelSampleData : IGameInfoViewModel
+    public class GameInfoViewModelSampleData
     {
         private readonly PlayerDummy _playerX;
         private readonly PlayerDummy _playerO;
@@ -36,10 +36,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
         public PlayerDummy PlayerO => _playerO;
         public PlayerDummy PlayerX => _playerX;
         public int Pie => _pie;
-
-        Player IGameInfoViewModel.PlayerX => throw new NotImplementedException();
-
-        Player IGameInfoViewModel.PlayerO => throw new NotImplementedException();
 
         public void RenewInfoBoard()
         {

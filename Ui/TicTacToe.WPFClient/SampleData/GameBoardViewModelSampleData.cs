@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
-    public class GameBoardViewModelSampleData : IGameBoardViewModel
+    public class GameBoardViewModelSampleData
     {
         private List<PlaceATokenCommand> _placeATokenCommands;
         private List<GameBoardAreaDummy> _gameBoardAreaList = new List<GameBoardAreaDummy>();        
@@ -62,7 +62,6 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 
         public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
 
-        List<GameBoardArea> IGameBoardViewModel.GameBoardAreaList => throw new NotImplementedException();
 
         public RelayCommandDummy StartGameAnimationCompletedCommand { get; set; }
 

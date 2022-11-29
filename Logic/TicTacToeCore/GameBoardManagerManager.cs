@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore
 {
-    public class GameBoard : IGameBoard
+    public class GameBoardManagerManager : IGameBoardManager
     {
         private readonly IGameBoardRepository _gameBoardRepository;
         private List<GameBoardArea> _gameBoardAreaList;
@@ -17,7 +17,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private bool _isGameTie;
         private readonly int[,] _winConstellations;
 
-        public GameBoard(IGameBoardRepository gameBoardRepository)
+        public GameBoardManagerManager(IGameBoardRepository gameBoardRepository)
         {
             _gameBoardRepository = gameBoardRepository ?? throw new ArgumentNullException(nameof(gameBoardRepository));
             _gameBoardAreaList = _gameBoardRepository.LoadNewGameBoard();
@@ -71,9 +71,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             var numberOfWinnconstellations = _winConstellations.GetLength(0);
             for (int i = 0; i < numberOfWinnconstellations; i++)
             {
-                string actualContent = _gameBoardAreaList[_winConstellations[i, 0]].Area;
-                actualContent += _gameBoardAreaList[_winConstellations[i, 1]].Area;
-                actualContent += _gameBoardAreaList[_winConstellations[i, 2]].Area;
+                string actualContent = _gameBoardAreaList[_winConstellations[i, 0]].Token;
+                actualContent += _gameBoardAreaList[_winConstellations[i, 1]].Token;
+                actualContent += _gameBoardAreaList[_winConstellations[i, 2]].Token;
         		
         		if(actualContent == "XXX")
                 {
@@ -102,7 +102,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             foreach (var area in _gameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                 {
                     return;
                 }
@@ -123,7 +123,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void PlaceAToken(int areaID, string token)
         {         
-            _gameBoardAreaList[areaID].Area = token;
+            _gameBoardAreaList[areaID].Token = token;
             _gameBoardAreaList[areaID].IsOccupied = true;
         }
 
@@ -131,7 +131,7 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {
             foreach (var area in _gameBoardAreaList)
             {
-                area.Area = " ";
+                area.Token = " ";
                 area.IsOccupied = false;
                 area.IsWinArea = false;
             }

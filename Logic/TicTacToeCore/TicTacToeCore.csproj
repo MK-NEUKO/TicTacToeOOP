@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>MichaelKoch.TicTacToe.Logik.TicTacToeCore</RootNamespace>
+    <RootNamespace>MichaelKoch.TicTacToe.Logic.TicTacToeCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
