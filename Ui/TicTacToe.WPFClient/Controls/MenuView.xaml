@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="800">
     <UserControl.Resources>
 
-        <Style x:Key="TTTTabControl" TargetType="TabControl">
+        <Style x:Key="MenuTabControl" TargetType="TabControl">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="Background" Value="{StaticResource TTTBackgroundMediumGray}"/>
@@ -655,7 +654,7 @@
     
     <Grid>
 
-        <TabControl Style="{StaticResource TTTTabControl}">
+        <TabControl Style="{StaticResource MenuTabControl}">
             <TabItem Header="Game">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -723,7 +722,7 @@
                                          Width="60"
                                          Margin="2"
                                          Content="Human"
-                                         ToolTip="If you are no machien"
+                                         ToolTip="If you are no machine"
                                          IsEnabled="False"
                                          Checked="SelectHumanPlayerX_Checked"
                                          IsChecked="{Binding IsHuman}"/>

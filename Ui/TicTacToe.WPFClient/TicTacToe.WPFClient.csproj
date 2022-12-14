@@ -8,9 +8,9 @@
   <ItemGroup>
     <None Remove="Resources\LogoInfo.png" />
     <None Remove="Resources\LogoInfo.svg" />
-    <None Remove="View\Resources\background_glass.jpg" />
-    <None Remove="View\Resources\background_glass_02.jpg" />
-    <None Remove="View\Resources\TTTVisualMinimax.jpg" />
+    <None Remove="Controls\Resources\background_glass.jpg" />
+    <None Remove="Controls\Resources\background_glass_02.jpg" />
+    <None Remove="Controls\Resources\TTTVisualMinimax.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
@@ -23,13 +23,13 @@
     <ProjectReference Include="..\..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Resources\LogoInfo.png" />
-    <Resource Include="View\Resources\LogoInfo.svg">
+    <Resource Include="Controls\Resources\LogoInfo.png" />
+    <Resource Include="Controls\Resources\LogoInfo.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="View\Resources\background_glass.jpg" />
-    <Resource Include="View\Resources\background_glass_02.jpg" />
-    <Resource Include="View\Resources\TTTVisualMinimax.jpg" />
+    <Resource Include="Controls\Resources\background_glass.jpg" />
+    <Resource Include="Controls\Resources\background_glass_02.jpg" />
+    <Resource Include="Controls\Resources\TTTVisualMinimax.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

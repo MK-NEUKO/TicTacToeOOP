@@ -6,7 +6,7 @@
     
     <Application.Resources>
 
-        <DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
+        <!--<DataTemplate x:Key="GameBoardViewModelDataTemplate" DataType="{x:Type local:IGameBoardViewModel}">
             <local:GameBoardView/>
         </DataTemplate>
 
@@ -16,7 +16,7 @@
 
         <DataTemplate x:Key="MenuViewModelDataTemplate" DataType="{x:Type local:IMenuViewModel}">
             <local:MenuView/>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
         <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>

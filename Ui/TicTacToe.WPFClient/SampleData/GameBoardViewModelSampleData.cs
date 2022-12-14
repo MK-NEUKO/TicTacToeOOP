@@ -2,94 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient.SampleData
 {
     public class GameBoardViewModelSampleData
     {
-        private List<PlaceATokenCommand> _placeATokenCommands;
-        private List<GameBoardAreaDummy> _gameBoardAreaList = new List<GameBoardAreaDummy>();        
-        private bool _isPlayed;
-
         public GameBoardViewModelSampleData()
         {
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 0, RowIndex = 0, ColumnIndex = 0, IsWinArea = true});
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "O", AreaID = 1, RowIndex = 0, ColumnIndex = 1 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 2, RowIndex = 0, ColumnIndex = 2 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 3, RowIndex = 1, ColumnIndex = 0 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 4, RowIndex = 1, ColumnIndex = 1 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 5, RowIndex = 1, ColumnIndex = 2 });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "X", AreaID = 6, RowIndex = 2, ColumnIndex = 0, IsGameRunning = true });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = " ", AreaID = 7, RowIndex = 2, ColumnIndex = 1, IsGameRunning = true });
-            _gameBoardAreaList.Add(new GameBoardAreaDummy() { Area = "O", AreaID = 8, RowIndex = 2, ColumnIndex = 2, IsGameRunning = true });
-
-            StartGameAnimationCompletedCommand = new RelayCommandDummy(Startgameexecute);
-
-            _placeATokenCommands = CreatePlaceATokenCommands();
-        }
-
-        private void Startgameexecute(object obj)
-        {
-            
-        }
-
-        private List<PlaceATokenCommand> CreatePlaceATokenCommands()
-        {
-            _placeATokenCommands = new List<PlaceATokenCommand>();
-            int numberOfCommands = 9;
-            for (int areaID = 0; areaID < numberOfCommands; areaID++)
+            Areas = new List<GameBoardAreaSampleData>
             {
-                _placeATokenCommands.Add(new PlaceATokenCommand(areaID, PlaceATokenExecute, PlaceATokenCanExecute));
-                _placeATokenCommands[areaID].RowIndex = _gameBoardAreaList[areaID].RowIndex;
-                _placeATokenCommands[areaID].ColumnIndex = _gameBoardAreaList[areaID].ColumnIndex;
-            }
-
-            return _placeATokenCommands;
+                new GameBoardAreaSampleData() { Token = "O", Id = 0, IsStartNewGameAnimation = true},
+                new GameBoardAreaSampleData() { Token = "X", Id = 1, IsWinArea = true},
+                new GameBoardAreaSampleData() { Token = " ", Id = 2, IsStartSaveGameAnimation = true},
+                new GameBoardAreaSampleData() { Token = "X", Id = 3, IsWinArea = true},
+                new GameBoardAreaSampleData() { Token = "X", Id = 4,},
+                new GameBoardAreaSampleData() { Token = " ", Id = 5 },
+                new GameBoardAreaSampleData() { Token = "X", Id = 6 },
+                new GameBoardAreaSampleData() { Token = " ", Id = 7 },
+                new GameBoardAreaSampleData() { Token = "O", Id = 8 }
+            };
         }
-
-        private bool PlaceATokenCanExecute(int areaID)
-        {
-            return true;
-        }
-
-        private void PlaceATokenExecute(int obj)
-        {
-            return;
-        }
-
-        public List<GameBoardAreaDummy> GameBoardAreaList { get => _gameBoardAreaList; set => _gameBoardAreaList = value; }
-        public bool IsPlayed { get => _isPlayed; set => _isPlayed = value; }
-
-        public IReadOnlyList<PlaceATokenCommand> PlaceATokenCommands => _placeATokenCommands.AsReadOnly();
-
-
-        public RelayCommandDummy StartGameAnimationCompletedCommand { get; set; }
-
-       
-
-        public void InitializeLastGameBoard()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InitializeNewGameBoard()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ShowStartAnimation()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ShowStartAnimation(bool isNewGame)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void LoadLastGameBoard()
-        {
-            throw new NotImplementedException();
-        }
+        
+        public List<GameBoardAreaSampleData> Areas { get; set; }
     }
 }

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    public class PlayerGameBoardAreaViewModel : ViewModelBase
+    [INotifyPropertyChanged]
+    public partial class PlayerGameBoardAreaViewModel
     {
         private readonly PlayerGameBoardArea _innerPlayerGameBoardArea;
 
@@ -16,14 +18,14 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel
             _innerPlayerGameBoardArea = innerPlayerGameBoardArea;
         }
 
-        public string Token
-        {
-            get => _innerPlayerGameBoardArea.Token;
-            set
-            {
-                _innerPlayerGameBoardArea.Token = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty] private string _token;
+        //{
+        //    get => _innerPlayerGameBoardArea.Token;
+        //    set
+        //    {
+        //        _innerPlayerGameBoardArea.Token = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
     }
 }

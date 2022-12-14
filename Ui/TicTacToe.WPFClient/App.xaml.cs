@@ -28,7 +28,7 @@ namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
 
             
 
-            MainWindow.DataContext = mainWindowViewModel;
+            //MainWindow.DataContext = mainWindowViewModel;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

@@ -14,8 +14,7 @@
 
     <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
 
-        <ContentControl Content="{Binding Path=MenuViewModel}"
-                        ContentTemplate="{StaticResource MenuViewModelDataTemplate}"
+        <ContentControl 
                         DockPanel.Dock="Top"
                         x:Name="menuView"/>
 
@@ -26,13 +25,11 @@
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
 
-            <ContentControl Content="{Binding Path=GameBoardViewModel}"
-                            ContentTemplate="{StaticResource GameBoardViewModelDataTemplate}"
+            <ContentControl 
                             Grid.Row="0"
                             x:Name="gameBoardView"/>
 
-            <ContentControl Content="{Binding Path=GameInfoViewModel}"
-                            ContentTemplate="{StaticResource GameInfoViewModelDataTemplate}"
+            <ContentControl 
                             Grid.Row="1"
                             x:Name="gameInfoView"
                             IsEnabled="False"/>
