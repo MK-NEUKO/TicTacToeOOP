@@ -1,4 +1,4 @@
-﻿<Application x:Class="MichaelKoch.TicTacToe.Ui.WPFClient.App"
+﻿<Application x:Class="MichaelKoch.TicTacToe.Ui.WPFClient.UserControls.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     

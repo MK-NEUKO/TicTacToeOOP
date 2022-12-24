@@ -22,9 +22,9 @@ namespace MichaelKoch.TicTacToe.Ui.WPFClient
                 .Build();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
-            AppHost!.RunAsync();
+            await AppHost!.RunAsync();
 
             var startWindow = AppHost!.Services.GetRequiredService<MainWindow>();
             startWindow.Show();
@@ -32,6 +32,15 @@ namespace MichaelKoch.TicTacToe.Ui.WPFClient
             base.OnStartup(e);
         }
 
+
+        private static void CreateAreas(IServiceCollection services)
+        {
+            const int numberOfAreas = 9;
+            for (int i = 0; i < numberOfAreas; i++)
+            {
+                services.AddSingleton<IPlayerGameBoardAreaViewModel>(new PlayerGameBoardAreaViewModel(i));
+            }
+        }
 
         protected override async void OnExit(ExitEventArgs e)
         {

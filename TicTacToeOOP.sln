@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E01E8A4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe.WPFClient", "Ui\TicTacToe.WPFClient\TicTacToe.WPFClient.csproj", "{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFClient", "Ui\TicTacToe.WPFClient\WPFClient.csproj", "{A7D93BB7-E91E-4BF1-A458-574A0F1EED2A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report_TicTacTorCoreTest", "Report_TicTacTorCoreTest", "{2E0D3659-1BF8-4F8E-B69D-EA8DBC89EB67}"
 	ProjectSection(SolutionItems) = preProject
@@ -57,13 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStoring", "Data\DataSto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStoring.Contarct", "Data\DataStoring.Contarct\DataStoring.Contarct.csproj", "{A732CDB4-1B34-434D-94AE-227F654C1C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLogic", "Ui\PresentationLogic\PresentationLogic.csproj", "{AAEDAE6D-7A3E-46B9-B121-19AD8F92217E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLogic", "Ui\PresentationLogic\PresentationLogic.csproj", "{AAEDAE6D-7A3E-46B9-B121-19AD8F92217E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLogic.Contract", "Ui\PresentationLogic.Contract\PresentationLogic.Contract.csproj", "{CF06D765-5567-4477-B06A-923D46D2E4D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLogic.Contract", "Ui\PresentationLogic.Contract\PresentationLogic.Contract.csproj", "{CF06D765-5567-4477-B06A-923D46D2E4D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "Ui\ViewModel\ViewModel.csproj", "{C1252CAA-EB93-462A-8D49-2CAFB364D2F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "Ui\ViewModel\ViewModel.csproj", "{C1252CAA-EB93-462A-8D49-2CAFB364D2F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel.Contract", "Ui\ViewModel.Contract\ViewModel.Contract.csproj", "{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel.Contract", "Ui\ViewModel.Contract\ViewModel.Contract.csproj", "{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
