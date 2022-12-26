@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "Ui\ViewModel\V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel.Contract", "Ui\ViewModel.Contract\ViewModel.Contract.csproj", "{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFDesktopClient", "Ui\WPFDesktopClient\WPFDesktopClient.csproj", "{B87545C5-66C2-4085-B424-C5EABE6224B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87545C5-66C2-4085-B424-C5EABE6224B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87545C5-66C2-4085-B424-C5EABE6224B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87545C5-66C2-4085-B424-C5EABE6224B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87545C5-66C2-4085-B424-C5EABE6224B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +133,7 @@ Global
 		{CF06D765-5567-4477-B06A-923D46D2E4D2} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{C1252CAA-EB93-462A-8D49-2CAFB364D2F4} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{DD7C1F48-5F7C-4C67-89E3-1708A86CCA60} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
+		{B87545C5-66C2-4085-B424-C5EABE6224B8} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}
