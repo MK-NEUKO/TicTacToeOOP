@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPFDesktopClient"
         xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
         xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
+        xmlns:viewModel="clr-namespace:MichaelKoch.TicTacToe.Ui.ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="650" Width="850">
@@ -13,6 +14,10 @@
     <d:Window.DataContext>
         <sampleData:MainViewModelSampleData/>
     </d:Window.DataContext>
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
     <DockPanel>
 
@@ -23,7 +28,8 @@
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
 
-            <userControls:PlayerGameBoard DataContext="{Binding Path=PlayerGameBoardSampleData}">
+            <userControls:PlayerGameBoard DataContext="{Binding Path=PlayerGameBoardViewModel}"
+                                          d:DataContext="{Binding Path=PlayerGameBoardSampleData}">
             </userControls:PlayerGameBoard>
 
         </Grid>

@@ -1,33 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    [INotifyPropertyChanged]
-    public partial class PlayerGameBoardAreaViewModel : IPlayerGameBoardAreaViewModel
+    public class PlayerGameBoardAreaViewModel : ObservableObject
     {
+        private string? _token;
+        private bool _isWinArea;
+        private bool _isStartNewGameAnimation;
+        private bool _isStartSaveGameAnimation;
+        private Player _currentPlayer;
+
         public PlayerGameBoardAreaViewModel(int id)
         {
-            _id = id;
-            _token = " ";
+            Id = id;
+            _token = string.Empty;
+            AreaWasClickedCommand = new RelayCommand(PlaceAToken, CanPlaceAToken);
         }
 
-        [ObservableProperty] private int _id;
-        [ObservableProperty] private string _token;
-        [ObservableProperty] private bool _isWinArea;
-        [ObservableProperty] private bool _isStartNewGameAnimation;
-        [ObservableProperty] private bool _isStartSaveGameAnimation;
+        private void PlaceAToken() => _currentPlayer.PlaceAToken();
 
-        [RelayCommand]
-        private void AreaWasClicked()
+        private bool CanPlaceAToken()
         {
             throw new NotImplementedException();
         }
+
+        public int Id { get; }
+
+        public string? Token
+        {
+            get => _token;
+            set => SetProperty(ref _token, value);
+        }
+
+        public bool IsWinArea
+        {
+            get => _isWinArea;
+            set => SetProperty(ref _isWinArea, value);
+        }
+
+        public bool IsStartNewGameAnimation
+        {
+            get => _isStartNewGameAnimation;
+            set => SetProperty(ref _isStartNewGameAnimation, value);
+        }
+
+        public bool IsStartSaveGameAnimation
+        {
+            get => _isStartSaveGameAnimation;
+            set => SetProperty(ref _isStartSaveGameAnimation, value);
+        }
+
+        public ICommand AreaWasClickedCommand { get; set; }
     }
 }

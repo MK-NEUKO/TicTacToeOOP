@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
              xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
              xmlns:valueConverter="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ValueConverter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
     <d:UserControl.DataContext>
-        <sampleData:PlayerGameBoardSampleData></sampleData:PlayerGameBoardSampleData>
+        <sampleData:PlayerGameBoardSampleData/>
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
@@ -401,7 +400,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding Path=Areas}"
+        <ItemsControl ItemsSource="{Binding Areas}"
                       ItemTemplate="{StaticResource GameBoardAreaDataTemplate}"
                       Background="{StaticResource TTTBackgroundDarkGrey}">
             <ItemsControl.ItemsPanel>
@@ -427,6 +426,8 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
+        
+        
             
     </Grid>
 </UserControl>

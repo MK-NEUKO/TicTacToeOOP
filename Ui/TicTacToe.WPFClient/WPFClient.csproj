@@ -23,8 +23,6 @@
     <ProjectReference Include="..\..\Data\DataStoring\DataStoring.csproj" />
     <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
     <ProjectReference Include="..\..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
-    <ProjectReference Include="..\ViewModel.Contract\ViewModel.Contract.csproj" />
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UserControls\Resources\LogoInfo.png" />

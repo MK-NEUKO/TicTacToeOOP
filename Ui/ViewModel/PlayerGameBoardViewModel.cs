@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    [INotifyPropertyChanged]
-    public partial class PlayerGameBoardViewModel
+    public class PlayerGameBoardViewModel
     {
-        private List<PlayerGameBoardAreaViewModel> _areas;
-
-        public PlayerGameBoardViewModel(List<PlayerGameBoardAreaViewModel> areas)
+        public PlayerGameBoardViewModel()
         {
-            _areas = areas.ToList();
+            Areas = CreateAreas();
         }
 
-        public List<PlayerGameBoardAreaViewModel> Areas { get => _areas; }
+        private static List<PlayerGameBoardAreaViewModel> CreateAreas()
+        {
+            var areas = new List<PlayerGameBoardAreaViewModel>();
+            for (int id = 0; id < 9; id++)
+            {
+                areas.Add(new PlayerGameBoardAreaViewModel(id));
+                areas[id].Token = "X";
+            }
+            return areas;
+        }
+
+        public List<PlayerGameBoardAreaViewModel> Areas { get; }
     }
-
-
-    
 }
