@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,22 +8,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    public class PlayerGameBoardViewModel
+    public interface IPlayerGameBoardViewModel
     {
-        public PlayerGameBoardViewModel()
-        {
-            Areas = CreateAreas();
-        }
+        List<PlayerGameBoardAreaViewModel> Areas { get; }
+    }
 
-        private static List<PlayerGameBoardAreaViewModel> CreateAreas()
+    public class PlayerGameBoardViewModel : IPlayerGameBoardViewModel
+    {
+        public PlayerGameBoardViewModel(IAreaFactory areaFactory)
         {
-            var areas = new List<PlayerGameBoardAreaViewModel>();
-            for (int id = 0; id < 9; id++)
-            {
-                areas.Add(new PlayerGameBoardAreaViewModel(id));
-                areas[id].Token = "X";
-            }
-            return areas;
+            Areas = areaFactory.CreateAreas();
         }
 
         public List<PlayerGameBoardAreaViewModel> Areas { get; }

@@ -2,11 +2,11 @@
 {
     public class MainViewModel
     {
-        public MainViewModel()
+        public MainViewModel(IPlayerGameBoardViewModel playerGameBoardViewModel)
         {
-            PlayerGameBoardViewModel = new PlayerGameBoardViewModel();
+            PlayerGameBoardViewModel = playerGameBoardViewModel;
         }
 
-        public PlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
+        public IPlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
     }
 }

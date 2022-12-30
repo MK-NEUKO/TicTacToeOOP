@@ -1,8 +1,6 @@
-﻿<Application x:Class="WPFDesktopClient.App"
+﻿<Application x:Class="MichaelKoch.TicTacToe.Ui.WPFDesktopClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WPFDesktopClient"
-             StartupUri="MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
         <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>

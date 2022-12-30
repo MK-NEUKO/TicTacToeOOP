@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFDesktopClient"
         xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
         xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
         xmlns:viewModel="clr-namespace:MichaelKoch.TicTacToe.Ui.ViewModel;assembly=ViewModel"
@@ -15,9 +14,7 @@
         <sampleData:MainViewModelSampleData/>
     </d:Window.DataContext>
 
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
+    
 
     <DockPanel>
 

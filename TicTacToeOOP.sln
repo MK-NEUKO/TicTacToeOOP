@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStoring.Contarct", "Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFDesktopClient", "Ui\WPFDesktopClient\WPFDesktopClient.csproj", "{B87545C5-66C2-4085-B424-C5EABE6224B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "Ui\ViewModel\ViewModel.csproj", "{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "Ui\ViewModel\ViewModel.csproj", "{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

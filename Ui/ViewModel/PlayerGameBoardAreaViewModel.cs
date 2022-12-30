@@ -4,26 +4,18 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel
 {
-    public class PlayerGameBoardAreaViewModel : ObservableObject
+    public class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
     {
         private string? _token;
         private bool _isWinArea;
         private bool _isStartNewGameAnimation;
         private bool _isStartSaveGameAnimation;
-        private Player _currentPlayer;
-
+        
         public PlayerGameBoardAreaViewModel(int id)
         {
             Id = id;
             _token = string.Empty;
-            AreaWasClickedCommand = new RelayCommand(PlaceAToken, CanPlaceAToken);
-        }
-
-        private void PlaceAToken() => _currentPlayer.PlaceAToken();
-
-        private bool CanPlaceAToken()
-        {
-            throw new NotImplementedException();
+            AreaWasClickedCommand = new RelayCommand(() => { _token = "X"; });
         }
 
         public int Id { get; }
@@ -52,6 +44,6 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel
             set => SetProperty(ref _isStartSaveGameAnimation, value);
         }
 
-        public ICommand AreaWasClickedCommand { get; set; }
+        public ICommand? AreaWasClickedCommand { get; set; }
     }
 }
