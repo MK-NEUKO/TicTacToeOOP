@@ -16,13 +16,15 @@
 
     
 
-    <DockPanel>
+    <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
         <userControls:MainMenu DockPanel.Dock="Top">
 
         </userControls:MainMenu>
 
         <Grid Width="300"
-              DockPanel.Dock="Left">
+              DockPanel.Dock="Left"
+              HorizontalAlignment="Left"
+              Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"/>
                 <RowDefinition Height="150"/>
@@ -31,6 +33,10 @@
             <userControls:PlayerGameBoard DataContext="{Binding Path=PlayerGameBoardViewModel}"
                                           d:DataContext="{Binding Path=PlayerGameBoardSampleData}">
             </userControls:PlayerGameBoard>
+
+            <userControls:GameInfoBoard Grid.Row="1">
+
+            </userControls:GameInfoBoard>
 
         </Grid>
     </DockPanel>
