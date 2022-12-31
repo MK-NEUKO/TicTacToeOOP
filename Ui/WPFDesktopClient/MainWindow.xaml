@@ -17,6 +17,9 @@
     
 
     <DockPanel>
+        <userControls:MainMenu DockPanel.Dock="Top">
+
+        </userControls:MainMenu>
 
         <Grid Width="300"
               DockPanel.Dock="Left">

@@ -15,7 +15,10 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel
         {
             Id = id;
             _token = string.Empty;
-            AreaWasClickedCommand = new RelayCommand(() => { _token = "X"; });
+            AreaWasClickedCommand = new RelayCommand
+            (
+                () => { Token = "X"; }
+            );
         }
 
         public int Id { get; }
@@ -44,6 +47,6 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel
             set => SetProperty(ref _isStartSaveGameAnimation, value);
         }
 
-        public ICommand? AreaWasClickedCommand { get; set; }
+        public ICommand AreaWasClickedCommand { get; set; }
     }
 }
