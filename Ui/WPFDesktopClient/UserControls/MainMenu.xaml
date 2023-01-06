@@ -703,7 +703,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerX"
+                    <GroupBox Header="PlayerViewModelX"
                               Grid.Column="1"
                               DataContext="{Binding PlayerX}">
                         <Grid>
@@ -772,7 +772,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerO"
+                    <GroupBox Header="PlayerViewModelO"
                               Grid.Column="2"
                               DataContext="{Binding PlayerO}">
                         <Grid>

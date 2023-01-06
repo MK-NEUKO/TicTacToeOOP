@@ -23,19 +23,19 @@
 
         <Grid Width="300"
               DockPanel.Dock="Left"
-              HorizontalAlignment="Left"
-              Margin="10,0,0,0">
+              HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"/>
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
 
-            <userControls:PlayerGameBoard DataContext="{Binding Path=PlayerGameBoardViewModel}"
+            <userControls:PlayerGameBoard Grid.Row="0"
+                                          DataContext="{Binding Path=PlayerGameBoardViewModel}"
                                           d:DataContext="{Binding Path=PlayerGameBoardSampleData}">
             </userControls:PlayerGameBoard>
 
-            <userControls:GameInfoBoard Grid.Row="1">
-
+            <userControls:GameInfoBoard Grid.Row="1"
+                                        d:DataContext="{Binding PlayingPlayerViewModelSampleData}">
             </userControls:GameInfoBoard>
 
         </Grid>
