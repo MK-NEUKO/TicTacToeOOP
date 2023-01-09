@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
         xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
-        xmlns:viewModel="clr-namespace:MichaelKoch.TicTacToe.Ui.ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="650" Width="850">
@@ -14,11 +13,9 @@
         <sampleData:MainViewModelSampleData/>
     </d:Window.DataContext>
 
-    
-
     <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
-        <userControls:MainMenu DockPanel.Dock="Top">
-
+        <userControls:MainMenu DockPanel.Dock="Top"
+                               DataContext="{Binding Path=MenuViewModel}">
         </userControls:MainMenu>
 
         <Grid Width="300"
@@ -30,14 +27,12 @@
             </Grid.RowDefinitions>
 
             <userControls:PlayerGameBoard Grid.Row="0"
-                                          DataContext="{Binding Path=PlayerGameBoardViewModel}"
-                                          d:DataContext="{Binding Path=PlayerGameBoardSampleData}">
+                                          DataContext="{Binding Path=PlayerGameBoardViewModel}">
             </userControls:PlayerGameBoard>
 
             <userControls:GameInfoBoard Grid.Row="1"
-                                        d:DataContext="{Binding PlayingPlayerViewModelSampleData}">
+                                        DataContext="{Binding Path=PlayingPlayerViewModel}">
             </userControls:GameInfoBoard>
-
         </Grid>
     </DockPanel>
 </Window>

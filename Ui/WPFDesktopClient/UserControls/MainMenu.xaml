@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
+             xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="800">
+
+    <d:UserControl.DataContext>
+        <sampleData:MenuViewModelSampleData/>
+    </d:UserControl.DataContext>
+
     <UserControl.Resources>
 
         <Style x:Key="MenuTabControl" TargetType="TabControl">
@@ -394,9 +399,6 @@
 
                             </Border>
                         </Grid>
-
-
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -657,7 +659,8 @@
     <Grid>
 
         <TabControl Style="{StaticResource MenuTabControl}">
-            <TabItem Header="Game">
+            <TabItem Header="Game Options"
+                     DataContext="{Binding Path=GameMenuViewModel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -675,37 +678,38 @@
                             </Grid.RowDefinitions>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="0"
-                                         Content="Load New Game"
+                                         Content="New Game"
                                          Height="25"
                                          Width="130" 
                                          Margin="5"
-                                         x:Name="loadNewGame"
+                                         x:Name="NewGame"
                                          Command="{Binding LoadNewGameCommand}"
                                          Checked="LoadNewGame_Checked"
-                                         IsChecked="{Binding IsLoadNewGame}"/>
-
+                                         IsChecked="{Binding IsLoadNewGame}">
+                            </RadioButton>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="1"                                          
                                          Height="25"
                                          Width="130"
                                          Margin="5"
                                          Content="Load Last Game"
-                                         x:Name="loadLastGame"
+                                         x:Name="LoadLastGame"
                                          Command="{Binding LoadLastGameCommand}"
                                          Checked="LoadLastGame_Checked"
-                                         IsChecked="{Binding IsLoadLastGame}"/>
-
-                            <Button Grid.RowSpan="2"
+                                         IsChecked="{Binding IsLoadLastGame}">
+                            </RadioButton>
+                            <Button Grid.Row="0"
+                                    Grid.RowSpan="2"
                                     Style="{StaticResource ControlsCoverButton}"
                                     Visibility="Hidden"
-                                    x:Name="controlsCoverGameOptions"/>
-
+                                    x:Name="ControlsCoverGameOptions">
+                            </Button>
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerViewModelX"
+                    <GroupBox Header="PlayerX"
                               Grid.Column="1"
-                              DataContext="{Binding PlayerX}">
+                              DataContext="{Binding Path=PlayerX}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -717,7 +721,7 @@
                             </Grid.ColumnDefinitions>
 
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
-                                         x:Name="selectHumanPlayerX"
+                                         x:Name="SelectHumanPlayerX"
                                          Grid.Row="0"
                                          Grid.Column="0"
                                          Height="25"
@@ -727,33 +731,33 @@
                                          ToolTip="If you are no machine"
                                          IsEnabled="False"
                                          Checked="SelectHumanPlayerX_Checked"
-                                         IsChecked="{Binding IsHuman}"/>
-
+                                         IsChecked="{Binding Path=IsHuman}">
+                            </RadioButton>
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Name}"
+                                     Text="{Binding Path=Name}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
-                                     x:Name="namePlayerX"
-                                     IsEnabled="False"/>
-
+                                     x:Name="NamePlayerX"
+                                     IsEnabled="False">
+                            </TextBox>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
-                                         Grid.Row="2"
+                                         Grid.Row="1"
                                          Grid.Column="0"
                                          Height="25"
                                          Margin="2"
                                          Content="AI"
-                                         x:Name="selectAiPlayerX"
+                                         x:Name="SelectAiPlayerX"
                                          IsEnabled="False"
                                          Checked="SelectAiPlayerX_Checked"
-                                         IsChecked="{Binding IsAI}"/>
-
+                                         IsChecked="{Binding Path=IsAi}">
+                            </RadioButton>
                             <ComboBox Style="{StaticResource ComboBox}"
-                                      x:Name="selectDiffecultylevelPlayerX"
-                                      Grid.Row="2"
+                                      x:Name="SelectDifficultyLevelPlayerX"
+                                      Grid.Row="1"
                                       Grid.Column="1"
                                       Height="25"                                     
                                       Margin="4"
@@ -762,19 +766,20 @@
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
-
-                            <Button Grid.ColumnSpan="2"
+                            <Button Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
                                     Grid.RowSpan="2"
                                     Style="{StaticResource ControlsCoverButton}"
-                                    x:Name="controlsCoverPlayerX"
-                                    Visibility="Hidden"/>
-
+                                    x:Name="ControlsCoverPlayerX"
+                                    Visibility="Hidden">
+                            </Button>
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerViewModelO"
+                    <GroupBox Header="PlayerO"
                               Grid.Column="2"
-                              DataContext="{Binding PlayerO}">
+                              DataContext="{Binding Path=PlayerO}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -792,52 +797,53 @@
                                          Width="60"
                                          Margin="2"
                                          Content="Human"
-                                         ToolTip="If you are no machien"
-                                         x:Name="selectHumanPlayerO"
+                                         ToolTip="If you are no machine"
+                                         x:Name="SelectHumanPlayerO"
                                          Checked="SelectHumanPlayerO_Checked"
                                          IsEnabled="False"
-                                         IsChecked="{Binding IsHuman}"/>
-
+                                         IsChecked="{Binding Path=IsHuman}">
+                            </RadioButton>    
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Name}"
+                                     Text="{Binding Path=Name}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
-                                     x:Name="namePlayerO"
-                                     IsEnabled="False"/>
-
+                                     x:Name="NamePlayerO"
+                                     IsEnabled="False">
+                            </TextBox>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="1"
                                          Grid.Column="0"
                                          Height="25"
                                          Margin="2"
                                          Content="AI"
-                                         x:Name="selectAiPlayerO"
+                                         x:Name="SelectAiPlayerO"
                                          Checked="SelectAiPlayerO_Checked"
                                          IsEnabled="False"
-                                         IsChecked="{Binding IsAI}"/>
-
+                                         IsChecked="{Binding Path=IsAi}">
+                            </RadioButton>
                             <ComboBox Style="{StaticResource ComboBox}"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Height="25"
                                       Margin="4"
-                                      x:Name="selectDiffecultylevelPlayerO"
+                                      x:Name="SelectDifficultyLevelPlayerO"
                                       IsEnabled="False">
                                 <ComboBoxItem IsSelected="True">Easy</ComboBoxItem>
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
-
-                            <Button Grid.ColumnSpan="2"
+                            <Button Grid.Column="0"
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
                                     Grid.RowSpan="2"
                                     Style="{StaticResource ControlsCoverButton}"
-                                    x:Name="controlsCoverPlayerO"
-                                    Visibility="Hidden"/>
-
+                                    x:Name="ControlsCoverPlayerO"
+                                    Visibility="Hidden">
+                            </Button>
                         </Grid>
                     </GroupBox>
 
@@ -849,10 +855,10 @@
                                 Margin="4"
                                 Content="Play"
                                 Command="{Binding StartGameCommand}"
-                                x:Name="startGameButton"
+                                x:Name="StartGameButton"
                                 IsEnabled="False"
-                                Click="StartGameButton_Click"/>
-
+                                Click="StartGameButton_Click">
+                        </Button>
                     </GroupBox>
 
                     <GroupBox Grid.Column="4"
@@ -861,7 +867,6 @@
                             <Image Width="150" Source="Resources/LogoInfo.png"/>
                         </StackPanel>
                     </GroupBox>
-
                 </Grid>
             </TabItem>
         </TabControl>

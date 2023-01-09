@@ -15,6 +15,6 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public bool IsWinArea { get; set; }
         public bool IsStartNewGameAnimation { get; set; }
         public bool IsStartSaveGameAnimation { get; set; }
-        public ICommand AreaWasClickedCommand { get; set; }
+        public ICommand AreaWasClickedCommand { get; set; } = null!;
     }
 }

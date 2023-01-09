@@ -30,98 +30,98 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             EnableControlsPlayerXPlayerO();
             UncheckRadioButtonsPlayerXPlayerO();
             DisableControlsCoverPlayerXPlayerO();
-            startGameButton.IsEnabled = true;
+            StartGameButton.IsEnabled = true;
         }
 
         private void LoadLastGame_Checked(object sender, RoutedEventArgs e)
         {
             ProtectControlsWithCoverPlayerXPlayerO();
             EnableControlsPlayerXPlayerO();
-            startGameButton.IsEnabled = true;
+            StartGameButton.IsEnabled = true;
         }
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
-            controlsCoverGameOptions.Visibility = Visibility.Visible;
-            loadLastGame.Focusable = false;
-            loadNewGame.Focusable = false;
+            ControlsCoverGameOptions.Visibility = Visibility.Visible;
+            LoadLastGame.Focusable = false;
+            NewGame.Focusable = false;
             ProtectControlsWithCoverPlayerXPlayerO();
-            if ((bool)loadNewGame.IsChecked)
+            if ((bool)NewGame.IsChecked!)
             {
-                loadLastGame.IsEnabled = false;
+                LoadLastGame.IsEnabled = false;
             }
             else
             {
-                loadNewGame.IsEnabled = false;   
+                NewGame.IsEnabled = false;   
             }
         }
 
         private void SelectHumanPlayerX_Checked(object sender, RoutedEventArgs e)
         {
-            selectDiffecultylevelPlayerX.IsEnabled = false;
+            SelectDifficultyLevelPlayerX.IsEnabled = false;
         }
 
         private void SelectAiPlayerX_Checked(object sender, RoutedEventArgs e)
         {
-            selectDiffecultylevelPlayerX.IsEnabled = true;
+            SelectDifficultyLevelPlayerX.IsEnabled = true;
         }
 
         private void SelectHumanPlayerO_Checked(object sender, RoutedEventArgs e)
         {
-            selectDiffecultylevelPlayerO.IsEnabled = false;
+            SelectDifficultyLevelPlayerO.IsEnabled = false;
         }
 
         private void SelectAiPlayerO_Checked(object sender, RoutedEventArgs e)
         {
-            selectDiffecultylevelPlayerO.IsEnabled = true;
+            SelectDifficultyLevelPlayerO.IsEnabled = true;
         }
 
         private void EnableControlsPlayerXPlayerO()
         {
-            selectHumanPlayerX.IsEnabled = true;
-            selectHumanPlayerO.IsEnabled = true;
-            selectAiPlayerX.IsEnabled = true;
-            selectAiPlayerO.IsEnabled = true;
-            namePlayerX.IsEnabled = true;
-            namePlayerO.IsEnabled = true;
-            selectDiffecultylevelPlayerX.IsEnabled = true;
-            selectDiffecultylevelPlayerO.IsEnabled = true;
+            SelectHumanPlayerX.IsEnabled = true;
+            SelectHumanPlayerO.IsEnabled = true;
+            SelectAiPlayerX.IsEnabled = true;
+            SelectAiPlayerO.IsEnabled = true;
+            NamePlayerX.IsEnabled = true;
+            NamePlayerO.IsEnabled = true;
+            SelectDifficultyLevelPlayerX.IsEnabled = true;
+            SelectDifficultyLevelPlayerO.IsEnabled = true;
         }
 
         private void UncheckRadioButtonsPlayerXPlayerO()
         {
-            selectHumanPlayerX.IsChecked = false;
-            selectHumanPlayerO.IsChecked = false;
-            selectAiPlayerX.IsChecked = false;
-            selectAiPlayerO.IsChecked = false;
+            SelectHumanPlayerX.IsChecked = false;
+            SelectHumanPlayerO.IsChecked = false;
+            SelectAiPlayerX.IsChecked = false;
+            SelectAiPlayerO.IsChecked = false;
         }
 
         private void ProtectControlsWithCoverPlayerXPlayerO()
         {
-            controlsCoverPlayerX.Visibility = Visibility.Visible;
-            controlsCoverPlayerO.Visibility = Visibility.Visible;
-            selectHumanPlayerX.Focusable = false;
-            selectHumanPlayerO.Focusable = false;
-            selectAiPlayerX.Focusable = false;
-            selectAiPlayerO.Focusable = false;
-            namePlayerX.Focusable = false;
-            namePlayerO.Focusable = false;
-            selectDiffecultylevelPlayerX.Focusable = false;
-            selectDiffecultylevelPlayerO.Focusable = false;
+            ControlsCoverPlayerX.Visibility = Visibility.Visible;
+            ControlsCoverPlayerO.Visibility = Visibility.Visible;
+            SelectHumanPlayerX.Focusable = false;
+            SelectHumanPlayerO.Focusable = false;
+            SelectAiPlayerX.Focusable = false;
+            SelectAiPlayerO.Focusable = false;
+            NamePlayerX.Focusable = false;
+            NamePlayerO.Focusable = false;
+            SelectDifficultyLevelPlayerX.Focusable = false;
+            SelectDifficultyLevelPlayerO.Focusable = false;
         }
 
         private void DisableControlsCoverPlayerXPlayerO()
         {
-            controlsCoverPlayerX.Visibility = Visibility.Hidden;
-            controlsCoverPlayerO.Visibility = Visibility.Hidden;
-            selectHumanPlayerX.Focusable = true;
-            selectHumanPlayerO.Focusable = true;
-            selectAiPlayerX.Focusable = true;
-            selectAiPlayerO.Focusable = true;
-            namePlayerX.Focusable = true;
-            namePlayerO.Focusable = true;
-            selectDiffecultylevelPlayerX.Focusable = true;
-            selectDiffecultylevelPlayerO.Focusable = true;
+            ControlsCoverPlayerX.Visibility = Visibility.Hidden;
+            ControlsCoverPlayerO.Visibility = Visibility.Hidden;
+            SelectHumanPlayerX.Focusable = true;
+            SelectHumanPlayerO.Focusable = true;
+            SelectAiPlayerX.Focusable = true;
+            SelectAiPlayerO.Focusable = true;
+            NamePlayerX.Focusable = true;
+            NamePlayerO.Focusable = true;
+            SelectDifficultyLevelPlayerX.Focusable = true;
+            SelectDifficultyLevelPlayerO.Focusable = true;
         }
     }
 }

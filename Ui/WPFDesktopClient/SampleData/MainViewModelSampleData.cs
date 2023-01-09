@@ -4,11 +4,13 @@
     {
         public MainViewModelSampleData()
         {
-            PlayerGameBoardSampleData = new PlayerGameBoardSampleData();
-            PlayingPlayerViewModelSampleData = new PlayingPlayerViewModelSampleData();
+            PlayerGameBoardViewModel = new PlayerGameBoardSampleData();
+            PlayingPlayerViewModel = new PlayingPlayerViewModelSampleData();
+            MenuViewModel = new MenuViewModelSampleData();
         }
 
-        public PlayerGameBoardSampleData PlayerGameBoardSampleData { get; set; }
-        public PlayingPlayerViewModelSampleData  PlayingPlayerViewModelSampleData { get; set; }
+        public PlayerGameBoardSampleData PlayerGameBoardViewModel { get; set; }
+        public PlayingPlayerViewModelSampleData  PlayingPlayerViewModel { get; set; }
+        public MenuViewModelSampleData MenuViewModel { get; set; }
     }
 }
