@@ -2,9 +2,9 @@
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
 {
-    public class PlayingPlayerViewModelSampleData
+    public class GameViewModelSampleData
     {
-        public PlayingPlayerViewModelSampleData()
+        public GameViewModelSampleData()
         {
             PlayerX = new PlayerViewModelSampleData()
                 { Name = "PlayerX", IsAi = false, IsHuman = true, IsPlayersTurn = true, Token = "X", IsWinner = false, Points = 8 };

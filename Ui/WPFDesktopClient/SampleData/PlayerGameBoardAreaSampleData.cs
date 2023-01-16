@@ -1,8 +1,9 @@
 ﻿using System.Windows.Input;
+using MichaelKoch.TicTacToe.Ui.ViewModel;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
 {
-    public class PlayerGameBoardAreaSampleData
+    public class PlayerGameBoardAreaSampleData : IPlayerGameBoardAreaViewModel
     {
         public PlayerGameBoardAreaSampleData(int id)
         {
@@ -10,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
             Token = " ";
         }
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
         public int Id { get; set; }
         public bool IsWinArea { get; set; }
         public bool IsStartNewGameAnimation { get; set; }

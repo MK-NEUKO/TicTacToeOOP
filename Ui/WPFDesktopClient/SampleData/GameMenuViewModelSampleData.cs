@@ -4,7 +4,7 @@
     {
         public GameMenuViewModelSampleData()
         {
-            var playingPlayers = new PlayingPlayerViewModelSampleData();
+            var playingPlayers = new GameViewModelSampleData();
             PlayerX = playingPlayers.PlayerX;
             PlayerO = playingPlayers.PlayerO;
         }

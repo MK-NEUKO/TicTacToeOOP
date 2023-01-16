@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="300">
 
     <d:UserControl.DataContext>
-        <sampleData:PlayingPlayerViewModelSampleData/>
+        <sampleData:GameViewModelSampleData/>
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
@@ -60,16 +60,17 @@
         </Style>
 
         <Style x:Key="RectangleTriggerPlayerXAi" TargetType="Rectangle">
+            <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=PlayerX.IsAi}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsHuman}" Value="true">
+                <!--<DataTrigger Binding="{Binding Path=PlayerX.IsHuman}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
-                </DataTrigger>
+                </DataTrigger>-->
             </Style.Triggers>
         </Style>
 
@@ -110,16 +111,17 @@
         </Style>
 
         <Style x:Key="RectangleTriggerPlayerOAi" TargetType="Rectangle">
+            <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=PlayerO.IsAi}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsHuman}" Value="true">
+                <!--<DataTrigger Binding="{Binding Path=PlayerO.IsHuman}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
-                </DataTrigger>
+                </DataTrigger>-->
             </Style.Triggers>
         </Style>
 
@@ -459,7 +461,7 @@
                 <TextBlock Grid.Row="1" 
                            FontSize="18"
                            FontWeight="ExtraBold"
-                           Foreground="{StaticResource TTTBackgroundMediumGray}"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Text="PLAYER O">

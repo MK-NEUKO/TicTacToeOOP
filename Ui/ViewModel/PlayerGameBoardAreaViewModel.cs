@@ -1,52 +1,36 @@
 ﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace MichaelKoch.TicTacToe.Ui.ViewModel
+namespace MichaelKoch.TicTacToe.Ui.ViewModel;
+
+public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
 {
-    public class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
-    {
-        private string? _token;
-        private bool _isWinArea;
-        private bool _isStartNewGameAnimation;
-        private bool _isStartSaveGameAnimation;
+    [ObservableProperty]
+    private int _id;
+
+    [ObservableProperty]
+    private string? _token;
+
+    [ObservableProperty]
+    private bool _isWinArea;
+
+    [ObservableProperty]
+    private bool _isStartNewGameAnimation;
+
+    [ObservableProperty]
+    private bool _isStartSaveGameAnimation;
         
-        public PlayerGameBoardAreaViewModel(int id)
-        {
-            Id = id;
-            _token = string.Empty;
-            AreaWasClickedCommand = new RelayCommand
-            (
-                () => { Token = "X"; }
-            );
-        }
-
-        public int Id { get; }
-
-        public string? Token
-        {
-            get => _token;
-            set => SetProperty(ref _token, value);
-        }
-
-        public bool IsWinArea
-        {
-            get => _isWinArea;
-            set => SetProperty(ref _isWinArea, value);
-        }
-
-        public bool IsStartNewGameAnimation
-        {
-            get => _isStartNewGameAnimation;
-            set => SetProperty(ref _isStartNewGameAnimation, value);
-        }
-
-        public bool IsStartSaveGameAnimation
-        {
-            get => _isStartSaveGameAnimation;
-            set => SetProperty(ref _isStartSaveGameAnimation, value);
-        }
-
-        public ICommand AreaWasClickedCommand { get; set; }
+    public PlayerGameBoardAreaViewModel(int id)
+    {
+        _id = id;
+        _token = string.Empty;
+        AreaWasClickedCommand = new RelayCommand
+        (
+            // this is for testing purposes only, not a final implementation.
+            () => { Token = Token is "X" or " " ? "O" : "X"; }
+        );
     }
+
+    public ICommand AreaWasClickedCommand { get; set; }
 }
