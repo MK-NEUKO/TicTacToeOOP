@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 

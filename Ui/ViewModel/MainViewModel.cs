@@ -1,4 +1,6 @@
-﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel;
+﻿using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+
+namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public class MainViewModel
 {

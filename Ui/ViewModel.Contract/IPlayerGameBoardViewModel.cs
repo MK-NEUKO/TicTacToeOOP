@@ -1,4 +1,4 @@
-﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel;
+﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IPlayerGameBoardViewModel
 {

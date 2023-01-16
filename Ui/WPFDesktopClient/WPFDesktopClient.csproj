@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ViewModel.Contract\ViewModel.Contract.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 

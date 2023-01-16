@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -14,6 +15,6 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         PlayerO = playerFactory.CreatePlayer("O");
     }
 
-    public PlayerViewModel PlayerX { get; set; }
-    public PlayerViewModel PlayerO { get; set;}
+    public IPlayerViewModel PlayerX { get; set; }
+    public IPlayerViewModel PlayerO { get; set;}
 }

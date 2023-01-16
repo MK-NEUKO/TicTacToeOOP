@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
 {

@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFDesktopClient", "Ui\WPFD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "Ui\ViewModel\ViewModel.csproj", "{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel.Contract", "Ui\ViewModel.Contract\ViewModel.Contract.csproj", "{079F38B3-30F5-4B9D-8266-9765AAC7157F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079F38B3-30F5-4B9D-8266-9765AAC7157F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079F38B3-30F5-4B9D-8266-9765AAC7157F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079F38B3-30F5-4B9D-8266-9765AAC7157F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079F38B3-30F5-4B9D-8266-9765AAC7157F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{A732CDB4-1B34-434D-94AE-227F654C1C26} = {61179EF0-4EA3-4CBF-8360-F00C2CEEAFB9}
 		{B87545C5-66C2-4085-B424-C5EABE6224B8} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 		{B1FC9F4B-E447-44CB-AB3D-B733ADAD202B} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
+		{079F38B3-30F5-4B9D-8266-9765AAC7157F} = {ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}

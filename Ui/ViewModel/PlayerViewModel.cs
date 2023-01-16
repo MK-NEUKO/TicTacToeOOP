@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 

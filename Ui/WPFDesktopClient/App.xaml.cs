@@ -2,6 +2,7 @@
 using MichaelKoch.TicTacToe.Ui.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 {
