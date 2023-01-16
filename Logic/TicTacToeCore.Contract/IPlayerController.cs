@@ -1,7 +1,7 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using System.Collections.Generic;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract
 {
     public interface IPlayerController
     {

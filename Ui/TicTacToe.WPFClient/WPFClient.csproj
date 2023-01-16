@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>MichaelKoch.TicTacToe.Ui.WPFClient</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\LogoInfo.png" />
+    <None Remove="Resources\LogoInfo.svg" />
+    <None Remove="UserControls\Resources\background_glass.jpg" />
+    <None Remove="UserControls\Resources\background_glass_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossCutting\DataClasses\DataClasses.csproj" />
+    <ProjectReference Include="..\..\Data\DataStoring\DataStoring.csproj" />
+    <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
+    <ProjectReference Include="..\..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\Resources\LogoInfo.png" />
+    <Resource Include="UserControls\Resources\LogoInfo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UserControls\Resources\background_glass.jpg" />
+    <Resource Include="UserControls\Resources\background_glass_02.jpg" />
+    <Resource Include="Resources\TTTVisualMinimax.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>

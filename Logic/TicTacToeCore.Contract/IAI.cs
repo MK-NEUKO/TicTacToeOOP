@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract
 {
     public interface IAI
     {

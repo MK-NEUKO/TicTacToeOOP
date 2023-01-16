@@ -1,16 +1,16 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore
 {
     public class PlayerController : IPlayerController
     {
         private readonly IPlayerReposytory _playerRepository;
-        private readonly IGameBoard _board;
+        private readonly IGameBoardManager _boardManager;
         private readonly IAI _aimimax;
         private Player _playerX;
         private Player _playerO;
@@ -19,10 +19,10 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         
 
-        public PlayerController(IPlayerReposytory playerRepository, IGameBoard board, IAI aimimax)
+        public PlayerController(IPlayerReposytory playerRepository, IGameBoardManager boardManager, IAI aimimax)
         {
             _playerRepository = playerRepository ?? throw new ArgumentNullException(nameof(playerRepository));
-            _board = board ?? throw new ArgumentNullException(nameof(board));
+            _boardManager = boardManager ?? throw new ArgumentNullException(nameof(boardManager));
             _aimimax = aimimax ?? throw new ArgumentNullException(nameof(aimimax));
             _playerX = _playerRepository.LoadDefaultPlayerList()[0];
             _playerO = _playerRepository.LoadDefaultPlayerList()[1];
@@ -98,19 +98,19 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
         public void GivePoints()
         {
-            if (_board.IsPlayerXWinner)
+            if (_boardManager.IsPlayerXWinner)
                 _playerX.Points++;
-            if (_board.IsPlayerOWinner)
+            if (_boardManager.IsPlayerOWinner)
                 _playerO.Points++;
-            if (_board.IsGameTie)
+            if (_boardManager.IsGameTie)
                 _gameIsTie++;
         }
 
         public void SetWinner()
         {
-            if (_board.IsPlayerXWinner)
+            if (_boardManager.IsPlayerXWinner)
                 _playerX.IsWinner = true;
-            if (_board.IsPlayerOWinner)
+            if (_boardManager.IsPlayerOWinner)
                 _playerO.IsWinner = true;
         }
 

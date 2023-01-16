@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract
 {
     public interface IGamePlay
     {

@@ -1,17 +1,17 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contarct;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
-namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore
 {
     public class AI : IAI
     {
         private IGameBoardRepository _gameBoardRepository;
         private IPlayerReposytory _playerRepository;     
-        private IGameBoard _gameBoard;
+        private IGameBoardManager _gameBoardManager;
         
         //private Player _playerX;
         //private Player _playerO;
@@ -25,11 +25,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         private int _areaIDForO;
         private int _areaIDForCurrentPlayer;
         
-        public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoard board)
+        public AI(IGameBoardRepository gameBoardRepository, IPlayerReposytory playerReposytory, IGameBoardManager boardManager)
         {
             _gameBoardRepository = gameBoardRepository;
             _playerRepository = playerReposytory;
-            _gameBoard = board;
+            _gameBoardManager = boardManager;
             
             //_playerX = _playerRepository.LoadNewPlayerList()[0];
             //_playerO = _playerRepository.LoadNewPlayerList()[1];
@@ -86,17 +86,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (var area in _gameBoard.GameBoardAreaList)
+            foreach (var area in _gameBoardManager.GameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                 {
-                    area.Area = "X";
+                    area.Token = "X";
                     int returnMinValue = Min(maximumDepth, alpha, beta);
-                    area.Area = " ";
+                    area.Token = " ";
                     if (returnMinValue > alpha)
                     {
                         alpha = returnMinValue;
-                        _areaIDForX = area.AreaID;
+                        _areaIDForX = area.Id;
                     }
                 }
             }
@@ -110,17 +110,17 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            foreach (var area in _gameBoard.GameBoardAreaList)
+            foreach (var area in _gameBoardManager.GameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                 {
-                    area.Area = "O";
+                    area.Token = "O";
                     int returnMaxValue = Max(maximumDepth, alpha, beta);
-                    area.Area = " ";
+                    area.Token = " ";
                     if (returnMaxValue < beta)
                     {
                         beta = returnMaxValue;
-                        _areaIDForO = area.AreaID;
+                        _areaIDForO = area.Id;
                     }
                 }
             }
@@ -135,18 +135,18 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             //if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
             //    return EvaluateBoardAreas();
 
-            foreach (var area in _gameBoard.GameBoardAreaList)
+            foreach (var area in _gameBoardManager.GameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                 {
-                    area.Area = "X";
+                    area.Token = "X";
                     int returnMinValue = Min(maximumDepth - 1, alpha, beta);                    
                     if (returnMinValue > alpha)
                     {
                         alpha = returnMinValue;
                     }
 
-                    area.Area = " ";
+                    area.Token = " ";
                     if (alpha >= beta)
                         return beta;
                 }
@@ -161,18 +161,18 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
             //if (maximumDepth == 0 && (_playerX.MaximumDepth > 1 || _playerO.MaximumDepth > 1))
             //    return EvaluateBoardAreas();
          
-            foreach (var area in _gameBoard.GameBoardAreaList)
+            foreach (var area in _gameBoardManager.GameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                 {
-                    area.Area = "O";
+                    area.Token = "O";
                     int returnMaxValue = Max(maximumDepth - 1, alpha, beta);                    
                     if (returnMaxValue < beta)
                     {
                         beta = returnMaxValue;
                     }
 
-                    area.Area = " ";
+                    area.Token = " ";
                     if (beta <= alpha)
                     {
                         return alpha;
@@ -187,9 +187,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         {        
             for (int i = 0; i < _winConstellations.GetLength(0); i++)
             {
-                string actualContent = _gameBoard.GameBoardAreaList[_winConstellations[i, 0]].Area;
-                actualContent += _gameBoard.GameBoardAreaList[_winConstellations[i, 1]].Area;
-                actualContent += _gameBoard.GameBoardAreaList[_winConstellations[i, 2]].Area;
+                string actualContent = _gameBoardManager.GameBoardAreaList[_winConstellations[i, 0]].Token;
+                actualContent += _gameBoardManager.GameBoardAreaList[_winConstellations[i, 1]].Token;
+                actualContent += _gameBoardManager.GameBoardAreaList[_winConstellations[i, 2]].Token;
 
                 if (actualContent == "XXX")
                     return _xIsWinner;
@@ -198,9 +198,9 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
                     return _oIsWinner;
             }
 
-            foreach (var area in _gameBoard.GameBoardAreaList)
+            foreach (var area in _gameBoardManager.GameBoardAreaList)
             {
-                if (area.Area == " ")
+                if (area.Token == " ")
                     return _gameIsOpen;
             }
             return _gameIsTie;
@@ -210,11 +210,11 @@ namespace MichaelKoch.TicTacToe.Logik.TicTacToeCore
         //{
         //    int value = 0;
         //    int index = 0;
-        //    foreach (var area in _gameBoard.GameBoardAreaList)
+        //    foreach (var area in _gameBoardManager.GameBoardAreaList)
         //    {
-        //        if (area.Area == "O")
+        //        if (area.Token == "O")
         //            value -= _boardAreaFineValues[index];
-        //        if (area.Area == "X")
+        //        if (area.Token == "X")
         //            value += _boardAreaFineValues[index];
         //        index++;
         //    }

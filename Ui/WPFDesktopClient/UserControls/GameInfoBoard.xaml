@@ -1,0 +1,499 @@
+﻿<UserControl x:Class="MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls.GameInfoBoard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
+             mc:Ignorable="d"
+             d:DesignHeight="150" d:DesignWidth="300">
+
+    <d:UserControl.DataContext>
+        <sampleData:GameViewModelSampleData/>
+    </d:UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <Style x:Key="DropShadowGrid" TargetType="Grid">
+            <Setter Property="Margin" Value="10, 5"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="10"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--PlayerX Section-->
+
+        <Style x:Key="BorderTriggerPlayerX" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0,0,4,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="false">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RectangleTriggerPlayerX" TargetType="Rectangle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="false">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RectangleTriggerPlayerXAi" TargetType="Rectangle">
+            <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsAi}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding Path=PlayerX.IsHuman}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+
+        <!--PlayerO Section-->
+
+        <Style x:Key="BorderTriggerPlayerO" TargetType="Border">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="false">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RectangleTriggerPlayerO" TargetType="Rectangle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="false">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="RectangleTriggerPlayerOAi" TargetType="Rectangle">
+            <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsAi}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding Path=PlayerO.IsHuman}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style´s for Winner Banner-->
+
+        <Style x:Key="TextBlockWinAnimation" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="Margin" Value="0, 0, 0, 6"/>
+        </Style>
+
+        <Style x:Key="BorderWinAnimation" TargetType="Border">
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="Margin" Value="15, 4"/>
+            <Setter Property="Background" Value="{StaticResource TTTBackgroundMediumGray}"/>
+        </Style>
+
+        <Style x:Key="BorderWinAnimationPlayerX" TargetType="Border"
+               BasedOn="{StaticResource BorderWinAnimation}">
+            <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextBlockWinAnimationPlayerX" TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockWinAnimation}">
+            <Setter Property="Foreground" Value="{StaticResource TTTGreen}"/>
+            <Setter Property="Text" Value="X Wins"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BorderWinAnimationPlayerO" TargetType="Border"
+               BasedOn="{StaticResource BorderWinAnimation}">
+            <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextBlockWinAnimationPlayerO" TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockWinAnimation}">
+            <Setter Property="Foreground" Value="{StaticResource TTTOrange}"/>
+            <Setter Property="Text" Value="O Wins"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="false">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource TTTBackgroundDarkGrey}"
+          Margin="0, 8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        
+        <!--PlayerX-Properties, Name, IsHuman, IsAi, IsPlayersTurn, Points-->
+
+        <Grid Grid.Row="0"
+              Style="{StaticResource DropShadowGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource RectangleTriggerPlayerXAi}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource RectangleTriggerPlayerXAi}">
+                </Rectangle>
+                <TextBlock Grid.Row="0"
+                           Text="A"
+                           FontSize="25"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center">
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           Text="I"
+                           FontSize="25"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                           RenderTransformOrigin="0.335,0.229">
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerX}"/>
+                <Rectangle Grid.Row="0" Style="{StaticResource RectangleTriggerPlayerX}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <TextBlock Grid.Row="0"
+                           FontSize="18"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Text="PLAYER X">
+                </TextBlock>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            Style="{StaticResource BorderTriggerPlayerX}">
+                    </Border>
+                    <Border Grid.Column="0"
+                            Style="{StaticResource BorderTriggerPlayerX}">
+                        <Border.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBlock Grid.Column="0"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               Foreground="{StaticResource TTTBlue}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=PlayerX.Name}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="0"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               Foreground="{StaticResource TTTBlue}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=PlayerX.Name}">
+                    </TextBlock>
+                    <TextBlock Grid.Column="1"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource TTTBlue}"
+                               Text="{Binding Path=PlayerX.Points}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource TTTBlue}"
+                               Text="{Binding Path=PlayerX.Points}">
+                    </TextBlock>
+                </Grid>
+            </Grid>
+            
+            <!--Shows PlayerO as the winner-->
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource BorderWinAnimationPlayerO}"> 
+                <Border.Effect>
+                    <BlurEffect Radius="15"/>
+                </Border.Effect>
+            </Border>
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource BorderWinAnimationPlayerO}"> 
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
+                </Border.Effect>
+            </Border>
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TextBlockWinAnimationPlayerO}">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="15"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TextBlockWinAnimationPlayerO}">
+            </TextBlock>
+        </Grid>
+
+        <!--PlayerO-Properties, Name, IsHuman, IsAi, IsPlayersTurn, Points-->
+        
+        <Grid Grid.Row="1"
+              Style="{StaticResource DropShadowGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource RectangleTriggerPlayerOAi}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource RectangleTriggerPlayerOAi}">
+                </Rectangle>
+                <TextBlock Grid.Row="0"
+                           Text="A"
+                           FontSize="25"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center">
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           Text="I"
+                           FontSize="25"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                           RenderTransformOrigin="0.719,0.085">
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+            
+                    <Border Grid.Column="0"
+                            Style="{StaticResource BorderTriggerPlayerO}"
+                            BorderThickness="0,0,4,0">
+                    </Border>
+                    <Border Grid.Column="0"
+                            Style="{StaticResource BorderTriggerPlayerO}"
+                            BorderThickness="0,0,4,0">
+                        <Border.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBlock Grid.Column="0"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               Foreground="{StaticResource TTTBlue}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=PlayerO.Name}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="0"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               Foreground="{StaticResource TTTBlue}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=PlayerO.Name}">
+                    </TextBlock>
+                    <TextBlock Grid.Column="1"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource TTTBlue}"
+                               Text="{Binding Path=PlayerO.Points}">
+                        <TextBlock.Effect>
+                            <BlurEffect Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1"
+                               FontSize="25"
+                               FontWeight="ExtraBold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource TTTBlue}"
+                               Text="{Binding Path=PlayerO.Points}">
+                    </TextBlock>
+                </Grid>
+
+                <Rectangle Grid.Row="1"
+                           Style="{StaticResource RectangleTriggerPlayerO}">
+                </Rectangle>
+                <Rectangle Grid.Row="1"
+                           Style="{StaticResource RectangleTriggerPlayerO}">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="15"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <TextBlock Grid.Row="1" 
+                           FontSize="18"
+                           FontWeight="ExtraBold"
+                           Foreground="{StaticResource TTTBackgroundLightGray}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Text="PLAYER O">
+                </TextBlock>
+            </Grid>
+            
+            <!--Shows PlayerX as the winner-->
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource BorderWinAnimationPlayerX}"> 
+                <Border.Effect>
+                    <BlurEffect Radius="15"/>
+                </Border.Effect>
+            </Border>
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource BorderWinAnimationPlayerX}">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="10" Opacity="0.8"/>
+                </Border.Effect>
+            </Border>
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TextBlockWinAnimationPlayerX}">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="15"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.Column="0" 
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TextBlockWinAnimationPlayerX}">
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

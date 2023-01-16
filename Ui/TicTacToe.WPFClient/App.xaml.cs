@@ -1,46 +1,43 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Data.DataStoring;
-using MichaelKoch.TicTacToe.Logik.TicTacToeCore;
-using System.Collections.Generic;
+﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
+using System;
 using System.Windows;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace MichaelKoch.TicTacToe.Ui.TicTacToe.WPFClient
+namespace MichaelKoch.TicTacToe.Ui.WPFClient
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
-    {
-        protected override void OnStartup(StartupEventArgs e)
+    { 
+        public static IHost? AppHost { get; private set; }
+
+        public App()
         {
-            base.OnStartup(e);
-
-            //Composition root           
-            var gameBoardRepository = new GameBoardRepository();
-            var gameBoard = new GameBoard(gameBoardRepository);
-
-            var playerReposytory = new PlayerRepository();
-            var aimimax = new AI(gameBoardRepository, playerReposytory, gameBoard);
-            
-            var playerController = new PlayerController(playerReposytory, gameBoard, aimimax);
-
-            var gamePlay = new GamePlay(gameBoard, playerController, aimimax);
-
-            var gameInfoViewModel = new GameInfoViewModel(playerController);            
-
-            var gameBoardViewModel = new GameBoardViewModel(gameBoard, gamePlay);
-
-            var menuViewModel = new MenuViewModel(gameBoardViewModel, gameInfoViewModel, playerController);
-
-            var mainWindowViewModel = new MainWindowViewModel(gameBoardViewModel, gameInfoViewModel, menuViewModel);
-
-            MainWindow.DataContext = mainWindowViewModel;
+            AppHost = Host.CreateDefaultBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddSingleton<MainWindow>();
+                })
+                .Build();
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
-            MainWindow.Show();
+            AppHost!.RunAsync();
+
+            var startWindow = AppHost!.Services.GetRequiredService<MainWindow>();
+            startWindow.Show();
+
+            base.OnStartup(e);
+        }
+
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await AppHost!.StopAsync();
+
+            base.OnExit(e);
         }
     }
 }
