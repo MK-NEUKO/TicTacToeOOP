@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -20,6 +22,12 @@ public partial class GameMenuViewModel : IGameMenuViewModel
     [RelayCommand]
     private void StartGame()
     {
-        PlayerX.Name = "Horst";
+        PlayerO.IsPlayersTurn = true;
+        var playerList = new List<IPlayerViewModel>
+        {
+            PlayerX,
+            PlayerO
+        };
+        WeakReferenceMessenger.Default.Send(new StartGameMessage(playerList));
     }
 }

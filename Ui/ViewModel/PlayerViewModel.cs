@@ -7,7 +7,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
     [ObservableProperty] 
-    [MaxLength(20)]
+    [Required]
+    [MaxLength(12)]
     private string? _name;
 
     [ObservableProperty]

@@ -20,4 +20,7 @@ public interface IPlayerViewModel
 
     /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._isAi"/>
     bool IsAi { get; set; }
+
+    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._isPlayersTurn"/>
+    bool IsPlayersTurn { get; set; }
 }

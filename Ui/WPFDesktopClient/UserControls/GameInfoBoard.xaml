@@ -273,19 +273,8 @@
                         </Border.Effect>
                     </Border>
                     <TextBlock Grid.Column="0"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
-                               Foreground="{StaticResource TTTBlue}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Text="{Binding Path=PlayerX.Name}">
-                        <TextBlock.Effect>
-                            <BlurEffect Radius="5"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="0"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
+                               FontSize="20"
+                               FontWeight="Bold"
                                Foreground="{StaticResource TTTBlue}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -293,18 +282,7 @@
                     </TextBlock>
                     <TextBlock Grid.Column="1"
                                FontSize="25"
-                               FontWeight="ExtraBold"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Foreground="{StaticResource TTTBlue}"
-                               Text="{Binding Path=PlayerX.Points}">
-                        <TextBlock.Effect>
-                            <BlurEffect Radius="5"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="1"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
+                               FontWeight="Bold"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Foreground="{StaticResource TTTBlue}"
@@ -410,19 +388,8 @@
                         </Border.Effect>
                     </Border>
                     <TextBlock Grid.Column="0"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
-                               Foreground="{StaticResource TTTBlue}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Text="{Binding Path=PlayerO.Name}">
-                        <TextBlock.Effect>
-                            <BlurEffect Radius="5"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="0"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
+                               FontSize="20"
+                               FontWeight="Bold"
                                Foreground="{StaticResource TTTBlue}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -430,18 +397,7 @@
                     </TextBlock>
                     <TextBlock Grid.Column="1"
                                FontSize="25"
-                               FontWeight="ExtraBold"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Foreground="{StaticResource TTTBlue}"
-                               Text="{Binding Path=PlayerO.Points}">
-                        <TextBlock.Effect>
-                            <BlurEffect Radius="5"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="1"
-                               FontSize="25"
-                               FontWeight="ExtraBold"
+                               FontWeight="Bold"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Foreground="{StaticResource TTTBlue}"
