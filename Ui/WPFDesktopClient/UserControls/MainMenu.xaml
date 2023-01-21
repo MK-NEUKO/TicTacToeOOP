@@ -135,6 +135,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="GroupBox">
                         <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="Valid"></VisualState>
+                                    <VisualState x:Name="InvalidFocused"></VisualState>
+                                    <VisualState x:Name="InvalidUnfocused"></VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
@@ -256,7 +263,9 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="LightGray"/>
-            <Setter Property="CaretBrush" Value="{StaticResource TTTOrange}"/>
+            <Setter Property="CaretBrush" Value="{StaticResource TTTGreen}"/>
+            <Setter Property="MaxLength" Value="13"/>
+            <Setter Property="MaxLines" Value="1"/>
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect ShadowDepth="5"/>
@@ -268,15 +277,8 @@
                         <Grid>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"></VisualState>
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                        Storyboard.TargetName="BorderBlurEffect"
-                                                        To="{StaticResource TTTOrangeColor}"
-                                                        Duration="0:0:0"/>
-                                        </Storyboard>
-                                    </VisualState>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
@@ -288,7 +290,35 @@
                                     <VisualState x:Name="ReadOnly"></VisualState>
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="FocusStates"></VisualStateGroup>
-                                <VisualStateGroup x:Name="ValidationStates"></VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="InvalidFocused">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="Red"
+                                                            Duration="0:0:0">
+                                            </ColorAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="InvalidUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="Red"
+                                                            Duration="0:0:0">
+                                            </ColorAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Valid">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0">
+                                            </ColorAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Border x:Name="BorderBlurEffect"
                                     BorderBrush="Transparent"
@@ -298,7 +328,7 @@
                                         <BlurEffect Radius="10"/>
                                     </Border.Effect>
                             </Border>
-                            <Border BorderBrush="{StaticResource TTTOrange}"
+                            <Border BorderBrush="{StaticResource TTTGreen}"
                                     BorderThickness="2"
                                     CornerRadius="2"
                                     x:Name="Border">
@@ -310,6 +340,12 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Foreground" Value="{StaticResource TTTBackgroundLightGray}"/>
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                                
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -683,7 +719,7 @@
                                          Width="130" 
                                          Margin="5"
                                          x:Name="NewGame"
-                                         Command="{Binding LoadNewGameCommand}"
+                                         Command="{Binding SetupDefaultPlayerCommand}"
                                          Checked="LoadNewGame_Checked"
                                          IsChecked="{Binding IsLoadNewGame}">
                             </RadioButton>
@@ -738,7 +774,7 @@
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Path=Name}"
+                                     Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="NamePlayerX"
@@ -808,7 +844,7 @@
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Path=Name}"
+                                     Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="NamePlayerO"

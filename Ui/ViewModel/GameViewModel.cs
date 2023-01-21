@@ -8,13 +8,12 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class GameViewModel : ObservableObject, IGameViewModel
 {
-    private readonly IPlayerFactory _playerFactory;
     [ObservableProperty] private IPlayerViewModel _playerX;
     [ObservableProperty] private IPlayerViewModel _playerO;
 
     public GameViewModel(IPlayerFactory playerFactory)
     {
-        _playerFactory = playerFactory;
+        if (playerFactory == null) throw new ArgumentNullException(nameof(playerFactory));
         _playerX = playerFactory.CreatePlayer("X");
         _playerO = playerFactory.CreatePlayer("O");
         WeakReferenceMessenger.Default.Register<StartGameMessage>(this, StartGameMessageHandler);

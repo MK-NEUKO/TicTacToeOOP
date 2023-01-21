@@ -1,4 +1,6 @@
-﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+﻿using System.Windows.Input;
+
+namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IGameMenuViewModel
 {

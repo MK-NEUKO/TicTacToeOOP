@@ -1,33 +1,42 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
-public partial class GameMenuViewModel : IGameMenuViewModel
+public partial class GameMenuViewModel : ObservableObject, IGameMenuViewModel 
 {
-    private IPlayerFactory _playerFactory;
-
     public GameMenuViewModel(IPlayerFactory playerFactory)
     {
-        _playerFactory = playerFactory;
-        PlayerX = _playerFactory.CreatePlayer("X");
-        PlayerO = _playerFactory.CreatePlayer("O");
+        if (playerFactory == null) throw new ArgumentNullException(nameof(playerFactory));
+        _playerX = playerFactory.CreatePlayer("X");
+        _playerO = playerFactory.CreatePlayer("O");
     }
 
-    public IPlayerViewModel PlayerX { get; set; }
-    public IPlayerViewModel PlayerO { get; set;}
+    [ObservableProperty] private IPlayerViewModel _playerX;
+    [ObservableProperty] private IPlayerViewModel _playerO;
 
     [RelayCommand]
     private void StartGame()
     {
-        PlayerO.IsPlayersTurn = true;
         var playerList = new List<IPlayerViewModel>
         {
             PlayerX,
             PlayerO
         };
         WeakReferenceMessenger.Default.Send(new StartGameMessage(playerList));
+    }
+
+    [RelayCommand]
+    private void SetupDefaultPlayer()
+    {
+        _playerX.Name = "PlayerX";
+        _playerX.IsHuman = true;
+        _playerX.IsPlayersTurn = true;
+        _playerO.Name = "PlayerO";
+        _playerO.IsAi = true;
     }
 }
