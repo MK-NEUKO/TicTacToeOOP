@@ -3,6 +3,7 @@ using MichaelKoch.TicTacToe.Ui.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 {

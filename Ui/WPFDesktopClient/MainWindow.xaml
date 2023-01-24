@@ -7,7 +7,7 @@
         xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="650" Width="850">
+        Title="MainWindow" Height="700" Width="850">
 
     <d:Window.DataContext>
         <sampleData:MainViewModelSampleData/>

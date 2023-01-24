@@ -23,7 +23,7 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 
     public PlayerViewModel(string token)
     {
-        _token = token;
+        _token = token ?? throw new ArgumentNullException(nameof(token));
         _name = "Player" + _token;
     }
 

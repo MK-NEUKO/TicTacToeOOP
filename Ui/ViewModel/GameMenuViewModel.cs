@@ -11,6 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 {
     private readonly IPlayerFactory _playerFactory;
+
     private string? _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
 
@@ -38,7 +39,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private string? _tokenPlayerO;
 
     public GameMenuViewModel(IPlayerFactory playerFactory)
-    { 
+    {
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
     }
 
@@ -67,16 +68,19 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [RelayCommand(CanExecute = nameof(CanStartGame))]
     private void StartGame()
     {
+        var playerX = CreatePlayerX();
+        var playerO = CreatePlayerO();
         var playerList = new List<IPlayerViewModel>
         {
-            
+            playerX,
+            playerO
         };
         WeakReferenceMessenger.Default.Send(new StartGameMessage(playerList));
     }
 
     private bool CanStartGame()
     {
-        return string.IsNullOrWhiteSpace(_namePlayerX);
+        return !HasErrors;
     }
 
     [RelayCommand]
@@ -87,5 +91,25 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsPlayersTurnPlayerX = true;
         NamePlayerO = "PlayerO";
         IsAiPlayerO = true;
+    }
+
+    private IPlayerViewModel CreatePlayerX()
+    {
+        var playerX = _playerFactory.CreatePlayer("X");
+        playerX.Name = NamePlayerX;
+        playerX.IsAi = IsAiPlayerX;
+        playerX.IsHuman = IsAiPlayerX;
+        playerX.IsPlayersTurn = IsPlayersTurnPlayerX;
+        return playerX;
+    }
+
+    private IPlayerViewModel CreatePlayerO()
+    {
+        var playerO = _playerFactory.CreatePlayer("O");
+        playerO.Name = NamePlayerO;
+        playerO.IsAi = IsAiPlayerO;
+        playerO.IsHuman = IsAiPlayerO;
+        playerO.IsPlayersTurn = IsPlayersTurnPlayerO;
+        return playerO;
     }
 }
