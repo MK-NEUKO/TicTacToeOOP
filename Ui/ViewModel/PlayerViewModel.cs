@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 
@@ -7,39 +6,25 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
-    private string? _name;
+    [ObservableProperty] private bool _isAi;
 
-    [ValidatePlayerName]
-    public string? Name
-    {
-        get => _name;
-        set => SetProperty(ref _name, value, true);
-    }
+    [ObservableProperty] private bool _isHuman;
 
-    [ObservableProperty]
-    private string? _token;
+    [ObservableProperty] private bool _isPlayersTurn;
 
-    [ObservableProperty] 
-    private bool _isWinner;
+    [ObservableProperty] private bool _isWinner;
 
-    [ObservableProperty] 
-    private bool _isHuman;
+    [ObservableProperty] private string? _name;
 
-    [ObservableProperty]
-    private bool _isAi;
+    [ObservableProperty] private int _points;
 
-    [ObservableProperty]
-    private bool _isPlayersTurn;
-
-    [ObservableProperty]
-    private int _points;
+    [ObservableProperty] private string? _token;
 
 
     public PlayerViewModel(string token)
     {
         _token = token;
         _name = "Player" + _token;
-        
     }
 
     public string PlaceAToken()

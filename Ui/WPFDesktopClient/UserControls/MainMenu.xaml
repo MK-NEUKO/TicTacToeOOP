@@ -689,6 +689,93 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"                                                            
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"></VisualState>
+                                    <VisualState x:Name="Indeterminate"></VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed"></VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="*" To="Pressed" GeneratedDuration="0:0:0.2"/>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                                
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"></VisualState>
+                                    <VisualState x:Name="Unfocused"></VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="BorderBlurEffect"
+                                BorderBrush="Transparent"
+                                BorderThickness="2"
+                                CornerRadius="4">
+                                <Border.Effect>
+                                    <BlurEffect Radius="10"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Background="Transparent"
+                                    BorderBrush="{StaticResource TTTGreen}"
+                                    x:Name="Border"                                    
+                                    BorderThickness="3"
+                                    CornerRadius="2"
+                                    TextBlock.Foreground="{StaticResource TTTBlue}">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Margin="2"
+                                                  RecognizesAccessKey="True"/>
+
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
 
@@ -745,10 +832,11 @@
 
                     <GroupBox Header="PlayerX"
                               Grid.Column="1"
-                              DataContext="{Binding Path=PlayerX}">
+                              >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
+                                <RowDefinition/>      
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -767,14 +855,14 @@
                                          ToolTip="If you are no machine"
                                          IsEnabled="False"
                                          Checked="SelectHumanPlayerX_Checked"
-                                         IsChecked="{Binding Path=IsHuman}">
+                                         IsChecked="{Binding Path=IsHumanPlayerX}">
                             </RadioButton>
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                     Text="{Binding Path=NamePlayerX, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="NamePlayerX"
@@ -789,7 +877,7 @@
                                          x:Name="SelectAiPlayerX"
                                          IsEnabled="False"
                                          Checked="SelectAiPlayerX_Checked"
-                                         IsChecked="{Binding Path=IsAi}">
+                                         IsChecked="{Binding Path=IsAiPlayerX}">
                             </RadioButton>
                             <ComboBox Style="{StaticResource ComboBox}"
                                       x:Name="SelectDifficultyLevelPlayerX"
@@ -802,10 +890,23 @@
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
+                            <ToggleButton Grid.Column="0"
+                                          Grid.Row="3"
+                                          Grid.ColumnSpan="2"
+                                          Style="{StaticResource ToggleButtonStyle}"
+                                          Height="25"
+                                          Margin="2"
+                                          IsEnabled="False"
+                                          Content="Has Next Turn"
+                                          x:Name="HasNextTurnPlayerX"
+                                          Checked="HasNextTurnPlayerX_Checked"
+                                          IsChecked="{Binding Path=IsPlayersTurnPlayerX}">
+
+                            </ToggleButton>
                             <Button Grid.Row="0"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="2"
-                                    Grid.RowSpan="2"
+                                    Grid.RowSpan="3"
                                     Style="{StaticResource ControlsCoverButton}"
                                     x:Name="ControlsCoverPlayerX"
                                     Visibility="Hidden">
@@ -814,10 +915,10 @@
                     </GroupBox>
 
                     <GroupBox Header="PlayerO"
-                              Grid.Column="2"
-                              DataContext="{Binding Path=PlayerO}">
+                              Grid.Column="2">
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
@@ -837,14 +938,14 @@
                                          x:Name="SelectHumanPlayerO"
                                          Checked="SelectHumanPlayerO_Checked"
                                          IsEnabled="False"
-                                         IsChecked="{Binding Path=IsHuman}">
+                                         IsChecked="{Binding Path=IsHumanPlayerO}">
                             </RadioButton>    
                             <TextBox Style="{StaticResource TextBoxStyle}"
                                      Grid.Row="0" 
                                      Grid.Column="1"
                                      Height="25"
                                      Margin="4"
-                                     Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                     Text="{Binding Path=NamePlayerO, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
                                      x:Name="NamePlayerO"
@@ -859,7 +960,7 @@
                                          x:Name="SelectAiPlayerO"
                                          Checked="SelectAiPlayerO_Checked"
                                          IsEnabled="False"
-                                         IsChecked="{Binding Path=IsAi}">
+                                         IsChecked="{Binding Path=IsAiPlayerO}">
                             </RadioButton>
                             <ComboBox Style="{StaticResource ComboBox}"
                                       Grid.Row="1"
@@ -872,10 +973,22 @@
                                 <ComboBoxItem>Normal</ComboBoxItem>
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
+                            <ToggleButton Grid.Column="0"
+                                         Grid.Row="3"
+                                         Grid.ColumnSpan="2"
+                                         Style="{StaticResource ToggleButtonStyle}"
+                                         Height="25"
+                                         Margin="2"
+                                         IsEnabled="False"
+                                         Content="Has Next Turn"
+                                         x:Name="HasNextTurnPlayerO"
+                                         Checked="HasNextTurnPlayerO_Checked"
+                                         IsChecked="{Binding Path=IsPlayersTurnPlayerO}">
+                            </ToggleButton>
                             <Button Grid.Column="0"
                                     Grid.Row="0"
                                     Grid.ColumnSpan="2"
-                                    Grid.RowSpan="2"
+                                    Grid.RowSpan="3"
                                     Style="{StaticResource ControlsCoverButton}"
                                     x:Name="ControlsCoverPlayerO"
                                     Visibility="Hidden">

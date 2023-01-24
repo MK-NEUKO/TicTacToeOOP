@@ -74,6 +74,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             NamePlayerO.IsEnabled = true;
             SelectDifficultyLevelPlayerX.IsEnabled = true;
             SelectDifficultyLevelPlayerO.IsEnabled = true;
+            HasNextTurnPlayerX.IsEnabled = true;
+            HasNextTurnPlayerO.IsEnabled = true;
         }
 
         private void UncheckRadioButtonsPlayerXPlayerO()
@@ -82,6 +84,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             SelectHumanPlayerO.IsChecked = false;
             SelectAiPlayerX.IsChecked = false;
             SelectAiPlayerO.IsChecked = false;
+            HasNextTurnPlayerX.IsChecked = false;
+            HasNextTurnPlayerO.IsChecked = false;
         }
 
         private void ProtectControlsWithCoverPlayerXPlayerO()
@@ -96,6 +100,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             NamePlayerO.Focusable = false;
             SelectDifficultyLevelPlayerX.Focusable = false;
             SelectDifficultyLevelPlayerO.Focusable = false;
+            HasNextTurnPlayerX.Focusable = false;
+            HasNextTurnPlayerO.Focusable = false;
         }
 
         private void DisableControlsCoverPlayerXPlayerO()
@@ -110,6 +116,18 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             NamePlayerO.Focusable = true;
             SelectDifficultyLevelPlayerX.Focusable = true;
             SelectDifficultyLevelPlayerO.Focusable = true;
+            HasNextTurnPlayerX.Focusable = true;
+            HasNextTurnPlayerO.Focusable = true;
+        }
+
+        private void HasNextTurnPlayerX_Checked(object sender, RoutedEventArgs e)
+        {
+            HasNextTurnPlayerO.IsChecked = false;
+        }
+
+        private void HasNextTurnPlayerO_Checked(object sender, RoutedEventArgs e)
+        {
+            HasNextTurnPlayerX.IsChecked = false;
         }
     }
 }
