@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
@@ -17,6 +18,6 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public bool IsWinArea { get; set; }
         public bool IsStartNewGameAnimation { get; set; }
         public bool IsStartSaveGameAnimation { get; set; }
-        public ICommand AreaWasClickedCommand { get; set; } = null!;
+        public IRelayCommand PlaceATokenCommand { get; set; } = null!;
     }
 }

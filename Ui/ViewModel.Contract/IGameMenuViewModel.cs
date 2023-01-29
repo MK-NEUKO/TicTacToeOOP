@@ -4,8 +4,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IGameMenuViewModel
 {
-    string NamePlayerX { get; set; }
-    string NamePlayerO { get; set; }
+    string? NamePlayerX { get; set; }
+    string? NamePlayerO { get; set; }
 
     /// <inheritdoc cref="GameMenuViewModel._isAiPlayerX"/>
     bool IsAiPlayerX { get; set; }

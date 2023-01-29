@@ -5,20 +5,21 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IPlayerGameBoardAreaViewModel
 {
-    ICommand AreaWasClickedCommand { get; set; }
-
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerGameBoardAreaViewModel._id"/>
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._id"/>
     int Id { get; set; }
 
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerGameBoardAreaViewModel._token"/>
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._token"/>
     string? Token { get; set; }
 
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerGameBoardAreaViewModel._isWinArea"/>
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isWinArea"/>
     bool IsWinArea { get; set; }
 
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerGameBoardAreaViewModel._isStartNewGameAnimation"/>
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isStartNewGameAnimation"/>
     bool IsStartNewGameAnimation { get; set; }
 
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerGameBoardAreaViewModel._isStartSaveGameAnimation"/>
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isStartSaveGameAnimation"/>
     bool IsStartSaveGameAnimation { get; set; }
+
+    /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardAreaViewModel.PlaceAToken"/>.</summary>
+    global::CommunityToolkit.Mvvm.Input.IRelayCommand PlaceATokenCommand { get; }
 }

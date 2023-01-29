@@ -17,6 +17,21 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _playerX = playerFactory.CreatePlayer("X");
         _playerO = playerFactory.CreatePlayer("O");
         WeakReferenceMessenger.Default.Register<StartGameMessage>(this, StartGameMessageHandler);
+        WeakReferenceMessenger.Default.Register<GetCurrentPlayerRequestMessage>(this, CurrentPlayerRequestHandler);
+    }
+
+    private void CurrentPlayerRequestHandler(object recipient, GetCurrentPlayerRequestMessage message)
+    {
+        if (_playerX.IsPlayersTurn)
+        {
+            message.Reply(_playerX);
+        }
+
+        if (_playerO.IsPlayersTurn)
+        {
+            message.Reply(_playerO);
+        }
+        
     }
 
     private void StartGameMessageHandler(object recipient, StartGameMessage message)

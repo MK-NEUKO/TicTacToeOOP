@@ -44,7 +44,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     }
 
     [ValidatePlayerName]
-    public string NamePlayerX
+    public string? NamePlayerX
     {
         get => _namePlayerX;
         set
@@ -55,7 +55,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     }
 
     [ValidatePlayerName]
-    public string NamePlayerO
+    public string? NamePlayerO
     {
         get => _namePlayerO;
         set
@@ -68,20 +68,13 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [RelayCommand(CanExecute = nameof(CanStartGame))]
     private void StartGame()
     {
-        var playerX = CreatePlayerX();
-        var playerO = CreatePlayerO();
-        var playerList = new List<IPlayerViewModel>
-        {
-            playerX,
-            playerO
-        };
+        var playerList = new List<IPlayerViewModel>();
+        playerList.Add(CreatePlayerX());
+        playerList.Add(CreatePlayerO());
         WeakReferenceMessenger.Default.Send(new StartGameMessage(playerList));
     }
 
-    private bool CanStartGame()
-    {
-        return !HasErrors;
-    }
+    private bool CanStartGame => !HasErrors;
 
     [RelayCommand]
     private void SetupDefaultPlayer()
