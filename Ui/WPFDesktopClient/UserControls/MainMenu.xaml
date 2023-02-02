@@ -830,7 +830,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerX"
+                    <GroupBox Header="PlayingPlayerX"
                               Grid.Column="1"
                               >
                         <Grid>
@@ -914,7 +914,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="PlayerO"
+                    <GroupBox Header="PlayingPlayerO"
                               Grid.Column="2">
                         <Grid>
                             <Grid.RowDefinitions>

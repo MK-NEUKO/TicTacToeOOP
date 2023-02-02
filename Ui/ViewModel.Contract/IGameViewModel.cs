@@ -2,6 +2,6 @@
 
 public interface IGameViewModel
 {
-    IPlayerViewModel PlayerX { get; set; }
-    IPlayerViewModel PlayerO { get; set; }
+    IPlayerViewModel PlayingPlayerX { get; set; }
+    IPlayerViewModel PlayingPlayerO { get; set; }
 }

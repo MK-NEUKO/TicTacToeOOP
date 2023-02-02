@@ -24,6 +24,10 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 
     [ObservableProperty]
     private bool _isStartSaveGameAnimation;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(PlaceATokenCommand))]
+    private bool _isInGame;
         
     public PlayerGameBoardAreaViewModel(int id)
     {
@@ -31,10 +35,15 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         _token = string.Empty;
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanPlaceAToken))]
     private void PlaceAToken()
     {
         var currentPlayer = WeakReferenceMessenger.Default.Send<GetCurrentPlayerRequestMessage>().Response;
         Token = currentPlayer.PlaceAToken();
+    }
+
+    private bool CanPlaceAToken()
+    {
+        return IsInGame;
     }
 }

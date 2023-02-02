@@ -20,6 +20,9 @@ public interface IPlayerGameBoardAreaViewModel
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isStartSaveGameAnimation"/>
     bool IsStartSaveGameAnimation { get; set; }
 
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isInGame"/>
+    bool IsInGame { get; set; }
+
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardAreaViewModel.PlaceAToken"/>.</summary>
     global::CommunityToolkit.Mvvm.Input.IRelayCommand PlaceATokenCommand { get; }
 }

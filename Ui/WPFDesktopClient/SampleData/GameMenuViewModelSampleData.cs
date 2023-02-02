@@ -6,9 +6,9 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
     {
         public GameMenuViewModelSampleData()
         {
-            var playingPlayers = new GameViewModelSampleData();
-            PlayerX = playingPlayers.PlayerX;
-            PlayerO = playingPlayers.PlayerO;
+            var gameViewModel = new GameViewModelSampleData();
+            PlayerX = gameViewModel.PlayingPlayerX;
+            PlayerO = gameViewModel.PlayingPlayerO;
         }
 
         public PlayerViewModelSampleData PlayerX { get; set; }

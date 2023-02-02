@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
              xmlns:valueConverter="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ValueConverter"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
@@ -16,11 +17,12 @@
         <valueConverter:AreaIdGridColumnConverter x:Key="AreaIdGridColumnConverter"/>
         <valueConverter:AreaIdGridRowConverter x:Key="AreaIdGridRowConverter"/>
 
-        <Storyboard x:Key="StartNewGameAnimation">
-            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" Duration="0:0:1"
-                                                            Storyboard.TargetName="theXColor"
-                                                            Storyboard.TargetProperty="Color"
-                                                            FillBehavior="Stop">
+        <Storyboard x:Key="StartNewGameAnimation" x:Name="StartNewGameAnimation">
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:0" 
+                                          Duration="0:0:1"
+                                          Storyboard.TargetName="theXColor"
+                                          Storyboard.TargetProperty="Color"
+                                          FillBehavior="Stop">
                 <DiscreteColorKeyFrame Value="{StaticResource TTTBackgroundLightGrayColor}" KeyTime="0:0:0"/>
                 <LinearColorKeyFrame Value="{StaticResource TTTGreenColor}" KeyTime="0:0:0.2"/>
                 <DiscreteColorKeyFrame Value="{StaticResource TTTGreenColor}" KeyTime="0:0:0.5"/>
@@ -351,7 +353,8 @@
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsStartNewGameAnimation}"  Value="true">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}">
+                        </BeginStoryboard>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsStartSaveGameAnimation}" Value="true">
@@ -402,7 +405,8 @@
     <Grid>
         <ItemsControl ItemsSource="{Binding Areas}"
                       ItemTemplate="{StaticResource GameBoardAreaDataTemplate}"
-                      Background="{StaticResource TTTBackgroundDarkGrey}">
+                      Background="{StaticResource TTTBackgroundDarkGrey}"
+                      x:Name="PlayerGameBoardControl">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
@@ -426,8 +430,12 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        
-        
-            
     </Grid>
+
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Completed" SourceObject="{Binding Source={StaticResource StartNewGameAnimation}}">
+            <behaviors:InvokeCommandAction Command="{Binding GameBoardStartAnimationCompletedCommand}"/>
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+
 </UserControl>

@@ -27,16 +27,16 @@
         <Style x:Key="BorderTriggerPlayerX" TargetType="Border">
             <Setter Property="BorderThickness" Value="0,0,4,0"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -44,16 +44,16 @@
 
         <Style x:Key="RectangleTriggerPlayerX" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsPlayersTurn}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -62,7 +62,7 @@
         <Style x:Key="RectangleTriggerPlayerXAi" TargetType="Rectangle">
             <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsAi}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsAi}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
                 </DataTrigger>
                 <!--<DataTrigger Binding="{Binding Path=PlayerX.IsHuman}" Value="true">
@@ -78,16 +78,16 @@
 
         <Style x:Key="BorderTriggerPlayerO" TargetType="Border">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -95,16 +95,16 @@
 
         <Style x:Key="RectangleTriggerPlayerO" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsPlayersTurn}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -113,7 +113,7 @@
         <Style x:Key="RectangleTriggerPlayerOAi" TargetType="Rectangle">
             <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsAi}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsAi}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBlue}"/>
                 </DataTrigger>
                 <!--<DataTrigger Binding="{Binding Path=PlayerO.IsHuman}" Value="true">
@@ -146,7 +146,7 @@
                BasedOn="{StaticResource BorderWinAnimation}">
             <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="false">
                     <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -157,7 +157,7 @@
             <Setter Property="Foreground" Value="{StaticResource TTTGreen}"/>
             <Setter Property="Text" Value="X Wins"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerX.IsWinner}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="false">
                     <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -167,7 +167,7 @@
                BasedOn="{StaticResource BorderWinAnimation}">
             <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="false">
                     <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -178,7 +178,7 @@
             <Setter Property="Foreground" Value="{StaticResource TTTOrange}"/>
             <Setter Property="Text" Value="O Wins"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayerO.IsWinner}" Value="false">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="false">
                     <Setter Property="Visibility" Value="Hidden"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -278,7 +278,7 @@
                                Foreground="{StaticResource TTTBlue}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               Text="{Binding Path=PlayerX.Name}">
+                               Text="{Binding Path=PlayingPlayerX.Name}">
                     </TextBlock>
                     <TextBlock Grid.Column="1"
                                FontSize="25"
@@ -286,7 +286,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Foreground="{StaticResource TTTBlue}"
-                               Text="{Binding Path=PlayerX.Points}">
+                               Text="{Binding Path=PlayingPlayerX.Points}">
                     </TextBlock>
                 </Grid>
             </Grid>
@@ -393,7 +393,7 @@
                                Foreground="{StaticResource TTTBlue}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               Text="{Binding Path=PlayerO.Name}">
+                               Text="{Binding Path=PlayingPlayerO.Name}">
                     </TextBlock>
                     <TextBlock Grid.Column="1"
                                FontSize="25"
@@ -401,7 +401,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Foreground="{StaticResource TTTBlue}"
-                               Text="{Binding Path=PlayerO.Points}">
+                               Text="{Binding Path=PlayingPlayerO.Points}">
                     </TextBlock>
                 </Grid>
 
