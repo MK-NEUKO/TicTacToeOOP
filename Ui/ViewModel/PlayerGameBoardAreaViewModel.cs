@@ -38,8 +38,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     [RelayCommand(CanExecute = nameof(CanPlaceAToken))]
     private void PlaceAToken()
     {
-        var currentPlayer = WeakReferenceMessenger.Default.Send<GetCurrentPlayerRequestMessage>().Response;
-        Token = currentPlayer.PlaceAToken();
+        WeakReferenceMessenger.Default.Send(new GameBoardAreaWasClickedMessage(this.Id));
     }
 
     private bool CanPlaceAToken()

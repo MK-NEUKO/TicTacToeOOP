@@ -11,6 +11,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     [ObservableProperty] private IPlayerViewModel _playingPlayerX;
     [ObservableProperty] private IPlayerViewModel _playingPlayerO;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
+    private IPlayerViewModel _currentPlayer;
 
     public GameViewModel(IPlayerFactory playerFactory, IPlayerGameBoardViewModel playerGameBoard)
     {
@@ -18,16 +19,16 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _playingPlayerX = playerFactory.CreatePlayer("X");
         _playingPlayerO = playerFactory.CreatePlayer("O");
+        _currentPlayer = playerFactory.CreatePlayer("X");
         WeakReferenceMessenger.Default.Register<StartGameMessage>(this, StartGameMessageHandler);
-        WeakReferenceMessenger.Default.Register<GetCurrentPlayerRequestMessage>(this, CurrentPlayerRequestHandler);
+        WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, GameBoardAreaWasClickedHandler);
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, GameBoardStartAnimationCompletedHandler);
+        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, CurrentPlayerChangedMessageHandler);
     }
 
-    private void MakeAMove()
+    private void CurrentPlayerChangedMessageHandler(object recipient, CurrentPlayerChangedMessage message)
     {
-        _playerGameBoard.Areas[5].Token = "X";
-        _playerGameBoard.Areas[4].Token = "O";
-
+        _currentPlayer = message.Value;
     }
 
     private void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
@@ -35,17 +36,10 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         MakeAMove();
     }
 
-    private void CurrentPlayerRequestHandler(object recipient, GetCurrentPlayerRequestMessage message)
+    private void GameBoardAreaWasClickedHandler(object recipient, GameBoardAreaWasClickedMessage message)
     {
-        if (PlayingPlayerX.IsPlayersTurn)
-        {
-            message.Reply(PlayingPlayerX);
-        }
-
-        if (PlayingPlayerO.IsPlayersTurn)
-        {
-            message.Reply(PlayingPlayerO);
-        }
+        var clickedAreaId = message.Value;
+        MakeAMove(clickedAreaId);
     }
 
     private void StartGameMessageHandler(object recipient, StartGameMessage message)
@@ -53,5 +47,12 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         PlayingPlayerX = message.Value.Find(player => player.Token == "X") ?? throw new InvalidOperationException(nameof(StartGameMessageHandler));
         PlayingPlayerO = message.Value.Find(player => player.Token == "O") ?? throw new InvalidOperationException(nameof(StartGameMessageHandler));
         _playerGameBoard.Areas.ForEach((area) => area.IsStartNewGameAnimation = true);
+    }
+
+    private void MakeAMove(int clickedAreaId = 10)
+    {
+        //if(_currentPlayer.TryPlaceAToken(_playerGameBoard, clickedAreaId))
+        clickedAreaId = 2;
+        _playerGameBoard.Areas[clickedAreaId].Token = "X";
     }
 }
