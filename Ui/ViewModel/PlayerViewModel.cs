@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
@@ -63,8 +64,22 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         }
     }
 
-    public string PlaceAToken()
+    public bool TryPlaceAToken(IPlayerGameBoardViewModel currentGameBoard, int clickedAreaId = 10)
     {
-        return Token;
+        if (this.IsAi)
+        {
+            // simulate the ai to set a token
+            var areaId = currentGameBoard.Areas.FindIndex(a => a.Token == string.Empty);
+            return currentGameBoard.TrySetToken(this.Token, areaId);
+        }
+        if (this.IsHuman && clickedAreaId < 10)
+            return currentGameBoard.TrySetToken(this.Token, clickedAreaId);
+
+        return false;
+    }
+
+    public void SetPoint()
+    {
+        if (this.IsWinner) this.Points++;
     }
 }

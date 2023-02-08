@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <RootNamespace>MichaelKoch.TicTacToe.Logic.TicTacToeCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\DataStoring.Contarct\DataStoring.Contarct.csproj" />
-    <ProjectReference Include="..\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
+    <ProjectReference Include="..\..\Ui\ViewModel.Contract\ViewModel.Contract.csproj" />
   </ItemGroup>
 
 </Project>

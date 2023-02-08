@@ -24,5 +24,5 @@ public interface IPlayerGameBoardAreaViewModel
     bool IsInGame { get; set; }
 
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardAreaViewModel.PlaceAToken"/>.</summary>
-    global::CommunityToolkit.Mvvm.Input.IRelayCommand PlaceATokenCommand { get; }
+    global::CommunityToolkit.Mvvm.Input.IRelayCommand AreaWasClickedCommand { get; }
 }

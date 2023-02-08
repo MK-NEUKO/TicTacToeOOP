@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +18,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<IGameBoardEvaluator, GameBoardEvaluator>();
+
                     services.AddSingleton<IGameBoardAreaFactory, GameBoardAreaFactory>();
                     services.AddSingleton<IPlayerFactory, PlayerFactory>();
                     services.AddSingleton<IPlayerGameBoardViewModel, PlayerGameBoardViewModel>();

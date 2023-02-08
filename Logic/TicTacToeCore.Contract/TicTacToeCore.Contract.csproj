@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>MichaelKoch.TicTacToe.Logik.TicTacToeCore.Contract</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\CrossCutting\DataClasses\DataClasses.csproj" />
-  </ItemGroup>
 
 </Project>

@@ -4,7 +4,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IPlayerViewModel
 {
-    string PlaceAToken();
+    void SetPoint();
+    bool TryPlaceAToken(IPlayerGameBoardViewModel currentGameBoard, int clickedAreaId = 10);
 
     /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._name"/>
     string? Name { get; set; }
@@ -23,4 +24,7 @@ public interface IPlayerViewModel
 
     /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._isPlayersTurn"/>
     bool IsPlayersTurn { get; set; }
+
+    /// <inheritdoc cref="PlayerViewModel._points"/>
+    int Points { get; set; }
 }

@@ -14,6 +14,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 {
+    private bool _isStartButtonClicked;
     private readonly IPlayerFactory _playerFactory;
 
     private string? _namePlayerX;
@@ -72,13 +73,18 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [RelayCommand(CanExecute = nameof(CanStartGame))]
     private void StartGame()
     {
+        _isStartButtonClicked = true;
+        StartGameCommand.NotifyCanExecuteChanged();
         var playerList = new List<IPlayerViewModel>();
         playerList.Add(CreatePlayerX());
         playerList.Add(CreatePlayerO());
-        WeakReferenceMessenger.Default.Send(new StartGameMessage(playerList));
+        WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(playerList));
     }
 
-    private bool CanStartGame => !HasErrors;
+    private bool CanStartGame()
+    {
+        return !HasErrors && !_isStartButtonClicked;
+    }
 
     [RelayCommand]
     private void SetupDefaultPlayer()
@@ -95,7 +101,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         var playerX = _playerFactory.CreatePlayer("X");
         playerX.Name = NamePlayerX;
         playerX.IsAi = IsAiPlayerX;
-        playerX.IsHuman = IsAiPlayerX;
+        playerX.IsHuman = IsHumanPlayerX;
         playerX.IsPlayersTurn = IsPlayersTurnPlayerX;
         return playerX;
     }
@@ -105,7 +111,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         var playerO = _playerFactory.CreatePlayer("O");
         playerO.Name = NamePlayerO;
         playerO.IsAi = IsAiPlayerO;
-        playerO.IsHuman = IsAiPlayerO;
+        playerO.IsHuman = IsHumanPlayerO;
         playerO.IsPlayersTurn = IsPlayersTurnPlayerO;
         return playerO;
     }

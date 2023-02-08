@@ -346,7 +346,7 @@
                     </Path>
                 </Viewbox>
                 <Button Style="{StaticResource GameBoardAreaButton}"
-                        Command="{Binding Path=PlaceATokenCommand}">
+                        Command="{Binding Path=AreaWasClickedCommand}">
                 </Button>
             </Grid>
 
