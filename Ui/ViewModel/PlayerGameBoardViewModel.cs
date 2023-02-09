@@ -9,17 +9,27 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoardViewModel
 {
-    private readonly IGameBoardEvaluator _gameBoardEvaluator;
-
-    public PlayerGameBoardViewModel(IGameBoardAreaFactory gameBoardAreaFactory, IGameBoardEvaluator gameBoardEvaluator)
+    public PlayerGameBoardViewModel(IGameBoardAreaFactory gameBoardAreaFactory, IGameEvaluator gameEvaluator)
     {
-        _gameBoardEvaluator = gameBoardEvaluator;
         Areas = gameBoardAreaFactory.CreateAreas();
     }
 
     public List<IPlayerGameBoardAreaViewModel> Areas { get; }
-    public bool IsWinner { get; private set; }
-    public bool IsGameDraw { get; private set; }
+
+    public List<string> GetTokenList()
+    {
+        var tokenList = new List<string>();
+        Areas.ForEach(a =>
+        {
+            if (a.Token != null) tokenList.Add(a.Token);
+        });
+        return tokenList;
+    }
+
+    public void AnimateWinAreas(List<bool> resultWinAreas)
+    {
+        Areas.ForEach(a => a.IsWinArea = resultWinAreas[a.Id]);
+    }
 
     [RelayCommand]
     public void GameBoardStartAnimationCompleted()
@@ -36,18 +46,4 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         Areas[areaId].Token = token;
         return true;
     }
-
-    public bool EvaluateGameState(string currentToken)
-    {
-        var tokenList = new List<string>();
-        Areas.ForEach(a => tokenList.Add(a.Token));
-        var result = _gameBoardEvaluator.DetermineWinner(tokenList, currentToken);
-        // set evaluation result
-        Areas.ForEach(a => a.IsWinArea = result[a.Id]);
-        IsWinner = result[9];
-        //IsGameDraw = result[10];
-        return IsWinner;
-    }
-
-   
 }

@@ -18,7 +18,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<IGameBoardEvaluator, GameBoardEvaluator>();
+                    services.AddSingleton<IGameEvaluator, GameEvaluator>();
 
                     services.AddSingleton<IGameBoardAreaFactory, GameBoardAreaFactory>();
                     services.AddSingleton<IPlayerFactory, PlayerFactory>();

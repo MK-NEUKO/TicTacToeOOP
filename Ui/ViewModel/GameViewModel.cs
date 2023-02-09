@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
@@ -12,13 +13,15 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     [ObservableProperty] private IPlayerViewModel _playingPlayerX;
     [ObservableProperty] private IPlayerViewModel _playingPlayerO;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
+    private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
-    private bool _isGameDraw;
+    private bool _isDraw;
 
-    public GameViewModel(IPlayerFactory playerFactory, IPlayerGameBoardViewModel playerGameBoard)
+    public GameViewModel(IPlayerFactory playerFactory, IPlayerGameBoardViewModel playerGameBoard, IGameEvaluator gameEvaluator)
     {
         if (playerFactory == null) throw new ArgumentNullException(nameof(playerFactory));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
+        _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
         _playingPlayerX = playerFactory.CreatePlayer("X");
         _playingPlayerO = playerFactory.CreatePlayer("O");
         _currentPlayer = playerFactory.CreatePlayer("X");
@@ -53,16 +56,26 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
     private void MakeAMove(int clickedAreaId = 10)
     {
+        var isGameOver = false;
         do
         {
             if (!_currentPlayer.TryPlaceAToken(_playerGameBoard, clickedAreaId)) return;
-            if (_playerGameBoard.EvaluateGameState(_currentPlayer.Token))
+            var result = _gameEvaluator.EvaluateGame(_playerGameBoard.GetTokenList(), _currentPlayer.Token);
+            if (result.IsWinner)
             {
-
+                _currentPlayer.IsWinner = result.IsWinner;
+                _playerGameBoard.AnimateWinAreas(result.WinAreas);
+                _currentPlayer.SetPoint();
+                isGameOver = true;
             }
-            _currentPlayer.SetPoint();
+
+            if (result.IsDraw)
+            {
+                _currentPlayer.Points = 50;
+                isGameOver = true;
+            }
             ChangeCurrentPlayer();
-        } while (_currentPlayer.IsAi);
+        } while (_currentPlayer.IsAi && isGameOver);
     }
 
     private void ChangeCurrentPlayer()

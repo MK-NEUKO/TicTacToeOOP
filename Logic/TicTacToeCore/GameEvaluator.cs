@@ -1,13 +1,17 @@
-﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+﻿using System.Reflection.Metadata.Ecma335;
+using CommunityToolkit.Mvvm.ComponentModel.__Internals;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
-public class GameBoardEvaluator : IGameBoardEvaluator
+public class GameEvaluator : IGameEvaluator
 {
     private readonly int[,] _winConstellations;
+    private readonly EvaluationResult _evaluationResult;
 
-    public GameBoardEvaluator()
+    public GameEvaluator()
     {
+        _evaluationResult = new EvaluationResult();
         _winConstellations = new int[8, 3]
         {
             {0,1,2}, /*  +---+---+---+  */
@@ -21,12 +25,18 @@ public class GameBoardEvaluator : IGameBoardEvaluator
         };
     }
 
-    public bool[] DetermineWinner(List<string> tokenList, string currentToken)
+    public IEvaluationResult EvaluateGame(List<string> tokenList, string currentToken)
     {
         if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
         if (currentToken == null) throw new ArgumentNullException(nameof(currentToken));
+        DetermineWinner(tokenList, currentToken);
+        DetermineDraw(tokenList);
 
-        var result = new bool[10];
+        return _evaluationResult;
+    }
+
+    private void DetermineWinner(IReadOnlyList<string> tokenList, string currentToken)
+    {
         var numberOfConstellations = _winConstellations.GetLength(0);
         var referenceString = new string(Convert.ToChar(currentToken), 3);
         for (var i = 0; i < numberOfConstellations; i++)
@@ -36,11 +46,17 @@ public class GameBoardEvaluator : IGameBoardEvaluator
             currentContent += tokenList[_winConstellations[i, 2]];
 
             if (currentContent != referenceString) continue;
-            result[_winConstellations[i, 0]] = true;
-            result[_winConstellations[i, 1]] = true;
-            result[_winConstellations[i, 2]] = true;
-            result[9] = true;
+            _evaluationResult.WinAreas[_winConstellations[i, 0]] = true;
+            _evaluationResult.WinAreas[_winConstellations[i, 1]] = true;
+            _evaluationResult.WinAreas[_winConstellations[i, 2]] = true;
+            _evaluationResult.IsWinner = true;
         }
-        return result;
+    }
+
+    private void DetermineDraw(IReadOnlyList<string> tokenList)
+    {
+        if (_evaluationResult.IsWinner) return;
+        if (tokenList.Contains(string.Empty)) return;
+        _evaluationResult.IsDraw = true;
     }
 }
