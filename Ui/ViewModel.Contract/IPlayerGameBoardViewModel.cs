@@ -5,7 +5,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IPlayerGameBoardViewModel
 {
-    bool TrySetToken(string token, int areaId);
+    Task<bool> TrySetTokenTaskAsync(string token, int areaId);
 
     List<IPlayerGameBoardAreaViewModel> Areas { get; }
     

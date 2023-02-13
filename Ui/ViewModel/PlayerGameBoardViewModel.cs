@@ -9,6 +9,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoardViewModel
 {
+    private int _counter = 0;
+
     public PlayerGameBoardViewModel(IGameBoardAreaFactory gameBoardAreaFactory, IGameEvaluator gameEvaluator)
     {
         Areas = gameBoardAreaFactory.CreateAreas();
@@ -34,16 +36,24 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     [RelayCommand]
     public void GameBoardStartAnimationCompleted()
     {
+        _counter++;
+        if (_counter != 9) return;
         Areas.ForEach(area => area.IsInGame = true);
         WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(this));
     }
 
-    public bool TrySetToken(string token, int areaId)
+    public async Task<bool> TrySetTokenTaskAsync(string token, int areaId)
     {
         if (token == null) throw new ArgumentNullException(nameof(token));
         if (areaId is < 0 or > 9) throw new ArgumentOutOfRangeException(nameof(areaId));
         if (!string.IsNullOrWhiteSpace(Areas[areaId].Token)) return false;
-        Areas[areaId].Token = token;
+        await Task.Run(() =>
+        {
+            var rnd = new Random();
+            var sleepTime = rnd.Next(500, 2000);
+            Thread.Sleep(sleepTime);
+            Areas[areaId].Token = token;
+        });
         return true;
     }
 }

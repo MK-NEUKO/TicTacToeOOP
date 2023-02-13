@@ -16,6 +16,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
     private bool _isDraw;
+    private bool _isGameOver;
 
     public GameViewModel(IPlayerFactory playerFactory, IPlayerGameBoardViewModel playerGameBoard, IGameEvaluator gameEvaluator)
     {
@@ -36,15 +37,15 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _currentPlayer = message.Value;
     }
 
-    private void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
-    {
-        MakeAMove();
+    private async void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
+    { 
+        await MakeAMoveAsync();
     }
 
-    private void GameBoardAreaWasClickedHandler(object recipient, GameBoardAreaWasClickedMessage message)
+    private async void GameBoardAreaWasClickedHandler(object recipient, GameBoardAreaWasClickedMessage message)
     {
         var clickedAreaId = message.Value;
-        MakeAMove(clickedAreaId);
+        await MakeAMoveAsync(clickedAreaId);
     }
 
     private void StartGameButtonClickedMessageHandler(object recipient, StartGameButtonClickedMessage buttonClickedMessage)
@@ -54,33 +55,46 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _playerGameBoard.Areas.ForEach((area) => area.IsStartNewGameAnimation = true);
     }
 
-    private void MakeAMove(int clickedAreaId = 10)
+    private async Task MakeAMoveAsync(int clickedAreaId = 10)
     {
-        var isGameOver = false;
+        var counter = 0;
         do
         {
-            if (!_currentPlayer.TryPlaceAToken(_playerGameBoard, clickedAreaId)) return;
-            var result = _gameEvaluator.EvaluateGame(_playerGameBoard.GetTokenList(), _currentPlayer.Token);
-            if (result.IsWinner)
+            var tokenList = new List<string>();
+            _playerGameBoard.Areas.ForEach(a => tokenList.Add(a.Token));
+
+            var areaId = await _currentPlayer.ReplayTokenAreaTaskAsync(tokenList, clickedAreaId);
+            await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, areaId);
+
+            var currentTokenList = new List<string>();
+            _playerGameBoard.Areas.ForEach(a => currentTokenList.Add(a.Token));
+
+            _playerGameBoard.Areas.ForEach(a => tokenList.Add(a.Token));
+            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(currentTokenList, _currentPlayer.Token);
+            if (evaluationResult.IsWinner)
             {
-                _currentPlayer.IsWinner = result.IsWinner;
-                _playerGameBoard.AnimateWinAreas(result.WinAreas);
+                _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
+                _currentPlayer.IsWinner = evaluationResult.IsWinner;
                 _currentPlayer.SetPoint();
-                isGameOver = true;
+                return;
             }
 
-            if (result.IsDraw)
+            if (evaluationResult.IsDraw)
             {
-                _currentPlayer.Points = 50;
-                isGameOver = true;
+                return;
             }
-            ChangeCurrentPlayer();
-        } while (_currentPlayer.IsAi && isGameOver);
+            await ChangeCurrentPlayerAsync();
+            counter++;
+
+        } while (_currentPlayer.IsAi && counter < 9);
     }
 
-    private void ChangeCurrentPlayer()
+    private async Task ChangeCurrentPlayerAsync()
     {
-        PlayingPlayerX.IsPlayersTurn = !PlayingPlayerX.IsPlayersTurn;
-        PlayingPlayerO.IsPlayersTurn = !PlayingPlayerO.IsPlayersTurn;
+        await Task.Run(() =>
+        {
+            PlayingPlayerX.IsPlayersTurn = !PlayingPlayerX.IsPlayersTurn;
+            PlayingPlayerO.IsPlayersTurn = !PlayingPlayerO.IsPlayersTurn;
+        });
     }
 }

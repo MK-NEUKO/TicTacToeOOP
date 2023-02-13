@@ -362,7 +362,7 @@
                         <BeginStoryboard Storyboard="{StaticResource StartSaveGameAnimation}"/>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Token}" Value="X">
+                <DataTrigger Binding="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="X">
                     <Setter Property="Path.Stroke" Value="{StaticResource TTTGreen}" TargetName="theX"/>
                     <Setter Property="Path.Stroke" Value="{StaticResource TTTGreen}" TargetName="theXBlurEffect"/>
                 </DataTrigger>
@@ -372,8 +372,8 @@
                 </DataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsWinArea}" Value="true"/>
-                        <Condition Binding="{Binding Token}" Value="X"/>
+                        <Condition Binding="{Binding IsWinArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="true"/>
+                        <Condition Binding="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="X"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource WinnerXAnimation}"
@@ -383,8 +383,8 @@
                 </MultiDataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsWinArea}" Value="true"/>
-                        <Condition Binding="{Binding Token}" Value="O"/>
+                        <Condition Binding="{Binding IsWinArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="true"/>
+                        <Condition Binding="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="O"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource WinnerOAnimation}"
@@ -392,7 +392,7 @@
                         </BeginStoryboard>
                     </MultiDataTrigger.EnterActions>
                 </MultiDataTrigger>
-                <DataTrigger Binding="{Binding IsWinArea}" Value="False">
+                <DataTrigger Binding="{Binding IsWinArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
                     <DataTrigger.EnterActions>
                         <StopStoryboard BeginStoryboardName="WinnerOAnimation"/>
                         <StopStoryboard BeginStoryboardName="WinnerXAnimation"/>
@@ -425,8 +425,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="Grid.Row" Value="{Binding Path=Id, Converter={StaticResource AreaIdGridRowConverter}}"/>
-                    <Setter Property="Grid.Column" Value="{Binding Path=Id, Converter={StaticResource AreaIdGridColumnConverter}}"/>
+                    <Setter Property="Grid.Row" Value="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource AreaIdGridRowConverter}}"/>
+                    <Setter Property="Grid.Column" Value="{Binding Path=Id, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource AreaIdGridColumnConverter}}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>

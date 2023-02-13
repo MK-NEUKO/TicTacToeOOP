@@ -5,7 +5,6 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 public interface IPlayerViewModel
 {
     void SetPoint();
-    bool TryPlaceAToken(IPlayerGameBoardViewModel currentGameBoard, int clickedAreaId = 10);
 
     /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._name"/>
     string? Name { get; set; }
@@ -27,4 +26,6 @@ public interface IPlayerViewModel
 
     /// <inheritdoc cref="PlayerViewModel._points"/>
     int Points { get; set; }
+
+    Task<int> ReplayTokenAreaTaskAsync(List<string> tokenList, int clickedAreaId);
 }

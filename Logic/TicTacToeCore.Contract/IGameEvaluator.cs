@@ -2,5 +2,5 @@
 
 public interface IGameEvaluator
 {
-    IEvaluationResult EvaluateGame(List<string> tokenList, string currentToken);
+    Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> tokenList, string currentToken);
 }

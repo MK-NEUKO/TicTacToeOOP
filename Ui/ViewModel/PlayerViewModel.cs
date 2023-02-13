@@ -64,18 +64,23 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         }
     }
 
-    public bool TryPlaceAToken(IPlayerGameBoardViewModel currentGameBoard, int clickedAreaId = 10)
+    public async Task<int> ReplayTokenAreaTaskAsync(List<string> tokenList, int clickedAreaId = 10)
     {
         if (this.IsAi)
         {
-            // simulate the ai to set a token
-            var areaId = currentGameBoard.Areas.FindIndex(a => a.Token == string.Empty);
-            return currentGameBoard.TrySetToken(this.Token, areaId);
+            var area = 0;
+            await Task.Run(() =>
+            {
+                // simulates the Ai
+                // TODO: Implement the Minimax Algorithem in TicTacToeCore-Project
+                area = tokenList.FindIndex(t => t == string.Empty);
+            });
+            return area;
         }
-        if (this.IsHuman && clickedAreaId < 10)
-            return currentGameBoard.TrySetToken(this.Token, clickedAreaId);
 
-        return false;
+        if (this.IsHuman && clickedAreaId < 10)
+            return clickedAreaId;
+        return -1;
     }
 
     public void SetPoint()
