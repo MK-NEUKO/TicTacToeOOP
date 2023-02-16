@@ -9,36 +9,39 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoardViewModel
 {
-    private int _counter = 0;
+    private int _animationCompletedCounter = 0;
+    private List<IPlayerGameBoardAreaViewModel> _areas;
 
     public PlayerGameBoardViewModel(IGameBoardAreaFactory gameBoardAreaFactory, IGameEvaluator gameEvaluator)
     {
-        Areas = gameBoardAreaFactory.CreateAreas();
+        _areas = gameBoardAreaFactory.CreateAreas();
     }
 
-    public List<IPlayerGameBoardAreaViewModel> Areas { get; }
+    public IReadOnlyList<IPlayerGameBoardAreaViewModel> Areas { get => _areas.AsReadOnly(); }
 
-    public List<string> GetTokenList()
+    public List<string> GetCurrentTokenList()
     {
-        var tokenList = new List<string>();
-        Areas.ForEach(a =>
-        {
-            if (a.Token != null) tokenList.Add(a.Token);
-        });
-        return tokenList;
+        var currentTokenList = new List<string>();
+        _areas.ForEach(a => currentTokenList.Add(a.Token));
+        return currentTokenList;
     }
 
     public void AnimateWinAreas(List<bool> resultWinAreas)
     {
-        Areas.ForEach(a => a.IsWinArea = resultWinAreas[a.Id]);
+        _areas.ForEach(a => a.IsWinArea = resultWinAreas[a.Id]);
+    }
+
+    public void StartGameStartAnimation()
+    {
+        _areas.ForEach(a => a.IsStartNewGameAnimation = true);
     }
 
     [RelayCommand]
     public void GameBoardStartAnimationCompleted()
     {
-        _counter++;
-        if (_counter != 9) return;
-        Areas.ForEach(area => area.IsInGame = true);
+        _animationCompletedCounter++;
+        if (_animationCompletedCounter != 9) return;
+        _areas.ForEach(area => area.IsInGame = true);
         WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(this));
     }
 

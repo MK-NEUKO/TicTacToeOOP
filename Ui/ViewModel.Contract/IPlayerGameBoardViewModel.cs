@@ -7,12 +7,14 @@ public interface IPlayerGameBoardViewModel
 {
     Task<bool> TrySetTokenTaskAsync(string token, int areaId);
 
-    List<IPlayerGameBoardAreaViewModel> Areas { get; }
+    IReadOnlyList<IPlayerGameBoardAreaViewModel> Areas { get; }
     
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardViewModel.StoryboardCompleted"/>.</summary>
     global::CommunityToolkit.Mvvm.Input.IRelayCommand GameBoardStartAnimationCompletedCommand { get; }
 
-    List<string> GetTokenList();
-
     void AnimateWinAreas(List<bool> resultWinAreas);
+
+    void StartGameStartAnimation();
+
+    List<string> GetCurrentTokenList();
 }

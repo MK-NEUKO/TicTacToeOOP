@@ -52,7 +52,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     {
         PlayingPlayerX = buttonClickedMessage.Value.Find(player => player.Token == "X") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
         PlayingPlayerO = buttonClickedMessage.Value.Find(player => player.Token == "O") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
-        _playerGameBoard.Areas.ForEach((area) => area.IsStartNewGameAnimation = true);
+        _playerGameBoard.StartGameStartAnimation();
     }
 
     private async Task MakeAMoveAsync(int clickedAreaId = 10)
@@ -60,17 +60,11 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         var counter = 0;
         do
         {
-            var tokenList = new List<string>();
-            _playerGameBoard.Areas.ForEach(a => tokenList.Add(a.Token));
-
-            var areaId = await _currentPlayer.ReplayTokenAreaTaskAsync(tokenList, clickedAreaId);
+            var areaId = await _currentPlayer.ReplayTokenAreaTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
             await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, areaId);
 
-            var currentTokenList = new List<string>();
-            _playerGameBoard.Areas.ForEach(a => currentTokenList.Add(a.Token));
-
-            _playerGameBoard.Areas.ForEach(a => tokenList.Add(a.Token));
-            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(currentTokenList, _currentPlayer.Token);
+            
+            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token);
             if (evaluationResult.IsWinner)
             {
                 _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
