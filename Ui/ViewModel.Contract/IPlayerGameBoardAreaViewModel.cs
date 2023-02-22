@@ -14,6 +14,9 @@ public interface IPlayerGameBoardAreaViewModel
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isWinArea"/>
     bool IsWinArea { get; set; }
 
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isOccupied"/>
+    bool IsOccupied { get; set; }
+
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isStartNewGameAnimation"/>
     bool IsStartNewGameAnimation { get; set; }
 

@@ -26,6 +26,9 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     [ObservableProperty]
     private bool _isStartSaveGameAnimation;
 
+    [ObservableProperty] 
+    private bool _isOccupied;
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
     private bool _isInGame;

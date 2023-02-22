@@ -64,7 +64,7 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         }
     }
 
-    public async Task<int> ReplayTokenAreaTaskAsync(List<string> tokenList, int clickedAreaId = 10)
+    public async Task<int> GiveTokenPositionTaskAsync(List<string> tokenList, int clickedAreaId = 10)
     {
         if (this.IsAi)
         {

@@ -60,8 +60,9 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         var counter = 0;
         do
         {
-            var areaId = await _currentPlayer.ReplayTokenAreaTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
-            await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, areaId);
+            var areaId = await _currentPlayer.GiveTokenPositionTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
+            if(areaId == -1) return;
+            if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
 
             
             var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token);
@@ -75,6 +76,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
             if (evaluationResult.IsDraw)
             {
+                _currentPlayer.Points = 25;
                 return;
             }
             await ChangeCurrentPlayerAsync();

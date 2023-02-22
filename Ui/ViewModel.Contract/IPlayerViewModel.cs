@@ -27,5 +27,5 @@ public interface IPlayerViewModel
     /// <inheritdoc cref="PlayerViewModel._points"/>
     int Points { get; set; }
 
-    Task<int> ReplayTokenAreaTaskAsync(List<string> tokenList, int clickedAreaId);
+    Task<int> GiveTokenPositionTaskAsync(List<string> tokenList, int clickedAreaId);
 }

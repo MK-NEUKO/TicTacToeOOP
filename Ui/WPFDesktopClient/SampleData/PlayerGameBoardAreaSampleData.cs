@@ -16,6 +16,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public string? Token { get; set; }
         public int Id { get; set; }
         public bool IsWinArea { get; set; }
+        public bool IsOccupied { get; set; }
         public bool IsStartNewGameAnimation { get; set; }
         public bool IsStartSaveGameAnimation { get; set; }
         public bool IsInGame { get; set; }

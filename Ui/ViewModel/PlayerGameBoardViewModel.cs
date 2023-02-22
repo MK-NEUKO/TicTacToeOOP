@@ -45,18 +45,30 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(this));
     }
 
-    public async Task<bool> TrySetTokenTaskAsync(string token, int areaId)
+    public async Task<bool> TrySetTokenTaskAsync(string token, bool isHuman, int areaId)
     {
         if (token == null) throw new ArgumentNullException(nameof(token));
         if (areaId is < 0 or > 9) throw new ArgumentOutOfRangeException(nameof(areaId));
-        if (!string.IsNullOrWhiteSpace(Areas[areaId].Token)) return false;
-        await Task.Run(() =>
+        if (Areas[areaId].IsOccupied) return true;
+        if (isHuman)
         {
-            var rnd = new Random();
-            var sleepTime = rnd.Next(500, 2000);
-            Thread.Sleep(sleepTime);
             Areas[areaId].Token = token;
-        });
+            Areas[areaId].IsOccupied = true;
+            return false;
+        }
+
+        if (!isHuman)
+        {
+            await Task.Run(() =>
+            {
+                var rnd = new Random();
+                var sleepTime = rnd.Next(500, 2000);
+                Thread.Sleep(sleepTime);
+                Areas[areaId].Token = token;
+                Areas[areaId].IsOccupied = true;
+            });
+            return false;
+        }
         return true;
     }
 }

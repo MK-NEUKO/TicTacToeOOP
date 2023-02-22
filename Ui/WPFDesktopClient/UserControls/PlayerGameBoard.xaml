@@ -211,12 +211,50 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
-        <Style  x:Key="GameBoardAreaButton" TargetType="Button">
+        <Storyboard x:Key="IsOccupiedMouseOverAnimation">
+            <ColorAnimation Storyboard.TargetName="boardAreaBorder"
+                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTRedColor}"/>
+        </Storyboard>
+
+        <Storyboard x:Key="IsOccupiedMouseAwayAnimation">
+            <ColorAnimation Storyboard.TargetName="boardAreaBorder"
+                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTBlueColor}"/>
+        </Storyboard>
+
+        <Storyboard x:Key="IsOccupiedIsPressedAnimation">
+            <ColorAnimation Storyboard.TargetName="boardAreaLightEffect"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTRedColor}"/>
+
+            <ColorAnimation Storyboard.TargetName="boardAreaBorderBlurEffect"
+                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTRedColor}"/>
+        </Storyboard>
+
+        <Storyboard x:Key="IsOccupiedReleaseAnimation">
+            <ColorAnimation Storyboard.TargetName="boardAreaLightEffect"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTBlueColor}"/>
+
+            <ColorAnimation Storyboard.TargetName="boardAreaBorderBlurEffect"
+                            Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"
+                            Duration="0"
+                            To="{StaticResource TTTBlueColor}"/>
+        </Storyboard>
+
+        <Style TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="BorderThickness" Value="5"/>
             <Setter Property="Command" Value="{Binding}"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -229,12 +267,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="Blue"/>
-                    <Setter Property="Opacity"  Value="0.5"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <DataTemplate x:Key="GameBoardAreaDataTemplate" 
@@ -345,8 +377,9 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-                <Button Style="{StaticResource GameBoardAreaButton}"
-                        Command="{Binding Path=AreaWasClickedCommand}">
+                <Button Command="{Binding Path=AreaWasClickedCommand}"
+                        x:Name="AreaButton">
+                    
                 </Button>
             </Grid>
 
@@ -370,6 +403,35 @@
                     <Setter Property="Path.Stroke" Value="{StaticResource TTTOrange}" TargetName="theO"/>
                     <Setter Property="Path.Stroke" Value="{StaticResource TTTOrange}" TargetName="theOBlurEffect"/>
                 </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=AreaButton, Path=IsMouseOver}" Value="true"/>
+                        <Condition Binding="{Binding Path=IsOccupied}" Value="true"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseOverAnimation}">
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseAwayAnimation}">
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=AreaButton, Path=IsMouseOver}" Value="true" />
+                        <Condition Binding="{Binding ElementName=AreaButton, Path=IsPressed}" Value="true" />
+                        <Condition Binding="{Binding Path=IsOccupied}" Value="true"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <SoundPlayerAction Source="/UserControls/Assets/area_denied.wav"></SoundPlayerAction>
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedIsPressedAnimation}">
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedReleaseAnimation}"></BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding IsWinArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="true"/>
