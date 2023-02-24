@@ -20,6 +20,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public bool IsStartNewGameAnimation { get; set; }
         public bool IsStartSaveGameAnimation { get; set; }
         public bool IsInGame { get; set; }
+        public bool CanShowIsOccupied { get; set; }
         public IRelayCommand AreaWasClickedCommand { get; set; } = null!;
+        public IRelayCommand MouseEnterCommand { get; set; } = null!;
     }
 }

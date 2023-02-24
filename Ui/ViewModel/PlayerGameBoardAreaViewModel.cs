@@ -11,6 +11,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
 {
+    private int _counterMouseEnter;
+
     [ObservableProperty]
     private int _id;
 
@@ -29,6 +31,18 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     [ObservableProperty] 
     private bool _isOccupied;
 
+    private bool _canShowIsOccupied;
+
+    public bool CanShowIsOccupied
+    {
+        get => _canShowIsOccupied;
+        set
+        {
+            if (IsOccupied && _counterMouseEnter >= 1)
+                SetProperty(ref _canShowIsOccupied, true);
+        }
+    }
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
     private bool _isInGame;
@@ -37,6 +51,16 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     {
         _id = id;
         _token = string.Empty;
+    }
+
+    [RelayCommand]
+    private void MouseEnter()
+    {
+        if (IsOccupied)
+        {
+            _counterMouseEnter++;
+            CanShowIsOccupied = true;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanAreaWasClicked))]

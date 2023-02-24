@@ -17,7 +17,7 @@
         <valueConverter:AreaIdGridColumnConverter x:Key="AreaIdGridColumnConverter"/>
         <valueConverter:AreaIdGridRowConverter x:Key="AreaIdGridRowConverter"/>
 
-        <Storyboard x:Key="StartNewGameAnimation" x:Name="StartNewGameAnimation">
+        <Storyboard x:Key="StartNewGameAnimation">
             <ColorAnimationUsingKeyFrames BeginTime="0:0:0" 
                                           Duration="0:0:1"
                                           Storyboard.TargetName="theXColor"
@@ -379,7 +379,11 @@
                 </Viewbox>
                 <Button Command="{Binding Path=AreaWasClickedCommand}"
                         x:Name="AreaButton">
-                    
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="MouseEnter" SourceName="AreaButton">
+                            <behaviors:InvokeCommandAction Command="{Binding Path=MouseEnterCommand}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </Button>
             </Grid>
 
@@ -407,6 +411,7 @@
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding ElementName=AreaButton, Path=IsMouseOver}" Value="true"/>
                         <Condition Binding="{Binding Path=IsOccupied}" Value="true"/>
+                        <Condition Binding="{Binding Path=CanShowIsOccupied}" Value="true"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseOverAnimation}">

@@ -26,6 +26,12 @@ public interface IPlayerGameBoardAreaViewModel
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isInGame"/>
     bool IsInGame { get; set; }
 
+    /// <inheritdoc cref="PlayerGameBoardAreaViewModel._canShowIsOccupied"/>
+    bool CanShowIsOccupied { get; set; }
+
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardAreaViewModel.PlaceAToken"/>.</summary>
     global::CommunityToolkit.Mvvm.Input.IRelayCommand AreaWasClickedCommand { get; }
+
+    /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="PlayerGameBoardAreaViewModel.MouseEnter"/>.</summary>
+    global::CommunityToolkit.Mvvm.Input.IRelayCommand MouseEnterCommand { get; }
 }
