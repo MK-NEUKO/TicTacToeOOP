@@ -39,7 +39,10 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         set
         {
             if (IsOccupied && _counterMouseEnter >= 1)
-                SetProperty(ref _canShowIsOccupied, true);
+            {
+                SetProperty(ref _canShowIsOccupied, value);
+                MouseEnterCommand.NotifyCanExecuteChanged();
+            }
         }
     }
 
@@ -53,7 +56,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         _token = string.Empty;
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanMouseEnter))]
     private void MouseEnter()
     {
         if (IsOccupied)
@@ -61,6 +64,11 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
             _counterMouseEnter++;
             CanShowIsOccupied = true;
         }
+    }
+
+    private bool CanMouseEnter()
+    {
+        return _counterMouseEnter <= 1;
     }
 
     [RelayCommand(CanExecute = nameof(CanAreaWasClicked))]
