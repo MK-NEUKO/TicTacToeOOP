@@ -802,7 +802,7 @@
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="0"
                                          Content="New Game"
-                                         Height="25"
+                                         Height="auto"
                                          Width="130" 
                                          Margin="5"
                                          x:Name="NewGame"
@@ -812,7 +812,7 @@
                             </RadioButton>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"
                                          Grid.Row="1"                                          
-                                         Height="25"
+                                         Height="auto"
                                          Width="130"
                                          Margin="5"
                                          Content="Load Last Game"
@@ -891,7 +891,7 @@
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
                             <ToggleButton Grid.Column="0"
-                                          Grid.Row="3"
+                                          Grid.Row="2"
                                           Grid.ColumnSpan="2"
                                           Style="{StaticResource ToggleButtonStyle}"
                                           Height="25"
@@ -974,7 +974,7 @@
                                 <ComboBoxItem>Hard</ComboBoxItem>
                             </ComboBox>
                             <ToggleButton Grid.Column="0"
-                                         Grid.Row="3"
+                                         Grid.Row="2"
                                          Grid.ColumnSpan="2"
                                          Style="{StaticResource ToggleButtonStyle}"
                                          Height="25"
@@ -998,16 +998,34 @@
 
                     <GroupBox Grid.Column="3"
                               Header="Start">
-                        <Button Style="{StaticResource ButtonStyle}"
-                                Width="60"
-                                Height="60"
-                                Margin="4"
-                                Content="Play"
-                                Command="{Binding StartGameCommand}"
-                                x:Name="StartGameButton"
-                                IsEnabled="False"
-                                Click="StartGameButton_Click">
-                        </Button>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="0" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Width="60"
+                                    Height="auto"
+                                    Margin="4"
+                                    Content="Play"
+                                    Command="{Binding StartGameCommand}"
+                                    x:Name="StartGameButton"
+                                    IsEnabled="False"
+                                    Click="StartGameButton_Click">
+                            </Button>
+                            <Button Grid.Row="1" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Width="60"
+                                    Height="auto"
+                                    Margin="4"
+                                    Content="Stop"
+                                    x:Name="StopGameButton"
+                                    IsCancel="False"
+                                    >
+
+                            </Button>
+                        </Grid>
                     </GroupBox>
 
                     <GroupBox Grid.Column="4"

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -15,14 +16,19 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
+    private readonly IDialogService _dialogService;
     private bool _isDraw;
     private bool _isGameOver;
 
-    public GameViewModel(IPlayerFactory playerFactory, IPlayerGameBoardViewModel playerGameBoard, IGameEvaluator gameEvaluator)
+    public GameViewModel(IPlayerFactory playerFactory, 
+                         IPlayerGameBoardViewModel playerGameBoard, 
+                         IGameEvaluator gameEvaluator,
+                         IDialogService dialogService)
     {
         if (playerFactory == null) throw new ArgumentNullException(nameof(playerFactory));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
         _playingPlayerX = playerFactory.CreatePlayer("X");
         _playingPlayerO = playerFactory.CreatePlayer("O");
         _currentPlayer = playerFactory.CreatePlayer("X");
@@ -71,7 +77,9 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
                 _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
                 _currentPlayer.IsWinner = evaluationResult.IsWinner;
                 _currentPlayer.SetPoint();
+                _dialogService.ShowDialog<GameOverDialogViewModel>();
                 return;
+
             }
 
             if (evaluationResult.IsDraw)

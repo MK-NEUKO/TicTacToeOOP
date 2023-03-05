@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
@@ -11,10 +12,25 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
 {
     private int _animationCompletedCounter = 0;
     private readonly List<IPlayerGameBoardAreaViewModel> _areas;
+    private readonly IAbstractFactory<IPlayerGameBoardAreaViewModel> _areaFactory;
 
-    public PlayerGameBoardViewModel(IGameBoardAreaFactory gameBoardAreaFactory, IGameEvaluator gameEvaluator)
+    public PlayerGameBoardViewModel(IGameEvaluator gameEvaluator, 
+                                    IAbstractFactory<IPlayerGameBoardAreaViewModel> areaFactory)
     {
-        _areas = gameBoardAreaFactory.CreateAreas();
+        _areaFactory = areaFactory ?? throw new ArgumentNullException(nameof(areaFactory));
+        _areas = GetAreas();
+    }
+
+    private List<IPlayerGameBoardAreaViewModel> GetAreas()
+    {
+        const int numberOfAreas = 9;
+        var list = new List<IPlayerGameBoardAreaViewModel>();
+        for (var i = 0; i < numberOfAreas; i++)
+        {
+            list.Add(_areaFactory.Create());
+            list[i].Id = i;
+        }
+        return list;
     }
 
     public IReadOnlyList<IPlayerGameBoardAreaViewModel> Areas => _areas.AsReadOnly();

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
@@ -44,8 +45,8 @@ public interface IGameMenuViewModel
     string? TokenPlayerO { get; set; }
 
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="GameMenuViewModel.StartGame"/>.</summary>
-    global::CommunityToolkit.Mvvm.Input.IRelayCommand StartGameCommand { get; }
+    IRelayCommand? StartGameCommand { get; }
 
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="GameMenuViewModel.SetupDefaultPlayer"/>.</summary>
-    global::CommunityToolkit.Mvvm.Input.IRelayCommand SetupDefaultPlayerCommand { get; }
+    IRelayCommand? SetupDefaultPlayerCommand { get; }
 }

@@ -50,9 +50,8 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
     private bool _isInGame;
         
-    public PlayerGameBoardAreaViewModel(int id)
+    public PlayerGameBoardAreaViewModel()
     {
-        _id = id;
         _token = string.Empty;
     }
 
