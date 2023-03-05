@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
@@ -13,6 +14,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 {
     [ObservableProperty] private IPlayerViewModel _playingPlayerX;
     [ObservableProperty] private IPlayerViewModel _playingPlayerO;
+    private readonly IAbstractFactory<IPlayerViewModel> _playerFactory;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
@@ -20,22 +22,31 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private bool _isDraw;
     private bool _isGameOver;
 
-    public GameViewModel(IPlayerFactory playerFactory, 
+    public GameViewModel(IAbstractFactory<IPlayerViewModel> playerFactory, 
                          IPlayerGameBoardViewModel playerGameBoard, 
                          IGameEvaluator gameEvaluator,
                          IDialogService dialogService)
     {
-        if (playerFactory == null) throw new ArgumentNullException(nameof(playerFactory));
+        _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
         _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
-        _playingPlayerX = playerFactory.CreatePlayer("X");
-        _playingPlayerO = playerFactory.CreatePlayer("O");
-        _currentPlayer = playerFactory.CreatePlayer("X");
+        _playingPlayerX = CreatePlayer("X");
+        _playingPlayerO = CreatePlayer("O");
+        _currentPlayer = CreatePlayer("X");
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, StartGameButtonClickedMessageHandler);
         WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, GameBoardAreaWasClickedHandler);
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, GameBoardStartAnimationCompletedHandler);
         WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, CurrentPlayerChangedMessageHandler);
+    }
+
+    private IPlayerViewModel CreatePlayer(string token)
+    {
+        if (token == null) throw new ArgumentNullException(nameof(token));
+        var player = _playerFactory.Create();
+        player.Token = token;
+        player.Name = "Player" + player.Token;
+        return player;
     }
 
     private void CurrentPlayerChangedMessageHandler(object recipient, CurrentPlayerChangedMessage message)
@@ -56,8 +67,8 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
     private void StartGameButtonClickedMessageHandler(object recipient, StartGameButtonClickedMessage buttonClickedMessage)
     {
-        PlayingPlayerX = buttonClickedMessage.Value.Find(player => player.Token == "X") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
-        PlayingPlayerO = buttonClickedMessage.Value.Find(player => player.Token == "O") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
+        PlayingPlayerX = buttonClickedMessage.Value.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
+        PlayingPlayerO = buttonClickedMessage.Value.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
         _playerGameBoard.StartGameStartAnimation();
     }
 

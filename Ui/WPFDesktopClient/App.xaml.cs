@@ -25,11 +25,13 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
                     services.AddSingleton<IGameEvaluator, GameEvaluator>();
 
                     services.AddTransient<IDialogService, DialogService>();
-                    services.AddSingleton<IPlayerFactory, PlayerFactory>();
                     services.AddSingleton<IPlayerGameBoardViewModel, PlayerGameBoardViewModel>();
                     services.AddTransient<IPlayerGameBoardAreaViewModel, PlayerGameBoardAreaViewModel>();
+                    services.AddTransient<IPlayerViewModel, PlayerViewModel>();
                     services.AddSingleton<IAbstractFactory<IPlayerGameBoardAreaViewModel>, AbstractFactory<IPlayerGameBoardAreaViewModel>>();
                     services.AddSingleton<Func<IPlayerGameBoardAreaViewModel>>(x => ()=> x.GetService<IPlayerGameBoardAreaViewModel>()!);
+                    services.AddSingleton<IAbstractFactory<IPlayerViewModel>, AbstractFactory<IPlayerViewModel>>();
+                    services.AddSingleton<Func<IPlayerViewModel>>(x => () => x.GetService<IPlayerViewModel>()!);
                     services.AddSingleton<IGameViewModel, GameViewModel>();
                     services.AddSingleton<IGameMenuViewModel, GameMenuViewModel>();
                     services.AddSingleton<IMenuViewModel, MenuViewModel>();

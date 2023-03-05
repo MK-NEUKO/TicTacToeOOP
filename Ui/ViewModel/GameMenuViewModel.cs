@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
@@ -15,7 +16,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 {
     private bool _isStartButtonClicked;
-    private readonly IPlayerFactory _playerFactory;
+    private readonly IAbstractFactory<IPlayerViewModel> _playerFactory;
 
     private string? _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
@@ -43,7 +44,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 
     [ObservableProperty] private string? _tokenPlayerO;
 
-    public GameMenuViewModel(IPlayerFactory playerFactory)
+    public GameMenuViewModel(IAbstractFactory<IPlayerViewModel> playerFactory)
     {
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
     }
@@ -98,7 +99,8 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 
     private IPlayerViewModel CreatePlayerX()
     {
-        var playerX = _playerFactory.CreatePlayer("X");
+        var playerX = _playerFactory.Create();
+        playerX.Token = "X";
         playerX.Name = NamePlayerX;
         playerX.IsAi = IsAiPlayerX;
         playerX.IsHuman = IsHumanPlayerX;
@@ -108,7 +110,8 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 
     private IPlayerViewModel CreatePlayerO()
     {
-        var playerO = _playerFactory.CreatePlayer("O");
+        var playerO = _playerFactory.Create();
+        playerO.Token = "O";
         playerO.Name = NamePlayerO;
         playerO.IsAi = IsAiPlayerO;
         playerO.IsHuman = IsHumanPlayerO;

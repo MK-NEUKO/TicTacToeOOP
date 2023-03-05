@@ -25,10 +25,8 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
     [ObservableProperty] private string? _token;
 
 
-    public PlayerViewModel(string token)
+    public PlayerViewModel()
     {
-        _token = token ?? throw new ArgumentNullException(nameof(token));
-        _name = "Player" + _token;
     }
 
     public bool IsAi
