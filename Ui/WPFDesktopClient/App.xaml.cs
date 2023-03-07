@@ -10,6 +10,7 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 using MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
+using MichaelKoch.TicTacToe.Mappings;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 {
@@ -22,20 +23,11 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddTicTacToeViewModel();
+
                     services.AddSingleton<IGameEvaluator, GameEvaluator>();
 
                     services.AddTransient<IDialogService, DialogService>();
-                    services.AddSingleton<IPlayerGameBoardViewModel, PlayerGameBoardViewModel>();
-                    services.AddTransient<IPlayerGameBoardAreaViewModel, PlayerGameBoardAreaViewModel>();
-                    services.AddTransient<IPlayerViewModel, PlayerViewModel>();
-                    services.AddSingleton<IAbstractFactory<IPlayerGameBoardAreaViewModel>, AbstractFactory<IPlayerGameBoardAreaViewModel>>();
-                    services.AddSingleton<Func<IPlayerGameBoardAreaViewModel>>(x => ()=> x.GetService<IPlayerGameBoardAreaViewModel>()!);
-                    services.AddSingleton<IAbstractFactory<IPlayerViewModel>, AbstractFactory<IPlayerViewModel>>();
-                    services.AddSingleton<Func<IPlayerViewModel>>(x => () => x.GetService<IPlayerViewModel>()!);
-                    services.AddSingleton<IGameViewModel, GameViewModel>();
-                    services.AddSingleton<IGameMenuViewModel, GameMenuViewModel>();
-                    services.AddSingleton<IMenuViewModel, MenuViewModel>();
-                    services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
@@ -46,7 +38,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
             await AppHost!.StartAsync();
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = AppHost.Services.GetService<MainViewModel>();
+            mainWindow.DataContext = AppHost.Services.GetService<IMainViewModel>();
             mainWindow.Show();
 
             base.OnStartup(e);

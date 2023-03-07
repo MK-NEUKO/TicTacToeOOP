@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <RootNamespace>MichaelKoch.TicTacToe.Ui.WPFDesktopClient</RootNamespace>
@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
     <ProjectReference Include="..\..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
+    <ProjectReference Include="..\..\Mappings\Mappings.csproj" />
     <ProjectReference Include="..\ViewModel.Contract\ViewModel.Contract.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
-public class MainViewModel
+public class MainViewModel : IMainViewModel
 {
     public MainViewModel(IPlayerGameBoardViewModel playerGameBoardViewModel, IGameViewModel gameViewModel, IMenuViewModel menuViewModel)
     {

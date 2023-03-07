@@ -28,9 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "Ui\ViewModel\V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel.Contract", "Ui\ViewModel.Contract\ViewModel.Contract.csproj", "{079F38B3-30F5-4B9D-8266-9765AAC7157F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeCore.Contract", "Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj", "{3AFACD9E-08D3-4F47-9A94-7CE435164EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeCore.Contract", "Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj", "{3AFACD9E-08D3-4F47-9A94-7CE435164EAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeCore", "Logic\TicTacToeCore\TicTacToeCore.csproj", "{C26932B2-927F-4E3B-B291-06ED59F3AD76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeCore", "Logic\TicTacToeCore\TicTacToeCore.csproj", "{C26932B2-927F-4E3B-B291-06ED59F3AD76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappings", "Mappings\Mappings.csproj", "{DE73037B-DC87-489E-9156-B17CB7D63772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{C26932B2-927F-4E3B-B291-06ED59F3AD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26932B2-927F-4E3B-B291-06ED59F3AD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26932B2-927F-4E3B-B291-06ED59F3AD76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE73037B-DC87-489E-9156-B17CB7D63772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE73037B-DC87-489E-9156-B17CB7D63772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE73037B-DC87-489E-9156-B17CB7D63772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE73037B-DC87-489E-9156-B17CB7D63772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
