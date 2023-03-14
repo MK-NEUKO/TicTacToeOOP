@@ -7,11 +7,20 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
 
 public class GameOverDialog : WindowService
 {
-    private readonly GameOverDialogControl _content = new GameOverDialogControl();
+    private readonly IAbstractFactory<GameOverDialogControl> _conteFactory;
 
-    public override FrameworkElement CreateContent()
+    public GameOverDialog(IAbstractFactory<DialogWindow> dialogAbstractFactory,
+                          IAbstractFactory<GameOverDialogControl> conteFactory) : base(dialogAbstractFactory)
     {
-        _content.DataContext = new GameOverDialogViewModel();
-        return _content;
+        _conteFactory = conteFactory;
     }
+
+    public override FrameworkElement CreateContent(object viewModel)
+    {
+        var content = _conteFactory.Create();
+        content.DataContext = viewModel;
+
+        return content;
+    }
+
 }
