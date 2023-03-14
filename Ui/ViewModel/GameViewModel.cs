@@ -14,19 +14,22 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 {
     [ObservableProperty] private IPlayerViewModel _playingPlayerX;
     [ObservableProperty] private IPlayerViewModel _playingPlayerO;
-    private readonly IAbstractFactory<IPlayerViewModel> _playerFactory;
+    private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverFactory;
+    private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
-    private readonly IDialogService _dialogService;
+    private readonly IWindowService _dialogService;
     private bool _isDraw;
     private bool _isGameOver;
 
-    public GameViewModel(IAbstractFactory<IPlayerViewModel> playerFactory, 
+    public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverFactory,
+                         IViewModelFactory<IPlayerViewModel> playerFactory, 
                          IPlayerGameBoardViewModel playerGameBoard, 
                          IGameEvaluator gameEvaluator,
-                         IDialogService dialogService)
+                         IWindowService dialogService)
     {
+        _gameOverFactory = gameOverFactory ?? throw new ArgumentNullException(nameof(gameOverFactory));
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
@@ -79,29 +82,41 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         {
             var areaId = await _currentPlayer.GiveTokenPositionTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
             if(areaId == -1) return;
-            if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
+            if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token!, _currentPlayer.IsHuman, areaId)) return;
 
-            
-            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token);
+            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token!);
             if (evaluationResult.IsWinner)
             {
-                _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
-                _currentPlayer.IsWinner = evaluationResult.IsWinner;
-                _currentPlayer.SetPoint();
-                _dialogService.ShowDialog<GameOverDialogViewModel>();
+                ShowWinner(evaluationResult);
                 return;
-
             }
 
             if (evaluationResult.IsDraw)
             {
-                _currentPlayer.Points = 25;
+                ShowDraw();
                 return;
             }
+
             await ChangeCurrentPlayerAsync();
             counter++;
 
         } while (_currentPlayer.IsAi && counter < 9);
+    }
+
+    private void ShowWinner(IEvaluationResult evaluationResult)
+    {
+        _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
+        _currentPlayer.IsWinner = evaluationResult.IsWinner;
+        _currentPlayer.SetPoint();
+        var gameOverViewModel = _gameOverFactory.Create();
+        gameOverViewModel.Message = "Test Test";
+        _dialogService.ShowDialog(gameOverViewModel);
+        return;
+    }
+
+    private void ShowDraw()
+    {
+        _currentPlayer.Points = 25;
     }
 
     private async Task ChangeCurrentPlayerAsync()

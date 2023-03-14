@@ -12,17 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MichaelKoch.TicTacToe.Ui.ViewModel;
+using MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
 {
     /// <summary>
-    /// Interaction logic for GameOverDialog.xaml
+    /// Interaction logic for GameOverDialogControl.xaml
     /// </summary>
-    public partial class GameOverDialog : UserControl
+    public partial class GameOverDialogControl : UserControl
     {
-        public GameOverDialog()
+        public GameOverDialogControl()
         {
             InitializeComponent();
+        }
+
+        private void CloseDialog (object sender, RoutedEventArgs e)
+        {
+            var shellWindow = this.Parent as Window;
+            shellWindow!.Close();
         }
     }
 }

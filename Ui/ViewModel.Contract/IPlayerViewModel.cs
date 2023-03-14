@@ -4,8 +4,6 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IPlayerViewModel
 {
-    void SetPoint();
-
     /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.PlayerViewModel._name"/>
     string? Name { get; set; }
 
@@ -28,4 +26,6 @@ public interface IPlayerViewModel
     int Points { get; set; }
 
     Task<int> GiveTokenPositionTaskAsync(List<string> tokenList, int clickedAreaId);
+
+    void SetPoint();
 }

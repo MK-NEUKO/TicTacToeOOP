@@ -11,19 +11,12 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
     private bool _isAi;
-
     private bool _isHuman;
-
     private bool _isPlayersTurn;
-
     [ObservableProperty] private bool _isWinner;
-
     [ObservableProperty] private string? _name;
-
     [ObservableProperty] private int _points;
-
     [ObservableProperty] private string? _token;
-
 
     public PlayerViewModel()
     {

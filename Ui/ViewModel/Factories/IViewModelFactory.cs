@@ -1,6 +1,6 @@
 ﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 
-public interface IAbstractFactory<T>
+public interface IViewModelFactory<T>
 {
     T Create();
 }

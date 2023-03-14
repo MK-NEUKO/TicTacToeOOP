@@ -16,35 +16,25 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 {
     private bool _isStartButtonClicked;
-    private readonly IAbstractFactory<IPlayerViewModel> _playerFactory;
+    private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
 
     private string? _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
-
     [ObservableProperty] private bool _isHumanPlayerX;
-
     [ObservableProperty] private bool _isPlayersTurnPlayerX;
-
     [ObservableProperty] private bool _isWinnerPlayerX;
-
     [ObservableProperty] private int _pointsPlayerX;
-
     [ObservableProperty] private string? _tokenPlayerX;
 
     private string? _namePlayerO;
     [ObservableProperty] private bool _isAiPlayerO;
-
     [ObservableProperty] private bool _isHumanPlayerO;
-
     [ObservableProperty] private bool _isPlayersTurnPlayerO;
-
     [ObservableProperty] private bool _isWinnerPlayerO;
-
     [ObservableProperty] private int _pointsPlayerO;
-
     [ObservableProperty] private string? _tokenPlayerO;
 
-    public GameMenuViewModel(IAbstractFactory<IPlayerViewModel> playerFactory)
+    public GameMenuViewModel(IViewModelFactory<IPlayerViewModel> playerFactory)
     {
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
     }

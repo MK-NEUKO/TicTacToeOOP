@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls.GameOverDialog"
+﻿<UserControl x:Class="MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls.GameOverDialogControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,14 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="400">
     <StackPanel>
-        <TextBlock Text="GameOverDialog"
+        <TextBlock Text="{Binding Path=Message}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="50"></TextBlock>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Content="Continue"
-                    Margin="20">
+                    Margin="20"
+                    IsDefault="True"
+                    Click="CloseDialog">
 
             </Button>
             <Button Content="New Game"

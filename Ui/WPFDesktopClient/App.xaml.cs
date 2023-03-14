@@ -24,10 +24,10 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddTicTacToeViewModel();
+                    services.AddViewLogic();
 
                     services.AddSingleton<IGameEvaluator, GameEvaluator>();
 
-                    services.AddTransient<IDialogService, DialogService>();
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();

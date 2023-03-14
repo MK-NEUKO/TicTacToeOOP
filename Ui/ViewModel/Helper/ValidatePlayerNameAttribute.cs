@@ -5,7 +5,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 
 public class ValidatePlayerNameAttribute : ValidationAttribute
 {
-    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+    protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
     {
         const string pattern = @"^[a-zA-Z0-9]+$";
         var name = Convert.ToString(value);

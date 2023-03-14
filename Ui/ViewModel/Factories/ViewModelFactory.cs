@@ -1,10 +1,10 @@
 ﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 
-public class AbstractFactory<T> : IAbstractFactory<T>
+public class ViewModelFactory<T> : IViewModelFactory<T>
 {
     private readonly Func<T> _factory;
 
-    public AbstractFactory(Func<T> factory)
+    public ViewModelFactory(Func<T> factory)
     {
         _factory = factory;
     }
