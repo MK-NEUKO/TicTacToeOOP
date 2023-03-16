@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IWindowService
 {
