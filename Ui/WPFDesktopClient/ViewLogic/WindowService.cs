@@ -18,7 +18,7 @@ public abstract class WindowService : IWindowService
     public virtual void ShowDialog(object viewModel)
     {
         var shellWindow = _dialogAbstractFactory.Create();
-        //shellWindow.Owner = _owner();
+        shellWindow.Owner = _owner();
         shellWindow.Content = CreateContent(viewModel);
 
         shellWindow.ShowDialog();

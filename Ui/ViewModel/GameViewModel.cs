@@ -109,7 +109,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _currentPlayer.IsWinner = evaluationResult.IsWinner;
         _currentPlayer.SetPoint();
         var gameOverViewModel = _gameOverFactory.Create();
-        gameOverViewModel.Message = "Test Test";
+        gameOverViewModel.Message = $"{_currentPlayer.Name} is the winner and gets a Point";
         _dialogService.ShowDialog(gameOverViewModel);
         return;
     }

@@ -5,22 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="400">
+             d:DesignHeight="150" d:DesignWidth="250">
     <StackPanel>
         <TextBlock Text="{Binding Path=Message}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="50"></TextBlock>
+                   FontSize="20"
+                   Foreground="Wheat"
+                   Margin="10">
+        </TextBlock>
+        <TextBlock Text="Press Enter to continue"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="12"
+                   Foreground="{StaticResource TTTBlue}">
+
+        </TextBlock>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right">
-            <Button Content="Continue"
-                    Margin="20"
+            <Button Style="{StaticResource ButtonStyle}"
+                    Height="25"
+                    Width="80"
+                    Content="Continue"
+                    Margin="5,5,10,15"
                     IsDefault="True"
                     Click="CloseDialog">
 
             </Button>
-            <Button Content="New Game"
-                    Margin="20">
+            <Button Style="{StaticResource ButtonStyle}"
+                    Content="New Game"
+                    Height="25"
+                    Width="80"
+                    Margin="5,5,15,15">
 
             </Button>
         </StackPanel>

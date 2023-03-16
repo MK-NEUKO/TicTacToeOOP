@@ -19,5 +19,167 @@
         <Color x:Key="TTTBackgroundMediumGrayColor">#FF272727</Color>
         <Color x:Key="TTTBackgroundDarkGreyColor">#212121</Color>
         <Color x:Key="TTTRedColor">#FF0D00</Color>
+
+        
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"                                                            
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"></VisualState>
+                                    <VisualState x:Name="Indeterminate"></VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="BorderBlurEffect"
+                                                            To="{StaticResource TTTGreenColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed"></VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="Border"
+                                                            To="{StaticResource TTTBackgroundLightGrayColor}"
+                                                            Duration="0:0:0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="*" To="Pressed" GeneratedDuration="0:0:0.2"/>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"></VisualState>
+                                    <VisualState x:Name="Unfocused"></VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="BorderBlurEffect"
+                                BorderBrush="Transparent"
+                                BorderThickness="2"
+                                CornerRadius="4">
+                                <Border.Effect>
+                                    <BlurEffect Radius="10"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Background="Transparent"
+                                    BorderBrush="{StaticResource TTTGreen}"
+                                    x:Name="Border"                                    
+                                    BorderThickness="3"
+                                    CornerRadius="2"
+                                    TextBlock.Foreground="{StaticResource TTTBlue}">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Margin="2"
+                                                  RecognizesAccessKey="True"/>
+
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="{x:Type ResizeGrip}"
+               TargetType="{x:Type ResizeGrip}">
+            <Setter Property="OverridesDefaultStyle"
+                    Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                        <Border Background="Transparent"
+                                SnapsToDevicePixels="True"
+                                Width="16"
+                                Height="16">
+                            <Rectangle Margin="2">
+                                <Rectangle.Fill>
+                                    <DrawingBrush Viewport="0,0,4,4"
+                                                  ViewportUnits="Absolute"
+                                                  Viewbox="0,0,8,8"
+                                                  ViewboxUnits="Absolute"
+                                                  TileMode="Tile">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing Brush="#FFE8EDF9"
+                                                                     Geometry="M 4 4 L 4 8 L 
+                                                 8 8 L 8 4 z" />
+                                                </DrawingGroup.Children>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowStyle" TargetType="Window">
+            <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="{StaticResource TTTBackgroundMediumGrayColor}"/>
+                            </Grid.Background>
+                            <AdornerDecorator>
+                                <ContentPresenter/>
+                            </AdornerDecorator>
+                            <ResizeGrip x:Name="WindowResizeGrip"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Visibility="Collapsed"
+                                        IsTabStop="false" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ResizeMode"
+                                     Value="CanResizeWithGrip">
+                                <Setter TargetName="WindowResizeGrip"
+                                        Property="Visibility"
+                                        Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+
+
     </Application.Resources>
+
+
 </Application>

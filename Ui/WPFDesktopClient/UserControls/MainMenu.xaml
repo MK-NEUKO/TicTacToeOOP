@@ -353,7 +353,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <!--<Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect ShadowDepth="5"/>
@@ -438,7 +438,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Grid>

@@ -8,11 +8,13 @@
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip"
         Title="MainWindow" Height="700" Width="850">
 
     <d:Window.DataContext>
         <sampleData:MainViewModelSampleData/>
     </d:Window.DataContext>
+
 
     <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
         <userControls:MainMenu DockPanel.Dock="Top"

@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
-        Title="DialogWindow" Height="200" Width="300">
-    <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                   Text="Dialog Window"
-                   VerticalAlignment="Center"
-                   FontSize="30">
-        </TextBlock>
+        ResizeMode="CanResizeWithGrip"
+        Title="Message from the Game" Height="200" Width="300"
+        Style="{StaticResource WindowStyle}">
+        
+    <Grid Background="{StaticResource TTTBackgroundMediumGray}">
+        
     </Grid>
 </Window>
