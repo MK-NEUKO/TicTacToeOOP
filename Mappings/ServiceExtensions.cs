@@ -17,6 +17,7 @@ public static class ServiceExtensions
         services.AddViewModelFactory<IPlayerViewModel, PlayerViewModel>();
         services.AddViewModelFactory<IPlayerGameBoardAreaViewModel, PlayerGameBoardAreaViewModel>();
         services.AddViewModelFactory<IGameOverDialogViewModel, GameOverDialogViewModel>();
+        services.AddViewModelFactory<IGetSecureQueryDialogViewModel, GetSecureQueryDialogViewModel>();
     }
 
     private static void AddViewModelFactory<TInterface, TImplementation>(this IServiceCollection services)

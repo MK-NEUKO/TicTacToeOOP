@@ -9,10 +9,12 @@ public static class ViewServiceExtensions
 {
     public static void AddViewLogic(this IServiceCollection services)
     {
-        services.AddSingleton<IWindowService, GameOverDialog>();
         services.AddSingleton<Func<MainWindow>>(x => () => x.GetService<MainWindow>()!);
+        services.AddTransient<IWindowService<IGameOverDialogViewModel>, GameOverDialog>();
+        services.AddTransient<IWindowService<IGetSecureQueryDialogViewModel>, GetSecureQueryDialog>();
         services.AddAbstractFactory<DialogWindow>();
         services.AddAbstractFactory<GameOverDialogControl>();
+        services.AddAbstractFactory<GetSecureDialogControl>();
     }
 
     private static void AddAbstractFactory<T>(this IServiceCollection services)

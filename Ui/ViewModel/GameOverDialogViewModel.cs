@@ -1,12 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class GameOverDialogViewModel : ObservableObject, IGameOverDialogViewModel
 {
+    private readonly IWindowService<IGetSecureQueryDialogViewModel> _getSecureQueryDialog;
+    private readonly IViewModelFactory<IGetSecureQueryDialogViewModel> _getSecureQueryViewModelFactory;
+
     [ObservableProperty] private string? _message;
+
+    public GameOverDialogViewModel(IWindowService<IGetSecureQueryDialogViewModel> getSecureQueryDialog,
+                                   IViewModelFactory<IGetSecureQueryDialogViewModel> getSecureQueryViewModelFactory)
+    {
+        _getSecureQueryDialog = getSecureQueryDialog;
+        _getSecureQueryViewModelFactory = getSecureQueryViewModelFactory;
+    }
 
     [RelayCommand]
     public void Continue()
@@ -17,6 +28,8 @@ public partial class GameOverDialogViewModel : ObservableObject, IGameOverDialog
     [RelayCommand]
     public void NewGame()
     {
-        throw new NotSupportedException(nameof(NewGame));
+        var getSecureQueryDialogViewModel = _getSecureQueryViewModelFactory.Create();
+        getSecureQueryDialogViewModel.Message = "Are you shure!";
+        _getSecureQueryDialog.ShowDialog(getSecureQueryDialogViewModel);
     }
 }

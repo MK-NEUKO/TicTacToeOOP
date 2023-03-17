@@ -4,7 +4,7 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
 
-public abstract class WindowService : IWindowService
+public abstract class WindowService<T> : IWindowService<T>
 {
     private readonly IAbstractFactory<DialogWindow> _dialogAbstractFactory;
     private readonly Func<MainWindow> _owner;

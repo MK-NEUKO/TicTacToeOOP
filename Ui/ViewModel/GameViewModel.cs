@@ -19,7 +19,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
-    private readonly IWindowService _dialogService;
+    private readonly IWindowService<IGameOverDialogViewModel> _dialogService;
     private bool _isDraw;
     private bool _isGameOver;
 
@@ -27,7 +27,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
                          IViewModelFactory<IPlayerViewModel> playerFactory, 
                          IPlayerGameBoardViewModel playerGameBoard, 
                          IGameEvaluator gameEvaluator,
-                         IWindowService dialogService)
+                         IWindowService<IGameOverDialogViewModel> dialogService)
     {
         _gameOverFactory = gameOverFactory ?? throw new ArgumentNullException(nameof(gameOverFactory));
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));

@@ -34,6 +34,8 @@
             </Button>
             <Button Style="{StaticResource ButtonStyle}"
                     Content="New Game"
+                    Command="{Binding Path=NewGameCommand}"
+                    Click="CloseDialog"
                     Height="25"
                     Width="80"
                     Margin="5,5,15,15">
