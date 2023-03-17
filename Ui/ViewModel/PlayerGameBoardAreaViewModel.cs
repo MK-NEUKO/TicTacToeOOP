@@ -12,26 +12,26 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
 {
     private int _counterMouseEnter;
-
-    [ObservableProperty]
-    private int _id;
-
-    [ObservableProperty]
-    private string? _token;
-
-    [ObservableProperty]
-    private bool _isWinArea;
-
-    [ObservableProperty]
-    private bool _isStartNewGameAnimation;
-
-    [ObservableProperty]
-    private bool _isStartSaveGameAnimation;
-
-    [ObservableProperty] 
-    private bool _isOccupied;
-
     private bool _canShowIsOccupied;
+    private PlayerViewModel? _currentPlayer;
+
+    [ObservableProperty] private int _id;
+    [ObservableProperty] private string? _token;
+    [ObservableProperty] private bool _isWinArea;
+    [ObservableProperty] private bool _isStartNewGameAnimation;
+    [ObservableProperty] private bool _isStartSaveGameAnimation;
+    [ObservableProperty] private bool _isOccupied;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
+    private bool _isInGame;
+
+    public PlayerGameBoardAreaViewModel()
+    {
+        _token = string.Empty;
+        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) => 
+            _currentPlayer = m.Value ?? throw  new ArgumentNullException(nameof(_currentPlayer)));
+    }
 
     public bool CanShowIsOccupied
     {
@@ -44,15 +44,6 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
                 MouseEnterCommand.NotifyCanExecuteChanged();
             }
         }
-    }
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
-    private bool _isInGame;
-        
-    public PlayerGameBoardAreaViewModel()
-    {
-        _token = string.Empty;
     }
 
     [RelayCommand(CanExecute = nameof(CanMouseEnter))]
@@ -78,6 +69,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 
     private bool CanAreaWasClicked()
     {
-        return IsInGame;
+        var isInGameAndIsHuman = IsInGame && !_currentPlayer!.IsAi;
+        return isInGameAndIsHuman;
     }
 }

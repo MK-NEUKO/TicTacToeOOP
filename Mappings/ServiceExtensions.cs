@@ -7,16 +7,6 @@ namespace MichaelKoch.TicTacToe.Mappings;
 
 public static class ServiceExtensions
 {
-    public static void AddTicTacToeView(this IServiceCollection services)
-    {
-        
-    }
-
-    private static void AddWindowFactory<TWindow, TContent>(this IServiceCollection services)
-    {
-
-    }
-
     public static void AddTicTacToeViewModel(this IServiceCollection services)
     {
         services.AddSingleton<IPlayerGameBoardViewModel, PlayerGameBoardViewModel>();
