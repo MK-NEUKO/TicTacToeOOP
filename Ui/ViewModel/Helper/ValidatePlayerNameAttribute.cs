@@ -7,6 +7,7 @@ public class ValidatePlayerNameAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
     {
+        if (value == null) throw new ArgumentNullException(nameof(value));
         const string pattern = @"^[a-zA-Z0-9]+$";
         var name = Convert.ToString(value);
         var isValid = Regex.IsMatch(name, pattern);

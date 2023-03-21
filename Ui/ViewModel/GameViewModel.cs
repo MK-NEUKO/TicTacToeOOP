@@ -12,49 +12,35 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class GameViewModel : ObservableObject, IGameViewModel
 {
-    [ObservableProperty] private IPlayerViewModel _playingPlayerX;
-    [ObservableProperty] private IPlayerViewModel _playingPlayerO;
-    private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverFactory;
-    private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
+    private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverDialogViewModelFactory;
+    private readonly IWindowService<IGameOverDialogViewModel> _gameOverDialogService;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
+    private readonly IPlayingPlayerViewModel _playingPlayer;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
-    private readonly IWindowService<IGameOverDialogViewModel> _dialogService;
-    private bool _isDraw;
-    private bool _isGameOver;
 
-    public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverFactory,
-                         IViewModelFactory<IPlayerViewModel> playerFactory, 
-                         IPlayerGameBoardViewModel playerGameBoard, 
-                         IGameEvaluator gameEvaluator,
-                         IWindowService<IGameOverDialogViewModel> dialogService)
+    public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverDialogViewModelFactory,
+                         IWindowService<IGameOverDialogViewModel> gameOverDialogService,
+                         IPlayerGameBoardViewModel playerGameBoard,
+                         IPlayingPlayerViewModel playingPlayer,
+                         IGameEvaluator gameEvaluator)
     {
-        _gameOverFactory = gameOverFactory ?? throw new ArgumentNullException(nameof(gameOverFactory));
-        _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+        _gameOverDialogViewModelFactory = gameOverDialogViewModelFactory ?? throw new ArgumentNullException(nameof(gameOverDialogViewModelFactory));
+        _gameOverDialogService = gameOverDialogService ?? throw new ArgumentNullException(nameof(gameOverDialogService));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
+        _playingPlayer = playingPlayer;
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
-        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
-        _playingPlayerX = CreatePlayer("X");
-        _playingPlayerO = CreatePlayer("O");
-        _currentPlayer = CreatePlayer("X");
-        WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, StartGameButtonClickedMessageHandler);
-        WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, GameBoardAreaWasClickedHandler);
+        _currentPlayer = null!;
+        WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
+        {
+            _playerGameBoard.StartGameStartAnimation();
+        });
+        WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, (GameBoardAreaWasClickedHandler));
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, GameBoardStartAnimationCompletedHandler);
-        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, CurrentPlayerChangedMessageHandler);
-    }
-
-    private IPlayerViewModel CreatePlayer(string token)
-    {
-        if (token == null) throw new ArgumentNullException(nameof(token));
-        var player = _playerFactory.Create();
-        player.Token = token;
-        player.Name = "Player" + player.Token;
-        return player;
-    }
-
-    private void CurrentPlayerChangedMessageHandler(object recipient, CurrentPlayerChangedMessage message)
-    {
-        _currentPlayer = message.Value;
+        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
+        {
+            _currentPlayer = m.Value;
+        });
     }
 
     private async void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
@@ -66,13 +52,6 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     {
         var clickedAreaId = message.Value;
         await MakeAMoveAsync(clickedAreaId);
-    }
-
-    private void StartGameButtonClickedMessageHandler(object recipient, StartGameButtonClickedMessage buttonClickedMessage)
-    {
-        PlayingPlayerX = buttonClickedMessage.Value.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
-        PlayingPlayerO = buttonClickedMessage.Value.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(StartGameButtonClickedMessageHandler));
-        _playerGameBoard.StartGameStartAnimation();
     }
 
     private async Task MakeAMoveAsync(int clickedAreaId = 10)
@@ -108,9 +87,9 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _playerGameBoard.AnimateWinAreas(evaluationResult.WinAreas);
         _currentPlayer.IsWinner = evaluationResult.IsWinner;
         _currentPlayer.SetPoint();
-        var gameOverViewModel = _gameOverFactory.Create();
+        var gameOverViewModel = _gameOverDialogViewModelFactory.Create();
         gameOverViewModel.Message = $"{_currentPlayer.Name} is the winner and gets a Point";
-        _dialogService.ShowDialog(gameOverViewModel);
+        _gameOverDialogService.ShowDialog(gameOverViewModel);
         return;
     }
 
@@ -123,8 +102,8 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     {
         await Task.Run(() =>
         {
-            PlayingPlayerX.IsPlayersTurn = !PlayingPlayerX.IsPlayersTurn;
-            PlayingPlayerO.IsPlayersTurn = !PlayingPlayerO.IsPlayersTurn;
+            _playingPlayer.PlayingPlayerX.IsPlayersTurn = !_playingPlayer.PlayingPlayerX.IsPlayersTurn;
+            _playingPlayer.PlayingPlayerO.IsPlayersTurn = !_playingPlayer.PlayingPlayerO.IsPlayersTurn;
         });
     }
 }

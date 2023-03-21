@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="300">
 
     <d:UserControl.DataContext>
-        <sampleData:GameViewModelSampleData/>
+        <sampleData:PlayingPlayerViewModelSampleData/>
     </d:UserControl.DataContext>
 
     <UserControl.Resources>

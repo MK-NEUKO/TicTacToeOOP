@@ -34,7 +34,7 @@
             </userControls:PlayerGameBoard>
 
             <userControls:GameInfoBoard Grid.Row="1"
-                                        DataContext="{Binding Path=GameViewModel}">
+                                        DataContext="{Binding Path=PlayingPlayerViewModel}">
             </userControls:GameInfoBoard>
         </Grid>
     </DockPanel>

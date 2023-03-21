@@ -13,7 +13,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 {
     private int _counterMouseEnter;
     private bool _canShowIsOccupied;
-    private PlayerViewModel? _currentPlayer;
+    private IPlayerViewModel _currentPlayer;
 
     [ObservableProperty] private int _id;
     [ObservableProperty] private string? _token;
@@ -29,8 +29,11 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     public PlayerGameBoardAreaViewModel()
     {
         _token = string.Empty;
-        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) => 
-            _currentPlayer = m.Value ?? throw  new ArgumentNullException(nameof(_currentPlayer)));
+        _currentPlayer = null!;
+        WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
+        {
+            _currentPlayer = m.Value ?? throw new ArgumentNullException(nameof(_currentPlayer));
+        });
     }
 
     public bool CanShowIsOccupied
