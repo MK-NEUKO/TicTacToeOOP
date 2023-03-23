@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -22,7 +24,7 @@ public partial class GameOverDialogViewModel : ObservableObject, IGameOverDialog
     [RelayCommand]
     public void Continue()
     {
-        throw new NotImplementedException(nameof(Continue));
+        WeakReferenceMessenger.Default.Send(new ContinueGameMessage(1));
     }
 
     [RelayCommand]

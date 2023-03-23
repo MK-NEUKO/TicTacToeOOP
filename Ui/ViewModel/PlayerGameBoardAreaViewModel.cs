@@ -29,10 +29,10 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     public PlayerGameBoardAreaViewModel()
     {
         _token = string.Empty;
-        _currentPlayer = null!;
         WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
         {
             _currentPlayer = m.Value ?? throw new ArgumentNullException(nameof(_currentPlayer));
+            AreaWasClickedCommand.NotifyCanExecuteChanged();
         });
     }
 
@@ -72,7 +72,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 
     private bool CanAreaWasClicked()
     {
-        var isInGameAndIsHuman = IsInGame && !_currentPlayer!.IsAi;
+        var isInGameAndIsHuman = IsInGame && _currentPlayer.IsHuman;
         return isInGameAndIsHuman;
     }
 }

@@ -7,11 +7,9 @@ namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 public class GameEvaluator : IGameEvaluator
 {
     private readonly int[,] _winConstellations;
-    private readonly EvaluationResult _evaluationResult;
 
     public GameEvaluator()
     {
-        _evaluationResult = new EvaluationResult();
         _winConstellations = new int[8, 3]
         {
             {0,1,2}, /*  +---+---+---+  */
@@ -29,13 +27,14 @@ public class GameEvaluator : IGameEvaluator
     {
         if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
         if (currentToken == null) throw new ArgumentNullException(nameof(currentToken));
-        await DetermineWinnerAsync(tokenList, currentToken);
-        await DetermineDrawAsync(tokenList);
+        var evaluationResult = new EvaluationResult();
+        await DetermineWinnerAsync(tokenList, currentToken, evaluationResult);
+        await DetermineDrawAsync(tokenList, evaluationResult);
 
-        return _evaluationResult;
+        return evaluationResult;
     }
 
-    private async Task DetermineWinnerAsync(IReadOnlyList<string> tokenList, string currentToken)
+    private async Task DetermineWinnerAsync(IReadOnlyList<string> tokenList, string currentToken, EvaluationResult evaluationResult)
     {
         await Task.Run(() =>
         {
@@ -48,21 +47,21 @@ public class GameEvaluator : IGameEvaluator
                 currentContent += tokenList[_winConstellations[i, 2]];
 
                 if (currentContent != referenceString) continue;
-                _evaluationResult.WinAreas[_winConstellations[i, 0]] = true;
-                _evaluationResult.WinAreas[_winConstellations[i, 1]] = true;
-                _evaluationResult.WinAreas[_winConstellations[i, 2]] = true;
-                _evaluationResult.IsWinner = true;
+                evaluationResult.WinAreas[_winConstellations[i, 0]] = true;
+                evaluationResult.WinAreas[_winConstellations[i, 1]] = true;
+                evaluationResult.WinAreas[_winConstellations[i, 2]] = true;
+                evaluationResult.IsWinner = true;
             }
         });
     }
 
-    private async Task DetermineDrawAsync(IReadOnlyList<string> tokenList)
+    private async Task DetermineDrawAsync(IReadOnlyList<string> tokenList, EvaluationResult evaluationResult)
     {
         await Task.Run(() =>
         {
-            if (_evaluationResult.IsWinner) return;
+            if (evaluationResult.IsWinner) return;
             if (tokenList.Contains(string.Empty)) return;
-            _evaluationResult.IsDraw = true;
+            evaluationResult.IsDraw = true;
         });
     }
 }

@@ -17,7 +17,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IPlayingPlayerViewModel _playingPlayer;
     private readonly IGameEvaluator _gameEvaluator;
-    private IPlayerViewModel _currentPlayer;
+    private IPlayerViewModel? _currentPlayer;
 
     public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverDialogViewModelFactory,
                          IWindowService<IGameOverDialogViewModel> gameOverDialogService,
@@ -30,7 +30,6 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _playingPlayer = playingPlayer;
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
-        _currentPlayer = null!;
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
             _playerGameBoard.StartGameStartAnimation();
@@ -44,7 +43,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     }
 
     private async void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
-    { 
+    {
         await MakeAMoveAsync();
     }
 
@@ -56,18 +55,19 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
     private async Task MakeAMoveAsync(int clickedAreaId = 10)
     {
-        var counter = 0;
         do
         {
+            if(_currentPlayer is null) return;
             var areaId = await _currentPlayer.GiveTokenPositionTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
             if(areaId == -1) return;
-            if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token!, _currentPlayer.IsHuman, areaId)) return;
+            if(_currentPlayer.Token is  null) return;
+            if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
 
-            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token!);
+            var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token);
             if (evaluationResult.IsWinner)
             {
                 ShowWinner(evaluationResult);
-                return;
+                //if(_currentPlayer.IsHuman) return;
             }
 
             if (evaluationResult.IsDraw)
@@ -76,10 +76,9 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
                 return;
             }
 
-            await ChangeCurrentPlayerAsync();
-            counter++;
+            ChangeCurrentPlayer();
 
-        } while (_currentPlayer.IsAi && counter < 9);
+        } while (_currentPlayer.IsAi);
     }
 
     private void ShowWinner(IEvaluationResult evaluationResult)
@@ -90,20 +89,19 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         var gameOverViewModel = _gameOverDialogViewModelFactory.Create();
         gameOverViewModel.Message = $"{_currentPlayer.Name} is the winner and gets a Point";
         _gameOverDialogService.ShowDialog(gameOverViewModel);
-        return;
     }
 
     private void ShowDraw()
     {
-        _currentPlayer.Points = 25;
+        var gameOverViewModel = _gameOverDialogViewModelFactory.Create();
+        gameOverViewModel.Message =
+            "The game is a draw, no one gets a point. The draw games are counted under the player display.";
+        _gameOverDialogService.ShowDialog(gameOverViewModel);
     }
 
-    private async Task ChangeCurrentPlayerAsync()
+    private void ChangeCurrentPlayer()
     {
-        await Task.Run(() =>
-        {
-            _playingPlayer.PlayingPlayerX.IsPlayersTurn = !_playingPlayer.PlayingPlayerX.IsPlayersTurn;
-            _playingPlayer.PlayingPlayerO.IsPlayersTurn = !_playingPlayer.PlayingPlayerO.IsPlayersTurn;
-        });
+        _playingPlayer.PlayingPlayerX.IsPlayersTurn = !_playingPlayer.PlayingPlayerX.IsPlayersTurn;
+        _playingPlayer.PlayingPlayerO.IsPlayersTurn = !_playingPlayer.PlayingPlayerO.IsPlayersTurn;
     }
 }

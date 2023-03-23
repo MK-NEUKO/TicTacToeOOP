@@ -29,7 +29,8 @@
                     Content="Continue"
                     Margin="5,5,10,15"
                     IsDefault="True"
-                    Click="CloseDialog">
+                    Click="CloseDialog"
+                    Command="{Binding Path=ContinueCommand}">
 
             </Button>
             <Button Style="{StaticResource ButtonStyle}"

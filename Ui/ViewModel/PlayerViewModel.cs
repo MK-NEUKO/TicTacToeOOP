@@ -20,6 +20,10 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 
     public PlayerViewModel()
     {
+        WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
+        {
+            IsWinner = false;
+        });
     }
 
     public bool IsAi
