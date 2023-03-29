@@ -22,6 +22,10 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public bool IsInGame { get; set; }
         public bool CanShowIsOccupied { get; set; }
         public IRelayCommand AreaWasClickedCommand { get; set; } = null!;
-        public IRelayCommand MouseEnterCommand { get; set; } = null!;
+        public IRelayCommand MouseEnterForShowIsOccupiedCommand { get; set; } = null!;
+        public void ResetToContinue()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

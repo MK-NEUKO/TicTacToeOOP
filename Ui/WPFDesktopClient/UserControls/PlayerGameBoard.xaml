@@ -381,7 +381,7 @@
                         x:Name="AreaButton">
                     <behaviors:Interaction.Triggers>
                         <behaviors:EventTrigger EventName="MouseEnter" SourceName="AreaButton">
-                            <behaviors:InvokeCommandAction Command="{Binding Path=MouseEnterCommand}"/>
+                            <behaviors:InvokeCommandAction Command="{Binding Path=MouseEnterForShowIsOccupiedCommand}"/>
                         </behaviors:EventTrigger>
                     </behaviors:Interaction.Triggers>
                 </Button>

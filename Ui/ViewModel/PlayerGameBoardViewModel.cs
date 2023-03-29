@@ -21,19 +21,8 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         _areas = GetAreas();
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
-            SetupGameBoardForContinue();
+            _areas.ForEach(a => a.ResetToContinue());
         });
-    }
-
-    private void SetupGameBoardForContinue()
-    {
-        foreach (var area in _areas)
-        {
-            area.Token = string.Empty;
-            area.IsWinArea = false;
-            area.IsOccupied = false;
-            area.CanShowIsOccupied = false;
-        }
     }
 
     private List<IPlayerGameBoardAreaViewModel> GetAreas()

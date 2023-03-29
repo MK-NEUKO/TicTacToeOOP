@@ -28,7 +28,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         _gameOverDialogViewModelFactory = gameOverDialogViewModelFactory ?? throw new ArgumentNullException(nameof(gameOverDialogViewModelFactory));
         _gameOverDialogService = gameOverDialogService ?? throw new ArgumentNullException(nameof(gameOverDialogService));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
-        _playingPlayer = playingPlayer;
+        _playingPlayer = playingPlayer ?? throw new ArgumentNullException(nameof(playingPlayer));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
@@ -53,27 +53,23 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         await MakeAMoveAsync(clickedAreaId);
     }
 
-    private async Task MakeAMoveAsync(int clickedAreaId = 10)
+    private async Task MakeAMoveAsync(int clickedAreaId = -1)
     {
         do
         {
-            if(_currentPlayer is null) return;
             var areaId = await _currentPlayer.GiveTokenPositionTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
             if(areaId == -1) return;
-            if(_currentPlayer.Token is  null) return;
             if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
 
             var evaluationResult = await _gameEvaluator.EvaluateGameTaskAsync(_playerGameBoard.GetCurrentTokenList(), _currentPlayer.Token);
             if (evaluationResult.IsWinner)
             {
                 ShowWinner(evaluationResult);
-                //if(_currentPlayer.IsHuman) return;
             }
 
             if (evaluationResult.IsDraw)
             {
                 ShowDraw();
-                return;
             }
 
             ChangeCurrentPlayer();

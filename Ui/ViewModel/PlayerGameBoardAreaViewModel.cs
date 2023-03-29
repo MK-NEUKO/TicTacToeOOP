@@ -13,7 +13,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 {
     private int _counterMouseEnter;
     private bool _canShowIsOccupied;
-    private IPlayerViewModel _currentPlayer;
+    private IPlayerViewModel? _currentPlayer;
 
     [ObservableProperty] private int _id;
     [ObservableProperty] private string? _token;
@@ -44,13 +44,13 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
             if (IsOccupied && _counterMouseEnter >= 1)
             {
                 SetProperty(ref _canShowIsOccupied, value);
-                MouseEnterCommand.NotifyCanExecuteChanged();
+                MouseEnterForShowIsOccupiedCommand.NotifyCanExecuteChanged();
             }
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanMouseEnter))]
-    private void MouseEnter()
+    [RelayCommand(CanExecute = nameof(CanMouseEnterForShowIsOccupied))]
+    private void MouseEnterForShowIsOccupied()
     {
         if (IsOccupied)
         {
@@ -59,9 +59,10 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         }
     }
 
-    private bool CanMouseEnter()
+    private bool CanMouseEnterForShowIsOccupied()
     {
-        return _counterMouseEnter <= 1;
+        var mouseEnterAfterPlaceAToken = _counterMouseEnter <= 1;
+        return mouseEnterAfterPlaceAToken;
     }
 
     [RelayCommand(CanExecute = nameof(CanAreaWasClicked))]
@@ -74,5 +75,14 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     {
         var isInGameAndIsHuman = IsInGame && _currentPlayer.IsHuman;
         return isInGameAndIsHuman;
+    }
+
+    public void ResetToContinue()
+    {
+        Token = string.Empty;
+        IsWinArea = false;
+        CanShowIsOccupied = false;
+        IsOccupied = false;
+        _counterMouseEnter = 0;
     }
 }
