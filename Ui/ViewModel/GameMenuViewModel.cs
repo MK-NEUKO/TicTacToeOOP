@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
@@ -16,7 +13,10 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 {
     private bool _isStartButtonClicked;
+    private bool _isGameStartAnimationCompleted;
     private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
+    private readonly IViewModelFactory<IGetSecureQueryDialogViewModel> _getSecureQueryDialogViewModelFactory;
+    private readonly IWindowService<IGetSecureQueryDialogViewModel> _getSecureQueryDialogService;
 
     private string? _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
@@ -24,7 +24,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private bool _isPlayersTurnPlayerX;
     [ObservableProperty] private bool _isWinnerPlayerX;
     [ObservableProperty] private int _pointsPlayerX;
-    [ObservableProperty] private string? _tokenPlayerX;
+    [ObservableProperty] private string _tokenPlayerX;
 
     private string? _namePlayerO;
     [ObservableProperty] private bool _isAiPlayerO;
@@ -32,12 +32,34 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private bool _isPlayersTurnPlayerO;
     [ObservableProperty] private bool _isWinnerPlayerO;
     [ObservableProperty] private int _pointsPlayerO;
-    [ObservableProperty] private string? _tokenPlayerO;
+    [ObservableProperty] private string _tokenPlayerO;
 
-    public GameMenuViewModel(IViewModelFactory<IPlayerViewModel> playerFactory)
+    public GameMenuViewModel(IViewModelFactory<IPlayerViewModel> playerFactory,
+                             IViewModelFactory<IGetSecureQueryDialogViewModel> getSecureQueryDialogViewModelFactory,
+                             IWindowService<IGetSecureQueryDialogViewModel> getSecureQueryDialogService)
     {
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
+        _getSecureQueryDialogViewModelFactory = getSecureQueryDialogViewModelFactory ?? throw new ArgumentNullException(nameof(getSecureQueryDialogViewModelFactory));
+        _getSecureQueryDialogService = getSecureQueryDialogService ?? throw new ArgumentNullException(nameof(getSecureQueryDialogService));
+        _tokenPlayerX = string.Empty;
+        _tokenPlayerO = string.Empty;
+        WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, (r, m) =>
+        {
+            _isGameStartAnimationCompleted = true;
+            StopGameCommand.NotifyCanExecuteChanged();
+        });
+        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, Handler);
     }
+
+    private void Handler(object recipient, StartNewGameMessage message)
+    { 
+        Reset.Invoke();
+        _isStartButtonClicked = false;
+        _isGameStartAnimationCompleted = false;
+        StopGameCommand.NotifyCanExecuteChanged();
+    }
+
+    public Action Reset { get; set; } = null!;
 
     [ValidatePlayerName]
     public string? NamePlayerX
@@ -66,15 +88,31 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     {
         _isStartButtonClicked = true;
         StartGameCommand.NotifyCanExecuteChanged();
-        var playerList = new List<IPlayerViewModel>();
-        playerList.Add(CreatePlayerX());
-        playerList.Add(CreatePlayerO());
+        StopGameCommand.NotifyCanExecuteChanged();
+        var playerList = new List<IPlayerViewModel>
+        {
+            CreatePlayerX(),
+            CreatePlayerO()
+        };
         WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(playerList));
     }
 
     private bool CanStartGame()
     {
         return !HasErrors && !_isStartButtonClicked;
+    }
+
+    [RelayCommand(CanExecute = nameof(CanStopGame))]
+    private void StopGame()
+    {
+        var getSecureQueryDialogViewModel = _getSecureQueryDialogViewModelFactory.Create();
+        getSecureQueryDialogViewModel.Message = "Are you sure to stop the game! All points and settings will be lost";
+        _getSecureQueryDialogService.ShowDialog(getSecureQueryDialogViewModel);
+    }
+
+    private bool CanStopGame()
+    {
+        return _isStartButtonClicked && _isGameStartAnimationCompleted;
     }
 
     [RelayCommand]

@@ -22,5 +22,10 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         {
             throw new System.NotImplementedException();
         }
+
+        public void ResetPlayer(string token)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

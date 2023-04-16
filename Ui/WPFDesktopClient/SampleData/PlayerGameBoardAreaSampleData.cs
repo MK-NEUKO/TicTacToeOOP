@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
@@ -13,7 +14,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
             Token = " ";
         }
 
-        public string? Token { get; set; }
+        public string Token { get; set; }
         public int Id { get; set; }
         public bool IsWinArea { get; set; }
         public bool IsOccupied { get; set; }
@@ -24,6 +25,11 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public IRelayCommand AreaWasClickedCommand { get; set; } = null!;
         public IRelayCommand MouseEnterForShowIsOccupiedCommand { get; set; } = null!;
         public void ResetToContinue()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResetForNewGame()
         {
             throw new System.NotImplementedException();
         }

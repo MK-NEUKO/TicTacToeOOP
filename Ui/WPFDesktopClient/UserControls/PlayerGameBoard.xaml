@@ -390,8 +390,14 @@
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsStartNewGameAnimation}"  Value="true">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}">
+                        <BeginStoryboard Storyboard="{StaticResource StartNewGameAnimation}"
+                                         Name="BeginStartNewGameAnimation">
                         </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsStartNewGameAnimation}" Value="false">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard BeginStoryboardName="BeginStartNewGameAnimation"></StopStoryboard>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsStartSaveGameAnimation}" Value="true">
@@ -418,7 +424,8 @@
                         </BeginStoryboard>
                     </MultiDataTrigger.EnterActions>
                     <MultiDataTrigger.ExitActions>
-                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseAwayAnimation}">
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseAwayAnimation}"
+                                         Name="BeginIsOccupiedMouseAwayAnimation">
                         </BeginStoryboard>
                     </MultiDataTrigger.ExitActions>
                 </MultiDataTrigger>
@@ -434,9 +441,16 @@
                         </BeginStoryboard>
                     </MultiDataTrigger.EnterActions>
                     <MultiDataTrigger.ExitActions>
-                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedReleaseAnimation}"></BeginStoryboard>
+                        <BeginStoryboard Storyboard="{StaticResource IsOccupiedReleaseAnimation}"
+                                         Name="BeginIsOccupiedReleaseAnimation"/>
                     </MultiDataTrigger.ExitActions>
                 </MultiDataTrigger>
+                <DataTrigger Binding="{Binding Path=IsInGame}" Value="false">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard BeginStoryboardName="BeginIsOccupiedMouseAwayAnimation"/>
+                        <StopStoryboard BeginStoryboardName="BeginIsOccupiedReleaseAnimation"/>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding IsWinArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="true"/>

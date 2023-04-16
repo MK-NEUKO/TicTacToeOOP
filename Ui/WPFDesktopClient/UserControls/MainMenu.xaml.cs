@@ -1,16 +1,24 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using MichaelKoch.TicTacToe.Ui.ViewModel;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
 {
-    /// <summary>
-    /// Interaction logic for MainMenu.xaml
-    /// </summary>
     public partial class MainMenu : UserControl
     {
         public MainMenu()
         {
             InitializeComponent();
+            Loaded += MainMenu_Loaded;
+        }
+
+        private void MainMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is IMenuViewModel vm)
+            {
+                vm.GameMenuViewModel.Reset += () => this.ResetGameMenu();
+            } 
         }
 
         private void LoadNewGame_Checked(object sender, RoutedEventArgs e)
@@ -78,6 +86,20 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             HasNextTurnPlayerO.IsEnabled = true;
         }
 
+        private void DisableControlsPlayerXPlayerO()
+        {
+            SelectHumanPlayerX.IsEnabled = false;
+            SelectHumanPlayerO.IsEnabled = false;
+            SelectAiPlayerX.IsEnabled = false;
+            SelectAiPlayerO.IsEnabled = false;
+            NamePlayerX.IsEnabled = false;
+            NamePlayerO.IsEnabled = false;
+            SelectDifficultyLevelPlayerX.IsEnabled = false;
+            SelectDifficultyLevelPlayerO.IsEnabled = false;
+            HasNextTurnPlayerX.IsEnabled = false;
+            HasNextTurnPlayerO.IsEnabled = false;
+        }
+
         private void UncheckRadioButtonsPlayerXPlayerO()
         {
             SelectHumanPlayerX.IsChecked = false;
@@ -128,6 +150,22 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
         private void HasNextTurnPlayerO_Checked(object sender, RoutedEventArgs e)
         {
             HasNextTurnPlayerX.IsChecked = false;
+        }
+
+        private void ResetGameOptionButtons()
+        {
+            NewGame.IsEnabled = true;
+            NewGame.IsChecked = false;
+            LoadLastGame.IsEnabled = true;
+            LoadLastGame.IsChecked = false;
+            ControlsCoverGameOptions.Visibility = Visibility.Hidden;
+        }
+
+        public void ResetGameMenu()
+        {
+            ResetGameOptionButtons();
+            DisableControlsPlayerXPlayerO();
+            UncheckRadioButtonsPlayerXPlayerO();
         }
     }
 }

@@ -21,28 +21,23 @@
                    VerticalAlignment="Center"
                    FontSize="12"
                    Foreground="{StaticResource TTTBlue}">
-
         </TextBlock>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Style="{StaticResource ButtonStyle}"
                     Height="25"
                     Width="80"
-                    Content="Continue"
+                    Content="CONTINUE"
                     Margin="5,5,10,15"
                     IsDefault="True"
-                    Click="CloseDialog"
                     Command="{Binding Path=ContinueCommand}">
-
             </Button>
             <Button Style="{StaticResource ButtonStyle}"
-                    Content="New Game"
+                    Content="NEW GAME"
                     Command="{Binding Path=NewGameCommand}"
-                    Click="CloseDialog"
                     Height="25"
                     Width="80"
                     Margin="5,5,15,15">
-
             </Button>
         </StackPanel>
     </StackPanel>

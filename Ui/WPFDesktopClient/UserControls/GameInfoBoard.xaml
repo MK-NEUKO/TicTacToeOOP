@@ -27,34 +27,34 @@
         <Style x:Key="BorderTriggerPlayerX" TargetType="Border">
             <Setter Property="BorderThickness" Value="0,0,4,0"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
-                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
-                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="RectangleTriggerPlayerX" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
-                    <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsPlayersTurn}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
-                    <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -77,35 +77,36 @@
         <!--PlayerO Section-->
 
         <Style x:Key="BorderTriggerPlayerO" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0,0,4,0"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
-                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
-                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="RectangleTriggerPlayerO" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
-                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
-                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PlayingPlayerX.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsPlayersTurn}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PlayingPlayerO.IsWinner}" Value="true">
+                    <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -377,12 +378,10 @@
                     </Grid.ColumnDefinitions>
             
                     <Border Grid.Column="0"
-                            Style="{StaticResource BorderTriggerPlayerO}"
-                            BorderThickness="0,0,4,0">
+                            Style="{StaticResource BorderTriggerPlayerO}">
                     </Border>
                     <Border Grid.Column="0"
-                            Style="{StaticResource BorderTriggerPlayerO}"
-                            BorderThickness="0,0,4,0">
+                            Style="{StaticResource BorderTriggerPlayerO}">
                         <Border.Effect>
                             <BlurEffect Radius="5"/>
                         </Border.Effect>

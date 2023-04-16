@@ -44,8 +44,13 @@ public interface IGameMenuViewModel
     /// <inheritdoc cref="GameMenuViewModel._tokenPlayerO"/>
     string? TokenPlayerO { get; set; }
 
+    Action Reset { get; set; }
+
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="GameMenuViewModel.StartGame"/>.</summary>
     IRelayCommand? StartGameCommand { get; }
+
+    /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="GameMenuViewModel.StopGame"/>.</summary>
+    IRelayCommand? StopGameCommand { get; }
 
     /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="GameMenuViewModel.SetupDefaultPlayer"/>.</summary>
     IRelayCommand? SetupDefaultPlayerCommand { get; }

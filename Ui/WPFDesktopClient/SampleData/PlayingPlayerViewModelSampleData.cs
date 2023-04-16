@@ -15,7 +15,7 @@ public class PlayingPlayerViewModelSampleData : IPlayingPlayerViewModel
     public IPlayerViewModel PlayingPlayerX { get; set; }
     public IPlayerViewModel PlayingPlayerO { get; set; }
 
-    private IPlayerViewModel CreatePlayer(string token)
+    public IPlayerViewModel CreatePlayer(string token)
     {
         if (token == null) throw new ArgumentNullException(nameof(token));
         var player = new PlayerViewModelSampleData

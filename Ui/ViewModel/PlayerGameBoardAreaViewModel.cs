@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,10 +14,10 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 {
     private int _counterMouseEnter;
     private bool _canShowIsOccupied;
-    private IPlayerViewModel? _currentPlayer;
+    private bool _currentPlayerIsHuman;
 
     [ObservableProperty] private int _id;
-    [ObservableProperty] private string? _token;
+    [ObservableProperty] private string _token;
     [ObservableProperty] private bool _isWinArea;
     [ObservableProperty] private bool _isStartNewGameAnimation;
     [ObservableProperty] private bool _isStartSaveGameAnimation;
@@ -31,7 +32,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         _token = string.Empty;
         WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
         {
-            _currentPlayer = m.Value ?? throw new ArgumentNullException(nameof(_currentPlayer));
+            _currentPlayerIsHuman = m.Value.IsHuman;
             AreaWasClickedCommand.NotifyCanExecuteChanged();
         });
     }
@@ -73,16 +74,29 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 
     private bool CanAreaWasClicked()
     {
-        var isInGameAndIsHuman = IsInGame && _currentPlayer.IsHuman;
+        var isInGameAndIsHuman = IsInGame && _currentPlayerIsHuman;
         return isInGameAndIsHuman;
     }
 
     public void ResetToContinue()
+    {
+        InnerReset();
+    }
+
+    private void InnerReset()
     {
         Token = string.Empty;
         IsWinArea = false;
         CanShowIsOccupied = false;
         IsOccupied = false;
         _counterMouseEnter = 0;
+    }
+
+    public void ResetForNewGame()
+    {
+        InnerReset();
+        IsInGame = false;
+        IsStartNewGameAnimation = false;
+        IsStartSaveGameAnimation = false;
     }
 }

@@ -23,13 +23,17 @@ public partial class PlayingPlayerViewModel : ObservableObject, IPlayingPlayerVi
             PlayingPlayerX = m.Value.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(PlayingPlayerX));
             PlayingPlayerO = m.Value.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(PlayingPlayerO));
         });
+        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
+        {
+            PlayingPlayerX = CreatePlayer("X");
+            PlayingPlayerO = CreatePlayer("O");
+        });
     }
 
-    private IPlayerViewModel CreatePlayer(string token)
+    public IPlayerViewModel CreatePlayer(string token)
     {
-        if (token == null) throw new ArgumentNullException(nameof(token));
         var player = _playerFactory.Create();
-        player.Token = token;
+        player.Token = token ?? throw new ArgumentNullException(nameof(token));
         player.Name = "Player" + player.Token;
         return player;
     }

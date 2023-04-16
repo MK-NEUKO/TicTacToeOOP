@@ -1009,7 +1009,7 @@
                                     Height="auto"
                                     Margin="4"
                                     Content="Play"
-                                    Command="{Binding StartGameCommand}"
+                                    Command="{Binding Path=StartGameCommand}"
                                     x:Name="StartGameButton"
                                     IsEnabled="False"
                                     Click="StartGameButton_Click">
@@ -1020,6 +1020,7 @@
                                     Height="auto"
                                     Margin="4"
                                     Content="Stop"
+                                    Command="{Binding Path=StopGameCommand}"
                                     x:Name="StopGameButton"
                                     IsCancel="False"
                                     >

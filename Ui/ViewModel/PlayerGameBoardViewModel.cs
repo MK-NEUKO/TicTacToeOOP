@@ -11,7 +11,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoardViewModel
 {
     private int _animationCompletedCounter = 0;
-    private readonly List<IPlayerGameBoardAreaViewModel> _areas;
+    private /*readonly*/ List<IPlayerGameBoardAreaViewModel> _areas;
     private readonly IViewModelFactory<IPlayerGameBoardAreaViewModel> _areaFactory;
 
     public PlayerGameBoardViewModel(IGameEvaluator gameEvaluator, 
@@ -22,6 +22,10 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
             _areas.ForEach(a => a.ResetToContinue());
+        });
+        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
+        {
+            _areas.ForEach(a => a.ResetForNewGame());
         });
     }
 
@@ -42,10 +46,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     public List<string> GetCurrentTokenList()
     {
         var currentTokenList = new List<string>();
-        _areas.ForEach(a =>
-        {
-            if (a.Token != null) currentTokenList.Add(a.Token);
-        });
+        _areas.ForEach(a => { currentTokenList.Add(a.Token); });
         return currentTokenList;
     }
 
@@ -64,6 +65,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     {
         _animationCompletedCounter++;
         if (_animationCompletedCounter != 9) return;
+        _animationCompletedCounter = 0;
         _areas.ForEach(area => area.IsInGame = true);
         WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(this));
     }

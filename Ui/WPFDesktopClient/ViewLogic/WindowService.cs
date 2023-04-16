@@ -8,6 +8,7 @@ public abstract class WindowService<T> : IWindowService<T>
 {
     private readonly IAbstractFactory<DialogWindow> _dialogAbstractFactory;
     private readonly Func<MainWindow> _owner;
+    private DialogWindow? _dialogWindow;
 
     protected WindowService(IAbstractFactory<DialogWindow> dialogAbstractFactory, Func<MainWindow> owner)
     {
@@ -15,13 +16,21 @@ public abstract class WindowService<T> : IWindowService<T>
         _owner = owner;
     }
 
-    public virtual void ShowDialog(object viewModel)
+    public virtual void ShowDialog(object viewModel, Action<bool>? callback = null)
     {
-        var shellWindow = _dialogAbstractFactory.Create();
-        shellWindow.Owner = _owner();
-        shellWindow.Content = CreateContent(viewModel);
+        _dialogWindow = _dialogAbstractFactory.Create();
+        _dialogWindow.Owner = _owner();
+        _dialogWindow.Content = CreateContent(viewModel);
+        
+        var result = _dialogWindow.ShowDialog();
 
-        shellWindow.ShowDialog();
+        if (result == null) return;
+        callback?.Invoke((bool)result);
+    }
+
+    public virtual void CloseDialog()
+    {
+        _dialogWindow?.Close();
     }
 
     public abstract FrameworkElement CreateContent(object viewModel);

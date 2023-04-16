@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
@@ -15,6 +16,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
 
         public PlayerViewModelSampleData PlayerX { get; set; }
         public PlayerViewModelSampleData PlayerO { get; set; }
+        public Action Reset { get; set; }
 
         public string? NamePlayerX { get; set; }
         public string? NamePlayerO { get; set; }
@@ -31,6 +33,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public int PointsPlayerX { get; set; }
         public int PointsPlayerO { get; set; }
         public IRelayCommand? StartGameCommand { get; set; }
+        public IRelayCommand? StopGameCommand { get; set; }
         public IRelayCommand? SetupDefaultPlayerCommand { get; set; }
     }
 }

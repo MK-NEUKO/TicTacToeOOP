@@ -3,13 +3,13 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
-public interface IPlayerGameBoardAreaViewModel
+public interface  IPlayerGameBoardAreaViewModel
 {
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._id"/>
     int Id { get; set; }
 
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._token"/>
-    string? Token { get; set; }
+    string Token { get; set; }
 
     /// <inheritdoc cref="PlayerGameBoardAreaViewModel._isWinArea"/>
     bool IsWinArea { get; set; }
@@ -36,4 +36,6 @@ public interface IPlayerGameBoardAreaViewModel
     global::CommunityToolkit.Mvvm.Input.IRelayCommand MouseEnterForShowIsOccupiedCommand { get; }
 
     void ResetToContinue();
+
+    void ResetForNewGame();
 }

@@ -8,7 +8,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
 public class GameOverDialog : WindowService<IGameOverDialogViewModel>
 {
     private readonly IAbstractFactory<GameOverDialogControl> _contentFactory;
-    
+
     public GameOverDialog(IAbstractFactory<DialogWindow> dialogAbstractFactory, Func<MainWindow> owner,
                           IAbstractFactory<GameOverDialogControl> contentFactory) : base(dialogAbstractFactory, owner)
     {
