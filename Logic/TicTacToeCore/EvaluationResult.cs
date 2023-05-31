@@ -21,5 +21,7 @@ public class EvaluationResult : IEvaluationResult
 
     public List<bool> WinAreas { get; set; }
     public bool IsWinner { get; set; }
+    public bool IsLoser { get; set; }
     public bool IsDraw { get; set; }
+    public bool IsOpen { get; set; }
 }

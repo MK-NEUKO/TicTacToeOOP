@@ -27,6 +27,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
                     services.AddTicTacToeViewModel();
 
                     services.AddSingleton<IGameEvaluator, GameEvaluator>();
+                    services.AddSingleton<IMinimaxAlgorithm, MinimaxAlgorithm>();
 
                     services.AddSingleton<MainWindow>();
                 })

@@ -1,88 +1,194 @@
-﻿namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
+﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+using System.ComponentModel;
+using System.Xml.Linq;
 
-public class MinimaxAlgorithem
+namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
+
+public class MinimaxAlgorithm : IMinimaxAlgorithm
 {
-//    // Evaluate the value of a game state for a player
-//int Evaluate(GameState state, Player player)
-//{
-//    // TODO: implement your evaluation function here
-//    // For example, return 1 if player wins, -1 if player loses, 0 if draw
-//}
+    private string _player;
+    private string _opponent;
+    private GEvaluator evaluator = new GEvaluator();
 
-//// Generate the possible moves for a player from a game state
-//List<Move> GenerateMoves(GameState state, Player player)
-//{
-//    // TODO: implement your move generation function here
-//    // For example, return a list of valid moves for the player
-//}
+    public int FindBestMove(List<string> board, string player)
+    {
+        var bestMove = -1;
+        var bestNodeRating = int.MinValue;
+        _player = player;
+        _opponent = SetOpponent(player);
 
-//// Negamax algorithm with alpha-beta pruning
-//int Negamax(GameState state, Player player, int depth, int alpha, int beta)
-//{
-//    // If the game is over or the depth limit is reached, return the value of the state
-//    if (state.IsGameOver() || depth == 0)
-//    {
-//        return Evaluate(state, player);
-//    }
+        for (var i = 0; i < board.Count; i++)
+        {
+            if (board[i] == string.Empty)
+            {
+                board[i] = _player;
+                //var currentBoard = new List<string>(board);
+                var currentNodeRating = Minimax(board, 0, false);
+                //Console.WriteLine(currentNodeRating);
+                board[i] = string.Empty;
 
-//    // Initialize the best value to negative infinity
-//    int bestValue = int.MinValue;
+                if (currentNodeRating > bestNodeRating)
+                {
+                    bestMove = i;
+                    bestNodeRating = currentNodeRating;
+                }
+                //NodeList.Add(new Node{Depth = 0, NodeRating = currentNodeRating, Board = currentBoard, SetAreaId = i});
+            }
+        }
 
-//    // Loop through all possible moves for the player
-//    foreach (Move move in GenerateMoves(state, player))
-//    {
-//        // Apply the move to get the new state
-//        GameState newState = state.ApplyMove(move);
+        return bestMove;
+    }
 
-//        // Call negamax recursively for the opponent with the negated alpha and beta values
-//        int value = -Negamax(newState, player.Opponent(), depth - 1, -beta, -alpha);
+    private string SetOpponent(string player) => player switch
+    {
+        "X" => "O",
+        "O" => "X",
+        _ => throw new InvalidOperationException(nameof(SetOpponent))
+    };
 
-//        // Undo the move to restore the original state
-//        state.UndoMove(move);
+    private int Minimax(List<string> board, int depth, bool isMaximizer)
+    {
 
-//        // Update the best value and alpha value
-//        bestValue = Math.Max(bestValue, value);
-//        alpha = Math.Max(alpha, value);
+        var evaluationResult = evaluator.EvaluateGameState(board, _player);
 
-//        // If alpha is greater than or equal to beta, prune the remaining moves
-//        if (alpha >= beta)
-//        {
-//            break;
-//        }
-//    }
+        // If Maximizer has won the game 
+        // return his/her evaluated score
+        if(evaluationResult.NodeRating == 100) return evaluationResult.NodeRating - depth;
 
-//    // Return the best value
-//    return bestValue;
-//}
+        // If Minimizer has won the game 
+        // return his/her evaluated score
+        if(evaluationResult.NodeRating == -100) return evaluationResult.NodeRating + depth;
 
-//// Find the best move for a player from a game state using negamax algorithm
-//Move FindBestMove(GameState state, Player player, int depth)
-//{
-//    // Initialize the best move to null and the best value to negative infinity
-//    Move bestMove = null;
-//    int bestValue = int.MinValue;
+        // If there are no more moves and 
+        // no winner then it is a tie
+        if (evaluationResult.IsMoveLeft == false) return 0;
 
-//    // Loop through all possible moves for the player
-//    foreach (Move move in GenerateMoves(state, player))
-//    {
-//        // Apply the move to get the new state
-//        GameState newState = state.ApplyMove(move);
+        // If this maximizer's move
+        if (isMaximizer)
+        {
+            var bestNodeRating = int.MinValue;
 
-//        // Call negamax recursively for the opponent with a large negative and positive value for alpha and beta
-//        int value = -Negamax(newState, player.Opponent(), depth - 1, int.MinValue, int.MaxValue);
+            // Traverse all cells
+            for (var i = 0; i < board.Count; i++)
+            {
+                // Check if cell is empty
+                if (board[i] == string.Empty)
+                {
+                    // Make the move
+                    board[i] = _player;
 
-//        // Undo the move to restore the original state
-//        state.UndoMove(move);
+                    // Call minimax recursively and choose
+                    // the maximum value
+                    bestNodeRating = Math.Max(bestNodeRating, Minimax(board, depth + 1, !isMaximizer));
 
-//        // Update the best move and best value if the current value is better
-//        if (value > bestValue)
-//        {
-//            bestMove = move;
-//            bestValue = value;
-//        }
-//    }
+                    // Undo the move
+                    board[i] = string.Empty;
+                }
+            }
+            return bestNodeRating;
+        }
 
-//    // Return the best move
-//    return bestMove;
-//}
+        // If this minimizer's move
+        else
+        {
+            var bestNodeRating = int.MaxValue;
+
+            // Traverse all cells
+            for (var i = 0; i < board.Count; i++)
+            {
+                // Check if cell is empty
+                if (board[i] == string.Empty)
+                {
+                    // Make the move
+                    board[i] = _opponent;
+                    // Call minimax recursively and choose
+                    // the minimum value
+                    bestNodeRating = Math.Min(bestNodeRating, Minimax(board, depth + 1, !isMaximizer));
+
+                    // Undo the move
+                    board[i] = string.Empty;
+                }
+            }
+            return bestNodeRating;
+        }
+    } 
+}
+
+public class GEvaluator
+{
+    private readonly List<List<int>> _winPositions;
+
+    public GEvaluator()
+    {
+        _winPositions = new List<List<int>>
+        {
+            new List<int> { 0, 1, 2 },
+            new List<int> { 3, 4, 5 },
+            new List<int> { 6, 7, 8 },
+            new List<int> { 0, 3, 6 },
+            new List<int> { 1, 4, 7 },
+            new List<int> { 2, 5, 8 },
+            new List<int> { 0, 4, 8 },
+            new List<int> { 2, 4, 6 }
+        };
+    }
+
+    public GameEvaluationResult EvaluateGameState(List<string> board, string player)
+    {
+        var result = new GameEvaluationResult();
+        var opponet = GetOpponent(player);
+        result.NodeRating = GetNodeRating(board, player, opponet);
+        result.IsMoveLeft = GetIsMoveLeft(board, result);
+        result.IsDraw = GetIsDraw(result);
+
+        return result;
+    }
+
+
+    private string GetOpponent(string player) => player switch
+    {
+		"X" => "O",
+		"O" => "X",
+		_ => throw new InvalidOperationException(nameof(GetOpponent))
+    };
+
+    private int GetNodeRating(List<string> board, string player, string opponent)
+    {
+        var threeTimesPlayerToken = new string(Convert.ToChar(player), 3);
+        var threeTimesOpponentToken = new string(Convert.ToChar(opponent), 3);
+
+        foreach (var winPosition in _winPositions)
+        {
+            var currentContent = string.Empty;
+            winPosition.ForEach(i => currentContent += board[i]);
+            if (currentContent == threeTimesPlayerToken) return 100;
+            if(currentContent == threeTimesOpponentToken) return -100;
+        }
+        return 0;
+    }
+
+    private bool GetIsDraw(GameEvaluationResult result)
+    {
+        if (!result.IsMoveLeft && result.NodeRating == 0) return true;
+
+        return false;
+    }
+
+    private bool GetIsMoveLeft(List<string> board, GameEvaluationResult result)
+    {
+        foreach (var area in board)
+        {
+            if(area == string.Empty && result.NodeRating == 0) return true;
+        }
+        return false;
+    }
+}
+
+
+public class GameEvaluationResult
+{
+    public int NodeRating { get; set; }
+    public bool IsDraw { get; set; }
+    public bool IsMoveLeft { get; set; }
 }

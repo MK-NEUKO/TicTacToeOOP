@@ -10,6 +10,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
+    private readonly IMinimaxAlgorithm _ai;
     private bool _isAi;
     private bool _isHuman;
     private bool _isPlayersTurn;
@@ -18,8 +19,9 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
     [ObservableProperty] private int _points;
     [ObservableProperty] private string _token;
 
-    public PlayerViewModel()
+    public PlayerViewModel(IMinimaxAlgorithm ai)
     {
+        _ai = ai;
         _name = string.Empty;
         _token = string.Empty;
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
@@ -65,12 +67,14 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
     {
         if (this.IsAi)
         {
-            var area = 0;
+            var area = -1;
             await Task.Run(() =>
             {
                 // simulates the Ai
                 // TODO: Implement the Minimax Algorithem in TicTacToeCore-Project
-                area = tokenList.FindIndex(t => t == string.Empty);
+                //area = tokenList.FindIndex(t => t == string.Empty);
+
+                area = _ai.FindBestMove(tokenList, Token);
             });
             return area;
         }

@@ -4,5 +4,7 @@ public interface IEvaluationResult
 {
     List<bool> WinAreas { get; set; }
     bool IsWinner { get; set; }
+    bool IsLoser { get; set; }
     bool IsDraw { get; set; }
+    bool IsOpen { get; set; }
 }
