@@ -2,6 +2,7 @@
 
 public interface IGameEvaluator
 {
-    Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> tokenList, string playersToken);
-    Task<IEvaluationResultMinimax> EvaluateGameForMinimaxTaskAsync(List<string> currentGameBoard, string player);
+    Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> gameBoard, string player);
+    IEvaluationResultForMinimax EvaluateGameForMinimax(List<string> gameBoard, string player);
+    string GetOpponentOf(string player);
 }

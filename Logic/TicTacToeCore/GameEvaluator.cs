@@ -1,12 +1,10 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using CommunityToolkit.Mvvm.ComponentModel.__Internals;
+﻿using System.Diagnostics;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
 public class GameEvaluator : IGameEvaluator
 {
-    private readonly int[,] _winConstellations;
     private readonly List<List<int>> _winPositions;
 
     public GameEvaluator()
@@ -22,96 +20,83 @@ public class GameEvaluator : IGameEvaluator
             new List<int>{0,4,8},   /*  +---+---+---+  */
             new List<int>{2,4,6}
         };
-
-        _winConstellations = new int[8, 3]
-        {
-            {0,1,2}, /*  +---+---+---+  */
-            {3,4,5}, /*  | 0 | 1 | 2 |  */
-            {6,7,8}, /*  +---+---+---+  */
-            {0,3,6}, /*  | 3 | 4 | 5 |  */
-            {1,4,7}, /*  +---+---+---+  */
-            {2,5,8}, /*  | 6 | 7 | 8 |  */
-            {0,4,8}, /*  +---+---+---+  */
-            {2,4,6},
-        };
     }
 
-    public async Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> tokenList, string playersToken)
+    public Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> gameBoard, string player)
     {
-        if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
-        if (playersToken == null) throw new ArgumentNullException(nameof(playersToken));
-        var evaluationResult = new EvaluationResult();
-        await DetermineGameBoardStateAsync(tokenList, playersToken, evaluationResult);
+        var task = Task.Run<IEvaluationResult>(() =>
+        {
+            return EvaluateGameBoardBase(gameBoard, player);
+        });
+        return task;
+    }
 
+    public IEvaluationResultForMinimax EvaluateGameForMinimax(List<string> gameBoard, string player)
+    {
+        var evaluationResult = EvaluateGameBoardBase(gameBoard, player);
+        var evaluationResultForMinimax = new EvaluationResultForForMinimax();
+        evaluationResultForMinimax.IsMovesLeft = evaluationResult.IsMoveLeft;
+        CreateCurrentNodeRating(evaluationResultForMinimax,  evaluationResult);
+
+        return evaluationResultForMinimax;
+    }
+
+    private EvaluationResult EvaluateGameBoardBase(List<string> gameBoard, string player)
+    {
+        if (gameBoard == null) throw new ArgumentNullException(nameof(gameBoard));
+        if (player == null) throw new ArgumentNullException(nameof(player));
+        var evaluationResult = new EvaluationResult();
+        DetermineGameBoardState(gameBoard, player, evaluationResult);
         return evaluationResult;
     }
 
-    public async Task<IEvaluationResultMinimax> EvaluateGameForMinimaxTaskAsync(List<string> currentGameBoard, string player)
+    private void CreateCurrentNodeRating(IEvaluationResultForMinimax evaluationResultForMinimax, IEvaluationResult evaluationResult)
     {
-        var evaluationResult = await EvaluateGameTaskAsync(currentGameBoard, player);
-        var evaluationResultMinimax = new EvaluationResultMinimax();
-        evaluationResultMinimax.IsMovesLeft = evaluationResult.IsOpen;
-        evaluationResultMinimax.NodeRating = CalculateCurrentNodeRating(evaluationResult);
-
-        return evaluationResultMinimax;
+        if (evaluationResult.IsWinner) evaluationResultForMinimax.NodeRating = 100;
+        if (evaluationResult.IsLoser) evaluationResultForMinimax.NodeRating = -100;
+        if (evaluationResult.IsDraw) evaluationResultForMinimax.NodeRating = 0;
     }
 
-    private int CalculateCurrentNodeRating(IEvaluationResult evaluationResult)
+    public string GetOpponentOf(string player)
     {
-        if (evaluationResult.IsWinner) return 10;
-        if (evaluationResult.IsDraw) return 0;
-        if (evaluationResult.IsLoser) return -10;
-        return 404;
-    }
-
-    private async Task DetermineGameBoardStateAsync(IReadOnlyList<string> tokenList, string playersToken, EvaluationResult evaluationResult)
-    {
-        await Task.Run(() =>
+        return player switch
         {
-            var numberOfConstellations = _winConstellations.GetLength(0);
-            var referenceString = new string(Convert.ToChar(playersToken), 3);
-            for (var i = 0; i < numberOfConstellations; i++)
-            {
-                var currentContent = tokenList[_winConstellations[i, 0]];
-                currentContent += tokenList[_winConstellations[i, 1]];
-                currentContent += tokenList[_winConstellations[i, 2]];
-
-                if (currentContent != referenceString) continue;
-                evaluationResult.WinAreas[_winConstellations[i, 0]] = true;
-                evaluationResult.WinAreas[_winConstellations[i, 1]] = true;
-                evaluationResult.WinAreas[_winConstellations[i, 2]] = true;
-                evaluationResult.IsWinner = true;
-
-                var opponentReferenceString = GetOpponentReferenceString(referenceString);
-                if(currentContent != opponentReferenceString) continue;
-                evaluationResult.IsLoser = true;
-            }
-
-            DetermineDrawAsync(tokenList, evaluationResult);
-            DetermineOpenGameAsync(evaluationResult);
-        });
-    }
-
-    private string GetOpponentReferenceString(string referenceString)
-    {
-        return referenceString switch
-        {
-            "XXX" => "OOO",
-            "OOO" => "XXX",
-            _ => throw new NotSupportedException("GetOpponentReferenceString")
+            "X" => "O",
+            "O" => "X",
+            _ => throw new NotSupportedException("GetOpponentOf")
         };
     }
 
-    private void DetermineDrawAsync(IReadOnlyList<string> tokenList, EvaluationResult evaluationResult)
+    private void DetermineGameBoardState(IReadOnlyList<string> gameBoard, string player, EvaluationResult evaluationResult)
     {
-        if (evaluationResult.IsWinner) return;
-        if (tokenList.Contains(string.Empty)) return;
-        evaluationResult.IsDraw = true;
-    }
+        var threeTimesPlayer = new string(Convert.ToChar(player), 3);
+        var threeTimesOpponent = new string(Convert.ToChar(GetOpponentOf(player)), 3);
 
-    private void DetermineOpenGameAsync(EvaluationResult evaluationResult)
-    {
-        if(evaluationResult.IsDraw) return;
-        evaluationResult.IsOpen = true;
+        foreach (var winPosition in _winPositions)
+        {
+            var currentContent = string.Empty;
+            winPosition.ForEach(i => currentContent += gameBoard[i]);
+
+            if (currentContent == threeTimesPlayer)
+            {
+                evaluationResult.IsWinner = true;
+                winPosition.ForEach(i => evaluationResult.WinAreas[i] = true);
+                return;
+            }
+
+            if (currentContent == threeTimesOpponent)
+            {
+                evaluationResult.IsLoser = true;
+                return;
+            }
+        }
+
+        if(gameBoard.Contains(string.Empty))
+        {
+            evaluationResult.IsMoveLeft = true;
+            return;
+        }
+
+        evaluationResult.IsDraw = true;
     }
 }

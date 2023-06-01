@@ -6,5 +6,5 @@ public interface IEvaluationResult
     bool IsWinner { get; set; }
     bool IsLoser { get; set; }
     bool IsDraw { get; set; }
-    bool IsOpen { get; set; }
+    bool IsMoveLeft { get; set; }
 }

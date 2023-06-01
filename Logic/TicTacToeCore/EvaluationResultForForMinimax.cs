@@ -2,7 +2,7 @@
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
-public class EvaluationResultMinimax : IEvaluationResultMinimax
+public class EvaluationResultForForMinimax : IEvaluationResultForMinimax
 {
     public int NodeRating { get; set; }
     public bool IsMovesLeft { get; set; }

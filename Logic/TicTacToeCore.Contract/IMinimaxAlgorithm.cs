@@ -2,5 +2,5 @@
 
 public interface IMinimaxAlgorithm
 {
-    int FindBestMove(List<string> board, string player);
+    int FindBestMove(List<string> gameBoard, string player);
 }
