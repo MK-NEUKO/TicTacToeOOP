@@ -6,14 +6,16 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
-public partial class PlayingPlayerViewModel : ObservableObject, IPlayingPlayerViewModel
+public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardViewModel
 {
     private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
 
     [ObservableProperty] private IPlayerViewModel _playingPlayerX;
     [ObservableProperty] private IPlayerViewModel _playingPlayerO;
+    [ObservableProperty] private string _firstInfoRowLabel;
+    [ObservableProperty] private string _firstInfoRowValue;
 
-    public PlayingPlayerViewModel(IViewModelFactory<IPlayerViewModel> playerFactory)
+    public GameInfoBoardViewModel(IViewModelFactory<IPlayerViewModel> playerFactory)
     {
         _playerFactory = playerFactory;
         _playingPlayerX = CreatePlayer("X");
@@ -27,6 +29,8 @@ public partial class PlayingPlayerViewModel : ObservableObject, IPlayingPlayerVi
         {
             PlayingPlayerX = CreatePlayer("X");
             PlayingPlayerO = CreatePlayer("O");
+            FirstInfoRowLabel = string.Empty;
+            FirstInfoRowValue = string.Empty;
         });
     }
 

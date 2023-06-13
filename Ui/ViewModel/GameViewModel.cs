@@ -16,25 +16,30 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
     private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverDialogViewModelFactory;
     private readonly IWindowService<IGameOverDialogViewModel> _gameOverDialogService;
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
-    private readonly IPlayingPlayerViewModel _playingPlayer;
+    private readonly IGameInfoBoardViewModel _gameInfoBoard;
     private readonly IGameEvaluator _gameEvaluator;
     private IPlayerViewModel _currentPlayer;
+    private int _numberOfDraw;
 
     public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverDialogViewModelFactory,
         IWindowService<IGameOverDialogViewModel> gameOverDialogService,
                          IPlayerGameBoardViewModel playerGameBoard,
-                         IPlayingPlayerViewModel playingPlayer,
+                         IGameInfoBoardViewModel gameInfoBoard,
                          IGameEvaluator gameEvaluator)
     {
         _gameOverDialogViewModelFactory = gameOverDialogViewModelFactory ?? throw new ArgumentNullException(nameof(gameOverDialogViewModelFactory));
         _gameOverDialogService = gameOverDialogService ?? throw new ArgumentNullException(nameof(gameOverDialogService));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
-        _playingPlayer = playingPlayer ?? throw new ArgumentNullException(nameof(playingPlayer));
+        _gameInfoBoard = gameInfoBoard ?? throw new ArgumentNullException(nameof(gameInfoBoard));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
-        _currentPlayer = playingPlayer.CreatePlayer("X");
+        _currentPlayer = gameInfoBoard.CreatePlayer("X");
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
             _playerGameBoard.StartGameStartAnimation();
+        });
+        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
+        {
+            _numberOfDraw = 0;
         });
         WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, (GameBoardAreaWasClickedHandler));
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, GameBoardStartAnimationCompletedHandler);
@@ -73,6 +78,9 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
             if (evaluationResult.IsDraw)
             {
+                _numberOfDraw++;
+                _gameInfoBoard.FirstInfoRowLabel = "Draw games";
+                _gameInfoBoard.FirstInfoRowValue = Convert.ToString(_numberOfDraw);
                 if(GetPlayerDecisionIsStartNewGame(evaluationResult)) return;
             }
 
@@ -110,7 +118,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
     private void ChangeCurrentPlayer()
     {
-        _playingPlayer.PlayingPlayerX.IsPlayersTurn = !_playingPlayer.PlayingPlayerX.IsPlayersTurn;
-        _playingPlayer.PlayingPlayerO.IsPlayersTurn = !_playingPlayer.PlayingPlayerO.IsPlayersTurn;
+        _gameInfoBoard.PlayingPlayerX.IsPlayersTurn = !_gameInfoBoard.PlayingPlayerX.IsPlayersTurn;
+        _gameInfoBoard.PlayingPlayerO.IsPlayersTurn = !_gameInfoBoard.PlayingPlayerO.IsPlayersTurn;
     }
 }

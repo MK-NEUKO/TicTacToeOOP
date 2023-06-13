@@ -11,7 +11,7 @@ public static class ServiceExtensions
     {
         services.AddSingleton<IPlayerGameBoardViewModel, PlayerGameBoardViewModel>();
         services.AddSingleton<IGameViewModel, GameViewModel>();
-        services.AddSingleton<IPlayingPlayerViewModel, PlayingPlayerViewModel>();
+        services.AddSingleton<IGameInfoBoardViewModel, GameInfoBoardViewModel>();
         services.AddSingleton<IGameMenuViewModel, GameMenuViewModel>();
         services.AddSingleton<IMenuViewModel, MenuViewModel>();
         services.AddSingleton<IMainViewModel, MainViewModel>();

@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="300">
 
     <d:UserControl.DataContext>
-        <sampleData:PlayingPlayerViewModelSampleData/>
+        <sampleData:GameInfoBoardViewModelSampleData/>
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
@@ -192,6 +192,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <!--PlayerX-Properties, Name, IsHuman, IsAi, IsPlayersTurn, Points-->
@@ -450,5 +451,21 @@
                        Style="{StaticResource TextBlockWinAnimationPlayerX}">
             </TextBlock>
         </Grid>
+
+        <!--Additional Information-->
+        <StackPanel Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" TextAlignment="Right" Foreground="{StaticResource TTTGreen}" Text="{Binding FirstInfoRowLabel}"/>
+                <TextBlock Grid.Column="1" Text=":" TextAlignment="Center" Foreground="AliceBlue"/>
+                <TextBlock Grid.Column="2" TextAlignment="Left" Foreground="{StaticResource TTTGreen}" Text="{Binding FirstInfoRowValue}"/>
+
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

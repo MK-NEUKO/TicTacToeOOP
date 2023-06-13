@@ -4,9 +4,9 @@ using MichaelKoch.TicTacToe.Ui.ViewModel;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData;
 
-public class PlayingPlayerViewModelSampleData : IPlayingPlayerViewModel
+public class GameInfoBoardViewModelSampleData : IGameInfoBoardViewModel
 {
-    public PlayingPlayerViewModelSampleData()
+    public GameInfoBoardViewModelSampleData()
     {
         PlayingPlayerX = CreatePlayer("X");
         PlayingPlayerO = CreatePlayer("O");
@@ -14,6 +14,8 @@ public class PlayingPlayerViewModelSampleData : IPlayingPlayerViewModel
 
     public IPlayerViewModel PlayingPlayerX { get; set; }
     public IPlayerViewModel PlayingPlayerO { get; set; }
+    public string FirstInfoRowLabel { get; set; }
+    public string FirstInfoRowValue { get; set; }
 
     public IPlayerViewModel CreatePlayer(string token)
     {

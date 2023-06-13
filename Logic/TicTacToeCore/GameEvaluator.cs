@@ -24,10 +24,7 @@ public class GameEvaluator : IGameEvaluator
 
     public Task<IEvaluationResult> EvaluateGameTaskAsync(List<string> gameBoard, string player)
     {
-        var task = Task.Run<IEvaluationResult>(() =>
-        {
-            return EvaluateGameBoardBase(gameBoard, player);
-        });
+        var task = Task.Run<IEvaluationResult>(() => EvaluateGameBoardBase(gameBoard, player));
         return task;
     }
 

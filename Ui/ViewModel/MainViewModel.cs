@@ -7,16 +7,16 @@ public class MainViewModel : IMainViewModel
     public MainViewModel(IPlayerGameBoardViewModel playerGameBoardViewModel,
                          IGameViewModel gameViewModel,
                          IMenuViewModel menuViewModel,
-                         IPlayingPlayerViewModel playingPlayerViewModel)
+                         IGameInfoBoardViewModel gameInfoBoardViewModel)
     {
         PlayerGameBoardViewModel = playerGameBoardViewModel;
         GameViewModel = gameViewModel;
         MenuViewModel = menuViewModel;
-        PlayingPlayerViewModel = playingPlayerViewModel;
+        GameInfoBoardViewModel = gameInfoBoardViewModel;
     }
 
     public IPlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
     public IGameViewModel GameViewModel { get; }
     public IMenuViewModel MenuViewModel { get; set; }
-    public IPlayingPlayerViewModel PlayingPlayerViewModel { get; }
+    public IGameInfoBoardViewModel GameInfoBoardViewModel { get; }
 }

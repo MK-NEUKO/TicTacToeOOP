@@ -5,5 +5,5 @@ public interface IMainViewModel
     IPlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
     IGameViewModel GameViewModel { get; }
     IMenuViewModel MenuViewModel { get; set; }
-    IPlayingPlayerViewModel PlayingPlayerViewModel { get; }
+    IGameInfoBoardViewModel GameInfoBoardViewModel { get; }
 }

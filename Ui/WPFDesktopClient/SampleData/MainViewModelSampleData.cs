@@ -5,12 +5,12 @@
         public MainViewModelSampleData()
         {
             PlayerGameBoardViewModel = new PlayerGameBoardSampleData();
-            PlayingPlayerViewModel = new PlayingPlayerViewModelSampleData();
+            GameInfoBoardViewModel = new GameInfoBoardViewModelSampleData();
             MenuViewModel = new MenuViewModelSampleData();
         }
 
         public PlayerGameBoardSampleData PlayerGameBoardViewModel { get; set; }
-        public PlayingPlayerViewModelSampleData PlayingPlayerViewModel { get; set; }
+        public GameInfoBoardViewModelSampleData GameInfoBoardViewModel { get; set; }
         public MenuViewModelSampleData MenuViewModel { get; set; }
     }
 }
