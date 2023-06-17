@@ -30,7 +30,7 @@ public partial class GameOverDialogViewModel : ObservableObject, IGameOverDialog
     public void Continue()
     {
         WeakReferenceMessenger.Default.Send(new ContinueGameMessage(1));
-
+        IsSelectNewGame = false;
         _ownDialogService.CloseDialog();
     }
 
