@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData"
              mc:Ignorable="d"
-             d:DesignHeight="150" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300">
 
     <d:UserControl.DataContext>
         <sampleData:GameInfoBoardViewModelSampleData/>
@@ -185,6 +185,15 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="AdditionalTextBlock" TargetType="TextBlock">
+            <Setter Property="Background" Value="{StaticResource TTTBackgroundLightGray}"/>
+            <Setter Property="Foreground" Value="{StaticResource TTTBlue}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="0, 0, 0, 2"/>
+            <Setter Property="Padding" Value="4,0, 4,2"/>
+        </Style>
+
     </UserControl.Resources>
 
     <Grid Background="{StaticResource TTTBackgroundDarkGrey}"
@@ -192,7 +201,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         
         <!--PlayerX-Properties, Name, IsHuman, IsAi, IsPlayersTurn, Points-->
@@ -453,7 +462,7 @@
         </Grid>
 
         <!--Additional Information-->
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="2" Margin="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
@@ -461,10 +470,22 @@
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" TextAlignment="Right" Foreground="{StaticResource TTTGreen}" Text="{Binding FirstInfoRowLabel}"/>
-                <TextBlock Grid.Column="1" Text=":" TextAlignment="Center" Foreground="AliceBlue"/>
-                <TextBlock Grid.Column="2" TextAlignment="Left" Foreground="{StaticResource TTTGreen}" Text="{Binding FirstInfoRowValue}"/>
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="0" TextAlignment="Right" Text="{Binding FirstInfoRowLabel}"/>
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="1" Text=":" Background="{StaticResource TTTBackgroundDarkGrey}" TextAlignment="Center" Foreground="{StaticResource TTTBlue}"/>
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="2" TextAlignment="Left" Text="{Binding FirstInfoRowValue}"/>
+                
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
 
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="0" TextAlignment="Right" Text="{Binding FirstInfoRowLabel}"/>
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="1" Text=":" Background="{StaticResource TTTBackgroundDarkGrey}" TextAlignment="Center" Foreground="{StaticResource TTTBlue}"/>
+                <TextBlock Style="{StaticResource AdditionalTextBlock}" Grid.Column="2" TextAlignment="Left" Text="{Binding FirstInfoRowValue}"/>
+                
             </Grid>
         </StackPanel>
     </Grid>

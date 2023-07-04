@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
-        Title="MainWindow" Height="700" Width="850">
+        Title="MainWindow" Height="800" Width="850">
 
     <d:Window.DataContext>
         <sampleData:MainViewModelSampleData/>
@@ -26,7 +26,7 @@
               HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"/>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="300"/>
             </Grid.RowDefinitions>
 
             <userControls:PlayerGameBoard Grid.Row="0"
