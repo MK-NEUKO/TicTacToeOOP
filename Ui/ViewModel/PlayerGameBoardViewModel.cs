@@ -10,8 +10,8 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoardViewModel
 {
-    private int _animationCompletedCounter = 0;
-    private /*readonly*/ List<IPlayerGameBoardAreaViewModel> _areas;
+    private int _animationCompletedCounter;
+    private readonly List<IPlayerGameBoardAreaViewModel> _areas;
     private readonly IViewModelFactory<IPlayerGameBoardAreaViewModel> _areaFactory;
 
     public PlayerGameBoardViewModel(IGameEvaluator gameEvaluator, 
@@ -61,7 +61,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     }
 
     [RelayCommand]
-    public void GameBoardStartAnimationCompleted()
+    private void GameBoardStartAnimationCompleted()
     {
         _animationCompletedCounter++;
         if (_animationCompletedCounter != 9) return;
@@ -82,14 +82,11 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
                 Areas[areaId].IsOccupied = true;
                 return false;
             case false:
-                await Task.Run(() =>
-                {
-                    var rnd = new Random();
-                    var sleepTime = rnd.Next(500, 2000);
-                    Thread.Sleep(sleepTime);
-                    Areas[areaId].Token = token;
-                    Areas[areaId].IsOccupied = true;
-                });
+                var rnd = new Random();
+                var delayTime = rnd.Next(500, 2000);
+                await Task.Delay(delayTime);
+                Areas[areaId].Token = token;
+                Areas[areaId].IsOccupied = true;
                 return false;
         }
     }

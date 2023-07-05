@@ -13,17 +13,12 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
         public bool IsPlayersTurn { get; set; }
         public bool IsWinner { get; set; }
         public int Points { get; set; }
-        public Task<int> GiveTokenPositionTaskAsync(List<string> tokenList, int clickedAreaId)
+        public int GiveTokenPosition(List<string> tokenList, int clickedAreaId)
         {
             throw new System.NotImplementedException();
         }
 
         public void SetPoint()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ResetPlayer(string token)
         {
             throw new System.NotImplementedException();
         }

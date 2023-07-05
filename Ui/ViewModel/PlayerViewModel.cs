@@ -1,9 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
@@ -63,23 +61,17 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         }
     }
 
-    public async Task<int> GiveTokenPositionTaskAsync(List<string> tokenList, int clickedAreaId = 10)
+    public int GiveTokenPosition(List<string> tokenList, int clickedAreaId)
     {
+        if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
         if (this.IsAi)
         {
             var area = -1;
-            await Task.Run(() =>
-            {
-                // simulates the Ai
-                // TODO: Implement the Minimax Algorithem in TicTacToeCore-Project
-                //area = tokenList.FindIndex(t => t == string.Empty);
-
-                area = _ai.FindBestMove(tokenList, Token);
-            });
+            area = _ai.FindBestMove(tokenList, Token);
             return area;
         }
 
-        if (this.IsHuman && clickedAreaId < 10)
+        if (this.IsHuman)
             return clickedAreaId;
         return -1;
     }

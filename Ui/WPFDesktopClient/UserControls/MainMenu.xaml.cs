@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MichaelKoch.TicTacToe.Ui.ViewModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
@@ -17,7 +16,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
         {
             if (DataContext is IMenuViewModel vm)
             {
-                vm.GameMenuViewModel.Reset += () => this.ResetGameMenu();
+                vm.GameMenuViewModel.Reset += this.ResetGameMenu;
             } 
         }
 
@@ -161,7 +160,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             ControlsCoverGameOptions.Visibility = Visibility.Hidden;
         }
 
-        public void ResetGameMenu()
+        private void ResetGameMenu()
         {
             ResetGameOptionButtons();
             DisableControlsPlayerXPlayerO();

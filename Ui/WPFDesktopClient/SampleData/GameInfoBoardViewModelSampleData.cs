@@ -10,6 +10,8 @@ public class GameInfoBoardViewModelSampleData : IGameInfoBoardViewModel
     {
         PlayingPlayerX = CreatePlayer("X");
         PlayingPlayerO = CreatePlayer("O");
+        FirstInfoRowLabel = "Description";
+        FirstInfoRowValue = "Value";
     }
 
     public IPlayerViewModel PlayingPlayerX { get; set; }

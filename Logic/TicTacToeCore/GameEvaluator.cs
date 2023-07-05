@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
@@ -31,8 +30,10 @@ public class GameEvaluator : IGameEvaluator
     public IEvaluationResultForMinimax EvaluateGameForMinimax(List<string> gameBoard, string player)
     {
         var evaluationResult = EvaluateGameBoardBase(gameBoard, player);
-        var evaluationResultForMinimax = new EvaluationResultForForMinimax();
-        evaluationResultForMinimax.IsMovesLeft = evaluationResult.IsMoveLeft;
+        var evaluationResultForMinimax = new EvaluationResultForForMinimax
+        {
+            IsMovesLeft = evaluationResult.IsMoveLeft
+        };
         CreateCurrentNodeRating(evaluationResultForMinimax,  evaluationResult);
 
         return evaluationResultForMinimax;

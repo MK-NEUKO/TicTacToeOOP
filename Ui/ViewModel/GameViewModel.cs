@@ -1,9 +1,4 @@
-﻿using System.ComponentModel;
-using System.Data;
-using System.Xml.XPath;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
@@ -11,7 +6,7 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
-public partial class GameViewModel : ObservableObject, IGameViewModel
+public class GameViewModel : IGameViewModel
 {
     private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverDialogViewModelFactory;
     private readonly IWindowService<IGameOverDialogViewModel> _gameOverDialogService;
@@ -65,7 +60,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         do
         {
             if (_currentPlayer.Token == null) return;
-            var areaId = await _currentPlayer.GiveTokenPositionTaskAsync(_playerGameBoard.GetCurrentTokenList(), clickedAreaId);
+            var areaId = await Task.Run(() => _currentPlayer.GiveTokenPosition(_playerGameBoard.GetCurrentTokenList(), clickedAreaId));
             if(areaId == -1) return;
             if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
 
@@ -78,9 +73,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
 
             if (evaluationResult.IsDraw)
             {
-                _numberOfDraw++;
-                _gameInfoBoard.FirstInfoRowLabel = "Draw games";
-                _gameInfoBoard.FirstInfoRowValue = Convert.ToString(_numberOfDraw);
+                ShowDraw();
                 if(GetPlayerDecisionIsStartNewGame(evaluationResult)) return;
             }
 
@@ -89,9 +82,15 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
         } while (_currentPlayer.IsAi);
     }
 
+    private void ShowDraw()
+    {
+        _numberOfDraw++;
+        _gameInfoBoard.FirstInfoRowLabel = "Draw games";
+        _gameInfoBoard.FirstInfoRowValue = Convert.ToString(_numberOfDraw);
+    }
+
     private bool GetPlayerDecisionIsStartNewGame(IEvaluationResult evaluationResult)
     {
-        var dialogResult = false;
         var gameOverViewModel = _gameOverDialogViewModelFactory.Create();
         if (evaluationResult.IsWinner)
         {
@@ -104,7 +103,7 @@ public partial class GameViewModel : ObservableObject, IGameViewModel
                 "The game is a draw, no one gets a point. The draw games are counted under the player display.";
         }
         _gameOverDialogService.ShowDialog(gameOverViewModel);
-        dialogResult = gameOverViewModel.IsSelectNewGame;
+        var dialogResult = gameOverViewModel.IsSelectNewGame;
 
         return dialogResult;
     }

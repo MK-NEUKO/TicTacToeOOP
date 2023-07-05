@@ -33,4 +33,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="SampleData\CommandDummy.cs" />
+  </ItemGroup>
+
 </Project>
