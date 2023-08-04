@@ -1,16 +1,11 @@
-﻿namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
+﻿using CommunityToolkit.Mvvm.Input;
+
+namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 public interface IGameOverDialogViewModel
 {
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.GameOverDialogViewModel._message"/>
     string Message { get; set; }
-
-    /// <inheritdoc cref="MichaelKoch.TicTacToe.Ui.ViewModel.GameOverDialogViewModel._isSelectNewGame"/>
     bool IsSelectNewGame { get; }
-
-    /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="MichaelKoch.TicTacToe.Ui.ViewModel.GameOverDialogViewModel.NewGame()"/>.</summary>
-    global::CommunityToolkit.Mvvm.Input.IRelayCommand NewGameCommand { get; }
-
-    /// <summary>Gets an <see cref="global::CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="MichaelKoch.TicTacToe.Ui.ViewModel.GameOverDialogViewModel.Continue()"/>.</summary>
-    global::CommunityToolkit.Mvvm.Input.IRelayCommand ContinueCommand { get; }
+    IRelayCommand NewGameCommand { get; }
+    IRelayCommand ContinueCommand { get; }
 }

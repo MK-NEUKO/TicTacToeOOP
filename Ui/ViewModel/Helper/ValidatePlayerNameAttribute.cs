@@ -9,7 +9,7 @@ public class ValidatePlayerNameAttribute : ValidationAttribute
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
         const string pattern = @"^[a-zA-Z0-9]+$";
-        var name = Convert.ToString(value);
+        var name = Convert.ToString(value) ;
         var isValid = Regex.IsMatch(name, pattern);
         if (string.IsNullOrWhiteSpace(name)) return new ValidationResult("A player name is required");
         if (name.Length > 12) return new ValidationResult("The player name cannot be longer than 12 characters");

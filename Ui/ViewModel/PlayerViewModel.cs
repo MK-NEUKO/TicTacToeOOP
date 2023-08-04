@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
@@ -13,19 +14,30 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
     private bool _isHuman;
     private bool _isPlayersTurn;
     [ObservableProperty] private bool _isWinner;
-    [ObservableProperty] private string _name;
     [ObservableProperty] private int _points;
     [ObservableProperty] private string _token;
 
     public PlayerViewModel(IMinimaxAlgorithm ai)
     {
+        PlayerData = new PlayerData();
         _ai = ai;
-        _name = string.Empty;
         _token = string.Empty;
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
             IsWinner = false;
         });
+    }
+
+    public PlayerData PlayerData { get; }
+
+    public string Name
+    {
+        get => PlayerData.Name;
+        set
+        {
+            SetProperty(PlayerData.Name, value, PlayerData, (playerData, name) => playerData.Name = name);
+            WeakReferenceMessenger.Default.Send(new PlayerPropertyChangedMessage(this));
+        }
     }
 
     public bool IsAi

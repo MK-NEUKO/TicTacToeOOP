@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CrossCutting\DataClasses\DataClasses.csproj" />
     <ProjectReference Include="..\..\Logic\TicTacToeCore.Contract\TicTacToeCore.Contract.csproj" />
   </ItemGroup>
 

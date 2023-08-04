@@ -10,13 +10,13 @@ public class MainViewModel : IMainViewModel
                          IGameInfoBoardViewModel gameInfoBoardViewModel)
     {
         PlayerGameBoardViewModel = playerGameBoardViewModel;
-        GameViewModel = gameViewModel;
         MenuViewModel = menuViewModel;
+        GameViewModel = gameViewModel;
         GameInfoBoardViewModel = gameInfoBoardViewModel;
     }
 
     public IPlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
-    public IGameViewModel GameViewModel { get; }
     public IMenuViewModel MenuViewModel { get; set; }
+    public IGameViewModel GameViewModel { get; }
     public IGameInfoBoardViewModel GameInfoBoardViewModel { get; }
 }

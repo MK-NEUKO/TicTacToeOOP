@@ -1,14 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
 using MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ViewLogic;
 using MichaelKoch.TicTacToe.Mappings;
 
@@ -47,6 +42,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 
         protected override async void OnExit(ExitEventArgs e)
         {
+            var gameViewModel = AppHost.Services.GetService<IGameViewModel>();
+            gameViewModel.SaveGame();
             await AppHost!.StopAsync();
 
             base.OnExit(e);

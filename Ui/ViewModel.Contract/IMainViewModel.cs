@@ -3,7 +3,7 @@
 public interface IMainViewModel
 {
     IPlayerGameBoardViewModel PlayerGameBoardViewModel { get; }
-    IGameViewModel GameViewModel { get; }
     IMenuViewModel MenuViewModel { get; set; }
+    IGameViewModel GameViewModel { get; }
     IGameInfoBoardViewModel GameInfoBoardViewModel { get; }
 }

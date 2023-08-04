@@ -30,7 +30,7 @@ public class GameEvaluator : IGameEvaluator
     public IEvaluationResultForMinimax EvaluateGameForMinimax(List<string> gameBoard, string player)
     {
         var evaluationResult = EvaluateGameBoardBase(gameBoard, player);
-        var evaluationResultForMinimax = new EvaluationResultForForMinimax
+        var evaluationResultForMinimax = new EvaluationResultForMinimax
         {
             IsMovesLeft = evaluationResult.IsMoveLeft
         };

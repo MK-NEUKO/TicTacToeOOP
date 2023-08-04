@@ -3,10 +3,11 @@ using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
+using System.Text.Json;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
-public class GameViewModel : IGameViewModel
+public class GameViewModel: IGameViewModel
 {
     private readonly IViewModelFactory<IGameOverDialogViewModel> _gameOverDialogViewModelFactory;
     private readonly IWindowService<IGameOverDialogViewModel> _gameOverDialogService;
@@ -17,7 +18,7 @@ public class GameViewModel : IGameViewModel
     private int _numberOfDraw;
 
     public GameViewModel(IViewModelFactory<IGameOverDialogViewModel> gameOverDialogViewModelFactory,
-        IWindowService<IGameOverDialogViewModel> gameOverDialogService,
+                         IWindowService<IGameOverDialogViewModel> gameOverDialogService,
                          IPlayerGameBoardViewModel playerGameBoard,
                          IGameInfoBoardViewModel gameInfoBoard,
                          IGameEvaluator gameEvaluator)
@@ -119,5 +120,10 @@ public class GameViewModel : IGameViewModel
     {
         _gameInfoBoard.PlayingPlayerX.IsPlayersTurn = !_gameInfoBoard.PlayingPlayerX.IsPlayersTurn;
         _gameInfoBoard.PlayingPlayerO.IsPlayersTurn = !_gameInfoBoard.PlayingPlayerO.IsPlayersTurn;
+    }
+
+    public void SaveGame()
+    {
+        _gameInfoBoard.SavePlayer();
     }
 }

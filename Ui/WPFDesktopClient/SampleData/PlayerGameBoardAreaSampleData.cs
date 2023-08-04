@@ -1,37 +1,33 @@
-﻿using System;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using MichaelKoch.TicTacToe.Ui.ViewModel;
+﻿using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
-namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData
+namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData;
+
+public class PlayerGameBoardAreaSampleData : IPlayerGameBoardAreaViewModel
 {
-    public class PlayerGameBoardAreaSampleData : IPlayerGameBoardAreaViewModel
+    public PlayerGameBoardAreaSampleData(int id)
     {
-        public PlayerGameBoardAreaSampleData(int id)
-        {
-            Id = id;
-            Token = " ";
-        }
+        Id = id;
+        Token = " ";
+    }
 
-        public string Token { get; set; }
-        public int Id { get; set; }
-        public bool IsWinArea { get; set; }
-        public bool IsOccupied { get; set; }
-        public bool IsStartNewGameAnimation { get; set; }
-        public bool IsStartSaveGameAnimation { get; set; }
-        public bool IsInGame { get; set; }
-        public bool CanShowIsOccupied { get; set; }
-        public IRelayCommand AreaWasClickedCommand { get; set; } = null!;
-        public IRelayCommand MouseEnterForShowIsOccupiedCommand { get; set; } = null!;
-        public void ResetToContinue()
-        {
-            throw new System.NotImplementedException();
-        }
+    public string Token { get; set; }
+    public int Id { get; set; }
+    public bool IsWinArea { get; set; }
+    public bool IsOccupied { get; set; }
+    public bool IsStartNewGameAnimation { get; set; }
+    public bool IsStartSaveGameAnimation { get; set; }
+    public bool IsInGame { get; set; }
+    public bool CanShowIsOccupied { get; set; }
+    public IRelayCommand AreaWasClickedCommand { get; set; } = null!;
+    public IRelayCommand MouseEnterForShowIsOccupiedCommand { get; set; } = null!;
+    public void ResetToContinue()
+    {
+        throw new System.NotImplementedException();
+    }
 
-        public void ResetForNewGame()
-        {
-            throw new System.NotImplementedException();
-        }
+    public void ResetForNewGame()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using System;
-using MichaelKoch.TicTacToe.Ui.ViewModel;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData;
 
@@ -24,9 +23,14 @@ public class GameInfoBoardViewModelSampleData : IGameInfoBoardViewModel
         if (token == null) throw new ArgumentNullException(nameof(token));
         var player = new PlayerViewModelSampleData
         {
-            Token = token
+            Token = token,
         };
         player.Name = "Player" + player.Token;
         return player;
+    }
+
+    public void SavePlayer()
+    {
+        throw new NotImplementedException();
     }
 }

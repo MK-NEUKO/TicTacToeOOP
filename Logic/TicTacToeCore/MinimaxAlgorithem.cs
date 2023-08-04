@@ -1,7 +1,4 @@
 ﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
-using System.ComponentModel;
-using System.Xml.Linq;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 

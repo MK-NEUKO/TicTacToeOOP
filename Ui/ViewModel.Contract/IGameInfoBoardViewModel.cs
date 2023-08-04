@@ -7,4 +7,5 @@ public interface IGameInfoBoardViewModel
     string FirstInfoRowLabel { get; set; }
     string FirstInfoRowValue { get; set; }
     IPlayerViewModel CreatePlayer(string token);
+    void SavePlayer();
 }
