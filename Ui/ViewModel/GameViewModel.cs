@@ -14,6 +14,7 @@ public class GameViewModel: IGameViewModel
     private readonly IPlayerGameBoardViewModel _playerGameBoard;
     private readonly IGameInfoBoardViewModel _gameInfoBoard;
     private readonly IGameEvaluator _gameEvaluator;
+    private readonly ISaveGameManager _saveGameManager;
     private IPlayerViewModel _currentPlayer;
     private int _numberOfDraw;
 
@@ -21,13 +22,15 @@ public class GameViewModel: IGameViewModel
                          IWindowService<IGameOverDialogViewModel> gameOverDialogService,
                          IPlayerGameBoardViewModel playerGameBoard,
                          IGameInfoBoardViewModel gameInfoBoard,
-                         IGameEvaluator gameEvaluator)
+                         IGameEvaluator gameEvaluator,
+                         ISaveGameManager saveGameManager)
     {
         _gameOverDialogViewModelFactory = gameOverDialogViewModelFactory ?? throw new ArgumentNullException(nameof(gameOverDialogViewModelFactory));
         _gameOverDialogService = gameOverDialogService ?? throw new ArgumentNullException(nameof(gameOverDialogService));
         _playerGameBoard = playerGameBoard ?? throw new ArgumentNullException(nameof(playerGameBoard));
         _gameInfoBoard = gameInfoBoard ?? throw new ArgumentNullException(nameof(gameInfoBoard));
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
+        _saveGameManager = saveGameManager ?? throw new ArgumentNullException(nameof(saveGameManager));
         _currentPlayer = gameInfoBoard.CreatePlayer("X");
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
@@ -124,6 +127,6 @@ public class GameViewModel: IGameViewModel
 
     public void SaveGame()
     {
-        _gameInfoBoard.SavePlayer();
+        _saveGameManager.SaveCurrentGame(_gameInfoBoard.GameInfoBoardData);
     }
 }

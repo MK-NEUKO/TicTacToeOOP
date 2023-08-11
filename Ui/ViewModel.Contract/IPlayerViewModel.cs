@@ -5,7 +5,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 public interface IPlayerViewModel
 {
     string Name { get; set; }
-    string? Token { get; set; }
+    string Token { get; set; }
     bool IsWinner { get; set; }
     bool IsHuman { get; set; }
     bool IsAi { get; set; }

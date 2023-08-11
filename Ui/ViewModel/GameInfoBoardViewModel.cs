@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
@@ -11,7 +10,6 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardViewModel
 {
     private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
-    private readonly PlayingPlayerData _playingPlayerData;
 
     [ObservableProperty]
     private IPlayerViewModel _playingPlayerX;
@@ -19,15 +17,12 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
     [ObservableProperty]
     private IPlayerViewModel _playingPlayerO;
 
-    [ObservableProperty] private string _firstInfoRowLabel;
-    [ObservableProperty] private string _firstInfoRowValue;
-
     public GameInfoBoardViewModel(IViewModelFactory<IPlayerViewModel> playerFactory)
     {
         _playerFactory = playerFactory;
         _playingPlayerX = CreatePlayer("X");
         _playingPlayerO = CreatePlayer("O");
-        _playingPlayerData = new PlayingPlayerData();
+        GameInfoBoardData = new GameInfoBoardData();
         
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
@@ -39,24 +34,40 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         {
             PlayingPlayerX = CreatePlayer("X");
             PlayingPlayerO = CreatePlayer("O");
-            FirstInfoRowLabel = string.Empty;
-            FirstInfoRowValue = string.Empty;
         });
         WeakReferenceMessenger.Default.Register<PlayerPropertyChangedMessage>(this, (r, m) =>
         {
             switch (m.Value.Token)
             {
                 case "X":
-                    _playingPlayerData.PlayerXData = m.Value.PlayerData;
+                    GameInfoBoardData.PlayerXData = m.Value.PlayerData;
                     break;
                 case "O":
-                    _playingPlayerData.PlayerOData = m.Value.PlayerData;
+                    GameInfoBoardData.PlayerOData = m.Value.PlayerData;
                     break;
             }
         });
     }
 
-    
+    public GameInfoBoardData GameInfoBoardData { get; }
+
+    public string FirstInfoRowLabel
+    {
+        get => GameInfoBoardData.FirstInfoRowLabel;
+        set
+        {
+            SetProperty(GameInfoBoardData.FirstInfoRowLabel, value, GameInfoBoardData, (data, dataLabel) => data.FirstInfoRowLabel = dataLabel);
+        }
+    }
+
+    public string FirstInfoRowValue
+    {
+        get => GameInfoBoardData.FirstInfoRowValue;
+        set
+        {
+            SetProperty(GameInfoBoardData.FirstInfoRowValue, value, GameInfoBoardData, (data, dataValue) => data.FirstInfoRowValue = dataValue);
+        }
+    }
 
     public IPlayerViewModel CreatePlayer(string token)
     {
@@ -64,10 +75,5 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         player.Token = token ?? throw new ArgumentNullException(nameof(token));
         player.Name = "Player" + player.Token;
         return player;
-    }
-
-    public void SavePlayer()
-    {
-        _playingPlayerData.SavePlayer();
     }
 }

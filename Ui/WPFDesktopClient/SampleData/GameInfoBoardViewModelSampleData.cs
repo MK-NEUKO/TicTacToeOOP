@@ -1,5 +1,6 @@
 ﻿using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using System;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.SampleData;
 
@@ -17,6 +18,7 @@ public class GameInfoBoardViewModelSampleData : IGameInfoBoardViewModel
     public IPlayerViewModel PlayingPlayerO { get; set; }
     public string FirstInfoRowLabel { get; set; }
     public string FirstInfoRowValue { get; set; }
+    public GameInfoBoardData GameInfoBoardData { get; set; }
 
     public IPlayerViewModel CreatePlayer(string token)
     {

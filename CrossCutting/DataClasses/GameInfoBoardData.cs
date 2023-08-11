@@ -2,22 +2,18 @@
 
 namespace MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
-public class PlayingPlayerData
+public class GameInfoBoardData
 {
-    public PlayingPlayerData()
+    public GameInfoBoardData()
     {
         PlayerXData = new PlayerData();
         PlayerOData = new PlayerData();
-
+        FirstInfoRowLabel = string.Empty;
+        FirstInfoRowValue = string.Empty;
     }
 
     public PlayerData PlayerXData { get; set; }
     public PlayerData PlayerOData { get; set; }
-
-
-    public void SavePlayer()
-    {
-        string playerDate = JsonSerializer.Serialize(PlayerXData);
-        playerDate += JsonSerializer.Serialize(PlayerOData);
-    }
+    public string FirstInfoRowLabel { get; set; }
+    public string FirstInfoRowValue { get; set; }
 }

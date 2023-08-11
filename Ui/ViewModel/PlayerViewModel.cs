@@ -10,22 +10,20 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
     private readonly IMinimaxAlgorithm _ai;
-    private bool _isAi;
-    private bool _isHuman;
-    private bool _isPlayersTurn;
-    [ObservableProperty] private bool _isWinner;
-    [ObservableProperty] private int _points;
-    [ObservableProperty] private string _token;
 
     public PlayerViewModel(IMinimaxAlgorithm ai)
     {
         PlayerData = new PlayerData();
         _ai = ai;
-        _token = string.Empty;
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
             IsWinner = false;
         });
+    }
+
+    private void SendPlayerPropertyChangedMessage()
+    {
+        WeakReferenceMessenger.Default.Send(new PlayerPropertyChangedMessage(this));
     }
 
     public PlayerData PlayerData { get; }
@@ -36,40 +34,67 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         set
         {
             SetProperty(PlayerData.Name, value, PlayerData, (playerData, name) => playerData.Name = name);
-            WeakReferenceMessenger.Default.Send(new PlayerPropertyChangedMessage(this));
+            SendPlayerPropertyChangedMessage();
+        }
+    }
+
+    public string Token
+    {
+        get => PlayerData.Token;
+        set
+        {
+            SetProperty(PlayerData.Token, value, PlayerData, (playerDate, token) => playerDate.Token = token);
+            SendPlayerPropertyChangedMessage();
         }
     }
 
     public bool IsAi
     {
-        get => _isAi;
+        get => PlayerData.IsAi;
         set
         {
-            SetProperty(ref _isAi, value);
-            SetProperty(ref _isHuman, !value);
+            SetProperty(PlayerData.IsAi, value, PlayerData, (playerData, isAi) => playerData.IsAi = isAi);
+            SetProperty(PlayerData.IsHuman, !value, PlayerData, (playerData, isHuman) => playerData.IsHuman = isHuman);
         }
     }
 
     public bool IsHuman
     {
-        get => _isHuman;
+        get => PlayerData.IsHuman;
         set
         {
-            SetProperty(ref _isHuman, value);
-            SetProperty(ref _isAi, !value);
+            SetProperty(PlayerData.IsHuman, value, PlayerData, (playerData, isHuman) => playerData.IsHuman = isHuman);
+            SetProperty(PlayerData.IsAi, !value, PlayerData, (playerData, isAi) => playerData.IsAi = isAi);
         }
     }
 
     public bool IsPlayersTurn
     {
-        get => _isPlayersTurn;
+        get => PlayerData.IsPlayersTurn;
         set
         {
-            var isSetTrue = SetProperty(ref _isPlayersTurn, value)  && value;
-            if (isSetTrue)
+            if (SetProperty(PlayerData.IsPlayersTurn, value, PlayerData, (playerData, isPlayersTurn) => playerData.IsPlayersTurn = isPlayersTurn)  && value)
             {
                 WeakReferenceMessenger.Default.Send(new CurrentPlayerChangedMessage(this));
             }
+        }
+    }
+
+    public bool IsWinner
+    {
+        get => PlayerData.IsWinner;
+        set
+        {
+            SetProperty(PlayerData.IsWinner, value, PlayerData, (playerData, isWinner) => playerData.IsWinner = isWinner);
+        }
+    }
+
+    public int Points
+    {
+        get => PlayerData.Points;
+        set
+        {
+            SetProperty(PlayerData.Points, value, PlayerData, (playerData, points) => playerData.Points = points);
         }
     }
 

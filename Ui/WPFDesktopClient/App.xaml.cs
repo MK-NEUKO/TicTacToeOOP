@@ -23,6 +23,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 
                     services.AddSingleton<IGameEvaluator, GameEvaluator>();
                     services.AddSingleton<IMinimaxAlgorithm, MinimaxAlgorithm>();
+                    services.AddSingleton<ISaveGameManager, SaveGameManager>();
 
                     services.AddSingleton<MainWindow>();
                 })
