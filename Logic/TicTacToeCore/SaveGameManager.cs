@@ -1,24 +1,27 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using System.Text.Json;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
 public class SaveGameManager : ISaveGameManager
 {
-    public void SaveCurrentGame(GameInfoBoardData gameInfoBoardData)
+    private readonly ISaveGameRepository _saveGameRepository; 
+
+    public SaveGameManager(ISaveGameRepository saveGameRepository)
+    {
+        _saveGameRepository = saveGameRepository;
+    }
+
+    public void SaveCurrentGame(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData)
     {
         var currentSaveGame = new SaveGame
         {
-            GameInfoBoardData = gameInfoBoardData
+            GameInfoBoardData = gameInfoBoardData,
+            PlayerGameBoardData = playerGameBoardData
         };
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            WriteIndented = true
-        };
-
-        var saveGame = JsonSerializer.Serialize(currentSaveGame, options);
+        _saveGameRepository.SaveGameInFile(currentSaveGame);
     }
 }

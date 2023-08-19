@@ -4,5 +4,5 @@ namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 public interface ISaveGameManager
 {
-    void SaveCurrentGame(GameInfoBoardData gameInfoBoardData);
+    void SaveCurrentGame(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData);
 }

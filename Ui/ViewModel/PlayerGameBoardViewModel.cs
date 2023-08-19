@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
@@ -19,6 +20,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     {
         _areaFactory = areaFactory ?? throw new ArgumentNullException(nameof(areaFactory));
         _areas = GetAreas();
+        PlayerGameBoardData = new PlayerGameBoardData();
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
             _areas.ForEach(a => a.ResetToContinue());
@@ -27,7 +29,15 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         {
             _areas.ForEach(a => a.ResetForNewGame());
         });
+        WeakReferenceMessenger.Default.Register<PlayerGameBoardAreaPropertyChangedMessage>(this, (r, m) =>
+        {
+            PlayerGameBoardData.AreasData[m.Value.Id] = m.Value.PlayerGameBoardAreaData;
+        });
     }
+
+    public IReadOnlyList<IPlayerGameBoardAreaViewModel> Areas => _areas.AsReadOnly();
+
+    public PlayerGameBoardData PlayerGameBoardData { get; set; }
 
     private List<IPlayerGameBoardAreaViewModel> GetAreas()
     {
@@ -40,8 +50,6 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         }
         return list;
     }
-
-    public IReadOnlyList<IPlayerGameBoardAreaViewModel> Areas => _areas.AsReadOnly();
 
     public List<string> GetCurrentTokenList()
     {

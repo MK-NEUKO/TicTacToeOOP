@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\DataStoring.Contract\DataStoring.Contract.csproj" />
     <ProjectReference Include="..\..\Ui\ViewModel.Contract\ViewModel.Contract.csproj" />
   </ItemGroup>
 

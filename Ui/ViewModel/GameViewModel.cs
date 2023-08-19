@@ -127,6 +127,6 @@ public class GameViewModel: IGameViewModel
 
     public void SaveGame()
     {
-        _saveGameManager.SaveCurrentGame(_gameInfoBoard.GameInfoBoardData);
+        _saveGameManager.SaveCurrentGame(_gameInfoBoard.GameInfoBoardData, _playerGameBoard.PlayerGameBoardData);
     }
 }

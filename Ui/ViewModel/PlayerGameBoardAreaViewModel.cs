@@ -1,10 +1,7 @@
-﻿using System.Data;
-using System.Diagnostics;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
@@ -12,16 +9,9 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGameBoardAreaViewModel
 {
-    private int _counterMouseEnter;
-    private bool _canShowIsOccupied;
     private bool _currentPlayerIsHuman;
 
-    [ObservableProperty] private int _id;
-    [ObservableProperty] private string _token;
-    [ObservableProperty] private bool _isWinArea;
     [ObservableProperty] private bool _isStartNewGameAnimation;
-    [ObservableProperty] private bool _isStartSaveGameAnimation;
-    [ObservableProperty] private bool _isOccupied;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AreaWasClickedCommand))]
@@ -29,7 +19,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
 
     public PlayerGameBoardAreaViewModel()
     {
-        _token = string.Empty;
+        PlayerGameBoardAreaData = new PlayerGameBoardAreaData();
         WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
         {
             _currentPlayerIsHuman = m.Value.IsHuman;
@@ -37,14 +27,82 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         });
     }
 
-    public bool CanShowIsOccupied
+    public PlayerGameBoardAreaData PlayerGameBoardAreaData { get; }
+
+    public bool IsStartSaveGameAnimation
     {
-        get => _canShowIsOccupied;
+        get => PlayerGameBoardAreaData.IsStartSaveGameAnimation;
         set
         {
-            if (IsOccupied && _counterMouseEnter >= 1)
+            SetProperty(PlayerGameBoardAreaData.IsStartSaveGameAnimation, value, PlayerGameBoardAreaData,
+                (areaData, isStartSaveGameAnimation) => areaData.IsStartSaveGameAnimation = isStartSaveGameAnimation);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+
+    public bool IsOccupied
+    {
+        get => PlayerGameBoardAreaData.IsOccupied;
+        set
+        {
+            SetProperty(PlayerGameBoardAreaData.IsOccupied, value, PlayerGameBoardAreaData,
+                (areaData, isOccupied) => areaData.IsOccupied = isOccupied);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+    
+    public bool IsWinArea
+    {
+        get => PlayerGameBoardAreaData.IsWinArea;
+        set
+        {
+            SetProperty(PlayerGameBoardAreaData.IsWinArea, value, PlayerGameBoardAreaData,
+                (areaData, isWinArea) => areaData.IsWinArea = isWinArea);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+
+    public int Id
+    {
+        get => PlayerGameBoardAreaData.Id;
+        set
+        {
+            SetProperty(PlayerGameBoardAreaData.Id, value, PlayerGameBoardAreaData, (areaData, id) => areaData.Id = id);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+
+    public string Token 
+    {
+        get => PlayerGameBoardAreaData.Token;
+        set
+        {
+            SetProperty(PlayerGameBoardAreaData.Token, value, PlayerGameBoardAreaData,
+                (areaData, token) => areaData.Token = token);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+
+    private int CounterMouseEnter
+    {
+        get => PlayerGameBoardAreaData.CounterMouseEnter;
+        set
+        {
+            SetProperty(PlayerGameBoardAreaData.CounterMouseEnter, value, PlayerGameBoardAreaData,
+                (areaData, counterMouseEnter) => areaData.CounterMouseEnter = counterMouseEnter);
+            SendPlayerGameBoardAreaPropertyChangedMessage();
+        }
+    }
+
+    public bool CanShowIsOccupied
+    {
+        get => PlayerGameBoardAreaData.CanShowIsOccupied;
+        set
+        {
+            if (IsOccupied && CounterMouseEnter >= 1)
             {
-                SetProperty(ref _canShowIsOccupied, value);
+                SetProperty(PlayerGameBoardAreaData.CanShowIsOccupied, value, PlayerGameBoardAreaData, (areaData, canShowIsOccupied) => areaData.CanShowIsOccupied = canShowIsOccupied);
+                SendPlayerGameBoardAreaPropertyChangedMessage();
                 MouseEnterForShowIsOccupiedCommand.NotifyCanExecuteChanged();
             }
         }
@@ -55,14 +113,14 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
     {
         if (IsOccupied)
         {
-            _counterMouseEnter++;
+            CounterMouseEnter++;
             CanShowIsOccupied = true;
         }
     }
 
     private bool CanMouseEnterForShowIsOccupied()
     {
-        var mouseEnterAfterPlaceAToken = _counterMouseEnter <= 1;
+        var mouseEnterAfterPlaceAToken = CounterMouseEnter <= 1;
         return mouseEnterAfterPlaceAToken;
     }
 
@@ -78,19 +136,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         return isInGameAndIsHuman;
     }
 
-    public void ResetToContinue()
-    {
-        InnerReset();
-    }
-
-    private void InnerReset()
-    {
-        Token = string.Empty;
-        IsWinArea = false;
-        CanShowIsOccupied = false;
-        IsOccupied = false;
-        _counterMouseEnter = 0;
-    }
+    public void ResetToContinue() => InnerReset();
 
     public void ResetForNewGame()
     {
@@ -99,4 +145,15 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         IsStartNewGameAnimation = false;
         IsStartSaveGameAnimation = false;
     }
+
+    private void InnerReset()
+    {
+        Token = string.Empty;
+        IsWinArea = false;
+        CanShowIsOccupied = false;
+        IsOccupied = false;
+        CounterMouseEnter = 0;
+    }
+
+    private void SendPlayerGameBoardAreaPropertyChangedMessage() => WeakReferenceMessenger.Default.Send(new PlayerGameBoardAreaPropertyChangedMessage(this));
 }

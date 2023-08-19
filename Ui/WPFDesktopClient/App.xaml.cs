@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using MichaelKoch.TicTacToe.Data.DataStoring;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,8 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
                     services.AddSingleton<IMinimaxAlgorithm, MinimaxAlgorithm>();
                     services.AddSingleton<ISaveGameManager, SaveGameManager>();
 
+                    services.AddSingleton<ISaveGameRepository, SaveGameRepository>();
+
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
@@ -43,7 +47,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 
         protected override async void OnExit(ExitEventArgs e)
         {
-            var gameViewModel = AppHost.Services.GetService<IGameViewModel>();
+            var gameViewModel = AppHost.Services.GetRequiredService<IGameViewModel>();
             gameViewModel.SaveGame();
             await AppHost!.StopAsync();
 
