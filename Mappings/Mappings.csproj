@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Data\DataStoring\DataStoring.csproj" />
+    <ProjectReference Include="..\Logic\TicTacToeCore\TicTacToeCore.csproj" />
     <ProjectReference Include="..\Ui\ViewModel.Contract\ViewModel.Contract.csproj" />
     <ProjectReference Include="..\Ui\ViewModel\ViewModel.csproj" />
   </ItemGroup>

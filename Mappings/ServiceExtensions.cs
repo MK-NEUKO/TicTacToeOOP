@@ -1,4 +1,8 @@
-﻿using MichaelKoch.TicTacToe.Ui.ViewModel;
+﻿using MichaelKoch.TicTacToe.Data.DataStoring;
+using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+using MichaelKoch.TicTacToe.Ui.ViewModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,5 +32,17 @@ public static class ServiceExtensions
         services.AddTransient<TInterface, TImplementation>();
         services.AddSingleton<Func<TInterface>>(x => () => x.GetService<TInterface>()!);
         services.AddSingleton<IViewModelFactory<TInterface>, ViewModelFactory<TInterface>>();
+    }
+
+    public static void AddTicTacToeLogic(this IServiceCollection services)
+    {
+        services.AddSingleton<IGameEvaluator, GameEvaluator>();
+        services.AddSingleton<IMinimaxAlgorithm, MinimaxAlgorithm>();
+        services.AddSingleton<ISaveGameManager, SaveGameManager>();
+    }
+
+    public static void AddTicTacToeData(this IServiceCollection services)
+    {
+        services.AddSingleton<ISaveGameRepository, SaveGameRepository>();
     }
 }
