@@ -10,6 +10,6 @@ public interface IPlayerGameBoardViewModel
     PlayerGameBoardData PlayerGameBoardData { get; }
     IRelayCommand GameBoardStartAnimationCompletedCommand { get; }
     void AnimateWinAreas(List<bool> resultWinAreas);
-    void StartGameStartAnimation();
+    void StartGameStartAnimation(bool isNewGame);
     List<string> GetCurrentTokenList();
 }

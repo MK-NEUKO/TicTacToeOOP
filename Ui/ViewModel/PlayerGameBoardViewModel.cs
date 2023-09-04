@@ -21,6 +21,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         _areaFactory = areaFactory ?? throw new ArgumentNullException(nameof(areaFactory));
         _areas = GetAreas();
         PlayerGameBoardData = new PlayerGameBoardData();
+
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
             _areas.ForEach(a => a.ResetToContinue());
@@ -32,6 +33,10 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         WeakReferenceMessenger.Default.Register<PlayerGameBoardAreaPropertyChangedMessage>(this, (r, m) =>
         {
             PlayerGameBoardData.AreasData[m.Value.Id] = m.Value.PlayerGameBoardAreaData;
+        });
+        WeakReferenceMessenger.Default.Register<LoadGameSettingsMessage>(this, (r, m) =>
+        {
+            _areas.ForEach(a => a.Token = m.Value.PlayerGameBoardData.AreasData[a.Id].Token);
         });
     }
 
@@ -63,9 +68,16 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         _areas.ForEach(a => a.IsWinArea = resultWinAreas[a.Id]);
     }
 
-    public void StartGameStartAnimation()
+    public void StartGameStartAnimation(bool isNewGame)
     {
-        _areas.ForEach(a => a.IsStartNewGameAnimation = true);
+        if (isNewGame)
+        {
+            _areas.ForEach(a => a.IsStartNewGameAnimation = true);
+        }
+        else
+        {
+            _areas.ForEach(a => a.IsStartSaveGameAnimation = true);
+        }
     }
 
     [RelayCommand]

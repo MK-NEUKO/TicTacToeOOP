@@ -26,8 +26,9 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
-            PlayingPlayerX = m.Value.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(PlayingPlayerX));
-            PlayingPlayerO = m.Value.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(PlayingPlayerO));
+            var playerList = m.Value.PlayerList;
+            PlayingPlayerX = playerList.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(PlayingPlayerX));
+            PlayingPlayerO = playerList.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(PlayingPlayerO));
             
         });
         WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
@@ -46,6 +47,13 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
                     GameInfoBoardData.PlayerOData = m.Value.PlayerData;
                     break;
             }
+        });
+        WeakReferenceMessenger.Default.Register<LoadGameSettingsMessage>(this, (r, m) =>
+        {
+            PlayingPlayerX.PlayerData = m.Value.GameInfoBoardData.PlayerXData;
+            PlayingPlayerO.PlayerData = m.Value.GameInfoBoardData.PlayerOData;
+            FirstInfoRowValue = m.Value.GameInfoBoardData.FirstInfoRowValue;
+            FirstInfoRowLabel = m.Value.GameInfoBoardData.FirstInfoRowLabel;
         });
     }
 

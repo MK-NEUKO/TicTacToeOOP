@@ -1,6 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Helper;
@@ -17,6 +20,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     private readonly IViewModelFactory<IPlayerViewModel> _playerFactory;
     private readonly IViewModelFactory<IGetSecureQueryDialogViewModel> _getSecureQueryDialogViewModelFactory;
     private readonly IWindowService<IGetSecureQueryDialogViewModel> _getSecureQueryDialogService;
+    private readonly ISaveGameManager _saveGameManager;
 
     private string? _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
@@ -36,13 +40,20 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 
     public GameMenuViewModel(IViewModelFactory<IPlayerViewModel> playerFactory,
                              IViewModelFactory<IGetSecureQueryDialogViewModel> getSecureQueryDialogViewModelFactory,
-                             IWindowService<IGetSecureQueryDialogViewModel> getSecureQueryDialogService)
+                             IWindowService<IGetSecureQueryDialogViewModel> getSecureQueryDialogService,
+                             ISaveGameManager saveGameManager)
     {
         _playerFactory = playerFactory ?? throw new ArgumentNullException(nameof(playerFactory));
         _getSecureQueryDialogViewModelFactory = getSecureQueryDialogViewModelFactory ?? throw new ArgumentNullException(nameof(getSecureQueryDialogViewModelFactory));
         _getSecureQueryDialogService = getSecureQueryDialogService ?? throw new ArgumentNullException(nameof(getSecureQueryDialogService));
+        _saveGameManager = saveGameManager ?? throw new ArgumentNullException(nameof(saveGameManager));
+
+        PlayerList = new List<IPlayerViewModel>();
         _tokenPlayerX = string.Empty;
         _tokenPlayerO = string.Empty;
+        _namePlayerX = string.Empty;
+        _namePlayerO = string.Empty;
+
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, (r, m) =>
         {
             _isGameStartAnimationCompleted = true;
@@ -53,16 +64,17 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
 
     private void Handler(object recipient, StartNewGameMessage message)
     { 
-        Reset.Invoke();
-        _isStartButtonClicked = false;
-        _isGameStartAnimationCompleted = false;
-        StopGameCommand.NotifyCanExecuteChanged();
+        ResetGameMenu();
     }
 
     public Action Reset { get; set; } = null!;
 
+    public bool IsNewGame { get; private set; }
+
+    public List<IPlayerViewModel> PlayerList { get; private set; }
+
     [ValidatePlayerName]
-    public string? NamePlayerX
+    public string NamePlayerX
     {
         get => _namePlayerX;
         set
@@ -73,7 +85,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     }
 
     [ValidatePlayerName]
-    public string? NamePlayerO
+    public string NamePlayerO
     {
         get => _namePlayerO;
         set
@@ -89,12 +101,11 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         _isStartButtonClicked = true;
         StartGameCommand.NotifyCanExecuteChanged();
         StopGameCommand.NotifyCanExecuteChanged();
-        var playerList = new List<IPlayerViewModel>
-        {
-            CreatePlayerX(),
-            CreatePlayerO()
-        };
-        WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(playerList));
+
+        PlayerList.Add(CreatePlayerX());
+        PlayerList.Add(CreatePlayerO());
+
+        WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(this));
     }
 
     private bool CanStartGame()
@@ -116,6 +127,42 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     }
 
     [RelayCommand]
+    private void NewGame()
+    {
+        IsNewGame = true;
+        SetupDefaultPlayer();
+        var emptySaveGame = new SaveGame();
+        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(emptySaveGame));
+    }
+
+    [RelayCommand]
+    private void LoadLastGame()
+    {
+        var saveGame = _saveGameManager.LoadLastSaveGame();
+        IsNewGame = false;
+        OverridePlayerInMenu(saveGame);
+
+        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(saveGame));
+    }
+
+    private void OverridePlayerInMenu(SaveGame saveGame)
+    {
+        var playerX = saveGame.GameInfoBoardData.PlayerXData;
+        var playerO = saveGame.GameInfoBoardData.PlayerOData;
+
+        TokenPlayerX = playerX.Token;
+        NamePlayerX = playerX.Name;
+        IsHumanPlayerX = playerX.IsHuman;
+        IsAiPlayerX = playerX.IsAi;
+        IsPlayersTurnPlayerX = playerX.IsPlayersTurn;
+
+        TokenPlayerO = playerO.Token;
+        NamePlayerO = playerO.Name;
+        IsHumanPlayerO = playerO.IsHuman;
+        IsAiPlayerO = playerO.IsAi;
+        IsPlayersTurnPlayerO = playerO.IsPlayersTurn;
+    }
+
     private void SetupDefaultPlayer()
     {
         NamePlayerX = "PlayerX";
@@ -145,5 +192,14 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         playerO.IsHuman = IsHumanPlayerO;
         playerO.IsPlayersTurn = IsPlayersTurnPlayerO;
         return playerO;
+    }
+
+    private void ResetGameMenu()
+    {
+        Reset.Invoke();
+        _isStartButtonClicked = false;
+        _isGameStartAnimationCompleted = false;
+        IsNewGame = false;
+        StopGameCommand.NotifyCanExecuteChanged();
     }
 }

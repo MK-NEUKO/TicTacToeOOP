@@ -806,8 +806,8 @@
                                          Width="130" 
                                          Margin="5"
                                          x:Name="NewGame"
-                                         Command="{Binding SetupDefaultPlayerCommand}"
-                                         Checked="LoadNewGame_Checked"
+                                         Command="{Binding NewGameCommand}"
+                                         Checked="NewGame_Checked"
                                          IsChecked="{Binding IsLoadNewGame}">
                             </RadioButton>
                             <RadioButton Style="{StaticResource RadioButtonStyle}"

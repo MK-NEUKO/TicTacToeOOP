@@ -3,4 +3,5 @@
 public interface IGameViewModel
 {
     void SaveGame();
+    bool IsInGame { get; }
 }

@@ -20,7 +20,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.UserControls
             } 
         }
 
-        private void LoadNewGame_Checked(object sender, RoutedEventArgs e)
+        private void NewGame_Checked(object sender, RoutedEventArgs e)
         {
             EnableControlsPlayerXPlayerO();
             UncheckRadioButtonsPlayerXPlayerO();

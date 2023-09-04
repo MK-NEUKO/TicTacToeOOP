@@ -517,6 +517,9 @@
         <behaviors:EventTrigger EventName="Completed" SourceObject="{Binding Source={StaticResource StartNewGameAnimation}}">
             <behaviors:InvokeCommandAction Command="{Binding GameBoardStartAnimationCompletedCommand}"/>
         </behaviors:EventTrigger>
+        <behaviors:EventTrigger EventName="Completed" SourceObject="{Binding Source={StaticResource StartSaveGameAnimation}}">
+            <behaviors:InvokeCommandAction Command="{Binding GameBoardStartAnimationCompletedCommand}"/>
+        </behaviors:EventTrigger>
     </behaviors:Interaction.Triggers>
 
 </UserControl>

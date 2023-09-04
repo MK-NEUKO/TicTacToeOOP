@@ -44,7 +44,10 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
         protected override async void OnExit(ExitEventArgs e)
         {
             var gameViewModel = AppHost.Services.GetRequiredService<IGameViewModel>();
-            gameViewModel.SaveGame();
+            if (gameViewModel.IsInGame)
+            {
+                gameViewModel.SaveGame(); 
+            }
             await AppHost!.StopAsync();
 
             base.OnExit(e);

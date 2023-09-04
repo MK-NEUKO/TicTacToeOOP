@@ -3,9 +3,9 @@ using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
-internal class StartGameButtonClickedMessage : ValueChangedMessage<List<IPlayerViewModel>>
+internal class StartGameButtonClickedMessage : ValueChangedMessage<GameMenuViewModel>
 {
-    public StartGameButtonClickedMessage(List<IPlayerViewModel> playerList) : base(playerList)
+    public StartGameButtonClickedMessage(GameMenuViewModel gameMenuViewModel) : base(gameMenuViewModel)
     {
     }
 }

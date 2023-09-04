@@ -34,7 +34,8 @@ public class GameViewModel: IGameViewModel
         _currentPlayer = gameInfoBoard.CreatePlayer("X");
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
-            _playerGameBoard.StartGameStartAnimation();
+            IsInGame = true;
+            _playerGameBoard.StartGameStartAnimation(m.Value.IsNewGame);
         });
         WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
         {
@@ -58,6 +59,8 @@ public class GameViewModel: IGameViewModel
         var clickedAreaId = message.Value;
         await MakeAMoveAsync(clickedAreaId);
     }
+
+    public bool IsInGame { get; private set; }
 
     private async Task MakeAMoveAsync(int clickedAreaId = -1)
     {

@@ -17,4 +17,12 @@ public class SaveGameRepository : ISaveGameRepository
         var jsonString = JsonSerializer.Serialize(saveGame, options);
         File.WriteAllText("SaveGame.json", jsonString);
     }
+
+    public SaveGame LoadLastGameFromFile()
+    {
+        const string fileName = "SaveGame.json";
+        using FileStream saveGameStream = File.OpenRead(fileName);
+        var saveGame = JsonSerializer.Deserialize<SaveGame>(saveGameStream) ?? throw new InvalidOperationException("Deserialize from SaveGame.json is null!");
+        return saveGame;
+    }
 }

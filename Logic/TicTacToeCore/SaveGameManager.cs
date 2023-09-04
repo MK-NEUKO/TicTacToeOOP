@@ -1,5 +1,4 @@
 ﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using System.Text.Json;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
@@ -23,5 +22,11 @@ public class SaveGameManager : ISaveGameManager
         };
 
         _saveGameRepository.SaveGameInFile(currentSaveGame);
+    }
+
+    public SaveGame LoadLastSaveGame()
+    {
+        var lastGame = _saveGameRepository.LoadLastGameFromFile();
+        return lastGame;
     }
 }

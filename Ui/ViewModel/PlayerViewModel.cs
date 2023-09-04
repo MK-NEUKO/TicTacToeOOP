@@ -26,7 +26,7 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         WeakReferenceMessenger.Default.Send(new PlayerPropertyChangedMessage(this));
     }
 
-    public PlayerData PlayerData { get; }
+    public PlayerData PlayerData { get; set; }
 
     public string Name
     {

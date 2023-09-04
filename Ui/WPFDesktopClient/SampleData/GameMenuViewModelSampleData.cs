@@ -29,10 +29,10 @@ public class GameMenuViewModelSampleData : IGameMenuViewModel
 
     public Action Reset { get; set; } = null!;
 
-    public string? NamePlayerX { get; set; }
-    public string? NamePlayerO { get; set; }
-    public string? TokenPlayerX { get; set; }
-    public string? TokenPlayerO { get; set; }
+    public string NamePlayerX { get; set; }
+    public string NamePlayerO { get; set; }
+    public string TokenPlayerX { get; set; }
+    public string TokenPlayerO { get; set; }
     public bool IsAiPlayerX { get; set; }
     public bool IsAiPlayerO { get; set; }
     public bool IsHumanPlayerX { get; set; }
@@ -45,5 +45,6 @@ public class GameMenuViewModelSampleData : IGameMenuViewModel
     public int PointsPlayerO { get; set; }
     public IRelayCommand? StartGameCommand { get; set; } = null;
     public IRelayCommand? StopGameCommand { get; set; } = null;
-    public IRelayCommand? SetupDefaultPlayerCommand { get; set; } = null;
+    public IRelayCommand? NewGameCommand { get; set; } = null;
+    public IRelayCommand? LoadLastGameCommand { get; set; } = null;
 }
