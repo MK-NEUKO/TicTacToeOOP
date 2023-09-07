@@ -50,10 +50,14 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         });
         WeakReferenceMessenger.Default.Register<LoadGameSettingsMessage>(this, (r, m) =>
         {
-            PlayingPlayerX.PlayerData = m.Value.GameInfoBoardData.PlayerXData;
-            PlayingPlayerO.PlayerData = m.Value.GameInfoBoardData.PlayerOData;
-            FirstInfoRowValue = m.Value.GameInfoBoardData.FirstInfoRowValue;
+            var playerX = CreatePlayer("X");
+            playerX.PlayerData = m.Value.GameInfoBoardData.PlayerXData;
+            var playerO = CreatePlayer("O");
+            playerO.PlayerData = m.Value.GameInfoBoardData.PlayerOData;
+            PlayingPlayerX = playerX;
+            PlayingPlayerO = playerO;
             FirstInfoRowLabel = m.Value.GameInfoBoardData.FirstInfoRowLabel;
+            FirstInfoRowValue = m.Value.GameInfoBoardData.FirstInfoRowValue;
         });
     }
 

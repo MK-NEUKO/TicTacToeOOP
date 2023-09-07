@@ -103,8 +103,7 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
         if (this.IsAi)
         {
-            var area = -1;
-            area = _ai.FindBestMove(tokenList, Token);
+            var area = _ai.FindBestMove(tokenList, Token);
             return area;
         }
 

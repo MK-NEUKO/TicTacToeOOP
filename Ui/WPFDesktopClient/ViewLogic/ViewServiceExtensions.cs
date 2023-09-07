@@ -9,6 +9,7 @@ public static class ViewServiceExtensions
 {
     public static void AddViewLogic(this IServiceCollection services)
     {
+        services.AddSingleton<MainWindow>();
         services.AddSingleton<Func<MainWindow>>(x => () => x.GetService<MainWindow>()!);
         services.AddSingleton<IWindowService<IGameOverDialogViewModel>, GameOverDialog>();
         services.AddSingleton<IWindowService<IGetSecureQueryDialogViewModel>, GetSecureQueryDialog>();

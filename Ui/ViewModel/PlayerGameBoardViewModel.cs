@@ -15,8 +15,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
     private readonly List<IPlayerGameBoardAreaViewModel> _areas;
     private readonly IViewModelFactory<IPlayerGameBoardAreaViewModel> _areaFactory;
 
-    public PlayerGameBoardViewModel(IGameEvaluator gameEvaluator, 
-                                    IViewModelFactory<IPlayerGameBoardAreaViewModel> areaFactory)
+    public PlayerGameBoardViewModel(IViewModelFactory<IPlayerGameBoardAreaViewModel> areaFactory)
     {
         _areaFactory = areaFactory ?? throw new ArgumentNullException(nameof(areaFactory));
         _areas = GetAreas();

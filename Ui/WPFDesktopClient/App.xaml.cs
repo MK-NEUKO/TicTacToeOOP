@@ -24,8 +24,6 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
                     services.AddTicTacToeViewModel();
                     services.AddTicTacToeLogic();
                     services.AddTicTacToeData();
-
-                    services.AddSingleton<MainWindow>();
                 })
                 .Build();
         }
@@ -43,10 +41,10 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
 
         protected override async void OnExit(ExitEventArgs e)
         {
-            var gameViewModel = AppHost.Services.GetRequiredService<IGameViewModel>();
-            if (gameViewModel.IsInGame)
+            var game = AppHost!.Services.GetRequiredService<IGameViewModel>();
+            if (game.IsInGame)
             {
-                gameViewModel.SaveGame(); 
+                game.SaveGame(); 
             }
             await AppHost!.StopAsync();
 

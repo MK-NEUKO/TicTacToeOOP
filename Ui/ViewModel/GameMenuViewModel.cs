@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
@@ -22,7 +21,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     private readonly IWindowService<IGetSecureQueryDialogViewModel> _getSecureQueryDialogService;
     private readonly ISaveGameManager _saveGameManager;
 
-    private string? _namePlayerX;
+    private string _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
     [ObservableProperty] private bool _isHumanPlayerX;
     [ObservableProperty] private bool _isPlayersTurnPlayerX;
@@ -30,7 +29,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private int _pointsPlayerX;
     [ObservableProperty] private string _tokenPlayerX;
 
-    private string? _namePlayerO;
+    private string _namePlayerO;
     [ObservableProperty] private bool _isAiPlayerO;
     [ObservableProperty] private bool _isHumanPlayerO;
     [ObservableProperty] private bool _isPlayersTurnPlayerO;
@@ -59,12 +58,10 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
             _isGameStartAnimationCompleted = true;
             StopGameCommand.NotifyCanExecuteChanged();
         });
-        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, Handler);
-    }
-
-    private void Handler(object recipient, StartNewGameMessage message)
-    { 
-        ResetGameMenu();
+        WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
+        {
+            ResetGameMenu();
+        });
     }
 
     public Action Reset { get; set; } = null!;
@@ -102,9 +99,9 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         StartGameCommand.NotifyCanExecuteChanged();
         StopGameCommand.NotifyCanExecuteChanged();
 
-        PlayerList.Add(CreatePlayerX());
+        PlayerList.Add(CreatePlayerX()); 
         PlayerList.Add(CreatePlayerO());
-
+        
         WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(this));
     }
 
@@ -132,6 +129,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsNewGame = true;
         SetupDefaultPlayer();
         var emptySaveGame = new SaveGame();
+
         WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(emptySaveGame));
     }
 
@@ -155,12 +153,14 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsHumanPlayerX = playerX.IsHuman;
         IsAiPlayerX = playerX.IsAi;
         IsPlayersTurnPlayerX = playerX.IsPlayersTurn;
+        PointsPlayerX = playerX.Points;
 
         TokenPlayerO = playerO.Token;
         NamePlayerO = playerO.Name;
         IsHumanPlayerO = playerO.IsHuman;
         IsAiPlayerO = playerO.IsAi;
         IsPlayersTurnPlayerO = playerO.IsPlayersTurn;
+        PointsPlayerO = playerO.Points;
     }
 
     private void SetupDefaultPlayer()
@@ -180,6 +180,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         playerX.IsAi = IsAiPlayerX;
         playerX.IsHuman = IsHumanPlayerX;
         playerX.IsPlayersTurn = IsPlayersTurnPlayerX;
+        playerX.Points = PointsPlayerX;
         return playerX;
     }
 
@@ -191,6 +192,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         playerO.IsAi = IsAiPlayerO;
         playerO.IsHuman = IsHumanPlayerO;
         playerO.IsPlayersTurn = IsPlayersTurnPlayerO;
+        playerO.Points = PointsPlayerO;
         return playerO;
     }
 

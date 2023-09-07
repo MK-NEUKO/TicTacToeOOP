@@ -3,7 +3,6 @@ using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
-using System.Text.Json;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -32,6 +31,7 @@ public class GameViewModel: IGameViewModel
         _gameEvaluator = gameEvaluator ?? throw new ArgumentNullException(nameof(gameEvaluator));
         _saveGameManager = saveGameManager ?? throw new ArgumentNullException(nameof(saveGameManager));
         _currentPlayer = gameInfoBoard.CreatePlayer("X");
+
         WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
         {
             IsInGame = true;
@@ -66,7 +66,7 @@ public class GameViewModel: IGameViewModel
     {
         do
         {
-            if (_currentPlayer.Token == null) return;
+            if (_currentPlayer.Token == string.Empty) return;
             var areaId = await Task.Run(() => _currentPlayer.GiveTokenPosition(_playerGameBoard.GetCurrentTokenList(), clickedAreaId));
             if(areaId == -1) return;
             if(await _playerGameBoard.TrySetTokenTaskAsync(_currentPlayer.Token, _currentPlayer.IsHuman, areaId)) return;
