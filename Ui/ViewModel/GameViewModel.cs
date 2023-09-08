@@ -128,8 +128,8 @@ public class GameViewModel: IGameViewModel
         _gameInfoBoard.PlayingPlayerO.IsPlayersTurn = !_gameInfoBoard.PlayingPlayerO.IsPlayersTurn;
     }
 
-    public void SaveGame()
+    public async Task SaveGame()
     {
-        _saveGameManager.SaveCurrentGame(_gameInfoBoard.GameInfoBoardData, _playerGameBoard.PlayerGameBoardData);
+        await _saveGameManager.SaveCurrentGameAsync(_gameInfoBoard.GameInfoBoardData, _playerGameBoard.PlayerGameBoardData);
     }
 }

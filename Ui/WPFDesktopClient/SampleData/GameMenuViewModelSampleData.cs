@@ -46,5 +46,5 @@ public class GameMenuViewModelSampleData : IGameMenuViewModel
     public IRelayCommand? StartGameCommand { get; set; } = null;
     public IRelayCommand? StopGameCommand { get; set; } = null;
     public IRelayCommand? NewGameCommand { get; set; } = null;
-    public IRelayCommand? LoadLastGameCommand { get; set; } = null;
+    public IAsyncRelayCommand? LoadLastGameCommand { get; set; } = null;
 }

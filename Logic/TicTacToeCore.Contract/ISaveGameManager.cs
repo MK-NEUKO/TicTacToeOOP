@@ -4,6 +4,6 @@ namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 public interface ISaveGameManager
 {
-    void SaveCurrentGame(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData);
-    SaveGame LoadLastSaveGame();
+    Task SaveCurrentGameAsync(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData);
+    Task<SaveGame> LoadLastSaveGameAsync();
 }

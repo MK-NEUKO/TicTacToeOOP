@@ -52,6 +52,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         _tokenPlayerO = string.Empty;
         _namePlayerX = string.Empty;
         _namePlayerO = string.Empty;
+        LoadLastGameCommand = new AsyncRelayCommand(LoadLastGameAsync);
 
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, (r, m) =>
         {
@@ -63,6 +64,8 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
             ResetGameMenu();
         });
     }
+
+    public IAsyncRelayCommand LoadLastGameCommand { get; }
 
     public Action Reset { get; set; } = null!;
 
@@ -133,10 +136,9 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(emptySaveGame));
     }
 
-    [RelayCommand]
-    private void LoadLastGame()
+    private async Task LoadLastGameAsync()
     {
-        var saveGame = _saveGameManager.LoadLastSaveGame();
+        var saveGame = await _saveGameManager.LoadLastSaveGameAsync();
         IsNewGame = false;
         OverridePlayerInMenu(saveGame);
 

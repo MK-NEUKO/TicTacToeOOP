@@ -1,4 +1,6 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+﻿using System.Security.Cryptography;
+using System.Text;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using System.Text.Json;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 
@@ -6,23 +8,26 @@ namespace MichaelKoch.TicTacToe.Data.DataStoring;
 
 public class SaveGameRepository : ISaveGameRepository
 {
-    public void SaveGameInFile(SaveGame saveGame)
+    private const string SaveGameFileName = "SaveGame.json";
+
+    public async Task SaveGameInFileAsync(SaveGame saveGame)
     {
+        if (saveGame == null) throw new ArgumentNullException(nameof(saveGame));
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
             WriteIndented = true
         };
 
-        var jsonString = JsonSerializer.Serialize(saveGame, options);
-        File.WriteAllText("SaveGame.json", jsonString);
+        await using var saveGameStream = File.Create(SaveGameFileName);
+        await JsonSerializer.SerializeAsync(saveGameStream, saveGame, options);
+        await saveGameStream.DisposeAsync();
     }
 
-    public SaveGame LoadLastGameFromFile()
+
+    public async Task<SaveGame> LoadLastGameFromFileAsync()
     {
-        const string fileName = "SaveGame.json";
-        using FileStream saveGameStream = File.OpenRead(fileName);
-        var saveGame = JsonSerializer.Deserialize<SaveGame>(saveGameStream) ?? throw new InvalidOperationException("Deserialize from SaveGame.json is null!");
-        return saveGame;
+        await using var openSaveGameStream = File.OpenRead(SaveGameFileName);
+        return await JsonSerializer.DeserializeAsync<SaveGame>(openSaveGameStream) ?? throw new InvalidDataException("The data could not be loaded!"); //return saveGame;
     }
 }

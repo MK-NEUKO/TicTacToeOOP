@@ -44,7 +44,7 @@ namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient
             var game = AppHost!.Services.GetRequiredService<IGameViewModel>();
             if (game.IsInGame)
             {
-                game.SaveGame(); 
+                await game.SaveGame(); 
             }
             await AppHost!.StopAsync();
 

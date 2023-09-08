@@ -22,5 +22,5 @@ public interface IGameMenuViewModel
     IRelayCommand? StartGameCommand { get; }
     IRelayCommand? StopGameCommand { get; }
     IRelayCommand? NewGameCommand { get; }
-    IRelayCommand? LoadLastGameCommand { get; }
+    IAsyncRelayCommand? LoadLastGameCommand { get; }
 }

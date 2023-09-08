@@ -2,6 +2,6 @@
 
 public interface IGameViewModel
 {
-    void SaveGame();
+    Task SaveGame();
     bool IsInGame { get; }
 }

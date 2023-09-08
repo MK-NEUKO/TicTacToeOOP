@@ -1,4 +1,6 @@
-﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+﻿using System.Runtime.InteropServices;
+using System.Text;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
@@ -13,7 +15,7 @@ public class SaveGameManager : ISaveGameManager
         _saveGameRepository = saveGameRepository;
     }
 
-    public void SaveCurrentGame(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData)
+    public async Task SaveCurrentGameAsync(GameInfoBoardData gameInfoBoardData, PlayerGameBoardData playerGameBoardData)
     {
         var currentSaveGame = new SaveGame
         {
@@ -21,12 +23,11 @@ public class SaveGameManager : ISaveGameManager
             PlayerGameBoardData = playerGameBoardData
         };
 
-        _saveGameRepository.SaveGameInFile(currentSaveGame);
+        await _saveGameRepository.SaveGameInFileAsync(currentSaveGame); 
     }
 
-    public SaveGame LoadLastSaveGame()
+    public async Task<SaveGame> LoadLastSaveGameAsync()
     {
-        var lastGame = _saveGameRepository.LoadLastGameFromFile();
-        return lastGame;
+        return await _saveGameRepository.LoadLastGameFromFileAsync();
     }
 }
