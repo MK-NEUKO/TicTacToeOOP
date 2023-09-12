@@ -1,19 +1,20 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
-using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
 public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
 {
     private readonly IMinimaxAlgorithm _ai;
+    private PlayerData _playerData;
 
     public PlayerViewModel(IMinimaxAlgorithm ai)
     {
-        PlayerData = new PlayerData();
+        _playerData = new PlayerData();
         _ai = ai;
         WeakReferenceMessenger.Default.Register<ContinueGameMessage>(this, (r, m) =>
         {
@@ -21,20 +22,42 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         });
     }
 
-    private void SendPlayerPropertyChangedMessage()
+    private void OverridePlayerData()
     {
-        WeakReferenceMessenger.Default.Send(new PlayerPropertyChangedMessage(this));
+        WeakReferenceMessenger.Default.Send(new OverridePlayerDataMessage(this));
     }
 
-    public PlayerData PlayerData { get; set; }
+    public AiDifficultyLevel AiDifficultyLevel
+    {
+        get => PlayerData.AiDifficultyLevel;
+        set
+        {
+            SetProperty(PlayerData.AiDifficultyLevel, value, PlayerData,
+                (playerData, aiDifficultyLevel) => playerData.AiDifficultyLevel = aiDifficultyLevel);
+            OverridePlayerData();
+        }
+    }
+
+    public PlayerData PlayerData
+    {
+        get => _playerData;
+        set
+        {
+            if (SetProperty(ref _playerData, value))
+            {
+                IsPlayersTurn = value.IsPlayersTurn;
+            }
+        }
+    }
 
     public string Name
     {
         get => PlayerData.Name;
         set
         {
-            SetProperty(PlayerData.Name, value, PlayerData, (playerData, name) => playerData.Name = name);
-            SendPlayerPropertyChangedMessage();
+            SetProperty(PlayerData.Name, value, PlayerData, 
+                (playerData, name) => playerData.Name = name);
+            OverridePlayerData();
         }
     }
 
@@ -43,8 +66,9 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.Token;
         set
         {
-            SetProperty(PlayerData.Token, value, PlayerData, (playerDate, token) => playerDate.Token = token);
-            SendPlayerPropertyChangedMessage();
+            SetProperty(PlayerData.Token, value, PlayerData, 
+                (playerDate, token) => playerDate.Token = token);
+            OverridePlayerData();
         }
     }
 
@@ -53,8 +77,11 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.IsAi;
         set
         {
-            SetProperty(PlayerData.IsAi, value, PlayerData, (playerData, isAi) => playerData.IsAi = isAi);
-            SetProperty(PlayerData.IsHuman, !value, PlayerData, (playerData, isHuman) => playerData.IsHuman = isHuman);
+            SetProperty(PlayerData.IsAi, value, PlayerData, 
+                (playerData, isAi) => playerData.IsAi = isAi);
+            SetProperty(PlayerData.IsHuman, !value, PlayerData, 
+                (playerData, isHuman) => playerData.IsHuman = isHuman);
+            OverridePlayerData();
         }
     }
 
@@ -63,8 +90,11 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.IsHuman;
         set
         {
-            SetProperty(PlayerData.IsHuman, value, PlayerData, (playerData, isHuman) => playerData.IsHuman = isHuman);
-            SetProperty(PlayerData.IsAi, !value, PlayerData, (playerData, isAi) => playerData.IsAi = isAi);
+            SetProperty(PlayerData.IsHuman, value, PlayerData, 
+                (playerData, isHuman) => playerData.IsHuman = isHuman);
+            SetProperty(PlayerData.IsAi, !value, PlayerData, 
+                (playerData, isAi) => playerData.IsAi = isAi);
+            OverridePlayerData();
         }
     }
 
@@ -73,10 +103,11 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.IsPlayersTurn;
         set
         {
-            if (SetProperty(PlayerData.IsPlayersTurn, value, PlayerData, (playerData, isPlayersTurn) => playerData.IsPlayersTurn = isPlayersTurn)  && value)
-            {
-                WeakReferenceMessenger.Default.Send(new CurrentPlayerChangedMessage(this));
-            }
+            SetProperty(PlayerData.IsPlayersTurn, value, PlayerData,
+                (playerData, isPlayersTurn) => playerData.IsPlayersTurn = isPlayersTurn);
+            if (!value) return;
+            WeakReferenceMessenger.Default.Send(new CurrentPlayerChangedMessage(this));
+            OverridePlayerData();
         }
     }
 
@@ -85,7 +116,9 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.IsWinner;
         set
         {
-            SetProperty(PlayerData.IsWinner, value, PlayerData, (playerData, isWinner) => playerData.IsWinner = isWinner);
+            SetProperty(PlayerData.IsWinner, value, PlayerData, 
+                (playerData, isWinner) => playerData.IsWinner = isWinner);
+            OverridePlayerData();
         }
     }
 
@@ -94,7 +127,9 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         get => PlayerData.Points;
         set
         {
-            SetProperty(PlayerData.Points, value, PlayerData, (playerData, points) => playerData.Points = points);
+            SetProperty(PlayerData.Points, value, PlayerData, 
+                (playerData, points) => playerData.Points = points);
+            OverridePlayerData();
         }
     }
 
@@ -103,7 +138,7 @@ public partial class PlayerViewModel : ObservableValidator, IPlayerViewModel
         if (tokenList == null) throw new ArgumentNullException(nameof(tokenList));
         if (this.IsAi)
         {
-            var area = _ai.FindBestMove(tokenList, Token);
+            var area = _ai.FindBestMove(tokenList, Token, AiDifficultyLevel);
             return area;
         }
 

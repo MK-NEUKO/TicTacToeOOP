@@ -19,8 +19,8 @@ public interface IGameMenuViewModel
     int PointsPlayerO { get; set; }
     string TokenPlayerO { get; set; }
     Action Reset { get; set; }
-    IRelayCommand? StartGameCommand { get; }
-    IRelayCommand? StopGameCommand { get; }
-    IRelayCommand? NewGameCommand { get; }
-    IAsyncRelayCommand? LoadLastGameCommand { get; }
+    IRelayCommand StartGameCommand { get; }
+    IRelayCommand StopGameCommand { get; }
+    IRelayCommand NewGameCommand { get; }
+    IAsyncRelayCommand LoadLastGameCommand { get; }
 }

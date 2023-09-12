@@ -26,8 +26,5 @@ public class SaveGameManager : ISaveGameManager
         await _saveGameRepository.SaveGameInFileAsync(currentSaveGame); 
     }
 
-    public async Task<SaveGame> LoadLastSaveGameAsync()
-    {
-        return await _saveGameRepository.LoadLastGameFromFileAsync();
-    }
+    public async Task<SaveGame> LoadLastSaveGameAsync() => await _saveGameRepository.LoadLastGameFromFileAsync();
 }

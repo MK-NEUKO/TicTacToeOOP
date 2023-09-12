@@ -6,6 +6,7 @@ public class PlayerData
     {
         Name = string.Empty;
         Token = string.Empty;
+        AiDifficultyLevel = new AiDifficultyLevel();
     }
 
     public string Name { get; set; }
@@ -15,4 +16,5 @@ public class PlayerData
     public bool IsPlayersTurn { get; set; }
     public bool IsWinner { get; set; }
     public int Points { get; set; }
+    public AiDifficultyLevel AiDifficultyLevel { get; set; }
 }

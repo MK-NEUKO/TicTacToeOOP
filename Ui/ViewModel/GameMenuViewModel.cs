@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.Immutable;
+using System.Linq.Expressions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
@@ -20,6 +22,8 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     private readonly IViewModelFactory<IGetSecureQueryDialogViewModel> _getSecureQueryDialogViewModelFactory;
     private readonly IWindowService<IGetSecureQueryDialogViewModel> _getSecureQueryDialogService;
     private readonly ISaveGameManager _saveGameManager;
+    [ObservableProperty] private ImmutableList<string> _aiDifficultyLevelList;
+
 
     private string _namePlayerX;
     [ObservableProperty] private bool _isAiPlayerX;
@@ -28,6 +32,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private bool _isWinnerPlayerX;
     [ObservableProperty] private int _pointsPlayerX;
     [ObservableProperty] private string _tokenPlayerX;
+    [ObservableProperty] private string _aiDifficultyLevelPlayerX;
 
     private string _namePlayerO;
     [ObservableProperty] private bool _isAiPlayerO;
@@ -36,6 +41,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [ObservableProperty] private bool _isWinnerPlayerO;
     [ObservableProperty] private int _pointsPlayerO;
     [ObservableProperty] private string _tokenPlayerO;
+    [ObservableProperty] private string _aiDifficultyLevelPlayerO;
 
     public GameMenuViewModel(IViewModelFactory<IPlayerViewModel> playerFactory,
                              IViewModelFactory<IGetSecureQueryDialogViewModel> getSecureQueryDialogViewModelFactory,
@@ -46,12 +52,14 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         _getSecureQueryDialogViewModelFactory = getSecureQueryDialogViewModelFactory ?? throw new ArgumentNullException(nameof(getSecureQueryDialogViewModelFactory));
         _getSecureQueryDialogService = getSecureQueryDialogService ?? throw new ArgumentNullException(nameof(getSecureQueryDialogService));
         _saveGameManager = saveGameManager ?? throw new ArgumentNullException(nameof(saveGameManager));
-
         PlayerList = new List<IPlayerViewModel>();
         _tokenPlayerX = string.Empty;
         _tokenPlayerO = string.Empty;
         _namePlayerX = string.Empty;
         _namePlayerO = string.Empty;
+        _aiDifficultyLevelList = ImmutableList.Create("Easy", "Normal", "Hard");
+        _aiDifficultyLevelPlayerX = string.Empty;
+        _aiDifficultyLevelPlayerO = string.Empty;
         LoadLastGameCommand = new AsyncRelayCommand(LoadLastGameAsync);
 
         WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, (r, m) =>
@@ -102,10 +110,20 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         StartGameCommand.NotifyCanExecuteChanged();
         StopGameCommand.NotifyCanExecuteChanged();
 
-        PlayerList.Add(CreatePlayerX()); 
-        PlayerList.Add(CreatePlayerO());
-        
-        WeakReferenceMessenger.Default.Send(new StartGameButtonClickedMessage(this));
+        if (IsNewGame)
+        {
+            var currentGameSettings = new SaveGame
+            {
+                GameInfoBoardData =
+                {
+                    PlayerXData = CreatePlayerX().PlayerData,
+                    PlayerOData = CreatePlayerO().PlayerData
+                }
+            };
+            WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(currentGameSettings)); 
+        }
+
+        WeakReferenceMessenger.Default.Send(new StartGameMessage(this));
     }
 
     private bool CanStartGame()
@@ -116,9 +134,12 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     [RelayCommand(CanExecute = nameof(CanStopGame))]
     private void StopGame()
     {
+        WeakReferenceMessenger.Default.Send(new PauseGameMessage(true));
         var getSecureQueryDialogViewModel = _getSecureQueryDialogViewModelFactory.Create();
         getSecureQueryDialogViewModel.Message = "Are you sure to stop the game! All points and settings will be lost";
         _getSecureQueryDialogService.ShowDialog(getSecureQueryDialogViewModel);
+        var dialogResult = getSecureQueryDialogViewModel.DialogResult;
+        WeakReferenceMessenger.Default.Send(new PauseGameMessage(dialogResult));
     }
 
     private bool CanStopGame()
@@ -131,18 +152,24 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
     {
         IsNewGame = true;
         SetupDefaultPlayer();
-        var emptySaveGame = new SaveGame();
-
-        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(emptySaveGame));
+        var defaultGameSettings = new SaveGame
+        {
+            GameInfoBoardData =
+            {
+                PlayerXData = CreatePlayerX().PlayerData,
+                PlayerOData = CreatePlayerO().PlayerData
+            }
+        };
+        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(defaultGameSettings));
     }
 
     private async Task LoadLastGameAsync()
     {
-        var saveGame = await _saveGameManager.LoadLastSaveGameAsync();
+        var currentGameSettings = await _saveGameManager.LoadLastSaveGameAsync();
         IsNewGame = false;
-        OverridePlayerInMenu(saveGame);
+        OverridePlayerInMenu(currentGameSettings);
 
-        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(saveGame));
+        WeakReferenceMessenger.Default.Send(new LoadGameSettingsMessage(currentGameSettings));
     }
 
     private void OverridePlayerInMenu(SaveGame saveGame)
@@ -156,6 +183,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsAiPlayerX = playerX.IsAi;
         IsPlayersTurnPlayerX = playerX.IsPlayersTurn;
         PointsPlayerX = playerX.Points;
+        AiDifficultyLevelPlayerX = playerX.AiDifficultyLevel.ToString();
 
         TokenPlayerO = playerO.Token;
         NamePlayerO = playerO.Name;
@@ -163,6 +191,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsAiPlayerO = playerO.IsAi;
         IsPlayersTurnPlayerO = playerO.IsPlayersTurn;
         PointsPlayerO = playerO.Points;
+        AiDifficultyLevelPlayerO = playerO.AiDifficultyLevel.ToString();
     }
 
     private void SetupDefaultPlayer()
@@ -172,6 +201,7 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         IsPlayersTurnPlayerX = true;
         NamePlayerO = "PlayerO";
         IsAiPlayerO = true;
+        AiDifficultyLevelPlayerO = AiDifficultyLevelList[1];
     }
 
     private IPlayerViewModel CreatePlayerX()
@@ -183,6 +213,13 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         playerX.IsHuman = IsHumanPlayerX;
         playerX.IsPlayersTurn = IsPlayersTurnPlayerX;
         playerX.Points = PointsPlayerX;
+        playerX.AiDifficultyLevel = AiDifficultyLevelPlayerX switch
+        {
+            "Easy" => AiDifficultyLevel.Easy,
+            "Normal" => AiDifficultyLevel.Normal,
+            "Hard" => AiDifficultyLevel.Hard,
+            _ => AiDifficultyLevel.Normal
+        };
         return playerX;
     }
 
@@ -195,6 +232,13 @@ public partial class GameMenuViewModel : ObservableValidator, IGameMenuViewModel
         playerO.IsHuman = IsHumanPlayerO;
         playerO.IsPlayersTurn = IsPlayersTurnPlayerO;
         playerO.Points = PointsPlayerO;
+        playerO.AiDifficultyLevel = AiDifficultyLevelPlayerO switch
+        {
+            "Easy" => AiDifficultyLevel.Easy,
+            "Normal" => AiDifficultyLevel.Normal,
+            "Hard" => AiDifficultyLevel.Hard,
+            _ => AiDifficultyLevel.Normal
+        };
         return playerO;
     }
 

@@ -11,6 +11,7 @@ public interface IPlayerViewModel
     bool IsAi { get; set; }
     bool IsPlayersTurn { get; set; }
     int Points { get; set; }
+    AiDifficultyLevel AiDifficultyLevel { get; set; }
     PlayerData PlayerData { get; set; }
     int GiveTokenPosition(List<string> tokenList, int clickedAreaId);
     void SetPoint();

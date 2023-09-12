@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -32,32 +32,37 @@ public class GameViewModel: IGameViewModel
         _saveGameManager = saveGameManager ?? throw new ArgumentNullException(nameof(saveGameManager));
         _currentPlayer = gameInfoBoard.CreatePlayer("X");
 
-        WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
+        WeakReferenceMessenger.Default.Register<StartGameMessage>(this, (r, m) =>
         {
             IsInGame = true;
             _playerGameBoard.StartGameStartAnimation(m.Value.IsNewGame);
         });
         WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
         {
+            IsInGame = false;
             _numberOfDraw = 0;
         });
-        WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, (GameBoardAreaWasClickedHandler));
-        WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, GameBoardStartAnimationCompletedHandler);
+        WeakReferenceMessenger.Default.Register<GameBoardAreaWasClickedMessage>(this, async (r, m) =>
+        {
+            var clickedAreaId = m.Value;
+            await MakeAMoveAsync(clickedAreaId);
+        });
+        WeakReferenceMessenger.Default.Register<GameBoardStartAnimationCompletedMessage>(this, async (r, m) =>
+        {
+            await MakeAMoveAsync();
+        }); 
         WeakReferenceMessenger.Default.Register<CurrentPlayerChangedMessage>(this, (r, m) =>
         {
             _currentPlayer = m.Value;
         });
-    }
-
-    private async void GameBoardStartAnimationCompletedHandler(object recipient, GameBoardStartAnimationCompletedMessage message)
-    {
-        await MakeAMoveAsync();
-    }
-
-    private async void GameBoardAreaWasClickedHandler(object recipient, GameBoardAreaWasClickedMessage message)
-    {
-        var clickedAreaId = message.Value;
-        await MakeAMoveAsync(clickedAreaId);
+        WeakReferenceMessenger.Default.Register<PauseGameMessage>(this, async (r, m) =>
+        {
+            IsInGame = !(m.Value);
+            if (IsInGame)
+            {
+                await MakeAMoveAsync();
+            }
+        });
     }
 
     public bool IsInGame { get; private set; }
@@ -66,6 +71,7 @@ public class GameViewModel: IGameViewModel
     {
         do
         {
+            if (!IsInGame) return;
             if (_currentPlayer.Token == string.Empty) return;
             var areaId = await Task.Run(() => _currentPlayer.GiveTokenPosition(_playerGameBoard.GetCurrentTokenList(), clickedAreaId));
             if(areaId == -1) return;
@@ -98,19 +104,19 @@ public class GameViewModel: IGameViewModel
 
     private bool GetPlayerDecisionIsStartNewGame(IEvaluationResult evaluationResult)
     {
-        var gameOverViewModel = _gameOverDialogViewModelFactory.Create();
+        var gameOverDialogViewModel = _gameOverDialogViewModelFactory.Create();
         if (evaluationResult.IsWinner)
         {
-            gameOverViewModel.Message = $"{_currentPlayer.Name} is the winner and gets a Point";
+            gameOverDialogViewModel.Message = $"{_currentPlayer.Name} is the winner and gets a Point";
         }
 
         if (evaluationResult.IsDraw)
         {
-            gameOverViewModel.Message =
+            gameOverDialogViewModel.Message =
                 "The game is a draw, no one gets a point. The draw games are counted under the player display.";
         }
-        _gameOverDialogService.ShowDialog(gameOverViewModel);
-        var dialogResult = gameOverViewModel.IsSelectNewGame;
+        _gameOverDialogService.ShowDialog(gameOverDialogViewModel);
+        var dialogResult = gameOverDialogViewModel.IsSelectNewGame;
 
         return dialogResult;
     }

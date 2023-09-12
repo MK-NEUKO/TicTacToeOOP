@@ -5,7 +5,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 public class LoadGameSettingsMessage : ValueChangedMessage<SaveGame>
 {
-    public LoadGameSettingsMessage(SaveGame value) : base(value)
+    public LoadGameSettingsMessage(SaveGame gameSettings) : base(gameSettings)
     {
     }
 }

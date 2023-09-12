@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -36,7 +36,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             SetProperty(PlayerGameBoardAreaData.IsStartSaveGameAnimation, value, PlayerGameBoardAreaData,
                 (areaData, isStartSaveGameAnimation) => areaData.IsStartSaveGameAnimation = isStartSaveGameAnimation);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            OverridePlayerGameBoardAreaData();
         }
     }
 
@@ -47,7 +47,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             SetProperty(PlayerGameBoardAreaData.IsOccupied, value, PlayerGameBoardAreaData,
                 (areaData, isOccupied) => areaData.IsOccupied = isOccupied);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            OverridePlayerGameBoardAreaData();
         }
     }
     
@@ -58,7 +58,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             SetProperty(PlayerGameBoardAreaData.IsWinArea, value, PlayerGameBoardAreaData,
                 (areaData, isWinArea) => areaData.IsWinArea = isWinArea);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            OverridePlayerGameBoardAreaData();
         }
     }
 
@@ -67,8 +67,9 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         get => PlayerGameBoardAreaData.Id;
         set
         {
-            SetProperty(PlayerGameBoardAreaData.Id, value, PlayerGameBoardAreaData, (areaData, id) => areaData.Id = id);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            SetProperty(PlayerGameBoardAreaData.Id, value, PlayerGameBoardAreaData, 
+                (areaData, id) => areaData.Id = id);
+            OverridePlayerGameBoardAreaData();
         }
     }
 
@@ -79,7 +80,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             SetProperty(PlayerGameBoardAreaData.Token, value, PlayerGameBoardAreaData,
                 (areaData, token) => areaData.Token = token);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            OverridePlayerGameBoardAreaData();
         }
     }
 
@@ -90,7 +91,7 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             SetProperty(PlayerGameBoardAreaData.CounterMouseEnter, value, PlayerGameBoardAreaData,
                 (areaData, counterMouseEnter) => areaData.CounterMouseEnter = counterMouseEnter);
-            SendPlayerGameBoardAreaPropertyChangedMessage();
+            OverridePlayerGameBoardAreaData();
         }
     }
 
@@ -101,8 +102,9 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         {
             if (IsOccupied && CounterMouseEnter >= 1)
             {
-                SetProperty(PlayerGameBoardAreaData.CanShowIsOccupied, value, PlayerGameBoardAreaData, (areaData, canShowIsOccupied) => areaData.CanShowIsOccupied = canShowIsOccupied);
-                SendPlayerGameBoardAreaPropertyChangedMessage();
+                SetProperty(PlayerGameBoardAreaData.CanShowIsOccupied, value, PlayerGameBoardAreaData, 
+                    (areaData, canShowIsOccupied) => areaData.CanShowIsOccupied = canShowIsOccupied);
+                OverridePlayerGameBoardAreaData();
                 MouseEnterForShowIsOccupiedCommand.NotifyCanExecuteChanged();
             }
         }
@@ -155,5 +157,6 @@ public partial class PlayerGameBoardAreaViewModel : ObservableObject, IPlayerGam
         CounterMouseEnter = 0;
     }
 
-    private void SendPlayerGameBoardAreaPropertyChangedMessage() => WeakReferenceMessenger.Default.Send(new PlayerGameBoardAreaPropertyChangedMessage(this));
+    private void OverridePlayerGameBoardAreaData() => 
+        WeakReferenceMessenger.Default.Send(new OverridePlayerGameBoardAreaDataChangedMessage(this));
 }

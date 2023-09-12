@@ -1,11 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
-using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
 using MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
+using MichaelKoch.TicTacToe.Ui.ViewModel.Factories;
+using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel;
 
@@ -29,12 +28,13 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         {
             _areas.ForEach(a => a.ResetForNewGame());
         });
-        WeakReferenceMessenger.Default.Register<PlayerGameBoardAreaPropertyChangedMessage>(this, (r, m) =>
+        WeakReferenceMessenger.Default.Register<OverridePlayerGameBoardAreaDataChangedMessage>(this, (r, m) =>
         {
             PlayerGameBoardData.AreasData[m.Value.Id] = m.Value.PlayerGameBoardAreaData;
         });
         WeakReferenceMessenger.Default.Register<LoadGameSettingsMessage>(this, (r, m) =>
         {
+            PlayerGameBoardData = m.Value.PlayerGameBoardData;
             _areas.ForEach(a => a.Token = m.Value.PlayerGameBoardData.AreasData[a.Id].Token);
         });
     }

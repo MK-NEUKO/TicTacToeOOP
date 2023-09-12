@@ -581,17 +581,20 @@
                                               ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"                                            
                                               VerticalAlignment="Center"
-                                              HorizontalAlignment="Center">
+                                              HorizontalAlignment="Right"
+                                              Margin="0,3,15,3">
                             </ContentPresenter>
                             <TextBox x:Name="PART_EditableTextBox"
+                                     Text="Ai Level:"
+                                     Foreground="{StaticResource TTTBlue}"
                                      Style="{x:Null}"
                                      Template="{StaticResource ComboBoxTextBox}"
                                      HorizontalAlignment="Left"
-                                     VerticalAlignment="Bottom"
-                                     Margin="3,3,23,3"
+                                     VerticalAlignment="Center"
+                                     Margin="5,3,5,3"
                                      Focusable="True"
                                      Background="Transparent"
-                                     Visibility="Hidden"
+                                     Visibility="Visible"
                                      IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Popup x:Name="Popup"
                                    Placement="Bottom"
@@ -885,11 +888,9 @@
                                       Grid.Column="1"
                                       Height="25"                                     
                                       Margin="4"
-                                      IsEnabled="False">
-                                <ComboBoxItem IsSelected="True">Easy</ComboBoxItem>
-                                <ComboBoxItem>Normal</ComboBoxItem>
-                                <ComboBoxItem>Hard</ComboBoxItem>
-                            </ComboBox>
+                                      IsEnabled="False"
+                                      ItemsSource="{Binding AiDifficultyLevelList}"
+                                      SelectedItem="{Binding AiDifficultyLevelPlayerX}"/>
                             <ToggleButton Grid.Column="0"
                                           Grid.Row="2"
                                           Grid.ColumnSpan="2"
@@ -968,11 +969,9 @@
                                       Height="25"
                                       Margin="4"
                                       x:Name="SelectDifficultyLevelPlayerO"
-                                      IsEnabled="False">
-                                <ComboBoxItem IsSelected="True">Easy</ComboBoxItem>
-                                <ComboBoxItem>Normal</ComboBoxItem>
-                                <ComboBoxItem>Hard</ComboBoxItem>
-                            </ComboBox>
+                                      IsEnabled="False"
+                                      ItemsSource="{Binding AiDifficultyLevelList}"
+                                      SelectedItem="{Binding AiDifficultyLevelPlayerO}"/>
                             <ToggleButton Grid.Column="0"
                                          Grid.Row="2"
                                          Grid.ColumnSpan="2"

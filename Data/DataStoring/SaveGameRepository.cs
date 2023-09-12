@@ -1,7 +1,5 @@
-﻿using System.Security.Cryptography;
-using System.Text;
+﻿using System.Text.Json;
 using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
-using System.Text.Json;
 using MichaelKoch.TicTacToe.Data.DataStoring.Contract;
 
 namespace MichaelKoch.TicTacToe.Data.DataStoring;
@@ -24,10 +22,11 @@ public class SaveGameRepository : ISaveGameRepository
         await saveGameStream.DisposeAsync();
     }
 
-
     public async Task<SaveGame> LoadLastGameFromFileAsync()
     {
         await using var openSaveGameStream = File.OpenRead(SaveGameFileName);
-        return await JsonSerializer.DeserializeAsync<SaveGame>(openSaveGameStream) ?? throw new InvalidDataException("The data could not be loaded!"); //return saveGame;
+        var saveGame = await JsonSerializer.DeserializeAsync<SaveGame>(openSaveGameStream) ?? throw new InvalidDataException("The data could not be loaded!");
+        await openSaveGameStream.DisposeAsync();
+        return saveGame;
     }
 }

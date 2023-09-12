@@ -24,19 +24,14 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         _playingPlayerO = CreatePlayer("O");
         GameInfoBoardData = new GameInfoBoardData();
         
-        WeakReferenceMessenger.Default.Register<StartGameButtonClickedMessage>(this, (r, m) =>
-        {
-            var playerList = m.Value.PlayerList;
-            PlayingPlayerX = playerList.Find(x => x.Token == "X") ?? throw new InvalidOperationException(nameof(PlayingPlayerX));
-            PlayingPlayerO = playerList.Find(x => x.Token == "O") ?? throw new InvalidOperationException(nameof(PlayingPlayerO));
-            
-        });
         WeakReferenceMessenger.Default.Register<StartNewGameMessage>(this, (r, m) =>
         {
             PlayingPlayerX = CreatePlayer("X");
             PlayingPlayerO = CreatePlayer("O");
+            FirstInfoRowLabel = string.Empty;
+            FirstInfoRowValue = string.Empty;
         });
-        WeakReferenceMessenger.Default.Register<PlayerPropertyChangedMessage>(this, (r, m) =>
+        WeakReferenceMessenger.Default.Register<OverridePlayerDataMessage>(this, (r, m) =>
         {
             switch (m.Value.Token)
             {

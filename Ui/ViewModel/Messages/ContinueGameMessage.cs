@@ -2,9 +2,9 @@
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
-public class ContinueGameMessage : ValueChangedMessage<int>
+public class ContinueGameMessage : ValueChangedMessage<bool>
 {
-    public ContinueGameMessage(int value) : base(value)
+    public ContinueGameMessage(bool isContinued) : base(isContinued)
     {
     }
 }

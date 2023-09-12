@@ -43,8 +43,8 @@ public class GameMenuViewModelSampleData : IGameMenuViewModel
     public bool IsWinnerPlayerO { get; set; }
     public int PointsPlayerX { get; set; }
     public int PointsPlayerO { get; set; }
-    public IRelayCommand? StartGameCommand { get; set; } = null;
-    public IRelayCommand? StopGameCommand { get; set; } = null;
-    public IRelayCommand? NewGameCommand { get; set; } = null;
-    public IAsyncRelayCommand? LoadLastGameCommand { get; set; } = null;
+    public IRelayCommand StartGameCommand { get; set; } = null!;
+    public IRelayCommand StopGameCommand { get; set; } = null!;
+    public IRelayCommand NewGameCommand { get; set; } = null!;
+    public IAsyncRelayCommand LoadLastGameCommand { get; set; } = null!;
 }

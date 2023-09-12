@@ -19,6 +19,7 @@ public class PlayerViewModelSampleData : IPlayerViewModel
     public bool IsPlayersTurn { get; set; }
     public bool IsWinner { get; set; }
     public int Points { get; set; }
+    public AiDifficultyLevel AiDifficultyLevel { get; set; }
     public PlayerData PlayerData { get; set; } = null!;
 
     public int GiveTokenPosition(List<string> tokenList, int clickedAreaId)

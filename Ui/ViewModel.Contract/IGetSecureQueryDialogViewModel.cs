@@ -2,5 +2,6 @@
 
 public interface IGetSecureQueryDialogViewModel
 {
-    string? Message { get; set; }
+    string Message { get; set; }
+    bool DialogResult { get; }
 }

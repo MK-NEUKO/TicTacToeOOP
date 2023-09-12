@@ -4,7 +4,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 public class StartNewGameMessage : ValueChangedMessage<bool>
 {
-    public StartNewGameMessage(bool value) : base(value)
+    public StartNewGameMessage(bool isStartNewGame) : base(isStartNewGame)
     {
     }
 }

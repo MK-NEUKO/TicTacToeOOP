@@ -1,4 +1,5 @@
-﻿using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
+﻿using MichaelKoch.TicTacToe.CrossCutting.DataClasses;
+using MichaelKoch.TicTacToe.Logic.TicTacToeCore.Contract;
 
 namespace MichaelKoch.TicTacToe.Logic.TicTacToeCore;
 
@@ -7,6 +8,7 @@ public class MinimaxAlgorithm : IMinimaxAlgorithm
     private readonly IGameEvaluator _evaluator;
     private string _player;
     private string _opponent;
+    private int _desiredDepth;
 
     public MinimaxAlgorithm(IGameEvaluator evaluator)
     {
@@ -15,12 +17,13 @@ public class MinimaxAlgorithm : IMinimaxAlgorithm
         _opponent = string.Empty;
     }
 
-    public int FindBestMove(List<string> gameBoard, string player)
+    public int FindBestMove(List<string> gameBoard, string player, AiDifficultyLevel difficultyLevel)
     {
         var bestMove = -1;
         var bestNodeRating = int.MinValue;
         _player = player;
         _opponent = _evaluator.GetOpponentOf(player);
+        _desiredDepth = (int)difficultyLevel;
 
         for (var i = 0; i < gameBoard.Count; i++)
         {
@@ -48,6 +51,7 @@ public class MinimaxAlgorithm : IMinimaxAlgorithm
 
         var evaluationResult = _evaluator.EvaluateGameForMinimax(gameBoard, _player);
 
+        if (depth > _desiredDepth) return evaluationResult.NodeRating;
         // If Maximizer has won the game 
         // return his/her evaluated score
         if(evaluationResult.NodeRating == 100) return evaluationResult.NodeRating - depth;

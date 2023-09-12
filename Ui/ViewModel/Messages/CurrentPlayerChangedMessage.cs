@@ -4,7 +4,7 @@ namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
 
 internal class CurrentPlayerChangedMessage : ValueChangedMessage<PlayerViewModel>
 {
-    public CurrentPlayerChangedMessage(PlayerViewModel value) : base(value)
+    public CurrentPlayerChangedMessage(PlayerViewModel currentPlayer) : base(currentPlayer)
     {
     }
 }

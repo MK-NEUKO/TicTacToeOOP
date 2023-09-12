@@ -2,10 +2,10 @@
 using MichaelKoch.TicTacToe.Ui.ViewModel.Contract;
 
 namespace MichaelKoch.TicTacToe.Ui.ViewModel.Messages;
-    
-public class GameBoardAreaWasClickedMessage : ValueChangedMessage<int>
+
+internal class StartGameMessage : ValueChangedMessage<GameMenuViewModel>
 {
-    public GameBoardAreaWasClickedMessage(int clickedAreaId) : base(clickedAreaId)
+    public StartGameMessage(GameMenuViewModel gameMenuViewModel) : base(gameMenuViewModel)
     {
     }
 }

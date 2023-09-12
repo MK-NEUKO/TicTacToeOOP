@@ -402,7 +402,14 @@
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsStartSaveGameAnimation}" Value="true">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource StartSaveGameAnimation}"/>
+                        <BeginStoryboard Storyboard="{StaticResource StartSaveGameAnimation}"
+                                         Name="BeginStartSaveGameAnimation">
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsStartSaveGameAnimation}" Value="false">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard BeginStoryboardName="BeginStartSaveGameAnimation"></StopStoryboard>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="X">
