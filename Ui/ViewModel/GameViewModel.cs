@@ -67,6 +67,11 @@ public class GameViewModel: IGameViewModel
 
     public bool IsInGame { get; private set; }
 
+    /* TODO - If Stop is pressed in the game, the GetSecure... dialog opens while the last move is still being executed by MakeAMoveAsync().
+            - If you press the OK button before the end of the move, the data for a new game will be overwritten.
+            - But when the last move ends, the data is overwritten again with the data from the last move.
+            FIX: You could encapsulate the execution of MakeAMove() in a class and thus better control the program flow using appropriate properties.
+    */
     private async Task MakeAMoveAsync(int clickedAreaId = -1)
     {
         do
