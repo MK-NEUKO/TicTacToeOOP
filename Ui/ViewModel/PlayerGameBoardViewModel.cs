@@ -86,7 +86,7 @@ public partial class PlayerGameBoardViewModel : ObservableObject, IPlayerGameBoa
         if (_animationCompletedCounter != 9) return;
         _animationCompletedCounter = 0;
         _areas.ForEach(area => area.IsInGame = true);
-        WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(this));
+        WeakReferenceMessenger.Default.Send(new GameBoardStartAnimationCompletedMessage(true));
     }
 
     public async Task<bool> TrySetTokenTaskAsync(string token, bool isHuman, int areaId)
