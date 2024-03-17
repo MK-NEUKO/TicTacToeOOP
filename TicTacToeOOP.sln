@@ -30,9 +30,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mappings", "Mappings\Mappin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataClasses", "CrossCutting\DataClasses\DataClasses.csproj", "{1A197692-4C6A-4CB7-9D1E-807D182420C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStoring", "Data\DataStoring\DataStoring.csproj", "{8E4B6320-5092-4B53-8054-67E3914FABB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStoring", "Data\DataStoring\DataStoring.csproj", "{8E4B6320-5092-4B53-8054-67E3914FABB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStoring.Contract", "Data\DataStoring.Contract\DataStoring.Contract.csproj", "{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStoring.Contract", "Data\DataStoring.Contract\DataStoring.Contract.csproj", "{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{37490DC7-4754-4714-B181-42B61DD0B3C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "src\core\TicTacToe\TicTacToe.csproj", "{AB7EB9EB-5112-4788-A108-2A90814114C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +80,10 @@ Global
 		{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7EB9EB-5112-4788-A108-2A90814114C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7EB9EB-5112-4788-A108-2A90814114C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7EB9EB-5112-4788-A108-2A90814114C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7EB9EB-5112-4788-A108-2A90814114C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,7 @@ Global
 		{1A197692-4C6A-4CB7-9D1E-807D182420C1} = {C7D841D1-8921-49F0-95A6-0F942617D9CD}
 		{8E4B6320-5092-4B53-8054-67E3914FABB0} = {61179EF0-4EA3-4CBF-8360-F00C2CEEAFB9}
 		{EEAA204A-3036-4B8A-BDE5-EBBF8A2EE55C} = {61179EF0-4EA3-4CBF-8360-F00C2CEEAFB9}
+		{AB7EB9EB-5112-4788-A108-2A90814114C4} = {37490DC7-4754-4714-B181-42B61DD0B3C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAD82985-8150-4C41-A5DF-202B1C75D0A9}
