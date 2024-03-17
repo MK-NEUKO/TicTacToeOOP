@@ -1,4 +1,4 @@
-﻿namespace MichaelKoch.TicTacToe.Enums;
+﻿namespace MichaelKoch.TicTacToe.Core.Enums;
 
 public enum AiDifficultyLevel
 {

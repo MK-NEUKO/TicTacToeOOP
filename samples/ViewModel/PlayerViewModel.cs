@@ -1,4 +1,4 @@
-﻿namespace MichaelKoch.Samples.ViewModel;
+﻿namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 
 public class PlayerViewModel
 {

@@ -1,7 +1,7 @@
-﻿using MichaelKoch.TicTacToe.Entities;
-using MichaelKoch.TicTacToe.Interfaces;
+﻿using MichaelKoch.TicTacToe.Core.Entities;
+using MichaelKoch.TicTacToe.Core.Interfaces;
 
-namespace MichaelKoch.TicTacToe.Services;
+namespace MichaelKoch.TicTacToe.Core.Services;
 
 public class PlayerService : IPlayerService  
 {

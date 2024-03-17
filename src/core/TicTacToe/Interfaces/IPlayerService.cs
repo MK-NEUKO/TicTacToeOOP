@@ -1,6 +1,6 @@
-﻿using MichaelKoch.TicTacToe.Entities;
+﻿using MichaelKoch.TicTacToe.Core.Entities;
 
-namespace MichaelKoch.TicTacToe.Interfaces;
+namespace MichaelKoch.TicTacToe.Core.Interfaces;
 
 public interface IPlayerService
 {

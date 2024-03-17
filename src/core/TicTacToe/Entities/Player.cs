@@ -1,6 +1,6 @@
-﻿using MichaelKoch.TicTacToe.Enums;
+﻿using MichaelKoch.TicTacToe.Core.Enums;
 
-namespace MichaelKoch.TicTacToe.Entities;
+namespace MichaelKoch.TicTacToe.Core.Entities;
 
 public class Player
 {

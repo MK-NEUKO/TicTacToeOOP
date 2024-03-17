@@ -5,11 +5,6 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{0B57F978-BC7F-4182-8D66-E1BA40E88E40}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E01E8A4-3BD8-43D9-9783-037BACE16646}"
-	ProjectSection(SolutionItems) = preProject
-		oldGameBoardTest.cs = oldGameBoardTest.cs
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{ED087BA9-C329-4BC2-8FBD-7F848CAA39BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{61179EF0-4EA3-4CBF-8360-F00C2CEEAFB9}"
