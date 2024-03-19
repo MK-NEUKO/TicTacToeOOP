@@ -1,7 +1,6 @@
 ﻿<Application x:Class="MichaelKoch.TicTacToe.Samples.DesktopWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="TTTGreen" Color="#6AFF00"/>
         <SolidColorBrush x:Key="TTTOrange" Color="#FF4F00"/>

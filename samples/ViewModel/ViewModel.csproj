@@ -7,4 +7,8 @@
     <RootNamespace>MichaelKoch.TicTacToe.Samples.ViewModel</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\core\TicTacToe\TicTacToe.csproj" />
+  </ItemGroup>
+
 </Project>

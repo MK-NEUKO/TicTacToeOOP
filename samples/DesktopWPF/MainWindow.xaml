@@ -3,9 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls"
+        xmlns:viewModel="clr-namespace:MichaelKoch.TicTacToe.Samples.ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="800">
+
+    
+        <Grid>
+        <!--<userControls:MainMenu DockPanel.Dock="Top"
+                               DataContext="{Binding Path=MenuViewModel}">
+        </userControls:MainMenu>-->
+
+        <Grid Width="300"
+              DockPanel.Dock="Left"
+              HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="300"/>
+
+            </Grid.RowDefinitions>
+
+            <!--<userControls:PlayerGameBoard Grid.Row="0"
+                                          DataContext="{Binding Path=PlayerGameBoardViewModel}">
+            </userControls:PlayerGameBoard>-->
+
+            <userControls:GameInfoBoard Grid.Row="1">
+            </userControls:GameInfoBoard>
+        </Grid>
 
     </Grid>
+        
 </Window>
