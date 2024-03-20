@@ -4,15 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls"
-        xmlns:viewModel="clr-namespace:MichaelKoch.TicTacToe.Samples.ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="800" Width="1024"
+        Style="{StaticResource WindowStyle}">
 
     
-        <Grid>
-        <!--<userControls:MainMenu DockPanel.Dock="Top"
-                               DataContext="{Binding Path=MenuViewModel}">
-        </userControls:MainMenu>-->
+    <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
+        <userControls:MainMenu DockPanel.Dock="Top">
+        </userControls:MainMenu>
 
         <Grid Width="300"
               DockPanel.Dock="Left"
@@ -31,6 +30,6 @@
             </userControls:GameInfoBoard>
         </Grid>
 
-    </Grid>
+    </DockPanel>
         
 </Window>

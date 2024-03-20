@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using MichaelKoch.TicTacToe.Core.Interfaces;
+using MichaelKoch.TicTacToe.Core.Services;
 using MichaelKoch.TicTacToe.Samples.ViewModel;
+using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,7 +21,11 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             builder.ConfigureServices(services =>
             {
                 services.AddSingleton<MainWindow>();
-                services.AddSingleton<PlayerViewModel>();
+
+                services.AddSingleton<IPlayerService, PlayerService>();
+
+                services.AddTransient<IPlayerViewModel, PlayerViewModel>();
+                services.AddSingleton<IGameInfoBoardViewModel, GameInfoBoardViewModel>();
             });
 
             AppHost = builder.Build();

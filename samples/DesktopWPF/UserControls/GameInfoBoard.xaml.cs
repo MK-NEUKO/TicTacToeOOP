@@ -1,6 +1,7 @@
-﻿using System.Windows.Controls;
-using MichaelKoch.TicTacToe.Samples.ViewModel;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
+using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 
 namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
 {
@@ -9,8 +10,21 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
         public GameInfoBoard()
         {
             InitializeComponent();
-            var vm = App.AppHost!.Services.GetRequiredService<PlayerViewModel>();
-            DataContext = vm;
+            SetDataContextBasedOnDesignMode();
+        }
+
+        private void SetDataContextBasedOnDesignMode() 
+        {
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                // DummyGameInfoBoardViewModel is instantiated in the XAML file,
+                // because than there is intellisense support for the properties.
+            }
+            else
+            {
+                var viewModel = App.AppHost!.Services.GetRequiredService<IGameInfoBoardViewModel>();
+                DataContext = viewModel;
+            }
         }
     }
 }

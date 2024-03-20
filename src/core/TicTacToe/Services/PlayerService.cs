@@ -3,22 +3,33 @@ using MichaelKoch.TicTacToe.Core.Interfaces;
 
 namespace MichaelKoch.TicTacToe.Core.Services;
 
-public class PlayerService : IPlayerService  
+public class PlayerService : IPlayerService
 {
-    public List<Player> GetDefaultPlayerList()
+    private Player _playerX;
+    private Player _playerO;
+
+    public PlayerService()
     {
-        return new List<Player>
+        _playerX = new Player();
+        _playerO = new Player();
+    }
+
+    public Player PlayerX => _playerX;
+    public Player PlayerO => _playerO;
+
+    public Player GetDefaultPlayer()
+    {
+        return new Player
         {
-            new Player
-            {
-                Name = "Player X",
-                Token = "X"
-            },
-            new Player
-            {
-                Name = "Player O",
-                Token = "O"
-            }
+            Name = "Player",
+            Token = ""
         };
+    }
+
+    public void ChangeIsOnTheMove(Player player1, Player player2)
+    {
+        player1.IsOnTheMove = !player1.IsOnTheMove;
+        player2.IsOnTheMove = !player2.IsOnTheMove;
+        player2.Name = "Name";
     }
 }
