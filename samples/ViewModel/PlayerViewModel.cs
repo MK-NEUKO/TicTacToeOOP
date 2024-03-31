@@ -1,67 +1,66 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MichaelKoch.TicTacToe.Core.Entities;
 using MichaelKoch.TicTacToe.Core.Enums;
 using MichaelKoch.TicTacToe.Core.Interfaces;
 using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 
 namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 
-public class PlayerViewModel : ObservableObject, IPlayerViewModel
+public class PlayerViewModel : ObservableObject, IPlayer
 {
-    private readonly Player _player;
-
-    public PlayerViewModel(IPlayerService playerService)
-    {
-        _player = playerService.GetDefaultPlayer();
-    }
-
-    public Player InnerPlayer => _player;
+    private string _name;
+    private string _token;
+    private bool _isHuman;
+    private bool _isAi;
+    private bool _isOnTheMove;
+    private bool _isWinner;
+    private int _score;
+    private AiDifficultyLevel _aiDifficultyLevel;
 
     public string Name
     {
-        get => _player.Name;
-        set => SetProperty(_player.Name, value, _player, (p, v) => p.Name = v);
+        get => _name;
+        set => SetProperty(ref _name, value);
     }
 
     public string Token
     {
-        get => _player.Token;
-        set => SetProperty(_player.Token, value, _player, (p, v) => p.Token = v);
+        get => _token;
+        set => SetProperty(ref _token, value);
     }
 
     public bool IsHuman
     {
-        get => _player.IsHuman;
-        set => SetProperty(_player.IsHuman, value, _player, (p, v) => p.IsHuman = v);
+        get => _isHuman;
+        set => SetProperty(ref _isHuman, value);
     }
 
     public bool IsAi
     {
-        get => _player.IsAi;
-        set => SetProperty(_player.IsAi, value, _player, (p, v) => p.IsAi = v);
+        get => _isAi;
+        set => SetProperty(ref _isAi, value);
     }
 
     public bool IsOnTheMove
     {
-        get => _player.IsOnTheMove;
-        set => SetProperty(_player.IsOnTheMove, value, _player, (p, v) => p.IsOnTheMove = v);
+        get => _isOnTheMove;
+        set => SetProperty(ref _isOnTheMove, value);
     }
 
     public bool IsWinner
     {
-        get => _player.IsWinner;
-        set => SetProperty(_player.IsWinner, value, _player, (p, v) => p.IsWinner = v);
+        get => _isWinner;
+        set => SetProperty(ref _isWinner, value);
     }
 
     public int Score
     {
-        get => _player.Score;
-        set => SetProperty(_player.Score, value, _player, (p, v) => p.Score = v);
+        get => _score;
+        set => SetProperty(ref _score, value);
     }
 
     public AiDifficultyLevel AiDifficultyLevel
     {
-        get => _player.AiDifficultyLevel;
-        set => SetProperty(_player.AiDifficultyLevel, value, _player, (p, v) => p.AiDifficultyLevel = v);
+        get => _aiDifficultyLevel;
+        set => SetProperty(ref _aiDifficultyLevel, value);
     }
 }

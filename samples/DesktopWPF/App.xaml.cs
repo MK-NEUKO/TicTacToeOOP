@@ -24,7 +24,7 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
 
                 services.AddSingleton<IPlayerService, PlayerService>();
 
-                services.AddTransient<IPlayerViewModel, PlayerViewModel>();
+                services.AddTransient<IPlayer, PlayerViewModel>();
                 services.AddSingleton<IGameInfoBoardViewModel, GameInfoBoardViewModel>();
             });
 

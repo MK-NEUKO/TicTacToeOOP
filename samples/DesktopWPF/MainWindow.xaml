@@ -22,13 +22,12 @@
 
             </Grid.RowDefinitions>
 
-            <!--<userControls:PlayerGameBoard Grid.Row="0"
-                                          DataContext="{Binding Path=PlayerGameBoardViewModel}">
-            </userControls:PlayerGameBoard>-->
+            <userControls:GameBoard Grid.Row="0">
+            </userControls:GameBoard>
 
             <userControls:GameInfoBoard Grid.Row="1">
             </userControls:GameInfoBoard>
-        </Grid>
+        </Grid> 
 
     </DockPanel>
         

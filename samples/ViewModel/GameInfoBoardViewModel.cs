@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MichaelKoch.TicTacToe.Core.Entities;
 using MichaelKoch.TicTacToe.Core.Interfaces;
 using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 
@@ -9,33 +8,31 @@ namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardViewModel
 {
     private readonly IPlayerService _playerService;
-    public GameInfoBoardViewModel(IPlayerViewModel playerX, IPlayerViewModel playerO, IPlayerService playerService)
+
+    public GameInfoBoardViewModel(IPlayer player, IPlayer opponent, IPlayerService playerService)
     {
-        PlayerX = playerX;
-        _playerO = playerO;
+        Player = player;
+        Player.Token = "X";
+        Opponent = opponent;
+        Opponent.Token = "O";
         _playerService = playerService;
     }
 
     [RelayCommand]
     private void Test()
     {
-        PlayerX.Name = "Test";
-        PlayerX.Token = "T";
-        PlayerX.IsHuman = true;
-        PlayerX.IsAi = false;
-        PlayerX.IsOnTheMove = true;
-        PlayerX.IsWinner = false;
-        PlayerX.Score = 2;
+        Player.Name = "Test";
+        
     }
 
     [RelayCommand]
-    private void Test2()
+    private async Task Test2()
     {
-        _playerService.ChangeIsOnTheMove(PlayerX.InnerPlayer, PlayerO.InnerPlayer);
+        await _playerService.ChangeIsOnTheMove(Player, Opponent);
     }
 
-    public IPlayerViewModel PlayerX { get; }
-    [ObservableProperty] private IPlayerViewModel _playerO;
-    public List<string> InfoRowLabels { get; set; }
-    public List<string> InfoRowValues { get; set; }
+    public IPlayer Player { get; }
+    public IPlayer Opponent { get; }
+    public List<string> InfoRowLabels { get; set; } = new List<string> { "Row-desc. 1", "Row-desc. 2" };
+    public List<string> InfoRowValues { get; set; } = new List<string> { "Row-Va. 1", "Row-Va.2" };
 }

@@ -1,9 +1,8 @@
-﻿using MichaelKoch.TicTacToe.Core.Entities;
-using MichaelKoch.TicTacToe.Core.Enums;
+﻿using MichaelKoch.TicTacToe.Core.Enums;
 
-namespace MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
+namespace MichaelKoch.TicTacToe.Core.Interfaces;
 
-public interface IPlayerViewModel
+public interface IPlayer
 {
     string Name { get; set; }
     string Token { get; set; }
@@ -13,5 +12,4 @@ public interface IPlayerViewModel
     bool IsWinner { get; set; }
     int Score { get; set; }
     AiDifficultyLevel AiDifficultyLevel { get; set; }
-    Player InnerPlayer { get; }
 }
