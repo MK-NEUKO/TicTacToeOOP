@@ -4,7 +4,7 @@ public class DummyGameBoard
 {
     public DummyGameBoard()
     {
-        Areas = CreateAreas();
+        GameBoardAreas = CreateAreas();
     }
 
     private List<DummyGameBoardArea>? CreateAreas()
@@ -25,5 +25,5 @@ public class DummyGameBoard
         return areas;
     }
 
-    public List<DummyGameBoardArea> Areas { get; set; }
+    public List<DummyGameBoardArea> GameBoardAreas { get; set; }
 }

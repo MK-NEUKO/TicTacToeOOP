@@ -15,8 +15,8 @@ public class GameBoardViewModel : ObservableObject, IGameBoard
     {
         GameBoardAreas =
         [
-            new GameBoardAreaViewModel { Id = 0 },
-            new GameBoardAreaViewModel { Id = 1 },
+            new GameBoardAreaViewModel { Id = 0, Token = "X"},
+            new GameBoardAreaViewModel { Id = 1, Token = "O"},
             new GameBoardAreaViewModel { Id = 2 },
             new GameBoardAreaViewModel { Id = 3 },
             new GameBoardAreaViewModel { Id = 4 },
