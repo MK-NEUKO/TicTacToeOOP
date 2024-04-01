@@ -22,8 +22,8 @@
 
             </Grid.RowDefinitions>
 
-            <userControls:GameBoard Grid.Row="0">
-            </userControls:GameBoard>
+            <!--<userControls:GameBoard Grid.Row="0">
+            </userControls:GameBoard>-->
 
             <userControls:GameInfoBoard Grid.Row="1">
             </userControls:GameInfoBoard>

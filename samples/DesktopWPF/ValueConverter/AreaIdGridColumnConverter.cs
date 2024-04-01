@@ -1,9 +1,8 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MichaelKoch.TicTacToe.Ui.WPFDesktopClient.ValueConverter
+namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.ValueConverter
 {
     public class AreaIdGridColumnConverter : IValueConverter
     {
