@@ -13,8 +13,10 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
     {
         Player = player;
         Player.Token = "X";
+        Player.IsCurrentPlayer = true;
         Opponent = opponent;
         Opponent.Token = "O";
+        Opponent.IsCurrentPlayer = false;
         _playerService = playerService;
     }
 

@@ -40,7 +40,7 @@ public class PlayerViewModel : ObservableObject, IPlayer
         set => SetProperty(ref _isAi, value);
     }
 
-    public bool IsOnTheMove
+    public bool IsCurrentPlayer
     {
         get => _isOnTheMove;
         set => SetProperty(ref _isOnTheMove, value);

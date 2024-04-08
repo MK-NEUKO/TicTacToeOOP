@@ -16,7 +16,7 @@ public class DummyGameBoard
             areas.Add(new DummyGameBoardArea
             {
                 Id = i,
-                Token = string.Empty,
+                Token = "X",
                 IsWinArea = false,
                 IsOccupied = false
             });

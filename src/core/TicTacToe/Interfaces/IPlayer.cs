@@ -8,7 +8,7 @@ public interface IPlayer
     string Token { get; set; }
     bool IsHuman { get; set; }
     bool IsAi { get; set; }
-    bool IsOnTheMove { get; set; }
+    bool IsCurrentPlayer { get; set; }
     bool IsWinner { get; set; }
     int Score { get; set; }
     AiDifficultyLevel AiDifficultyLevel { get; set; }

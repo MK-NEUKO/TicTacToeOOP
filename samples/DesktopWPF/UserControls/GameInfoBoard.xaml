@@ -27,13 +27,13 @@
         <Style x:Key="BorderTriggerPlayerX" TargetType="Border">
             <Setter Property="BorderThickness" Value="0,0,4,0"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Player.IsOnTheMove}" Value="false">
+                <DataTrigger Binding="{Binding Path=Player.IsCurrentPlayer}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Opponent.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Player.IsOnTheMove}" Value="true">
+                <DataTrigger Binding="{Binding Path=Player.IsCurrentPlayer}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Player.IsWinner}" Value="true">
@@ -44,13 +44,13 @@
 
         <Style x:Key="RectangleTriggerPlayerX" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Player.IsOnTheMove}" Value="false">
+                <DataTrigger Binding="{Binding Path=Player.IsCurrentPlayer}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Opponent.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Player.IsOnTheMove}" Value="true">
+                <DataTrigger Binding="{Binding Path=Player.IsCurrentPlayer}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTGreen}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Player.IsWinner}" Value="true">
@@ -73,13 +73,13 @@
         <Style x:Key="BorderTriggerOpponent" TargetType="Border">
             <Setter Property="BorderThickness" Value="0,0,4,0"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Opponent.IsOnTheMove}" Value="false">
+                <DataTrigger Binding="{Binding Path=Opponent.IsCurrentPlayer}" Value="false">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Player.IsWinner}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Opponent.IsOnTheMove}" Value="true">
+                <DataTrigger Binding="{Binding Path=Opponent.IsCurrentPlayer}" Value="true">
                     <Setter Property="BorderBrush" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Opponent.IsWinner}" Value="true">
@@ -90,13 +90,13 @@
 
         <Style x:Key="RectangleTriggerOpponent" TargetType="Rectangle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Opponent.IsOnTheMove}" Value="false">
+                <DataTrigger Binding="{Binding Path=Opponent.IsCurrentPlayer}" Value="false">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Player.IsWinner}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTBackgroundDarkGrey}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Opponent.IsOnTheMove}" Value="true">
+                <DataTrigger Binding="{Binding Path=Opponent.IsCurrentPlayer}" Value="true">
                     <Setter Property="Fill" Value="{StaticResource TTTOrange}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Opponent.IsWinner}" Value="true">

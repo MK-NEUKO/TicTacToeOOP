@@ -1,14 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MichaelKoch.TicTacToe.Core.Interfaces;
+using MichaelKoch.TicTacToe.Samples.ViewModel.Messenger;
 
 namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 
-public class GameBoardAreaViewModel : ObservableObject, IGameBoardArea
+public partial class GameBoardAreaViewModel : ObservableObject, IGameBoardArea
 {
     private int _id;
     private string _token;
     private bool _isWinArea;
     private bool _isOccupied;
+
+    [RelayCommand]
+    public async Task AreaWasClicked()
+    {
+        await Task.Run(() =>
+        {
+            WeakReferenceMessenger.Default.Send(new AreaWasClickedMessage(this));
+        });
+    }
 
     public int Id
     {

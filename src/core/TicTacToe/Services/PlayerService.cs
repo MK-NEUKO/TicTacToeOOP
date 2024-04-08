@@ -8,6 +8,10 @@ public class PlayerService : IPlayerService
     {
     }
 
+    public void ChangeCurrentPlayer(List<IPlayer> playerList)
+    {
+        playerList.ForEach(p => p.IsCurrentPlayer = !p.IsCurrentPlayer);
+    }
 
     public async Task ChangeIsOnTheMove(IPlayer player, IPlayer opponent)
     {
