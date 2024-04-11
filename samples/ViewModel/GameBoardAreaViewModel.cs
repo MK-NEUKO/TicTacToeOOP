@@ -9,7 +9,7 @@ namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 public partial class GameBoardAreaViewModel : ObservableObject, IGameBoardArea
 {
     private int _id;
-    private string _token;
+    private string _token = string.Empty;
     private bool _isWinArea;
     private bool _isOccupied;
 
@@ -18,6 +18,7 @@ public partial class GameBoardAreaViewModel : ObservableObject, IGameBoardArea
     {
         await Task.Run(() =>
         {
+            if(IsOccupied) return;
             WeakReferenceMessenger.Default.Send(new AreaWasClickedMessage(this));
         });
     }

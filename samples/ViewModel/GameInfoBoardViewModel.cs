@@ -9,7 +9,7 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
 {
     private readonly IPlayerService _playerService;
 
-    public GameInfoBoardViewModel(IPlayer player, IPlayer opponent, IPlayerService playerService)
+    public GameInfoBoardViewModel(IPlayer player, IPlayer opponent)
     {
         Player = player;
         Player.Token = "X";
@@ -17,7 +17,7 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         Opponent = opponent;
         Opponent.Token = "O";
         Opponent.IsCurrentPlayer = false;
-        _playerService = playerService;
+        _playerService = Core.Services.TicTacToe.GetPlayerService();
     }
 
     [RelayCommand]

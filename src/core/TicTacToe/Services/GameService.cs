@@ -24,7 +24,10 @@ namespace MichaelKoch.TicTacToe.Core.Services
         private void SetToken(List<IGameBoardArea> gameBoard, List<IPlayer> playerList, int areaId)
         {
             var currentPlayer = playerList.FirstOrDefault(p => p.IsCurrentPlayer == true);
+            if (currentPlayer == null) return;
+            if(gameBoard[areaId].IsOccupied) return;
             gameBoard[areaId].Token = currentPlayer.Token;
+            gameBoard[areaId].IsOccupied = true;
         }
     }
 }

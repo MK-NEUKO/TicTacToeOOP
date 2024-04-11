@@ -12,9 +12,9 @@ public class GameViewModel : ObservableObject
     private readonly IGameBoard _gameBoard;
     private readonly IGameInfoBoardViewModel _gameInfoBoardViewModel;
 
-    public GameViewModel(IGameService gameService, IGameBoard gameBoard, IGameInfoBoardViewModel gameInfoBoardViewModel)
+    public GameViewModel(IGameBoard gameBoard, IGameInfoBoardViewModel gameInfoBoardViewModel)
     {
-        _gameService = gameService;
+        _gameService = Core.Services.TicTacToe.GetGameService();
         _gameBoard = gameBoard;
         _gameInfoBoardViewModel = gameInfoBoardViewModel;
         WeakReferenceMessenger.Default.Register<AreaWasClickedMessage>(this, async (r, m) =>

@@ -22,8 +22,9 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             {
                 services.AddSingleton<MainWindow>();
 
-                services.AddSingleton<IPlayerService, PlayerService>();
-                services.AddSingleton<IGameService, GameService>();
+
+                
+                
 
                 services.AddTransient<IPlayer, PlayerViewModel>();
                 services.AddSingleton<IGameInfoBoardViewModel, GameInfoBoardViewModel>();
@@ -39,6 +40,7 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             AppHost!.StartAsync();
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
             var gameViewModel = AppHost.Services.GetRequiredService<GameViewModel>();
+            
 
             mainWindow.Show();
             base.OnStartup(e);

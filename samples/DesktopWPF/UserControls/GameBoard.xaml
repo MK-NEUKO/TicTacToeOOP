@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sampleData="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.SampleData"
              xmlns:valueConverter="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.ValueConverter"
+             xmlns:customControls="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.CustomControls"
 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -249,7 +250,7 @@
                             To="{StaticResource TTTBlueColor}"/>
         </Storyboard>
 
-        <Style TargetType="Button">
+        <Style TargetType="customControls:AreaButton">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Margin" Value="10"/>
@@ -258,7 +259,7 @@
             <Setter Property="Command" Value="{Binding}"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="customControls:AreaButton">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="1">
@@ -377,10 +378,10 @@
                         </Path.Effect>
                     </Path>
                 </Viewbox>
-                <Button Command="{Binding Path=AreaWasClickedCommand}"
-                        x:Name="AreaButton">
-                    
-                </Button>
+                <customControls:AreaButton Command="{Binding Path=AreaWasClickedCommand}"
+                                           x:Name="AreaButton"
+                                           MouseLeave="AreaButton_OnMouseLeave">
+                </customControls:AreaButton>
             </Grid>
 
             <DataTemplate.Triggers>
@@ -420,7 +421,7 @@
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding ElementName=AreaButton, Path=IsMouseOver}" Value="true"/>
                         <Condition Binding="{Binding Path=IsOccupied}" Value="true"/>
-                        <Condition Binding="{Binding Path=CanShowIsOccupied}" Value="true"/>
+                        <Condition Binding="{Binding ElementName=AreaButton, Path=CanShowIsOccupied}" Value="true"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource IsOccupiedMouseOverAnimation}">
@@ -434,12 +435,12 @@
                 </MultiDataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding ElementName=AreaButton, Path=IsMouseOver}" Value="true" />
                         <Condition Binding="{Binding ElementName=AreaButton, Path=IsPressed}" Value="true" />
                         <Condition Binding="{Binding Path=IsOccupied}" Value="true"/>
+                        <Condition Binding="{Binding ElementName=AreaButton, Path=CanShowIsOccupied}" Value="true"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.EnterActions>
-                        <SoundPlayerAction Source="/UserControls/Assets/area_denied.wav"></SoundPlayerAction>
+                        <SoundPlayerAction Source="../Assets/area_denied.wav"></SoundPlayerAction>
                         <BeginStoryboard Storyboard="{StaticResource IsOccupiedIsPressedAnimation}">
                         </BeginStoryboard>
                     </MultiDataTrigger.EnterActions>
