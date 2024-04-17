@@ -20,18 +20,7 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
         _playerService = Core.Services.TicTacToe.GetPlayerService();
     }
 
-    [RelayCommand]
-    private void Test()
-    {
-        Player.Name = "Test";
-        
-    }
-
-    [RelayCommand]
-    private async Task Test2()
-    {
-        await _playerService.ChangeIsOnTheMove(Player, Opponent);
-    }
+    
 
     public IPlayer Player { get; }
     public IPlayer Opponent { get; }
