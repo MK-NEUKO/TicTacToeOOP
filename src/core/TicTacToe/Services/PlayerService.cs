@@ -14,7 +14,7 @@ public class PlayerService : IPlayerService
     public void ChangeCurrentPlayer(List<IPlayer> playerList)
     {
         if (playerList == null) throw new ArgumentNullException(nameof(playerList), "The Argument \"playerList\" is Null!");
-        if(playerList.Count == 2) throw new ArgumentException("The Argument \"playerList\" must have two Players!", nameof(playerList));
+        if(playerList.Count != 2) throw new ArgumentException("The Argument \"playerList\" must have two Players!", nameof(playerList));
         playerList.ForEach(p => p.IsCurrentPlayer = !p.IsCurrentPlayer);
     }
 }

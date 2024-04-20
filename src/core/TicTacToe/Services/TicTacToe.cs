@@ -3,10 +3,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MichaelKoch.TicTacToe.Core.Services;
 
+/// <summary>
+/// 
+/// </summary>
 public static class TicTacToe
 {
     private static IServiceProvider? _internalServiceProvider;
 
+    /// <summary>
+    /// returns an instance of the GameService class
+    /// </summary>
+    /// <returns>
+    /// 
+    /// </returns>
+    /// <exception cref="Exception"></exception>
     public static IGameService GetGameService()
     {
         if (_internalServiceProvider != null) return _internalServiceProvider.GetRequiredService<IGameService>();
@@ -30,7 +40,7 @@ public static class TicTacToe
         _internalServiceProvider = services.BuildServiceProvider();
     }
 
-    public static void AddServices(IServiceCollection services)
+    private static void AddServices(IServiceCollection services)
     {
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<IPlayerService, PlayerService>();

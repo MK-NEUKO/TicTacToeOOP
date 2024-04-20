@@ -6,22 +6,20 @@ namespace TicTacToe.Tests;
 
 public class PlayerServiceTests
 {
-    [Theory]
-    [InlineData(true, false)]
-    [InlineData(false, true)]
-    public void ChangeCurrentPlayer_ShouldChangeIsCurrentPlayer(bool player1IsCurrentPlayer, bool player2IsCurrentPlayer)
+    [Fact]
+    public void ChangeCurrentPlayer_ShouldChangeIsCurrentPlayer()
     {
         // Arrange
-        var player1 = new FakePlayer() { IsCurrentPlayer = player1IsCurrentPlayer };
-        var player2 = new FakePlayer() { IsCurrentPlayer = player2IsCurrentPlayer };
+        var player1 = new FakePlayer() { IsCurrentPlayer = true };
+        var player2 = new FakePlayer() { IsCurrentPlayer = false };
         var playerService = new PlayerService();
 
         // Act
         playerService.ChangeCurrentPlayer(new List<IPlayer> { player1, player2 });
 
         // Assert
-        Assert.NotEqual(player1IsCurrentPlayer, player1.IsCurrentPlayer);
-        Assert.NotEqual(player2.IsCurrentPlayer ,player2IsCurrentPlayer);
+        Assert.False(player1.IsCurrentPlayer);
+        Assert.True(player2.IsCurrentPlayer);
     }
 
     [Fact]
@@ -41,11 +39,13 @@ public class PlayerServiceTests
     {
         //Arrange
         var playerService = new PlayerService();
-        var playerList = new List<IPlayer> { new FakePlayer() };
+        var emptyPlayerList = new List<IPlayer>();
+        var playerListWithOnePlayer = new List<IPlayer> { new FakePlayer() };
 
         //Act
 
         //Assert
-        Assert.Throws<ArgumentException>(() => playerService.ChangeCurrentPlayer(playerList));
+        Assert.Throws<ArgumentException>(() => playerService.ChangeCurrentPlayer(emptyPlayerList));
+        Assert.Throws<ArgumentException>(() => playerService.ChangeCurrentPlayer(playerListWithOnePlayer));
     }
 }
