@@ -8,13 +8,15 @@ namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardViewModel
 {
     private readonly IPlayerService _playerService;
+    private readonly IGameBoard _gameBoard;
 
-    public GameInfoBoardViewModel(IPlayer player, IPlayer opponent)
+    public GameInfoBoardViewModel(IPlayer player, IPlayer opponent, IGameBoard gameBoard)
     {
         Player = player;
         Player.Token = "X";
         Player.IsCurrentPlayer = true;
         Opponent = opponent;
+        _gameBoard = gameBoard;
         Opponent.Token = "O";
         Opponent.IsCurrentPlayer = false;
         _playerService = Core.Services.TicTacToe.GetPlayerService();
@@ -26,4 +28,5 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
     public IPlayer Opponent { get; }
     public List<string> InfoRowLabels { get; set; } = new List<string> { "Row-desc. 1", "Row-desc. 2" };
     public List<string> InfoRowValues { get; set; } = new List<string> { "Row-Va. 1", "Row-Va.2" };
+
 }

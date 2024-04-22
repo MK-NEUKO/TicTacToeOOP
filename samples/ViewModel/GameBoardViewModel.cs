@@ -5,15 +5,17 @@ namespace MichaelKoch.TicTacToe.Samples.ViewModel;
 
 public class GameBoardViewModel : ObservableObject, IGameBoard
 {
+    private bool _isUndecided;
+
     public GameBoardViewModel()
     {
         
-        InitializeGameBoardAreas();
+        InitializeAreas();
     }
 
-    private void InitializeGameBoardAreas()
+    private void InitializeAreas()
     {
-        GameBoardAreas =
+        Areas =
         [
             new GameBoardAreaViewModel { Id = 0, Token = "X"},
             new GameBoardAreaViewModel { Id = 1, Token = "O"},
@@ -27,5 +29,11 @@ public class GameBoardViewModel : ObservableObject, IGameBoard
         ];
     }
 
-    public List<IGameBoardArea> GameBoardAreas { get; set; }
+    public List<IGameBoardArea> Areas { get; set; }
+
+    public bool IsUndecided
+    {
+        get => _isUndecided;
+        set => SetProperty(ref _isUndecided, value);
+    }
 }

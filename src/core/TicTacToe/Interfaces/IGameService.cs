@@ -2,5 +2,5 @@
 
 public interface IGameService
 {
-    Task MakeAMoveAsync(List<IGameBoardArea> gameBoard, List<IPlayer> playerList, int areaId);
+    Task MakeAMoveAsync(IGameBoard gameBoard, List<IPlayer> playerList, int areaId);
 }

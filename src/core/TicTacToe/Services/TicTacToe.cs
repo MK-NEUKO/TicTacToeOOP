@@ -44,5 +44,6 @@ public static class TicTacToe
     {
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<IPlayerService, PlayerService>();
+        services.AddSingleton<IGameEvaluator, GameEvaluator>();
     }
 }

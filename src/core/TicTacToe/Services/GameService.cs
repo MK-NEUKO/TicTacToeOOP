@@ -5,29 +5,32 @@ namespace MichaelKoch.TicTacToe.Core.Services
     public class GameService : IGameService
     {
         private readonly IPlayerService _playerService;
+        private readonly IGameEvaluator _gameEvaluator;
 
-        public GameService(IPlayerService playerService)
+        public GameService(IPlayerService playerService, IGameEvaluator gameEvaluator)
         {
             _playerService = playerService;
+            _gameEvaluator = gameEvaluator;
         }
 
-        public async Task MakeAMoveAsync(List<IGameBoardArea> gameBoard, List<IPlayer> playerList, int areaId)
+        public async Task MakeAMoveAsync(IGameBoard gameBoard, List<IPlayer> playerList, int areaId)
         {
             await Task.Run(() =>
             {
                 SetToken(gameBoard, playerList, areaId);
+                var evaluationResult = _gameEvaluator.EvaluateGame(gameBoard, playerList);
                 _playerService.ChangeCurrentPlayer(playerList);
             });
         }
 
 
-        private void SetToken(List<IGameBoardArea> gameBoard, List<IPlayer> playerList, int areaId)
+        private void SetToken(IGameBoard gameBoard, List<IPlayer> playerList, int areaId)
         {
             var currentPlayer = playerList.FirstOrDefault(p => p.IsCurrentPlayer == true);
             if (currentPlayer == null) return;
-            if(gameBoard[areaId].IsOccupied) return;
-            gameBoard[areaId].Token = currentPlayer.Token;
-            gameBoard[areaId].IsOccupied = true;
+            if(gameBoard.Areas[areaId].IsOccupied) return;
+            gameBoard.Areas[areaId].Token = currentPlayer.Token;
+            gameBoard.Areas[areaId].IsOccupied = true;
         }
     }
 }

@@ -11,6 +11,7 @@ public class FakePlayer : IPlayer
     public bool IsAi { get; set; }
     public bool IsCurrentPlayer { get; set; }
     public bool IsWinner { get; set; }
+    public bool IsLoser { get; set; }
     public int Score { get; set; }
     public AiDifficultyLevel AiDifficultyLevel { get; set; }
 }

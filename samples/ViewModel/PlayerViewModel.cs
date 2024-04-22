@@ -13,6 +13,7 @@ public class PlayerViewModel : ObservableObject, IPlayer
     private bool _isAi;
     private bool _isOnTheMove;
     private bool _isWinner;
+    private bool _isLoser;
     private int _score;
     private AiDifficultyLevel _aiDifficultyLevel;
 
@@ -50,6 +51,12 @@ public class PlayerViewModel : ObservableObject, IPlayer
     {
         get => _isWinner;
         set => SetProperty(ref _isWinner, value);
+    }
+
+    public bool IsLoser
+    {
+        get => _isLoser;
+        set => SetProperty(ref _isLoser, value);
     }
 
     public int Score

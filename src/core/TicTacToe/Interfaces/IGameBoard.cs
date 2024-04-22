@@ -2,5 +2,6 @@
 
 public interface IGameBoard
 {
-    List<IGameBoardArea> GameBoardAreas { get; set; }
+    List<IGameBoardArea> Areas { get; set; }
+    bool IsUndecided { get; set; }
 }

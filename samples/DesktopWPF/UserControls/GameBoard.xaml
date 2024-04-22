@@ -488,7 +488,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding GameBoardAreas}"
+        <ItemsControl ItemsSource="{Binding Areas}"
                       ItemTemplate="{StaticResource GameBoardAreaDataTemplate}"
                       Background="{StaticResource TTTBackgroundDarkGrey}"
                       x:Name="PlayerGameBoardControl">

@@ -28,6 +28,6 @@ public class GameViewModel : ObservableObject
         var playerList = new List<IPlayer>();
         playerList.Add(_gameInfoBoardViewModel.Player);
         playerList.Add(_gameInfoBoardViewModel.Opponent);
-        await _gameService.MakeAMoveAsync(_gameBoard.GameBoardAreas, playerList, areaId);
+        await _gameService.MakeAMoveAsync(_gameBoard, playerList, areaId);
     }
 }

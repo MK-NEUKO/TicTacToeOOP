@@ -10,6 +10,7 @@ public interface IPlayer
     bool IsAi { get; set; }
     bool IsCurrentPlayer { get; set; }
     bool IsWinner { get; set; }
+    bool IsLoser { get; set; }
     int Score { get; set; }
     AiDifficultyLevel AiDifficultyLevel { get; set; }
 }
