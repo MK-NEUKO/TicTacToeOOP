@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MichaelKoch.TicTacToe.Core.Interfaces;
 using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 
@@ -9,6 +8,7 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
 {
     private readonly IPlayerService _playerService;
     private readonly IGameBoard _gameBoard;
+    private List<string> _infoRowValues = ["1", "2"];
 
     public GameInfoBoardViewModel(IPlayer player, IPlayer opponent, IGameBoard gameBoard)
     {
@@ -26,7 +26,12 @@ public partial class GameInfoBoardViewModel : ObservableObject, IGameInfoBoardVi
 
     public IPlayer Player { get; }
     public IPlayer Opponent { get; }
-    public List<string> InfoRowLabels { get; set; } = new List<string> { "Row-desc. 1", "Row-desc. 2" };
-    public List<string> InfoRowValues { get; set; } = new List<string> { "Row-Va. 1", "Row-Va.2" };
+    public List<string> InfoRowLabels { get; set; } = new List<string> { "Undecided", "Row-desc. 2" };
+
+    public List<string> InfoRowValues
+    {
+        get => _infoRowValues; 
+        set => SetProperty(ref _infoRowValues, value);
+    } 
 
 }

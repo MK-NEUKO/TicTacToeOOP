@@ -18,7 +18,7 @@ namespace MichaelKoch.TicTacToe.Core.Services
             await Task.Run(() =>
             {
                 SetToken(gameBoard, playerList, areaId);
-                var evaluationResult = _gameEvaluator.EvaluateGame(gameBoard, playerList);
+                _gameEvaluator.EvaluateGame(gameBoard, playerList);
                 _playerService.ChangeCurrentPlayer(playerList);
             });
         }

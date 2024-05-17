@@ -1,5 +1,4 @@
-﻿using MichaelKoch.TicTacToe.Core.Entities;
-using MichaelKoch.TicTacToe.Core.Interfaces;
+﻿using MichaelKoch.TicTacToe.Core.Interfaces;
 
 namespace MichaelKoch.TicTacToe.Core.Services;
 
@@ -35,18 +34,16 @@ public class GameEvaluator : IGameEvaluator
     //    return evaluationResultForMinimax;
     //}
 
-    public EvaluationResult EvaluateGame(IGameBoard gameBoard, List<IPlayer> players)
+    public void EvaluateGame(IGameBoard gameBoard, List<IPlayer> playerList)
     {
-        return EvaluateGameBoardBase(gameBoard, players);
+        EvaluateGameBoardBase(gameBoard, playerList);
     }
 
-    public EvaluationResult EvaluateGameBoardBase(IGameBoard gameBoard, List<IPlayer> playerList)
+    public void EvaluateGameBoardBase(IGameBoard gameBoard, List<IPlayer> playerList)
     {
-        if (gameBoard == null) throw new ArgumentNullException(nameof(gameBoard));
-        if (playerList == null) throw new ArgumentNullException(nameof(playerList));
-        var evaluationResult = new EvaluationResult();
-        DetermineGameBoardState(gameBoard, playerList, evaluationResult);
-        return evaluationResult;
+        ArgumentNullException.ThrowIfNull(gameBoard);
+        ArgumentNullException.ThrowIfNull(playerList);
+        DetermineWinner(gameBoard, playerList);
     }
 
     //private void CreateCurrentNodeRating(IEvaluationResultForMinimax evaluationResultForMinimax, IEvaluationResult evaluationResult)
@@ -66,7 +63,7 @@ public class GameEvaluator : IGameEvaluator
     //    };
     //}
 
-    public void DetermineGameBoardState(IGameBoard gameBoard, List<IPlayer> playerList, EvaluationResult evaluationResult)
+    public void DetermineWinner(IGameBoard gameBoard, List<IPlayer> playerList)
     {
         var currentPlayer = playerList.FirstOrDefault(p => p.IsCurrentPlayer);
         var opponent = playerList.FirstOrDefault(p => !p.IsCurrentPlayer);
@@ -90,6 +87,12 @@ public class GameEvaluator : IGameEvaluator
                 currentPlayer.IsLoser = true;
                 return;
             }
+
+        }
+
+        if(gameBoard.Areas.All(area => area.IsOccupied))
+        {
+            gameBoard.IsUndecided = true;
         }
     }
 }

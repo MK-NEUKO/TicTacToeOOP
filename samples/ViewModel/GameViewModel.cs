@@ -29,5 +29,6 @@ public class GameViewModel : ObservableObject
         playerList.Add(_gameInfoBoardViewModel.Player);
         playerList.Add(_gameInfoBoardViewModel.Opponent);
         await _gameService.MakeAMoveAsync(_gameBoard, playerList, areaId);
+        _gameInfoBoardViewModel.InfoRowValues = ["3", "7"];
     }
 }
