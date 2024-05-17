@@ -1,0 +1,34 @@
+﻿<Window x:Class="MichaelKoch.TicTacToe.Samples.DesktopWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:userControls="clr-namespace:MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1024"
+        Style="{StaticResource WindowStyle}">
+
+    
+    <DockPanel Background="{StaticResource TTTBackgroundDarkGrey}">
+        <userControls:MainMenu DockPanel.Dock="Top">
+        </userControls:MainMenu>
+
+        <Grid Width="300"
+              DockPanel.Dock="Left"
+              HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="300"/>
+
+            </Grid.RowDefinitions>
+
+            <userControls:GameBoard Grid.Row="0">
+            </userControls:GameBoard>
+
+            <userControls:GameInfoBoard Grid.Row="1">
+            </userControls:GameInfoBoard>
+        </Grid> 
+
+    </DockPanel>
+        
+</Window>
