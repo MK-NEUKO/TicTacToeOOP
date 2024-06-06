@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using MichaelKoch.TicTacToe.Core.Interfaces;
-using MichaelKoch.TicTacToe.Core.Services;
-using MichaelKoch.TicTacToe.Samples.ViewModel;
-using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using TicTacToe.Application;
+using TicTacToe.Infrastructure;
+using TicTacToe.Presentation;
 
 namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
 {
@@ -22,15 +21,9 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             {
                 services.AddSingleton<MainWindow>();
 
-
-                
-                
-
-                services.AddTransient<IPlayer, PlayerViewModel>();
-                services.AddSingleton<IGameInfoBoardViewModel, GameInfoBoardViewModel>();
-                services.AddSingleton<IGameBoard, GameBoardViewModel>();
-                services.AddTransient<IGameBoardArea, GameBoardAreaViewModel>();
-                services.AddSingleton<GameViewModel>();
+                services.AddTicTacToeApplication();
+                services.AddTicTacToePresentation();
+                services.AddTicTacToeInfrastructure();
             });
 
             AppHost = builder.Build();
@@ -39,7 +32,7 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
         {
             AppHost!.StartAsync();
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            var gameViewModel = AppHost.Services.GetRequiredService<GameViewModel>();
+            //var gameViewModel = AppHost.Services.GetRequiredService<GameViewModel>();
             
 
             mainWindow.Show();

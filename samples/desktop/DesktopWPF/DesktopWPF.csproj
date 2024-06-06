@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\TicTacToe.Application\TicTacToe.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\TicTacToe.Infrastructure\TicTacToe.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\src\TicTacToe.Presentation\TicTacToe.Presentation.csproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 
