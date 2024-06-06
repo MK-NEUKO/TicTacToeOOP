@@ -4,11 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>MichaelKoch.TicTacToe.Samples.ViewModel</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <Folder Include="SeedWork\" />
   </ItemGroup>
 
 </Project>
