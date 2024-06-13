@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
-using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 
 namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
 {
@@ -22,8 +21,9 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
             }
             else
             {
-                var viewModel = App.AppHost!.Services.GetRequiredService<IGameInfoBoardViewModel>();
-                DataContext = viewModel;
+                // Todo: Setup the ViewModel for the GameInfoBoard-UserControl
+                //var viewModel = App.AppHost!.Services.GetRequiredService<IGameInfoBoardViewModel>();
+                //DataContext = viewModel;
             }
         }
     }

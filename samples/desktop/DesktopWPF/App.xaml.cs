@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using TicTacToe.Application;
 using TicTacToe.Infrastructure;
 using TicTacToe.Presentation;

@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MichaelKoch.TicTacToe.Core.Interfaces;
 using MichaelKoch.TicTacToe.Samples.DesktopWPF.CustomControls;
-using MichaelKoch.TicTacToe.Samples.ViewModel.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
@@ -26,8 +24,9 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF.UserControls
             }
             else
             {
-                var viewModel = App.AppHost!.Services.GetRequiredService<IGameBoard>();
-                DataContext = viewModel;
+                // TODO: Setup a new ViewModel for the GameBoard-Control 
+                //var viewModel = App.AppHost!.Services.GetRequiredService<IGameBoard>();
+                //DataContext = viewModel;
             }
         }
 

@@ -7,9 +7,9 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <sampleData:DummyGameInfoBoardViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <UserControl.Resources>
 
