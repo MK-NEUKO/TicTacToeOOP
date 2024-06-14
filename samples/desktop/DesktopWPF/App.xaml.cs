@@ -1,12 +1,10 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.Runtime.InteropServices;
 using Serilog;
+using Serilog.Core;
 using TicTacToe.Application;
 using TicTacToe.Infrastructure;
 using TicTacToe.Presentation;
@@ -20,6 +18,8 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
     {
         public static IHost? AppHost { get; private set; }
 
+        public static Serilog.ILogger Logger { get; private set; }
+
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
         private static extern bool AllocConsole();
@@ -31,7 +31,7 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             var configuration = BuildAppConfigurationRoot(environmentName);
             var openConsoleInDebugMode = configuration.GetValue<bool>("ApplicationSettings:OpenConsoleInDebugMode");
 
-            CreateLoggerSerilog(configuration);
+            Logger = CreateLoggerSerilog(configuration);
 
             var builder = AddRequiredAppServices();
             AppHost = builder.Build();
@@ -41,7 +41,7 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             if (openConsoleInDebugMode)
             {
                 AllocConsole();
-                Log.Logger.Information("Console opened: Debug configuration / Development mode");
+                Logger.Information("Console opened: Debug configuration / Development mode");
             }
 #endif
         }
@@ -70,19 +70,34 @@ namespace MichaelKoch.TicTacToe.Samples.DesktopWPF
             return configuration;
         }
 
-        private static void CreateLoggerSerilog(IConfigurationRoot configuration)
+        private static Logger CreateLoggerSerilog(IConfigurationRoot configuration)
         {
-            Log.Logger = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
-                
+
+            return logger;
         }
 
 
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            AppHost!.StartAsync();
+            try
+            {
+                Logger.Information("TicTacToe DesktopWPF ist starting!");
+                AppHost!.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal(ex, "TicTacToe DesktopWPF failed to start correctly.");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
+
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
             //var gameViewModel = AppHost.Services.GetRequiredService<GameViewModel>();
             
