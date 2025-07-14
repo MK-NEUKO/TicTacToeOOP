@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MichaelKoch.TicTacToe.Ui.AspNetCoreWebUI</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\core\TicTacToe\TicTacToe.csproj" />
+    <ProjectReference Include="..\..\Mappings\Mappings.csproj" />
+    <ProjectReference Include="..\ViewModel.Contract\ViewModel.Contract.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>
