@@ -1,0 +1,79 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "TicTacToe Game";
+}
+@model MichaelKoch.TicTacToe.Ui.AspNetCoreWebUI.Models.GameViewModel
+
+<div class="text-center">
+    <h1 class="display-4">TicTacToe Game</h1>
+    <p class="lead">Play the classic game of TicTacToe!</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@Model.GameStatus</h4>
+                    @if (!Model.GameEnded)
+                    {
+                        <p class="mb-0"><strong>Current Player:</strong> @Model.GetCurrentPlayer().Name (@Model.CurrentPlayerToken)</p>
+                    }
+                </div>
+                <div class="card-body">
+                    <div class="tic-tac-toe-board">
+                        @for (int i = 0; i < 9; i++)
+                        {
+                            var area = Model.GameBoard.ConcreteAreas[i];
+                            <form method="post" action="/Game/MakeMove" style="display: inline;">
+                                <input type="hidden" name="areaId" value="@area.Id" />
+                                <button type="submit" 
+                                        class="game-area @(area.IsWinArea ? "win-area" : "")"
+                                        @(area.IsOccupied || Model.GameEnded ? "disabled" : "")>
+                                    @area.Token
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        @if (Model.GameEnded)
+        {
+            <form method="post" action="/Game/NewGame">
+                <button type="submit" class="btn btn-primary btn-lg">Start New Game</button>
+            </form>
+        }
+    </div>
+
+    <div class="mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Players</h5>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var player in Model.Players)
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="@(player.IsCurrentPlayer && !Model.GameEnded ? "fw-bold text-primary" : "")">
+                                    @player.Name (@player.Token)
+                                </span>
+                                @if (player.IsWinner)
+                                {
+                                    <span class="badge bg-success">Winner!</span>
+                                }
+                                else if (player.IsCurrentPlayer && !Model.GameEnded)
+                                {
+                                    <span class="badge bg-primary">Current</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
